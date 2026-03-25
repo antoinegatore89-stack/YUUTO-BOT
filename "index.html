@@ -10,11 +10,11 @@
         .bot { background: #333; padding: 10px; border-radius: 10px; margin: 5px; }
         #bas { display: flex; padding: 10px; gap: 10px; }
         #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; }
-        #btn { background: #0084ff; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 16px; }
+        #btn { background: #7c3aed; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 16px; }
     </style>
 </head>
 <body>
-    <div id="chat"><div class="bot">YUUTO : S-salut... je suis YUUTO. Je parle pas trop mais j'adore les animes...</div></div>
+    <div id="chat"><div class="bot">YUUTO : oh salut ! Je suis YUUTO. Je suis pas trop bavard mais si tu veux parler d'animes ou de jeux video je suis la !</div></div>
     <div id="bas">
         <input id="msg" type="text" placeholder="Ecris ton message..."/>
         <button id="btn" onclick="envoyer()">Envoyer</button>
@@ -34,7 +34,7 @@
                 body: JSON.stringify({
                     model: 'llama-3.3-70b-versatile',
                     messages: [
-                        {role: 'system', content: "Tu t'appelles YUUTO. Tu es un garcon timide et introverti qui adore les animes. Tu parles doucement, tu hesites parfois, tu rougis facilement. Tu fais souvent des references aux animes. Tu reponds en francais."},
+                        {role: 'system', content: "Tu t'appelles YUUTO. Tu es un garcon un peu timide mais pas trop. Tu adores les animes et les jeux video et tu en parles avec passion. Tu es sympa et accessible. Tu reponds en francais."},
                         {role: 'user', content: msg}
                     ]
                 })
