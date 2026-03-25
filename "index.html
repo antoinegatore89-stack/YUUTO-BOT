@@ -20,12 +20,12 @@
 </head>
 <body>
     <div id="header">
-        <img src="https://i.imgur.com/SzbRg2u.jpg"/>
+        <img src="https://cdn.discordapp.com/attachments/1465954460168880243/1486477831994081350/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_facons_manga_20260325_054242_0000.jpg?ex=69c5a5dc&is=69c4545c&hm=c4ca498ed9436893086d105395b29559cb45b3d6716a4fa3e6171154a2c91850&"/>
         <span>YUUTO</span>
     </div>
     <div id="chat">
         <div class="bot">
-            <img src="https://i.imgur.com/SzbRg2u.jpg"/>
+            <img src="https://cdn.discordapp.com/attachments/1465954460168880243/1486477831994081350/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_facons_manga_20260325_054242_0000.jpg?ex=69c5a5dc&is=69c4545c&hm=c4ca498ed9436893086d105395b29559cb45b3d6716a4fa3e6171154a2c91850&"/>
             <div class="bot-msg">Ah... salut ! Je suis YUUTO. Je suis pas trop bavard mais si tu veux parler d'animes ou de jeux video je suis la !</div>
         </div>
     </div>
@@ -34,6 +34,7 @@
         <button id="btn" onclick="envoyer()">Envoyer</button>
     </div>
     <script>
+        const AVATAR = "https://cdn.discordapp.com/attachments/1465954460168880243/1486477831994081350/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_facons_manga_20260325_054242_0000.jpg?ex=69c5a5dc&is=69c4545c&hm=c4ca498ed9436893086d105395b29559cb45b3d6716a4fa3e6171154a2c91850&";
         async function envoyer() {
             const msg = document.getElementById('msg').value;
             if (!msg) return;
@@ -55,11 +56,7 @@
             });
             const data = await rep.json();
             const reponse = data.choices[0].message.content;
-            document.getElementById('chat').innerHTML += `
-                <div class="bot">
-                    <img src="https://i.imgur.com/SzbRg2u.jpg"/>
-                    <div class="bot-msg">YUUTO : ${reponse}</div>
-                </div>`;
+            document.getElementById('chat').innerHTML += `<div class="bot"><img src="${AVATAR}"/><div class="bot-msg">YUUTO : ${reponse}</div></div>`;
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
     </script>
