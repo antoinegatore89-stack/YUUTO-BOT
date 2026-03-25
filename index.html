@@ -40,6 +40,7 @@
     <script>
         const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg";
         const historique = [];
+        let loadingId = 0;
 
         async function envoyer() {
             const msg = document.getElementById('msg').value;
@@ -48,17 +49,20 @@
             document.getElementById('chat').innerHTML += `<div class="moi">${msg}</div>`;
 
             if (msg.toLowerCase().includes('genere') || msg.toLowerCase().includes('génère') || msg.toLowerCase().includes('image de')) {
-                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi, '').trim();
+                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi, '').trim() + ' anime style manga';
+                loadingId++;
+                const currentId = 'loading' + loadingId;
                 document.getElementById('chat').innerHTML += `
                     <div class="bot">
                         <img class="avatar" src="${AVATAR}"/>
-                        <div class="bot-msg" id="loading">Generation en cours...</div>
+                        <div class="bot-msg" id="${currentId}">Generation en cours...</div>
                     </div>`;
+                document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
                 try {
                     const image = await puter.ai.txt2img(prompt);
-                    document.getElementById('loading').innerHTML = `Voila ton image !<br><img class="generated" src="${image.src}"/>`;
+                    document.getElementById(currentId).innerHTML = `Voila ton image !<br><img class="generated" src="${image.src}"/>`;
                 } catch(e) {
-                    document.getElementById('loading').innerHTML = "Desole, je n'ai pas pu generer l'image 😅";
+                    document.getElementById(currentId).innerHTML = "Desole, je n'ai pas pu generer l'image 😅";
                 }
             } else {
                 historique.push({"role": "user", "content": msg});
