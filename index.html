@@ -5,6 +5,7 @@
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
     <link rel="icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://js.puter.com/v2/"></script>
     <style>
         body { font-family: Arial; margin: 0; background: #1a1a1a; color: white; }
         #header { display: flex; align-items: center; padding: 10px; background: #222; gap: 10px; }
@@ -15,7 +16,7 @@
         .bot { display: flex; align-items: flex-start; gap: 8px; margin: 5px; }
         .bot img.avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
         .bot-msg { background: #333; padding: 10px; border-radius: 10px; }
-        .bot-msg img { max-width: 200px; border-radius: 10px; margin-top: 5px; display: block; }
+        .bot-msg img.generated { max-width: 200px; border-radius: 10px; margin-top: 5px; display: block; }
         #bas { display: flex; padding: 10px; gap: 10px; }
         #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; }
         #btn { background: #7c3aed; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 16px; }
@@ -29,7 +30,7 @@
     <div id="chat">
         <div class="bot">
             <img class="avatar" src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
-            <div class="bot-msg">Ah... salut ! Je suis YUUTO. Je peux discuter ET generer des images ! Dis moi "genere une image de..." pour essayer !</div>
+            <div class="bot-msg">Ah... salut ! Je suis YUUTO. Dis moi "genere une image de..." pour creer une image !</div>
         </div>
     </div>
     <div id="bas">
@@ -46,14 +47,19 @@
             document.getElementById('msg').value = '';
             document.getElementById('chat').innerHTML += `<div class="moi">${msg}</div>`;
 
-            if (msg.toLowerCase().includes('genere') || msg.toLowerCase().includes('génère') || msg.toLowerCase().includes('image')) {
-                const prompt = msg.replace(/genere|génère|une image de|image/gi, '').trim();
-                const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=512&height=512&nologo=true`;
+            if (msg.toLowerCase().includes('genere') || msg.toLowerCase().includes('génère') || msg.toLowerCase().includes('image de')) {
+                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi, '').trim();
                 document.getElementById('chat').innerHTML += `
                     <div class="bot">
                         <img class="avatar" src="${AVATAR}"/>
-                        <div class="bot-msg">Voila ton image !<br><img src="${imageUrl}" alt="image generee"/></div>
+                        <div class="bot-msg" id="loading">Generation en cours...</div>
                     </div>`;
+                try {
+                    const image = await puter.ai.txt2img(prompt);
+                    document.getElementById('loading').innerHTML = `Voila ton image !<br><img class="generated" src="${image.src}"/>`;
+                } catch(e) {
+                    document.getElementById('loading').innerHTML = "Desole, je n'ai pas pu generer l'image 😅";
+                }
             } else {
                 historique.push({"role": "user", "content": msg});
                 const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
