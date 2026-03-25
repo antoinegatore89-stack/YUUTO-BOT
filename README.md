@@ -1,2 +1,49 @@
-# YUUTO-BOT
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YUUTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial; margin: 0; background: #1a1a1a; color: white; }
+        #chat { height: 80vh; overflow-y: auto; padding: 10px; }
+        .moi { background: #0084ff; padding: 10px; border-radius: 10px; margin: 5px; text-align: right; }
+        .bot { background: #333; padding: 10px; border-radius: 10px; margin: 5px; }
+        #bas { display: flex; padding: 10px; gap: 10px; }
+        #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; }
+        #btn { background: #0084ff; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div id="chat"><div class="bot">YUUTO : S-salut... je suis YUUTO. Je parle pas trop mais j'adore les animes...</div></div>
+    <div id="bas">
+        <input id="msg" type="text" placeholder="Ecris ton message..."/>
+        <button id="btn" onclick="envoyer()">Envoyer</button>
+    </div>
+    <script>
+        async function envoyer() {
+            const msg = document.getElementById('msg').value;
+            if (!msg) return;
+            document.getElementById('msg').value = '';
+            document.getElementById('chat').innerHTML += `<div class="moi">${msg}</div>`;
+            const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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'
+                },
+                body: JSON.stringify({
+                    model: 'llama-3.3-70b-versatile',
+                    messages: [
+                        {role: 'system', content: "Tu t'appelles YUUTO. Tu es un garcon timide et introverti qui adore les animes. Tu parles doucement, tu hesites parfois, tu rougis facilement. Tu fais souvent des references aux animes. Tu reponds en francais."},
+                        {role: 'user', content: msg}
+                    ]
+                })
+            });
+            const data = await rep.json();
+            const reponse = data.choices[0].message.content;
+            document.getElementById('chat').innerHTML += `<div class="bot">YUUTO : ${reponse}</div>`;
+        }
+    </script>
+</body>
+</html>
 BOT FRANÇAIS POUR DISCUTAIS DES ANIME ET MANGA
