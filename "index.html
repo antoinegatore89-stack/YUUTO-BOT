@@ -5,16 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body { font-family: Arial; margin: 0; background: #1a1a1a; color: white; }
-        #chat { height: 80vh; overflow-y: auto; padding: 10px; }
+        #header { display: flex; align-items: center; padding: 10px; background: #222; gap: 10px; }
+        #header img { width: 45px; height: 45px; border-radius: 50%; }
+        #header span { font-size: 18px; font-weight: bold; }
+        #chat { height: 75vh; overflow-y: auto; padding: 10px; }
         .moi { background: #0084ff; padding: 10px; border-radius: 10px; margin: 5px; text-align: right; }
-        .bot { background: #333; padding: 10px; border-radius: 10px; margin: 5px; }
+        .bot { display: flex; align-items: flex-start; gap: 8px; margin: 5px; }
+        .bot img { width: 30px; height: 30px; border-radius: 50%; }
+        .bot-msg { background: #333; padding: 10px; border-radius: 10px; }
         #bas { display: flex; padding: 10px; gap: 10px; }
         #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; }
         #btn { background: #7c3aed; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 16px; }
     </style>
 </head>
 <body>
-    <div id="chat"><div class="bot">YUUTO : oh salut ! Je suis YUUTO. Je suis pas trop bavard mais si tu veux parler d'animes ou de jeux video je suis la !</div></div>
+    <div id="header">
+        <img src="https://i.imgur.com/LErLt94.jpg"/>
+        <span>YUUTO</span>
+    </div>
+    <div id="chat">
+        <div class="bot">
+            <img src="https://i.imgur.com/LErLt94.jpg"/>
+            <div class="bot-msg">Ah... salut ! Je suis YUUTO. Je suis pas trop bavard mais si tu veux parler d'animes ou de jeux video je suis la !</div>
+        </div>
+    </div>
     <div id="bas">
         <input id="msg" type="text" placeholder="Ecris ton message..."/>
         <button id="btn" onclick="envoyer()">Envoyer</button>
@@ -41,7 +55,11 @@
             });
             const data = await rep.json();
             const reponse = data.choices[0].message.content;
-            document.getElementById('chat').innerHTML += `<div class="bot">YUUTO : ${reponse}</div>`;
+            document.getElementById('chat').innerHTML += `
+                <div class="bot">
+                    <img src="https://i.imgur.com/LErLt94.jpg"/>
+                    <div class="bot-msg">YUUTO : ${reponse}</div>
+                </div>`;
         }
     </script>
 </body>
