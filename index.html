@@ -46,6 +46,7 @@
         #headerTitle { font-size: 16px; font-weight: bold; }
         #humeur { font-size: 11px; color: #aaa; }
         #modePerso { font-size: 11px; color: #f59e0b; }
+        #codexBadge { font-size: 11px; color: #00d4ff; display: none; }
         #headerBtns { display: flex; gap: 8px; }
         #callBtn { background: #22c55e; border: none; color: white; padding: 7px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         #chat { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
@@ -55,6 +56,7 @@
         .bot { display: flex; align-items: flex-start; gap: 10px; max-width: 92%; }
         .bot img.avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #7c3aed; margin-top: 3px; }
         .bot-msg { background: #1e1e2e; padding: 10px 15px; border-radius: 4px 18px 18px 18px; font-size: 14px; border: 1px solid #2a2a4e; line-height: 1.5; }
+        .bot-msg.codex { background: #0a1a2e; border-color: #00d4ff; border-left: 3px solid #00d4ff; }
         .bot-msg.urgent { background: #1a0a2a; border-color: #7c3aed; }
         .perso1-msg { background: #1e3a5f; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .perso2-msg { background: #3a1e1e; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
@@ -67,6 +69,7 @@
         #inputRow { display: flex; gap: 8px; align-items: center; }
         #msg { flex: 1; padding: 11px 15px; border-radius: 25px; border: 1px solid #333; font-size: 15px; background: #222; color: white; outline: none; }
         #msg:focus { border-color: #7c3aed; }
+        #msg.codex-active { border-color: #00d4ff; }
         #btn { background: linear-gradient(135deg, #7c3aed, #5b21b6); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; flex-shrink: 0; }
         #micBtn { background: #222; color: white; border: 1px solid #333; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; flex-shrink: 0; }
         #micBtn.active { background: #e11d48; border-color: #e11d48; }
@@ -79,11 +82,21 @@
         .modalBtn.primary { background: linear-gradient(90deg,#7c3aed,#5b21b6); color: white; }
         .modalBtn.secondary { background: #333; color: white; }
         .modalBtn.danger { background: #e11d48; color: white; }
+        .modalBtn.codex { background: linear-gradient(90deg,#00d4ff,#0077ff); color: white; }
         .menu-option { background: #222; padding: 15px; border-radius: 12px; border: 1px solid #333; }
         .menu-option label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
         .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
         .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 10px; border: 1px solid #333; background: #333; color: white; font-size: 14px; }
         .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; width: 100%; }
+        /* Toggle switch */
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; }
+        .toggle { position: relative; width: 50px; height: 26px; }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #333; border-radius: 26px; transition: 0.3s; }
+        .toggle-slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
+        input:checked + .toggle-slider { background: linear-gradient(90deg, #00d4ff, #0077ff); }
+        input:checked + .toggle-slider:before { transform: translateX(24px); }
+        .codex-desc { font-size: 12px; color: #aaa; margin-top: 5px; }
         .prix { font-size: 32px; font-weight: bold; color: #f59e0b; text-align: center; }
         .feature { background: #222; padding: 10px; border-radius: 10px; font-size: 14px; border: 1px solid #333; text-align: center; }
         .wave-info { background: #0a2a0a; padding: 15px; border-radius: 12px; font-size: 13px; color: #aaa; border: 1px solid #22c55e; text-align: center; line-height: 1.8; }
@@ -96,7 +109,6 @@
         #videoCallTop { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 10px; }
         #videoCallName { font-size: 20px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 10px #f59e0b; }
         #videoCallStatus { font-size: 13px; color: #aaa; }
-
         #animeChar { position: relative; width: 220px; height: 280px; }
         .ac-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 130px; height: 140px; background: linear-gradient(180deg, #7c3aed, #4c1d95); border-radius: 15px 15px 25px 25px; }
         .ac-body::before { content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 40px; height: 20px; background: rgba(255,255,255,0.15); border-radius: 10px; }
@@ -111,14 +123,14 @@
         @keyframes waveArm { 0%{transform:rotate(-30deg)} 100%{transform:rotate(30deg)} }
         .ac-head { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 115px; background: linear-gradient(180deg, #fde8c8, #f8d4a8); border-radius: 55% 55% 48% 48%; border: 2px solid #f0c080; animation: headBob 2s ease-in-out infinite; z-index: 5; }
         @keyframes headBob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-4px)} }
-        .ac-hair { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 130px; height: 70px; background: linear-gradient(180deg, #f8f8f8, #e8e8e8); border-radius: 55% 55% 0 0; z-index: 6; box-shadow: 0 2px 8px rgba(200,200,200,0.3); }
+        .ac-hair { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 130px; height: 70px; background: linear-gradient(180deg, #f8f8f8, #e8e8e8); border-radius: 55% 55% 0 0; z-index: 6; }
         .ac-hair::before { content: ''; position: absolute; width: 35px; height: 55px; background: linear-gradient(180deg, #f8f8f8, #e8e8e8); border-radius: 0 0 50% 80%; left: -8px; top: 25px; }
         .ac-hair::after { content: ''; position: absolute; width: 35px; height: 55px; background: linear-gradient(180deg, #f8f8f8, #e8e8e8); border-radius: 0 0 80% 50%; right: -8px; top: 25px; }
         .ac-hair-front { position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 25px; height: 40px; background: linear-gradient(180deg, #ffffff, #f0f0f0); border-radius: 50% 50% 30% 30%; z-index: 7; }
         .ac-ear-left { position: absolute; top: 38px; left: -8px; width: 16px; height: 20px; background: #fde8c8; border-radius: 50%; z-index: 4; }
         .ac-ear-right { position: absolute; top: 38px; right: -8px; width: 16px; height: 20px; background: #fde8c8; border-radius: 50%; z-index: 4; }
-        .ac-brow-left { position: absolute; top: 28px; left: 18px; width: 28px; height: 4px; background: #bbb; border-radius: 2px; z-index: 8; transform: rotate(-5deg); transition: all 0.3s; }
-        .ac-brow-right { position: absolute; top: 28px; right: 18px; width: 28px; height: 4px; background: #bbb; border-radius: 2px; z-index: 8; transform: rotate(5deg); transition: all 0.3s; }
+        .ac-brow-left { position: absolute; top: 28px; left: 18px; width: 28px; height: 4px; background: #bbb; border-radius: 2px; z-index: 8; transform: rotate(-5deg); }
+        .ac-brow-right { position: absolute; top: 28px; right: 18px; width: 28px; height: 4px; background: #bbb; border-radius: 2px; z-index: 8; transform: rotate(5deg); }
         .ac-eye-left { position: absolute; top: 40px; left: 16px; width: 28px; height: 28px; background: white; border-radius: 50%; z-index: 8; overflow: hidden; transition: height 0.15s; }
         .ac-eye-left-iris { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 20px; height: 20px; background: radial-gradient(circle at 35% 35%, #60a5fa, #1d4ed8, #1e3a8a); border-radius: 50%; animation: eyeMove 4s ease-in-out infinite; }
         .ac-eye-left-pupil { position: absolute; top: 50%; left: 50%; transform: translate(-40%,-40%); width: 10px; height: 10px; background: #0a0a2e; border-radius: 50%; }
@@ -146,7 +158,6 @@
         @keyframes floatZzz { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-20px) scale(1.3)} }
         @keyframes sparkleAnim { 0%{opacity:0.5;transform:scale(0.8) rotate(0deg)} 100%{opacity:1;transform:scale(1.3) rotate(20deg)} }
         @keyframes starsAnim { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
         #videoCallBubble { background: rgba(20,20,40,0.92); border: 1px solid #7c3aed; border-radius: 20px; padding: 12px 20px; width: 90%; max-width: 320px; font-size: 14px; text-align: center; color: white; min-height: 45px; }
         #videoCallBtns { display: flex; gap: 20px; margin-bottom: 10px; }
         #videoMicBtn { background: #333; color: white; border: 2px solid #555; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
@@ -165,6 +176,7 @@
     <span id="erreur">Acces refuse 😤</span>
 </div>
 
+<!-- SETTINGS avec Codex -->
 <div class="modal" id="menuScreen">
     <div class="modalBox">
         <h2>⚙️ Paramètres</h2>
@@ -176,6 +188,25 @@
             <label>👤 Changer ton nom</label>
             <input type="text" id="nouveauNom" placeholder="Nouveau nom..."/>
             <button onclick="changerNom()">Changer</button>
+        </div>
+        <!-- MODE CODEX -->
+        <div class="menu-option" style="border-color:#00d4ff">
+            <div class="toggle-row">
+                <div>
+                    <label style="color:#00d4ff">🧠 Mode Codex</label>
+                    <div class="codex-desc">YUUTO devient un expert sérieux et détaillé</div>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" id="codexToggle" onchange="toggleCodex()"/>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div id="codexInfo" style="display:none;margin-top:10px;padding:10px;background:#0a1a2e;border-radius:8px;font-size:12px;color:#00d4ff;border:1px solid #00d4ff">
+                ✅ Mode Codex activé !<br/>
+                📚 Devoirs, culture générale, explications<br/>
+                🔬 Sciences, maths, histoire...<br/>
+                💡 Réponses détaillées et précises
+            </div>
         </div>
         <button class="modalBtn secondary" onclick="fermerModal('menuScreen')">Fermer</button>
     </div>
@@ -256,11 +287,11 @@
         <div class="ac-sparkle" id="acSparkle">✨</div>
         <div class="ac-stars" id="acStars">⭐</div>
         <div class="ac-hair"><div class="ac-hair-front"></div></div>
-        <div class="ac-head" id="acHead">
+        <div class="ac-head">
             <div class="ac-ear-left"></div>
             <div class="ac-ear-right"></div>
-            <div class="ac-brow-left" id="browLeft"></div>
-            <div class="ac-brow-right" id="browRight"></div>
+            <div class="ac-brow-left"></div>
+            <div class="ac-brow-right"></div>
             <div class="ac-eye-left" id="eyeLeft">
                 <div class="ac-eye-left-iris"><div class="ac-eye-left-pupil"></div><div class="ac-eye-left-shine"></div></div>
                 <div class="ac-blink-left" id="blinkLeft"></div>
@@ -272,7 +303,7 @@
             <div class="ac-nose"></div>
             <div class="ac-blush-left"></div>
             <div class="ac-blush-right"></div>
-            <div class="ac-mouth" id="acMouth"><div class="mouth-smile" id="mouthShape"></div></div>
+            <div class="ac-mouth"><div class="mouth-smile" id="mouthShape"></div></div>
         </div>
         <div class="ac-neck"></div>
         <div class="ac-arm-left" id="armLeft"></div>
@@ -311,9 +342,10 @@
             <button id="toggleSidebar" onclick="toggleSidebar()">☰</button>
             <div id="headerCenter">
                 <div id="headerTitle">YUUTO</div>
-                <div style="display:flex;gap:8px">
+                <div style="display:flex;gap:8px;align-items:center">
                     <span id="humeur"></span>
                     <span id="modePerso"></span>
+                    <span id="codexBadge">🧠 Codex</span>
                 </div>
             </div>
             <div id="headerBtns">
@@ -363,6 +395,31 @@
     let sidebarVisible = false;
     let blinkInterval = null;
     let humeurVideo = 'normal';
+    let modeCodex = false;
+
+    // CODEX
+    function toggleCodex() {
+        modeCodex = document.getElementById('codexToggle').checked;
+        localStorage.setItem('yuuto_codex', modeCodex.toString());
+        document.getElementById('codexInfo').style.display = modeCodex ? 'block' : 'none';
+        document.getElementById('codexBadge').style.display = modeCodex ? 'inline' : 'none';
+        document.getElementById('msg').className = modeCodex ? 'codex-active' : '';
+        document.getElementById('msg').placeholder = modeCodex ? '🧠 Pose ta question sérieuse...' : 'Message YUUTO...';
+        if (modeCodex) {
+            fermerModal('menuScreen');
+            ajouterMessageBot("Mode Codex activé 🧠 Je suis maintenant en mode expert. Pose moi n'importe quelle question sérieuse : devoirs, sciences, histoire, maths... Je vais répondre de façon détaillée et précise !", null, true);
+        } else {
+            ajouterMessageBot("Mode Codex désactivé 😊 Je redeviens ton YUUTO normal !");
+        }
+    }
+
+    function getSystemPrompt() {
+        if (modeCodex) {
+            return `Tu es YUUTO en mode Codex. Tu es un assistant expert, sérieux et très précis. Tu réponds de façon détaillée, structurée et pédagogique. Tu peux aider avec les devoirs, les sciences, les maths, l'histoire, la géographie, la culture générale et tout autre sujet sérieux. Tu utilises des exemples clairs. Tu réponds toujours en français. Tu restes bienveillant mais professionnel.`;
+        }
+        if (personnageActuel) return `Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;
+        return window.humeurInfo.personnalite;
+    }
 
     function toggleSidebar() {
         sidebarVisible = !sidebarVisible;
@@ -405,12 +462,9 @@
 
     function setHumeur(humeur) {
         humeurVideo = humeur;
-        const eL = document.getElementById('eyeLeft');
-        const eR = document.getElementById('eyeRight');
-        const mouth = document.getElementById('mouthShape');
-        const zzz = document.getElementById('acZzz');
-        const sparkle = document.getElementById('acSparkle');
-        const stars = document.getElementById('acStars');
+        const eL=document.getElementById('eyeLeft'), eR=document.getElementById('eyeRight');
+        const mouth=document.getElementById('mouthShape');
+        const zzz=document.getElementById('acZzz'), sparkle=document.getElementById('acSparkle'), stars=document.getElementById('acStars');
         zzz.style.display='none'; sparkle.style.display='none'; stars.style.display='none';
         eL.style.height='28px'; eR.style.height='28px';
         if (humeur==='sleepy') { eL.style.height='12px'; eR.style.height='12px'; mouth.className='mouth-sleepy'; zzz.style.display='block'; }
@@ -421,7 +475,7 @@
 
     function startTalking() { document.getElementById('mouthShape').className='mouth-talk'; document.getElementById('armLeft').classList.add('wave'); }
     function stopTalking() {
-        const m = document.getElementById('mouthShape');
+        const m=document.getElementById('mouthShape');
         if (humeurVideo==='sleepy') m.className='mouth-sleepy';
         else if (humeurVideo==='excited') m.className='mouth-excited';
         else m.className='mouth-smile';
@@ -438,48 +492,48 @@
     }
 
     async function demarrerVideoAppel() {
-        enVideoAppel = true;
-        document.getElementById('videoCallScreen').style.display = 'flex';
-        document.getElementById('videoCallName').textContent = personnageActuel || 'YUUTO';
-        const h = new Date().getHours();
-        if (h>=6&&h<12) setHumeur('sleepy');
-        else if (h>=12&&h<18) setHumeur('excited');
-        else if (h>=18&&h<22) setHumeur('normal');
+        enVideoAppel=true;
+        document.getElementById('videoCallScreen').style.display='flex';
+        document.getElementById('videoCallName').textContent=personnageActuel||'YUUTO';
+        const h=new Date().getHours();
+        if(h>=6&&h<12)setHumeur('sleepy');
+        else if(h>=12&&h<18)setHumeur('excited');
+        else if(h>=18&&h<22)setHumeur('normal');
         else setHumeur('mysterious');
         startBlink();
-        const intro = estAntoine ? "Wsh Antoine tu mappelles en video !" : `Salut ${memoire.prenom} tu mappelles en video !`;
-        document.getElementById('videoCallBubble').textContent = intro;
-        document.getElementById('videoCallStatus').textContent = 'Parle...';
+        const intro=estAntoine?"Wsh Antoine tu mappelles en video !":`Salut ${memoire.prenom} tu mappelles en video !`;
+        document.getElementById('videoCallBubble').textContent=intro;
+        document.getElementById('videoCallStatus').textContent='Parle...';
         startTalking();
-        parlerVideo(intro, () => { stopTalking(); document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro pour parler'; });
+        parlerVideo(intro,()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro pour parler';});
     }
 
     function terminerVideoAppel() {
-        enVideoAppel=false; yuutoParle=false; stopMic(); stopTalking();
+        enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();
         window.speechSynthesis.cancel();
-        if (blinkInterval) { clearInterval(blinkInterval); blinkInterval=null; }
+        if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}
         document.getElementById('videoCallScreen').style.display='none';
     }
 
-    function parlerVideo(texte, callback) {
-        const s=window.speechSynthesis; if(!s){if(callback)callback();return;}
-        s.cancel(); yuutoParle=true; startTalking();
+    function parlerVideo(texte,callback) {
+        const s=window.speechSynthesis;if(!s){if(callback)callback();return;}
+        s.cancel();yuutoParle=true;startTalking();
         const u=new SpeechSynthesisUtterance(texte);
-        u.lang='fr-FR'; u.rate=1; u.pitch=1.1;
-        u.onend=()=>{yuutoParle=false; stopTalking(); if(callback)setTimeout(callback,500);};
+        u.lang='fr-FR';u.rate=1;u.pitch=1.1;
+        u.onend=()=>{yuutoParle=false;stopTalking();if(callback)setTimeout(callback,500);};
         s.speak(u);
     }
 
     function toggleVideoMic() {
-        if (!yuutoParle && recognition) {
-            if (isListening) stopMic();
-            else try {
+        if(!yuutoParle&&recognition){
+            if(isListening)stopMic();
+            else try{
                 recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};
-                recognition.start(); isListening=true;
+                recognition.start();isListening=true;
                 document.getElementById('videoMicBtn').classList.add('active');
                 document.getElementById('videoMicBtn').textContent='🔴';
                 document.getElementById('videoCallStatus').textContent='Tu parles...';
-            } catch(e) {}
+            }catch(e){}
         }
     }
 
@@ -489,7 +543,7 @@
         document.getElementById('videoMicBtn').textContent='🎤';
         historique.push({"role":"user","content":msg});
         const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]})});
-        const d=await r.json(); const rep=d.choices[0].message.content;
+        const d=await r.json();const rep=d.choices[0].message.content;
         historique.push({"role":"assistant","content":rep});
         document.getElementById('videoCallBubble').textContent=rep;
         document.getElementById('videoCallStatus').textContent='Parle...';
@@ -502,6 +556,14 @@
         estPremium=localStorage.getItem('yuuto_premium')==='true';
         nbTransfo=parseInt(localStorage.getItem('yuuto_transfo')||'0');
         if(estPremium)document.getElementById('premiumBadgeSide').style.display='inline';
+        modeCodex=localStorage.getItem('yuuto_codex')==='true';
+        if(modeCodex){
+            document.getElementById('codexToggle').checked=true;
+            document.getElementById('codexInfo').style.display='block';
+            document.getElementById('codexBadge').style.display='inline';
+            document.getElementById('msg').className='codex-active';
+            document.getElementById('msg').placeholder='🧠 Pose ta question sérieuse...';
+        }
         const nom=localStorage.getItem('yuuto_nom');
         if(nom){document.getElementById('nom').value=nom;seConnecter();}
     }
@@ -535,7 +597,6 @@
         personnageActuel=null;document.getElementById('modePerso').textContent='';
         fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis de retour ! 😄`);
     }
-    function getSystemPrompt(){if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;return window.humeurInfo.personnalite;}
 
     async function chercherAnime(genre,genreId){
         fermerModal('searchScreen');
@@ -601,7 +662,15 @@
     function stopMic(){try{if(recognition)recognition.stop();}catch(e){}isListening=false;}
     function parler(t,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';u.rate=1;u.pitch=1;u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};s.speak(u);}
     function nettoyerTexte(t){return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");}
-    function ajouterMessageBot(texte,nom){const t=nettoyerTexte(texte),n=nom||'YUUTO';document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${n} : ${texte}<br><button class="audio-btn" onclick="parler('${t}')">🔊 Ecouter</button></div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+
+    function ajouterMessageBot(texte, nom, isCodex=false) {
+        const t=nettoyerTexte(texte), n=nom||'YUUTO';
+        const cls = isCodex || modeCodex ? 'bot-msg codex' : 'bot-msg';
+        const prefix = isCodex || modeCodex ? '🧠 ' : '';
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${cls}">${prefix}${n} : ${texte}<br><button class="audio-btn" onclick="parler('${t}')">🔊 Ecouter</button></div></div>`;
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+
     function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d)memoire=JSON.parse(d);}
     function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
     function getMemoireTexte(){let t="";if(memoire.animes)t+=`animes:${memoire.animes}. `;if(memoire.prenom)t+=`prenom:${memoire.prenom}. `;return t?"Tu sais:"+t:"";}
@@ -656,7 +725,8 @@
             historique.push({"role":"user","content":msg});
             const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
             const d=await r.json();const rep=d.choices[0].message.content;
-            historique.push({"role":"assistant","content":rep});ajouterMessageBot(rep,personnageActuel);
+            historique.push({"role":"assistant","content":rep});
+            ajouterMessageBot(rep, personnageActuel, modeCodex);
         }
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
