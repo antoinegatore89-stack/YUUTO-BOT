@@ -6,5 +6,11 @@
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#7c3aed",
-  "icons": [{"src": "android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"}]
-}
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
