@@ -27,12 +27,14 @@
         #callBtn { background: #22c55e; border: none; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; cursor: pointer; }
         #menuBtn { background: #333; border: none; color: white; padding: 8px 12px; border-radius: 20px; font-size: 18px; cursor: pointer; }
         #menuScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
-        #menuBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; }
-        #menuBox h2 { margin: 0 0 20px 0; text-align: center; }
-        .menu-option { background: #333; padding: 15px; border-radius: 12px; margin-bottom: 10px; }
+        #menuBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
+        #menuBox h2 { margin: 0; text-align: center; }
+        .menu-option { background: #333; padding: 15px; border-radius: 12px; }
         .menu-option label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
         .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
-        #closeMenu { background: #7c3aed; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; width: 100%; margin-top: 10px; cursor: pointer; }
+        .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 10px; border: none; background: #444; color: white; font-size: 14px; box-sizing: border-box; }
+        .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; width: 100%; }
+        #closeMenu { background: #555; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #persoScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
         #persoBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
         #persoBox h2 { margin: 0; text-align: center; }
@@ -41,8 +43,6 @@
         #persoConfirm { background: #f59e0b; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #persoReset { background: #333; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 14px; cursor: pointer; }
         #persoClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
-
-        /* Battle screen */
         #battleScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 998; justify-content: center; align-items: center; }
         #battleBox { background: #222; border-radius: 20px; padding: 25px; width: 85%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
         #battleBox h2 { margin: 0; text-align: center; }
@@ -50,7 +50,6 @@
         .battle-input { padding: 12px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; text-align: center; width: 100%; box-sizing: border-box; }
         #battleStart { background: #e11d48; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #battleClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
-
         #callScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #111; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 999; }
         #callScreen img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #22c55e; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 70% { box-shadow: 0 0 0 20px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
@@ -66,7 +65,6 @@
         .bot-msg { background: #333; padding: 10px; border-radius: 10px; }
         .perso1-msg { background: #1e3a5f; padding: 10px; border-radius: 10px; }
         .perso2-msg { background: #3a1e1e; padding: 10px; border-radius: 10px; }
-        .bot-msg img.generated { max-width: 200px; border-radius: 10px; margin-top: 5px; display: block; }
         .audio-btn { background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; margin-top: 5px; padding: 0; }
         #bas { display: flex; flex-direction: column; padding: 10px; gap: 8px; }
         #basButtons2 { display: flex; gap: 5px; }
@@ -98,6 +96,11 @@
                 <label>🎨 Couleur du fond</label>
                 <input type="color" id="couleurFond" value="#1a1a1a" oninput="changerCouleur()"/>
             </div>
+            <div class="menu-option">
+                <label>👤 Changer ton nom</label>
+                <input type="text" id="nouveauNom" placeholder="Ton nouveau nom..."/>
+                <button onclick="changerNom()">Changer</button>
+            </div>
             <button id="closeMenu" onclick="fermerMenu()">Fermer</button>
         </div>
     </div>
@@ -116,7 +119,7 @@
     <div id="battleScreen">
         <div id="battleBox">
             <h2>⚔️ Mode Battle !</h2>
-            <p>Choisis deux personnages qui vont se disputer !</p>
+            <p>Choisis deux personnages !</p>
             <input class="battle-input" id="perso1Input" type="text" placeholder="Personnage 1 (ex: Naruto)"/>
             <input class="battle-input" id="perso2Input" type="text" placeholder="Personnage 2 (ex: Sasuke)"/>
             <button id="battleStart" onclick="lancerBattle()">⚔️ BATTLE !</button>
@@ -185,10 +188,22 @@
 
         function ouvrirMenu() { document.getElementById('menuScreen').style.display = 'flex'; }
         function fermerMenu() { document.getElementById('menuScreen').style.display = 'none'; }
+
         function changerCouleur() {
             const couleur = document.getElementById('couleurFond').value;
             document.body.style.background = couleur;
             localStorage.setItem('yuuto_couleur', couleur);
+        }
+
+        function changerNom() {
+            const nouveauNom = document.getElementById('nouveauNom').value.trim();
+            if (!nouveauNom) return;
+            localStorage.setItem('yuuto_nom', nouveauNom);
+            memoire.prenom = nouveauNom;
+            estAntoine = nouveauNom.toLowerCase() === "antoine gatore";
+            sauvegarderMemoire();
+            fermerMenu();
+            ajouterMessageBot(estAntoine ? `wsh ${nouveauNom} ! 😄 nom change !` : `Nom change en ${nouveauNom} ! 😊`);
         }
 
         function ouvrirPerso() { document.getElementById('persoScreen').style.display = 'flex'; }
@@ -211,63 +226,44 @@
             document.getElementById('modePerso').textContent = '';
             document.getElementById('persoScreen').style.display = 'none';
             historique.length = 0;
-            ajouterMessageBot(`Oe je suis de retour, c'est YUUTO ! 😄`);
+            ajouterMessageBot(`Je suis de retour, c'est YUUTO ! 😄`);
+        }
+
+        function getSystemPrompt() {
+            if (personnageActuel) {
+                return `Tu joues le role de ${personnageActuel}, un personnage d'anime. Tu parles exactement comme ce personnage. Tu reponds en francais.`;
+            }
+            return window.humeurInfo.personnalite;
         }
 
         async function lancerBattle() {
             const perso1 = document.getElementById('perso1Input').value.trim();
             const perso2 = document.getElementById('perso2Input').value.trim();
             if (!perso1 || !perso2) return;
-
             fermerBattle();
             document.getElementById('chat').innerHTML += `<div class="moi">⚔️ Battle ${perso1} VS ${perso2} !</div>`;
-
             const battleHistory = [];
-
             for (let i = 0; i < 4; i++) {
                 const persoActuel = i % 2 === 0 ? perso1 : perso2;
                 const persoAdversaire = i % 2 === 0 ? perso2 : perso1;
-
                 const prompt = battleHistory.length === 0
-                    ? `Tu es ${persoActuel} de l'anime. Lance une pique ou une provocation a ${persoAdversaire} en restant dans ton personnage. Sois drole et agressif. Maximum 2 phrases.`
-                    : `Tu es ${persoActuel}. Reponds a ce que ${persoAdversaire} vient de dire : "${battleHistory[battleHistory.length-1]}". Sois dans ton personnage, drole et agressif. Maximum 2 phrases.`;
-
+                    ? `Tu es ${persoActuel}. Lance une pique a ${persoAdversaire} en restant dans ton personnage. Sois drole et agressif. Maximum 2 phrases. En francais.`
+                    : `Tu es ${persoActuel}. Reponds a : "${battleHistory[battleHistory.length-1]}". Sois dans ton personnage, drole et agressif. Maximum 2 phrases. En francais.`;
                 const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
-                    body: JSON.stringify({
-                        model: 'llama-3.3-70b-versatile',
-                        messages: [{ role: 'user', content: prompt }]
-                    })
+                    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'user', content: prompt }] })
                 });
                 const data = await rep.json();
                 const reponse = data.choices[0].message.content;
                 battleHistory.push(reponse);
-
                 const couleurMsg = i % 2 === 0 ? 'perso1-msg' : 'perso2-msg';
-                document.getElementById('chat').innerHTML += `
-                    <div class="bot">
-                        <img class="avatar" src="${AVATAR}"/>
-                        <div class="${couleurMsg}"><strong>${persoActuel} :</strong> ${reponse}</div>
-                    </div>`;
+                document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${couleurMsg}"><strong>${persoActuel} :</strong> ${reponse}</div></div>`;
                 document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-
                 await new Promise(r => setTimeout(r, 500));
             }
-
-            document.getElementById('chat').innerHTML += `
-                <div class="bot">
-                    <img class="avatar" src="${AVATAR}"/>
-                    <div class="bot-msg">YUUTO : ptdr ils sont trop chauds ces deux la 😂🔥</div>
-                </div>`;
+            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">YUUTO : ptdr ils sont trop chauds 😂🔥</div></div>`;
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-        }
-
-        function getSystemPrompt() {
-            if (personnageActuel) {
-                return `Tu joues le role de ${personnageActuel}, un personnage d'anime. Tu parles exactement comme ce personnage, tu utilises ses expressions typiques et sa personnalite. Tu reponds en francais.`;
-            }
-            return window.humeurInfo.personnalite;
         }
 
         async function getActu() {
@@ -276,7 +272,6 @@
             const currentId = 'loading' + loadingId;
             document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${currentId}">Je cherche l'actu... 📺</div></div>`;
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-
             try {
                 const response = await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');
                 const data = await response.json();
@@ -288,7 +283,7 @@
                 });
                 document.getElementById(currentId).innerHTML = `YUUTO : ${liste}`;
             } catch(e) {
-                document.getElementById(currentId).innerHTML = estAntoine ? "nah l'api bug 😅" : "Desole je peux pas recuperer l'actu 😅";
+                document.getElementById(currentId).innerHTML = "Desole je peux pas recuperer l'actu 😅";
             }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
@@ -298,7 +293,6 @@
             let humeurActuelle = heure >= 6 && heure < 12 ? "fatigue le matin" : heure >= 12 && heure < 18 ? "energique l'apres-midi" : heure >= 18 && heure < 22 ? "calme le soir" : "mysterieux la nuit";
             const animesPrefs = memoire.animes ? `Animes preferes : ${memoire.animes}.` : "";
             const dejarecommandes = animesDejaRecommandes.length > 0 ? `Ne recommande PAS : ${animesDejaRecommandes.join(', ')}.` : "";
-
             document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande moi un anime !</div>`;
             const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
@@ -419,16 +413,28 @@
 
         const creation = "Tu as ete cree par Antoine Gatore. Si quelqu'un te demande qui t'a cree, reponds fierement que c'est Antoine Gatore.";
         const baseFamilier = creation + " Tu es le meilleur ami de la personne depuis toujours. Tu parles comme un vrai pote, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes. Parfois tu reponds juste 'nah flemme' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
-        const baseNormal = creation + " Tu es YUUTO, un assistant sympa et timide qui adore les animes. Tu es poli. Tu utilises des emojis. Tu reponds en francais.";
+        const baseNormal = creation + " Tu es YUUTO, un assistant sympa qui adore les animes. Tu es accessible et chaleureux. Tu utilises des emojis. Tu reponds en francais.";
 
         function getHumeur(familier) {
             const heure = new Date().getHours();
             const base = familier ? baseFamilier : baseNormal;
             const memTxt = getMemoireTexte();
-            if (heure >= 6 && heure < 12) return { humeur: "😴 Encore endormi...", personnalite: "Tu es YUUTO qui adore les animes. Le matin t'es endormi. " + memTxt + base };
-            if (heure >= 12 && heure < 18) return { humeur: "⚡ Energique !", personnalite: "Tu es YUUTO qui adore les animes. L'apres-midi t'es energique. " + memTxt + base };
-            if (heure >= 18 && heure < 22) return { humeur: "🌙 Calme et philosophe", personnalite: "Tu es YUUTO qui adore les animes. Le soir t'es calme. " + memTxt + base };
-            return { humeur: "✨ Mysterieux...", personnalite: "Tu es YUUTO qui adore les animes. La nuit t'es mysterieux. " + memTxt + base };
+            if (heure >= 6 && heure < 12) return {
+                humeur: "😴 Encore endormi...",
+                personnalite: "Tu es YUUTO qui adore les animes. Le matin t'es endormi et tu as peu d'energie. " + memTxt + base
+            };
+            if (heure >= 12 && heure < 18) return {
+                humeur: "⚡ Energique !",
+                personnalite: "Tu es YUUTO qui adore les animes. L'apres-midi t'es energique et enthousiaste. " + memTxt + base
+            };
+            if (heure >= 18 && heure < 22) return {
+                humeur: "🌙 Calme et philosophe",
+                personnalite: "Tu es YUUTO qui adore les animes. Le soir t'es calme et tu fais des reflexions profondes. " + memTxt + base
+            };
+            return {
+                humeur: "✨ Mysterieux...",
+                personnalite: "Tu es YUUTO qui adore les animes. La nuit t'es mysterieux et poetique. " + memTxt + base
+            };
         }
 
         function seConnecter() {
