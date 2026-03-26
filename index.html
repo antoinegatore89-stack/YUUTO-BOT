@@ -68,6 +68,53 @@
         #genreButtons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .genre-btn { background: #333; color: white; border: none; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         #searchClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+
+        /* Video Call Screen */
+        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a1a; flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 20px; box-sizing: border-box; }
+        #videoCallName { font-size: 20px; font-weight: bold; color: white; margin-top: 10px; }
+        #videoCallStatus { font-size: 14px; color: #aaa; }
+
+        /* Personnage anime CSS */
+        #animeCharacter { position: relative; width: 200px; height: 220px; margin: 10px auto; }
+        .char-body { width: 120px; height: 130px; background: linear-gradient(180deg, #7c3aed, #5b21b6); border-radius: 20px 20px 30px 30px; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+        .char-head { width: 110px; height: 100px; background: #fdd8b5; border-radius: 50% 50% 45% 45%; position: absolute; top: 0; left: 50%; transform: translateX(-50%); border: 3px solid #f0c080; z-index: 2; transition: all 0.3s; }
+        .char-hair { width: 120px; height: 60px; background: #1a1a2e; border-radius: 50% 50% 0 0; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); z-index: 3; }
+        .char-hair::before { content: ''; position: absolute; width: 30px; height: 50px; background: #1a1a2e; border-radius: 0 0 50% 50%; left: -10px; top: 20px; }
+        .char-hair::after { content: ''; position: absolute; width: 30px; height: 50px; background: #1a1a2e; border-radius: 0 0 50% 50%; right: -10px; top: 20px; }
+        .char-eyes { position: absolute; top: 38px; left: 50%; transform: translateX(-50%); width: 80px; display: flex; justify-content: space-between; z-index: 4; }
+        .char-eye { width: 20px; height: 22px; background: #1a1a2e; border-radius: 50%; position: relative; overflow: hidden; transition: height 0.1s; }
+        .char-eye::after { content: ''; position: absolute; width: 8px; height: 8px; background: white; border-radius: 50%; top: 3px; right: 3px; }
+        .char-eye.blink { height: 3px !important; border-radius: 2px; }
+        .char-eye.sleepy { height: 10px; border-radius: 50% 50% 0 0; }
+        .char-eye.excited { height: 26px; width: 22px; }
+        .char-mouth { position: absolute; top: 68px; left: 50%; transform: translateX(-50%); z-index: 4; transition: all 0.2s; }
+        .char-mouth-normal { width: 20px; height: 8px; border-bottom: 3px solid #c0666a; border-radius: 0 0 10px 10px; }
+        .char-mouth-talking { width: 24px; height: 16px; background: #c0666a; border-radius: 50%; animation: talking 0.3s infinite alternate; }
+        .char-mouth-sleepy { width: 15px; height: 5px; border-bottom: 3px solid #c0666a; border-radius: 0 0 5px 5px; opacity: 0.7; }
+        .char-mouth-smile { width: 30px; height: 12px; border-bottom: 3px solid #c0666a; border-radius: 0 0 15px 15px; }
+        @keyframes talking { 0% { height: 10px; } 100% { height: 20px; } }
+        .char-blush { position: absolute; top: 52px; z-index: 4; width: 18px; height: 10px; background: rgba(255, 150, 150, 0.5); border-radius: 50%; }
+        .char-blush.left { left: 12px; }
+        .char-blush.right { right: 12px; }
+        .char-sweat { position: absolute; top: 10px; right: 5px; font-size: 20px; z-index: 5; display: none; }
+        .char-zzz { position: absolute; top: -20px; right: 10px; font-size: 18px; z-index: 5; display: none; animation: floatUp 2s infinite; }
+        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-20px); } }
+        .char-sparkle { position: absolute; top: -15px; left: 5px; font-size: 16px; z-index: 5; display: none; animation: sparkle 1s infinite alternate; }
+        @keyframes sparkle { 0% { opacity: 0.5; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+        .char-arms { position: absolute; bottom: 60px; width: 160px; left: 50%; transform: translateX(-50%); display: flex; justify-content: space-between; z-index: 1; }
+        .char-arm { width: 25px; height: 60px; background: linear-gradient(180deg, #7c3aed, #5b21b6); border-radius: 10px; }
+        .char-arm.left { transform: rotate(15deg); transform-origin: top; }
+        .char-arm.right { transform: rotate(-15deg); transform-origin: top; }
+        .char-arm.wave { animation: wave 0.5s infinite alternate; }
+        @keyframes wave { 0% { transform: rotate(-20deg); } 100% { transform: rotate(20deg); } }
+        .char-name-tag { text-align: center; color: #f59e0b; font-size: 13px; font-weight: bold; margin-top: 5px; }
+
+        #videoCallBubble { background: #222; border-radius: 20px; padding: 15px; width: 90%; max-width: 320px; min-height: 50px; font-size: 14px; text-align: center; color: white; }
+        #videoMicBtn { background: #333; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
+        #videoMicBtn.active { background: #22c55e; }
+        #videoEndBtn { background: red; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
+        #videoCallBtns { display: flex; gap: 20px; margin-bottom: 20px; }
+
         #callScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #111; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 999; }
         #callScreen img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #22c55e; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 70% { box-shadow: 0 0 0 20px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
@@ -115,16 +162,6 @@
             <div class="menu-option">
                 <label>🎨 Couleur du fond</label>
                 <input type="color" id="couleurFond" value="#1a1a1a" oninput="changerCouleur()"/>
-            </div>
-            <div class="menu-option">
-                <label>✍️ Police d'ecriture</label>
-                <select id="policeSelect" onchange="changerPolice()">
-                    <option value="Arial">Normale</option>
-                    <option value="'Comic Sans MS'">Manga 😄</option>
-                    <option value="Georgia">Elegante</option>
-                    <option value="'Courier New'">Retro</option>
-                    <option value="Verdana">Moderne</option>
-                </select>
             </div>
             <div class="menu-option">
                 <label>👤 Changer ton nom</label>
@@ -197,6 +234,40 @@
         </div>
     </div>
 
+    <!-- Video Call Screen -->
+    <div id="videoCallScreen">
+        <div id="videoCallName">YUUTO</div>
+        <div id="videoCallStatus">En appel video...</div>
+        <div id="animeCharacter">
+            <div class="char-zzz" id="charZzz">💤</div>
+            <div class="char-sparkle" id="charSparkle">✨</div>
+            <div class="char-sweat" id="charSweat">💦</div>
+            <div class="char-hair"></div>
+            <div class="char-head">
+                <div class="char-eyes">
+                    <div class="char-eye" id="eyeLeft"></div>
+                    <div class="char-eye" id="eyeRight"></div>
+                </div>
+                <div class="char-blush left"></div>
+                <div class="char-blush right"></div>
+                <div class="char-mouth" id="charMouth">
+                    <div class="char-mouth-normal" id="mouthShape"></div>
+                </div>
+            </div>
+            <div class="char-arms">
+                <div class="char-arm left" id="armLeft"></div>
+                <div class="char-arm right" id="armRight"></div>
+            </div>
+            <div class="char-body"></div>
+            <div class="char-name-tag" id="charNameTag">YUUTO</div>
+        </div>
+        <div id="videoCallBubble">Salut ! Appuie sur le micro pour me parler 😊</div>
+        <div id="videoCallBtns">
+            <button id="videoMicBtn" onclick="toggleVideoMic()">🎤</button>
+            <button id="videoEndBtn" onclick="terminerVideoAppel()">📵</button>
+        </div>
+    </div>
+
     <div id="callScreen">
         <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
         <div id="callName">YUUTO</div>
@@ -216,7 +287,7 @@
                 <span id="modePerso"></span>
             </div>
             <div id="headerBtns">
-                <button id="callBtn" onclick="demarrerAppel()">📞</button>
+                <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
                 <button id="menuBtn" onclick="ouvrirMenu()">⚙️</button>
             </div>
         </div>
@@ -253,28 +324,17 @@
         let recognition = null;
         let isListening = false;
         let enAppel = false;
+        let enVideoAppel = false;
         let yuutoParle = false;
         let personnageActuel = null;
         let estPremium = false;
         let nbTransfo = 0;
-
-        function appliquerPolice(police) {
-            document.body.style.fontFamily = police;
-            const chat = document.getElementById('chat');
-            const msg = document.getElementById('msg');
-            if (chat) chat.style.fontFamily = police;
-            if (msg) msg.style.fontFamily = police;
-        }
+        let blinkInterval = null;
+        let humeurActuelleVideo = 'normal';
 
         window.onload = function() {
             const couleur = localStorage.getItem('yuuto_couleur');
             if (couleur) { document.body.style.background = couleur; document.getElementById('couleurFond').value = couleur; }
-            const police = localStorage.getItem('yuuto_police');
-            if (police) {
-                appliquerPolice(police);
-                const sel = document.getElementById('policeSelect');
-                if (sel) sel.value = police;
-            }
             estPremium = localStorage.getItem('yuuto_premium') === 'true';
             nbTransfo = parseInt(localStorage.getItem('yuuto_transfo') || '0');
             if (estPremium) document.getElementById('premiumBadge').style.display = 'inline';
@@ -282,21 +342,150 @@
             if (nomSauvegarde) { document.getElementById('nom').value = nomSauvegarde; seConnecter(); }
         }
 
+        // Animations personnage
+        function startBlink() {
+            blinkInterval = setInterval(() => {
+                const el = document.getElementById('eyeLeft');
+                const er = document.getElementById('eyeRight');
+                if (!el || !er) return;
+                el.classList.add('blink'); er.classList.add('blink');
+                setTimeout(() => { el.classList.remove('blink'); er.classList.remove('blink'); }, 150);
+            }, 3000);
+        }
+
+        function setHumeurPersonnage(humeur) {
+            humeurActuelleVideo = humeur;
+            const el = document.getElementById('eyeLeft');
+            const er = document.getElementById('eyeRight');
+            const zzz = document.getElementById('charZzz');
+            const sparkle = document.getElementById('charSparkle');
+            const mouth = document.getElementById('mouthShape');
+
+            el.className = 'char-eye';
+            er.className = 'char-eye';
+            zzz.style.display = 'none';
+            sparkle.style.display = 'none';
+
+            if (humeur === 'sleepy') {
+                el.classList.add('sleepy'); er.classList.add('sleepy');
+                zzz.style.display = 'block';
+                mouth.className = 'char-mouth-sleepy';
+            } else if (humeur === 'excited') {
+                el.classList.add('excited'); er.classList.add('excited');
+                sparkle.style.display = 'block';
+                mouth.className = 'char-mouth-smile';
+            } else if (humeur === 'mysterious') {
+                mouth.className = 'char-mouth-normal';
+            } else {
+                mouth.className = 'char-mouth-smile';
+            }
+        }
+
+        function startTalking() {
+            const mouth = document.getElementById('mouthShape');
+            if (mouth) mouth.className = 'char-mouth-talking';
+            const armLeft = document.getElementById('armLeft');
+            if (armLeft) armLeft.classList.add('wave');
+        }
+
+        function stopTalking() {
+            const mouth = document.getElementById('mouthShape');
+            if (mouth) mouth.className = humeurActuelleVideo === 'sleepy' ? 'char-mouth-sleepy' : 'char-mouth-smile';
+            const armLeft = document.getElementById('armLeft');
+            if (armLeft) armLeft.classList.remove('wave');
+        }
+
+        async function demarrerVideoAppel() {
+            enVideoAppel = true;
+            document.getElementById('videoCallScreen').style.display = 'flex';
+            const nom = personnageActuel || 'YUUTO';
+            document.getElementById('videoCallName').textContent = nom;
+            document.getElementById('charNameTag').textContent = nom;
+
+            const heure = new Date().getHours();
+            if (heure >= 6 && heure < 12) setHumeurPersonnage('sleepy');
+            else if (heure >= 12 && heure < 18) setHumeurPersonnage('excited');
+            else if (heure >= 18 && heure < 22) setHumeurPersonnage('normal');
+            else setHumeurPersonnage('mysterious');
+
+            startBlink();
+
+            const intro = estAntoine ? "Wsh Antoine tu mappelles en video !" : `Salut ${memoire.prenom} tu mappelles en video !`;
+            document.getElementById('videoCallBubble').textContent = intro;
+            document.getElementById('videoCallStatus').textContent = `${nom} parle...`;
+            startTalking();
+            parlerVideo(intro, () => {
+                stopTalking();
+                document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro pour parler';
+            });
+        }
+
+        function terminerVideoAppel() {
+            enVideoAppel = false; yuutoParle = false; stopMic();
+            window.speechSynthesis.cancel();
+            stopTalking();
+            if (blinkInterval) { clearInterval(blinkInterval); blinkInterval = null; }
+            document.getElementById('videoCallScreen').style.display = 'none';
+        }
+
+        function parlerVideo(texte, callback) {
+            const synth = window.speechSynthesis;
+            if (!synth) { if (callback) callback(); return; }
+            synth.cancel(); yuutoParle = true;
+            startTalking();
+            const utterance = new SpeechSynthesisUtterance(texte);
+            utterance.lang = 'fr-FR'; utterance.rate = 1; utterance.pitch = 1.1;
+            utterance.onend = () => { yuutoParle = false; stopTalking(); if (callback) setTimeout(callback, 500); };
+            synth.speak(utterance);
+        }
+
+        function toggleVideoMic() {
+            if (!yuutoParle) {
+                if (isListening) stopMic();
+                else {
+                    if (!recognition) { alert("Micro non supporte"); return; }
+                    try {
+                        recognition.onresult = (e) => {
+                            const texte = e.results[0][0].transcript;
+                            stopMic();
+                            envoyerVideoAppel(texte);
+                        };
+                        recognition.start(); isListening = true;
+                        document.getElementById('videoMicBtn').classList.add('active');
+                        document.getElementById('videoMicBtn').textContent = '🔴';
+                        document.getElementById('videoCallStatus').textContent = 'Tu parles...';
+                    } catch(e) {}
+                }
+            }
+        }
+
+        async function envoyerVideoAppel(msg) {
+            document.getElementById('videoCallStatus').textContent = 'YUUTO reflechit...';
+            document.getElementById('videoMicBtn').classList.remove('active');
+            document.getElementById('videoMicBtn').textContent = '🎤';
+            historique.push({"role": "user", "content": msg});
+            const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+                body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: getSystemPrompt() + " Reponds en 1-2 phrases courtes max." }, ...historique] })
+            });
+            const data = await rep.json();
+            const reponse = data.choices[0].message.content;
+            historique.push({"role": "assistant", "content": reponse});
+            document.getElementById('videoCallBubble').textContent = reponse;
+            document.getElementById('videoCallStatus').textContent = 'YUUTO parle...';
+            parlerVideo(reponse.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, ''), () => {
+                if (enVideoAppel) document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro pour parler';
+            });
+        }
+
         function ouvrirMenu() { document.getElementById('menuScreen').style.display = 'flex'; }
         function fermerMenu() { document.getElementById('menuScreen').style.display = 'none'; }
-
         function changerCouleur() {
             const couleur = document.getElementById('couleurFond').value;
             document.body.style.background = couleur;
             localStorage.setItem('yuuto_couleur', couleur);
         }
-
-        function changerPolice() {
-            const police = document.getElementById('policeSelect').value;
-            appliquerPolice(police);
-            localStorage.setItem('yuuto_police', police);
-        }
-
         function changerNom() {
             const nouveauNom = document.getElementById('nouveauNom').value.trim();
             if (!nouveauNom) return;
@@ -371,19 +560,19 @@
             document.getElementById('chat').innerHTML += `<div class="moi">🔍 Meilleurs animes ${genre} !</div>`;
             loadingId++;
             const currentId = 'loading' + loadingId;
-            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${currentId}">Je cherche les meilleurs animes ${genre}... 🔍</div></div>`;
+            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${currentId}">Je cherche... 🔍</div></div>`;
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
             try {
                 const response = await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);
                 const data = await response.json();
-                let liste = estAntoine ? `wsh bro voila les meilleurs animes ${genre} 🔥<br><br>` : `Voila les meilleurs animes ${genre} 🎌<br><br>`;
+                let liste = estAntoine ? `wsh voila les meilleurs ${genre} 🔥<br><br>` : `Voila les meilleurs ${genre} 🎌<br><br>`;
                 data.data.forEach((anime, i) => {
                     liste += `${i + 1}. <strong>${anime.title}</strong> ⭐${anime.score || '?'}/10<br>`;
                     if (anime.synopsis) liste += `${anime.synopsis.substring(0, 100)}...<br><br>`;
                 });
                 document.getElementById(currentId).innerHTML = `YUUTO : ${liste}`;
             } catch(e) {
-                document.getElementById(currentId).innerHTML = estAntoine ? "nah ca bug 😅" : "Desole je peux pas chercher 😅";
+                document.getElementById(currentId).innerHTML = "Desole je peux pas chercher 😅";
             }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
@@ -426,14 +615,14 @@
             try {
                 const response = await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');
                 const data = await response.json();
-                let liste = estAntoine ? "wsh bro voila les animes qui cartonnent 🔥<br><br>" : "Voila les animes du moment 📺<br><br>";
+                let liste = estAntoine ? "wsh voila les animes qui cartonnent 🔥<br><br>" : "Voila les animes du moment 📺<br><br>";
                 data.data.forEach((anime, i) => {
                     liste += `${i + 1}. <strong>${anime.title}</strong> ⭐${anime.score || '?'}/10<br>`;
                     if (anime.synopsis) liste += `${anime.synopsis.substring(0, 80)}...<br><br>`;
                 });
                 document.getElementById(currentId).innerHTML = `YUUTO : ${liste}`;
             } catch(e) {
-                document.getElementById(currentId).innerHTML = "Desole je peux pas recuperer l'actu 😅";
+                document.getElementById(currentId).innerHTML = "Desole 😅";
             }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
@@ -473,8 +662,11 @@
             };
             recognition.onend = () => {
                 isListening = false;
+                document.getElementById('micBtn').classList.remove('active');
+                document.getElementById('micBtn').textContent = '🎤';
+                document.getElementById('videoMicBtn').classList.remove('active');
+                document.getElementById('videoMicBtn').textContent = '🎤';
                 if (enAppel) { document.getElementById('micCallBtn').classList.remove('active'); document.getElementById('micCallBtn').textContent = '🎤'; }
-                else { document.getElementById('micBtn').classList.remove('active'); document.getElementById('micBtn').textContent = '🎤'; }
             };
         }
 
@@ -559,29 +751,17 @@
         }
 
         const creation = "Tu as ete cree par Antoine Gatore. Si quelqu'un te demande qui t'a cree, reponds fierement que c'est Antoine Gatore.";
-        const styleFamilier = "Tu parles comme un vrai pote de longue date, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes. Parfois tu reponds juste 'nah flemme' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
+        const styleFamilier = "Tu parles comme un vrai pote, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes. Tu utilises des emojis. Tu reponds en francais.";
         const styleNormal = "Tu es accessible et chaleureux. Tu utilises des emojis. Tu reponds en francais.";
 
         function getHumeur(familier) {
             const heure = new Date().getHours();
             const style = familier ? styleFamilier : styleNormal;
             const memTxt = getMemoireTexte();
-            if (heure >= 6 && heure < 12) return {
-                humeur: "😴 Encore endormi...",
-                personnalite: creation + " Tu es YUUTO qui adore les animes. Le matin t'es endormi, tu as peu d'energie. " + memTxt + style
-            };
-            if (heure >= 12 && heure < 18) return {
-                humeur: "⚡ Energique !",
-                personnalite: creation + " Tu es YUUTO qui adore les animes. L'apres-midi t'es energique et enthousiaste. " + memTxt + style
-            };
-            if (heure >= 18 && heure < 22) return {
-                humeur: "🌙 Calme et philosophe",
-                personnalite: creation + " Tu es YUUTO qui adore les animes. Le soir t'es calme et philosophe. " + memTxt + style
-            };
-            return {
-                humeur: "✨ Mysterieux...",
-                personnalite: creation + " Tu es YUUTO qui adore les animes. La nuit t'es mysterieux et poetique. " + memTxt + style
-            };
+            if (heure >= 6 && heure < 12) return { humeur: "😴 Encore endormi...", personnalite: creation + " Tu es YUUTO. Le matin t'es endormi. " + memTxt + style };
+            if (heure >= 12 && heure < 18) return { humeur: "⚡ Energique !", personnalite: creation + " Tu es YUUTO. L'apres-midi t'es energique. " + memTxt + style };
+            if (heure >= 18 && heure < 22) return { humeur: "🌙 Calme et philosophe", personnalite: creation + " Tu es YUUTO. Le soir t'es calme. " + memTxt + style };
+            return { humeur: "✨ Mysterieux...", personnalite: creation + " Tu es YUUTO. La nuit t'es mysterieux. " + memTxt + style };
         }
 
         function seConnecter() {
@@ -599,9 +779,6 @@
             document.getElementById('app').style.display = 'flex';
             initMic();
 
-            const police = localStorage.getItem('yuuto_police');
-            if (police) appliquerPolice(police);
-
             const humeurInfo = getHumeur(estAntoine);
             document.getElementById('humeur').textContent = humeurInfo.humeur;
             window.humeurInfo = humeurInfo;
@@ -611,13 +788,13 @@
             sauvegarderMemoire();
 
             const introsFamilier = {
-                "😴 Encore endormi...": `wsh... 😴 j'ai meme pas dormi j'ai mate des animes toute la nuit...`,
-                "⚡ Energique !": `YOOO 🔥 t'es la Antoine ! j'suis chaud, on cause de quoi ?`,
-                "🌙 Calme et philosophe": `wsh... 🌙 je pensais a un truc random sur One Piece... t'arrives bien`,
-                "✨ Mysterieux...": `...t'es la ✨ comme Naruto avant un fight... c'est quoi`
+                "😴 Encore endormi...": `wsh... 😴 j'ai meme pas dormi j'ai mate des animes...`,
+                "⚡ Energique !": `YOOO 🔥 t'es la Antoine !`,
+                "🌙 Calme et philosophe": `wsh... 🌙 je pensais a One Piece...`,
+                "✨ Mysterieux...": `...t'es la ✨ c'est quoi`
             };
             const introsNormal = {
-                "😴 Encore endormi...": `Bonjour... 😴 j'ai veille tard sur des animes. Comment je peux t'aider ?`,
+                "😴 Encore endormi...": `Bonjour... 😴 j'ai veille sur des animes.`,
                 "⚡ Energique !": `Salut ${memoire.prenom} ! ⚡ Content de te voir !`,
                 "🌙 Calme et philosophe": `Bonsoir... 🌙 Comment je peux t'aider ?`,
                 "✨ Mysterieux...": `Tu es la... ✨ qu'est ce qui t'amene ?`
