@@ -23,8 +23,6 @@
         #headerBtns { margin-left: auto; display: flex; gap: 8px; }
         #callBtn { background: #22c55e; border: none; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; cursor: pointer; }
         #menuBtn { background: #333; border: none; color: white; padding: 8px 12px; border-radius: 20px; font-size: 18px; cursor: pointer; }
-
-        /* Menu */
         #menuScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
         #menuBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; }
         #menuBox h2 { margin: 0 0 20px 0; text-align: center; }
@@ -32,8 +30,6 @@
         .menu-option label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
         .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
         #closeMenu { background: #7c3aed; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; width: 100%; margin-top: 10px; cursor: pointer; }
-
-        /* Appel */
         #callScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #111; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 999; }
         #callScreen img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #22c55e; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 70% { box-shadow: 0 0 0 20px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
@@ -42,7 +38,6 @@
         #endCallBtn { background: red; border: none; color: white; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
         #micCallBtn { background: #333; border: none; color: white; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
         #micCallBtn.active { background: #22c55e; }
-
         #chat { flex: 1; overflow-y: auto; padding: 10px; }
         .moi { background: #0084ff; padding: 10px; border-radius: 10px; margin: 5px; text-align: right; }
         .bot { display: flex; align-items: flex-start; gap: 8px; margin: 5px; }
@@ -50,7 +45,9 @@
         .bot-msg { background: #333; padding: 10px; border-radius: 10px; }
         .bot-msg img.generated { max-width: 200px; border-radius: 10px; margin-top: 5px; display: block; }
         .audio-btn { background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; margin-top: 5px; padding: 0; }
-        #bas { display: flex; padding: 10px; gap: 5px; }
+        #bas { display: flex; flex-direction: column; padding: 10px; gap: 8px; }
+        #basButtons { display: flex; gap: 5px; }
+        #recommandeBtn { background: #f59e0b; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; width: 100%; }
         #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; }
         #btn { background: #7c3aed; color: white; border: none; padding: 10px 15px; border-radius: 20px; font-size: 16px; }
         #micBtn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 20px; font-size: 20px; }
@@ -102,9 +99,12 @@
         </div>
         <div id="chat"></div>
         <div id="bas">
-            <button id="micBtn" onclick="toggleMic()">🎤</button>
-            <input id="msg" type="text" placeholder="Ecris ou parle..."/>
-            <button id="btn" onclick="envoyer()">Envoyer</button>
+            <button id="recommandeBtn" onclick="recommander()">🎌 Recommande moi un anime !</button>
+            <div id="basButtons">
+                <button id="micBtn" onclick="toggleMic()">🎤</button>
+                <input id="msg" type="text" placeholder="Ecris ou parle..."/>
+                <button id="btn" onclick="envoyer()">Envoyer</button>
+            </div>
         </div>
     </div>
 
@@ -121,29 +121,48 @@
 
         window.onload = function() {
             const couleur = localStorage.getItem('yuuto_couleur');
-            if (couleur) {
-                document.body.style.background = couleur;
-                document.getElementById('couleurFond').value = couleur;
-            }
+            if (couleur) { document.body.style.background = couleur; document.getElementById('couleurFond').value = couleur; }
             const nomSauvegarde = localStorage.getItem('yuuto_nom');
-            if (nomSauvegarde) {
-                document.getElementById('nom').value = nomSauvegarde;
-                seConnecter();
-            }
+            if (nomSauvegarde) { document.getElementById('nom').value = nomSauvegarde; seConnecter(); }
         }
 
-        function ouvrirMenu() {
-            document.getElementById('menuScreen').style.display = 'flex';
-        }
-
-        function fermerMenu() {
-            document.getElementById('menuScreen').style.display = 'none';
-        }
-
+        function ouvrirMenu() { document.getElementById('menuScreen').style.display = 'flex'; }
+        function fermerMenu() { document.getElementById('menuScreen').style.display = 'none'; }
         function changerCouleur() {
             const couleur = document.getElementById('couleurFond').value;
             document.body.style.background = couleur;
             localStorage.setItem('yuuto_couleur', couleur);
+        }
+
+        async function recommander() {
+            const heure = new Date().getHours();
+            let humeurActuelle = "";
+            if (heure >= 6 && heure < 12) humeurActuelle = "le matin tu es fatigue";
+            else if (heure >= 12 && heure < 18) humeurActuelle = "l'apres-midi tu es energique";
+            else if (heure >= 18 && heure < 22) humeurActuelle = "le soir tu es calme et philosophe";
+            else humeurActuelle = "la nuit tu es mysterieux";
+
+            const animesPrefs = memoire.animes ? `Les animes preferes de la personne sont : ${memoire.animes}.` : "La personne n'a pas encore mentionne ses animes preferes.";
+
+            document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande moi un anime !</div>`;
+
+            const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+                body: JSON.stringify({
+                    model: 'llama-3.3-70b-versatile',
+                    messages: [{
+                        role: 'system',
+                        content: window.humeurInfo.personnalite
+                    }, {
+                        role: 'user',
+                        content: `Recommande moi un anime en tenant compte de ces infos : ${humeurActuelle}. ${animesPrefs} Donne le nom de l'anime, une courte description et pourquoi tu le recommandes selon mon humeur et mes gouts. Reponds de maniere ${estAntoine ? 'tres familiere comme a un pote' : 'sympa'}.`
+                    }]
+                })
+            });
+            const data = await rep.json();
+            const reponse = data.choices[0].message.content;
+            ajouterMessageBot(reponse);
         }
 
         function initMic() {
@@ -171,8 +190,7 @@
         function startMic(appel) {
             if (!recognition) { alert("Micro non supporte"); return; }
             try {
-                recognition.start();
-                isListening = true;
+                recognition.start(); isListening = true;
                 if (appel) { document.getElementById('micCallBtn').classList.add('active'); document.getElementById('micCallBtn').textContent = '🔴'; document.getElementById('callStatus').textContent = 'Tu parles...'; }
                 else { document.getElementById('micBtn').classList.add('active'); document.getElementById('micBtn').textContent = '🔴'; }
             } catch(e) {}
@@ -183,12 +201,9 @@
         function parler(texte, callback) {
             const synth = window.speechSynthesis;
             if (!synth) { if (callback) callback(); return; }
-            synth.cancel();
-            yuutoParle = true;
+            synth.cancel(); yuutoParle = true;
             const utterance = new SpeechSynthesisUtterance(texte);
-            utterance.lang = 'fr-FR';
-            utterance.rate = 1;
-            utterance.pitch = 1;
+            utterance.lang = 'fr-FR'; utterance.rate = 1; utterance.pitch = 1;
             utterance.onend = () => { yuutoParle = false; if (callback) setTimeout(callback, 800); };
             synth.speak(utterance);
         }
