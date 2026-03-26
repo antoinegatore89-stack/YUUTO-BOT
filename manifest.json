@@ -1,0 +1,16 @@
+{
+  "name": "YUUTO",
+  "short_name": "YUUTO",
+  "description": "BOT FRANÇAIS QUI ADORE LES ANILE ET LES JEUX VIDEO PEU PARLER DE SUJET DIVAIRSSE",
+  "start_url": "/YUUTO-BOT/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
