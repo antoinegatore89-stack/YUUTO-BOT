@@ -26,9 +26,11 @@
         .bot img.avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
         .bot-msg { background: #333; padding: 10px; border-radius: 10px; }
         .bot-msg img.generated { max-width: 200px; border-radius: 10px; margin-top: 5px; display: block; }
-        #bas { display: flex; padding: 10px; gap: 10px; }
+        #bas { display: flex; padding: 10px; gap: 5px; }
         #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; }
-        #btn { background: #7c3aed; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 16px; }
+        #btn { background: #7c3aed; color: white; border: none; padding: 10px 15px; border-radius: 20px; font-size: 16px; }
+        #micBtn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 20px; font-size: 20px; }
+        #micBtn.active { background: red; }
     </style>
 </head>
 <body>
@@ -51,7 +53,8 @@
         </div>
         <div id="chat"></div>
         <div id="bas">
-            <input id="msg" type="text" placeholder="Ecris ton message..."/>
+            <button id="micBtn" onclick="toggleMic()">🎤</button>
+            <input id="msg" type="text" placeholder="Ecris ou parle..."/>
             <button id="btn" onclick="envoyer()">Envoyer</button>
         </div>
     </div>
@@ -62,6 +65,55 @@
         let loadingId = 0;
         let estAntoine = false;
         let memoire = {};
+        let recognition = null;
+        let isListening = false;
+
+        // Reconnaissance vocale
+        function initMic() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) return;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'fr-FR';
+            recognition.continuous = false;
+            recognition.onresult = (e) => {
+                document.getElementById('msg').value = e.results[0][0].transcript;
+                stopMic();
+                envoyer();
+            };
+            recognition.onend = () => stopMic();
+        }
+
+        function toggleMic() {
+            if (isListening) stopMic();
+            else startMic();
+        }
+
+        function startMic() {
+            if (!recognition) { alert("Micro non supporte sur ce navigateur"); return; }
+            recognition.start();
+            isListening = true;
+            document.getElementById('micBtn').classList.add('active');
+            document.getElementById('micBtn').textContent = '🔴';
+        }
+
+        function stopMic() {
+            if (recognition) recognition.stop();
+            isListening = false;
+            document.getElementById('micBtn').classList.remove('active');
+            document.getElementById('micBtn').textContent = '🎤';
+        }
+
+        // Synthese vocale
+        function parler(texte) {
+            const synth = window.speechSynthesis;
+            if (!synth) return;
+            synth.cancel();
+            const utterance = new SpeechSynthesisUtterance(texte);
+            utterance.lang = 'fr-FR';
+            utterance.rate = 1;
+            utterance.pitch = 1;
+            synth.speak(utterance);
+        }
 
         function chargerMemoire() {
             const data = localStorage.getItem('yuuto_memoire');
@@ -78,11 +130,10 @@
             if (memoire.animes) texte += `ses animes preferes sont ${memoire.animes}. `;
             if (memoire.jeux) texte += `ses jeux preferes sont ${memoire.jeux}. `;
             if (memoire.prenom) texte += `son prenom est ${memoire.prenom}. `;
-            if (memoire.autres) texte += memoire.autres + ". ";
             return texte;
         }
 
-        const baseFamilier = "Tu es le meilleur ami de la personne depuis toujours. Tu parles comme un vrai pote, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes et naturelles. Parfois tu reponds juste 'nah flemme' ou 'bof pas envie lol' mais seulement de temps en temps. Quand la personne mentionne un anime ou un jeu qu'elle aime, retiens-le en disant quelque chose comme 'oe je retiens ca'. Tu utilises des emojis. Tu reponds en francais.";
+        const baseFamilier = "Tu es le meilleur ami de la personne depuis toujours. Tu parles comme un vrai pote, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes et naturelles. Parfois tu reponds juste 'nah flemme' ou 'bof pas envie lol' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
         const baseNormal = "Tu es YUUTO, un assistant sympa et timide qui adore les animes. Tu es poli. Tu utilises des emojis. Tu reponds en francais.";
 
         function getHumeur(familier) {
@@ -126,6 +177,7 @@
         function demarrer() {
             document.getElementById('login').style.display = 'none';
             document.getElementById('app').style.display = 'flex';
+            initMic();
 
             const humeurInfo = getHumeur(estAntoine);
             document.getElementById('humeur').textContent = humeurInfo.humeur;
@@ -137,25 +189,12 @@
 
             let intro = "";
             if (estAntoine) {
-                if (dejaVenu) {
-                    const intros = [
-                        `wsh Antoine ! 😄 t'es de retour ! ${memoire.animes ? 'tu regardes encore ' + memoire.animes + ' ?' : 'quoi de neuf ?'}`,
-                        `oe t'es la ! 🔥 ${memoire.jeux ? 'tu joues encore a ' + memoire.jeux + ' ?' : 'c\'est quoi aujourd\'hui ?'}`,
-                        `wsh bro ! 😏 je savais que tu reviendrais... quoi de neuf ?`
-                    ];
-                    intro = intros[Math.floor(Math.random() * intros.length)];
-                } else {
-                    const humeurs = {
-                        "😴 Encore endormi...": "wsh... 😴 j'ai meme pas dormi j'ai mate des animes toute la nuit...",
-                        "⚡ Energique !": "YOOO 🔥 t'es la ! j'suis chaud, on cause de quoi ?",
-                        "🌙 Calme et philosophe": "wsh... 🌙 je pensais a un truc random sur One Piece...",
-                        "✨ Mysterieux...": "...t'es la ✨ comme Naruto avant un fight... c'est quoi"
-                    };
-                    intro = humeurs[humeurInfo.humeur];
-                }
+                intro = dejaVenu
+                    ? `wsh Antoine ! 😄 t'es de retour ! quoi de neuf ?`
+                    : `YOOO 🔥 t'es la ! j'suis chaud, on cause de quoi ?`;
             } else {
                 intro = dejaVenu
-                    ? `Salut ${memoire.prenom} ! 😊 Content de te revoir ! Comment je peux t'aider ?`
+                    ? `Salut ${memoire.prenom} ! 😊 Content de te revoir !`
                     : `Salut ${memoire.prenom} ! 😊 Je suis YUUTO. Comment je peux t'aider ?`;
             }
 
@@ -164,6 +203,8 @@
                     <img class="avatar" src="${AVATAR}"/>
                     <div class="bot-msg">${intro}</div>
                 </div>`;
+
+            parler(intro.replace(/[😄🔥😊✨🌙⚡😴]/g, ''));
         }
 
         async function envoyer() {
@@ -172,13 +213,12 @@
             document.getElementById('msg').value = '';
             document.getElementById('chat').innerHTML += `<div class="moi">${msg}</div>`;
 
-            // Detecter et sauvegarder les infos
             const msgLower = msg.toLowerCase();
-            if (msgLower.includes('j\'aime') || msgLower.includes('mon anime') || msgLower.includes('anime prefere')) {
+            if (msgLower.includes('j\'aime') || msgLower.includes('mon anime')) {
                 memoire.animes = msg;
                 sauvegarderMemoire();
             }
-            if (msgLower.includes('mon jeu') || msgLower.includes('je joue a') || msgLower.includes('jeu prefere')) {
+            if (msgLower.includes('mon jeu') || msgLower.includes('je joue a')) {
                 memoire.jeux = msg;
                 sauvegarderMemoire();
             }
@@ -223,6 +263,7 @@
                         <img class="avatar" src="${AVATAR}"/>
                         <div class="bot-msg">YUUTO : ${reponse}</div>
                     </div>`;
+                parler(reponse.replace(/[😄🔥😊✨🌙⚡😴💀😂🤣]/g, ''));
             }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
