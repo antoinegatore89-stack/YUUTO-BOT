@@ -91,6 +91,15 @@
         let enAppel = false;
         let yuutoParle = false;
 
+        // Connexion automatique si nom deja sauvegarde
+        window.onload = function() {
+            const nomSauvegarde = localStorage.getItem('yuuto_nom');
+            if (nomSauvegarde) {
+                document.getElementById('nom').value = nomSauvegarde;
+                seConnecter();
+            }
+        }
+
         function initMic() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) return;
@@ -272,6 +281,7 @@
                 document.getElementById('erreur').style.display = 'block';
                 return;
             }
+            localStorage.setItem('yuuto_nom', nom);
             chargerMemoire();
             demarrer();
         }
