@@ -26,6 +26,8 @@
         .bot img.avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
         .bot-msg { background: #333; padding: 10px; border-radius: 10px; }
         .bot-msg img.generated { max-width: 200px; border-radius: 10px; margin-top: 5px; display: block; }
+        .audio-btn { background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; margin-top: 5px; padding: 0; }
+        .audio-btn:hover { color: white; }
         #bas { display: flex; padding: 10px; gap: 5px; }
         #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; }
         #btn { background: #7c3aed; color: white; border: none; padding: 10px 15px; border-radius: 20px; font-size: 16px; }
@@ -68,7 +70,6 @@
         let recognition = null;
         let isListening = false;
 
-        // Reconnaissance vocale
         function initMic() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) return;
@@ -89,7 +90,7 @@
         }
 
         function startMic() {
-            if (!recognition) { alert("Micro non supporte sur ce navigateur"); return; }
+            if (!recognition) { alert("Micro non supporte"); return; }
             recognition.start();
             isListening = true;
             document.getElementById('micBtn').classList.add('active');
@@ -103,16 +104,33 @@
             document.getElementById('micBtn').textContent = '🎤';
         }
 
-        // Synthese vocale
         function parler(texte) {
             const synth = window.speechSynthesis;
             if (!synth) return;
             synth.cancel();
             const utterance = new SpeechSynthesisUtterance(texte);
             utterance.lang = 'fr-FR';
-            utterance.rate = 1;
-            utterance.pitch = 1;
+            utterance.rate = 0.85;
+            utterance.pitch = 1.3;
+            utterance.volume = 1;
             synth.speak(utterance);
+        }
+
+        function nettoyerTexte(texte) {
+            return texte.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').replace(/'/g, "\\'");
+        }
+
+        function ajouterMessageBot(texte) {
+            const texteNettoy = nettoyerTexte(texte);
+            document.getElementById('chat').innerHTML += `
+                <div class="bot">
+                    <img class="avatar" src="${AVATAR}"/>
+                    <div class="bot-msg">
+                        YUUTO : ${texte}
+                        <br><button class="audio-btn" onclick="parler('${texteNettoy}')">🔊 Ecouter</button>
+                    </div>
+                </div>`;
+            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
 
         function chargerMemoire() {
@@ -189,22 +207,20 @@
 
             let intro = "";
             if (estAntoine) {
-                intro = dejaVenu
-                    ? `wsh Antoine ! 😄 t'es de retour ! quoi de neuf ?`
-                    : `YOOO 🔥 t'es la ! j'suis chaud, on cause de quoi ?`;
+                intro = dejaVenu ? `wsh Antoine ! 😄 t'es de retour ! quoi de neuf ?` : `YOOO 🔥 t'es la ! j'suis chaud, on cause de quoi ?`;
             } else {
-                intro = dejaVenu
-                    ? `Salut ${memoire.prenom} ! 😊 Content de te revoir !`
-                    : `Salut ${memoire.prenom} ! 😊 Je suis YUUTO. Comment je peux t'aider ?`;
+                intro = dejaVenu ? `Salut ${memoire.prenom} ! 😊 Content de te revoir !` : `Salut ${memoire.prenom} ! 😊 Je suis YUUTO. Comment je peux t'aider ?`;
             }
 
+            const texteNettoy = nettoyerTexte(intro);
             document.getElementById('chat').innerHTML = `
                 <div class="bot">
                     <img class="avatar" src="${AVATAR}"/>
-                    <div class="bot-msg">${intro}</div>
+                    <div class="bot-msg">
+                        ${intro}
+                        <br><button class="audio-btn" onclick="parler('${texteNettoy}')">🔊 Ecouter</button>
+                    </div>
                 </div>`;
-
-            parler(intro.replace(/[😄🔥😊✨🌙⚡😴]/g, ''));
         }
 
         async function envoyer() {
@@ -258,15 +274,10 @@
                 const data = await rep.json();
                 const reponse = data.choices[0].message.content;
                 historique.push({"role": "assistant", "content": reponse});
-                document.getElementById('chat').innerHTML += `
-                    <div class="bot">
-                        <img class="avatar" src="${AVATAR}"/>
-                        <div class="bot-msg">YUUTO : ${reponse}</div>
-                    </div>`;
-                parler(reponse.replace(/[😄🔥😊✨🌙⚡😴💀😂🤣]/g, ''));
+                ajouterMessageBot(reponse);
             }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
     </script>
 </body>
-</html>
+</html
