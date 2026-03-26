@@ -9,67 +9,89 @@
     <meta name="theme-color" content="#7c3aed"/>
     <script src="https://js.puter.com/v2/"></script>
     <style>
-        * { box-sizing: border-box; }
-        body { font-family: Arial; margin: 0; background: #1a1a1a; color: white; overflow: hidden; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial; background: #1a1a1a; color: white; overflow: hidden; height: 100vh; }
 
-        /* LOGIN */
         #login { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 15px; }
         #login img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #7c3aed; }
-        #login h2 { margin: 0; font-size: 28px; background: linear-gradient(90deg, #7c3aed, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #login p { color: #aaa; margin: 0; }
+        #login h2 { font-size: 28px; background: linear-gradient(90deg, #7c3aed, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        #login p { color: #aaa; }
         #login input { padding: 12px; border-radius: 20px; border: 2px solid #7c3aed; font-size: 16px; width: 250px; text-align: center; background: #222; color: white; outline: none; }
         #login button { background: linear-gradient(90deg, #7c3aed, #5b21b6); color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #erreur { color: red; display: none; font-size: 14px; }
 
-        /* MAIN APP */
-        #app { display: none; flex-direction: row; height: 100vh; }
+        /* APP */
+        #app { display: none; height: 100vh; position: relative; }
 
-        /* SIDEBAR */
-        #sidebar { width: 260px; background: #111; display: flex; flex-direction: column; height: 100vh; transition: transform 0.3s; position: relative; z-index: 10; flex-shrink: 0; }
-        #sidebar.hidden { transform: translateX(-260px); position: absolute; }
+        /* SIDEBAR - position fixe par dessus */
+        #sidebar { display: none; position: fixed; top: 0; left: 0; width: 270px; height: 100vh; background: #111; flex-direction: column; z-index: 100; border-right: 1px solid #222; }
+        #sidebar.open { display: flex; }
         #sidebarHeader { padding: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #222; }
         #sidebarHeader img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid #7c3aed; }
         #sidebarTitle { font-size: 16px; font-weight: bold; background: linear-gradient(90deg, #7c3aed, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #newChatBtn { margin: 10px; padding: 10px; background: linear-gradient(90deg, #7c3aed, #5b21b6); border: none; color: white; border-radius: 10px; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
-        #newChatBtn:hover { opacity: 0.9; }
+        #newChatBtn { margin: 10px; padding: 10px 15px; background: linear-gradient(90deg, #7c3aed, #5b21b6); border: none; color: white; border-radius: 10px; cursor: pointer; font-size: 14px; text-align: left; }
         #historyLabel { padding: 8px 15px; font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
         #historyList { flex: 1; overflow-y: auto; padding: 5px; }
-        .historyItem { padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; color: #aaa; display: flex; align-items: center; gap: 8px; margin-bottom: 3px; transition: background 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .historyItem { padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; color: #aaa; display: flex; align-items: center; gap: 8px; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .historyItem:hover { background: #222; color: white; }
-        .historyItem.active { background: #222; color: white; }
-        .historyItem .icon { font-size: 16px; flex-shrink: 0; }
         #sidebarFooter { padding: 10px; border-top: 1px solid #222; }
-        .sidebarBtn { width: 100%; padding: 10px 12px; background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px; text-align: left; transition: background 0.2s; }
+        .sidebarBtn { width: 100%; padding: 10px 12px; background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px; text-align: left; }
         .sidebarBtn:hover { background: #222; color: white; }
         #userInfo { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
         #userAvatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #7c3aed, #f59e0b); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; flex-shrink: 0; }
         #userName { font-size: 14px; color: #ddd; }
-        #premiumBadgeSide { background: #f59e0b; color: black; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; }
+        #premiumBadgeSide { background: #f59e0b; color: black; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; display: none; }
 
-        /* MAIN CONTENT */
-        #mainContent { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; position: relative; }
+        /* OVERLAY */
+        #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
+
+        /* MAIN - prend tout l'espace */
+        #mainContent { display: flex; flex-direction: column; height: 100vh; width: 100%; }
 
         /* HEADER */
-        #header { display: flex; align-items: center; padding: 10px 15px; background: #111; border-bottom: 1px solid #222; gap: 10px; }
-        #toggleSidebar { background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 5px; border-radius: 8px; }
+        #header { display: flex; align-items: center; padding: 10px 15px; background: #111; border-bottom: 1px solid #222; gap: 10px; flex-shrink: 0; }
+        #toggleSidebar { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 5px 8px; border-radius: 8px; }
         #toggleSidebar:hover { background: #222; }
-        #headerTitle { font-size: 16px; font-weight: bold; flex: 1; }
+        #headerCenter { flex: 1; }
+        #headerTitle { font-size: 16px; font-weight: bold; }
         #humeur { font-size: 11px; color: #aaa; }
         #modePerso { font-size: 11px; color: #f59e0b; }
         #headerBtns { display: flex; gap: 8px; }
         #callBtn { background: #22c55e; border: none; color: white; padding: 7px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
-        #premiumBtn { background: linear-gradient(90deg, #f59e0b, #d97706); border: none; color: black; padding: 7px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; font-weight: bold; }
 
-        /* OVERLAY pour fermer sidebar sur mobile */
-        #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9; }
+        /* CHAT */
+        #chat { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
+        #chat::-webkit-scrollbar { width: 4px; }
+        #chat::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+        .moi { background: #2a2a3e; padding: 10px 15px; border-radius: 18px 18px 4px 18px; margin-left: auto; max-width: 80%; font-size: 14px; border: 1px solid #3a3a5e; }
+        .bot { display: flex; align-items: flex-start; gap: 10px; max-width: 92%; }
+        .bot img.avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #7c3aed; margin-top: 3px; }
+        .bot-msg { background: #1e1e2e; padding: 10px 15px; border-radius: 4px 18px 18px 18px; font-size: 14px; border: 1px solid #2a2a4e; line-height: 1.5; }
+        .perso1-msg { background: #1e3a5f; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
+        .perso2-msg { background: #3a1e1e; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
+        .audio-btn { background: none; border: none; color: #555; font-size: 12px; cursor: pointer; margin-top: 5px; display: block; padding: 0; }
+        .audio-btn:hover { color: #aaa; }
+
+        /* INPUT */
+        #inputArea { padding: 10px 15px; border-top: 1px solid #222; background: #111; flex-shrink: 0; }
+        #quickBtns { display: flex; gap: 6px; margin-bottom: 8px; overflow-x: auto; padding-bottom: 3px; }
+        #quickBtns::-webkit-scrollbar { display: none; }
+        .quickBtn { background: #222; color: #aaa; border: 1px solid #333; padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+        .quickBtn:hover { background: #7c3aed; color: white; border-color: #7c3aed; }
+        #inputRow { display: flex; gap: 8px; align-items: center; }
+        #msg { flex: 1; padding: 11px 15px; border-radius: 25px; border: 1px solid #333; font-size: 15px; background: #222; color: white; outline: none; }
+        #msg:focus { border-color: #7c3aed; }
+        #btn { background: linear-gradient(135deg, #7c3aed, #5b21b6); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; flex-shrink: 0; }
+        #micBtn { background: #222; color: white; border: 1px solid #333; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; flex-shrink: 0; }
+        #micBtn.active { background: #e11d48; border-color: #e11d48; }
 
         /* MODALS */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
-        .modalBox { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 25px; width: 85%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; max-height: 85vh; overflow-y: auto; }
-        .modalBox h2 { margin: 0; text-align: center; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 998; justify-content: center; align-items: center; }
+        .modalBox { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 25px; width: 88%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; max-height: 88vh; overflow-y: auto; }
+        .modalBox h2 { text-align: center; font-size: 18px; }
         .modalInput { padding: 12px; border-radius: 10px; border: 1px solid #333; background: #222; color: white; font-size: 15px; text-align: center; width: 100%; }
         .modalBtn { padding: 12px; border-radius: 20px; border: none; font-size: 15px; cursor: pointer; width: 100%; }
-        .modalBtn.primary { background: linear-gradient(90deg, #7c3aed, #5b21b6); color: white; }
+        .modalBtn.primary { background: linear-gradient(90deg,#7c3aed,#5b21b6); color: white; }
         .modalBtn.secondary { background: #333; color: white; }
         .modalBtn.danger { background: #e11d48; color: white; }
         .menu-option { background: #222; padding: 15px; border-radius: 12px; border: 1px solid #333; }
@@ -77,689 +99,614 @@
         .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
         .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 10px; border: 1px solid #333; background: #333; color: white; font-size: 14px; }
         .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; width: 100%; }
-
-        /* PREMIUM */
-        #premiumBox { text-align: center; }
-        #premiumBox .prix { font-size: 32px; font-weight: bold; color: #f59e0b; }
-        #premiumBox .feature { background: #222; padding: 10px; border-radius: 10px; font-size: 14px; border: 1px solid #333; }
-        #premiumBox .wave-info { background: #0a2a0a; padding: 15px; border-radius: 12px; font-size: 13px; color: #aaa; border: 1px solid #22c55e; }
-
-        /* BATTLE / SEARCH */
+        .prix { font-size: 32px; font-weight: bold; color: #f59e0b; text-align: center; }
+        .feature { background: #222; padding: 10px; border-radius: 10px; font-size: 14px; border: 1px solid #333; text-align: center; }
+        .wave-info { background: #0a2a0a; padding: 15px; border-radius: 12px; font-size: 13px; color: #aaa; border: 1px solid #22c55e; text-align: center; }
         .battle-input { padding: 12px; border-radius: 10px; border: 1px solid #333; background: #222; color: white; text-align: center; width: 100%; font-size: 15px; }
         #genreButtons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-        .genre-btn { background: #222; color: white; border: 1px solid #333; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+        .genre-btn { background: #222; color: white; border: 1px solid #333; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         .genre-btn:hover { background: #7c3aed; border-color: #7c3aed; }
 
         /* VIDEO CALL */
-        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #0a0a2e 0%, #1a0a3e 100%); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 20px; }
+        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg,#0a0a2e,#1a0a3e); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 20px; }
         #videoCallName { font-size: 22px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 10px #f59e0b; margin-top: 10px; }
         #videoCallStatus { font-size: 13px; color: #aaa; }
-        #vtuberContainer { position: relative; width: 280px; height: 300px; }
+        #vtuberContainer { width: 260px; height: 290px; }
         #vtuberSVG { width: 100%; height: 100%; filter: drop-shadow(0 0 20px rgba(124,58,237,0.5)); }
         #videoCallBubble { background: rgba(34,34,34,0.9); border: 1px solid #7c3aed; border-radius: 20px; padding: 12px 20px; width: 90%; max-width: 320px; font-size: 14px; text-align: center; color: white; min-height: 45px; }
         #videoCallBtns { display: flex; gap: 20px; margin-bottom: 10px; }
         #videoMicBtn { background: #333; color: white; border: 2px solid #555; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
         #videoMicBtn.active { background: #22c55e; border-color: #22c55e; }
         #videoEndBtn { background: #e11d48; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
-
-        /* CHAT */
-        #chat { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 5px; }
-        #chat::-webkit-scrollbar { width: 4px; }
-        #chat::-webkit-scrollbar-track { background: transparent; }
-        #chat::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
-        .moi { background: #2a2a3e; padding: 10px 15px; border-radius: 18px 18px 4px 18px; margin: 2px 0 2px auto; max-width: 80%; font-size: 14px; border: 1px solid #3a3a5e; }
-        .bot { display: flex; align-items: flex-start; gap: 10px; margin: 2px 0; max-width: 90%; }
-        .bot img.avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #7c3aed; margin-top: 3px; }
-        .bot-msg { background: #1e1e2e; padding: 10px 15px; border-radius: 18px 18px 18px 4px; font-size: 14px; border: 1px solid #2a2a4e; line-height: 1.5; }
-        .perso1-msg { background: #1e3a5f; padding: 10px 15px; border-radius: 18px; font-size: 14px; border: 1px solid #2a4a7f; }
-        .perso2-msg { background: #3a1e1e; padding: 10px 15px; border-radius: 18px; font-size: 14px; border: 1px solid #5a2a2a; }
-        .audio-btn { background: none; border: none; color: #555; font-size: 12px; cursor: pointer; margin-top: 6px; padding: 0; display: block; }
-        .audio-btn:hover { color: #aaa; }
-
-        /* INPUT AREA */
-        #inputArea { padding: 10px 15px; border-top: 1px solid #222; background: #111; }
-        #quickBtns { display: flex; gap: 5px; margin-bottom: 8px; overflow-x: auto; padding-bottom: 3px; }
-        #quickBtns::-webkit-scrollbar { display: none; }
-        .quickBtn { background: #222; color: #aaa; border: 1px solid #333; padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s; }
-        .quickBtn:hover { background: #7c3aed; color: white; border-color: #7c3aed; }
-        #inputRow { display: flex; gap: 8px; align-items: center; }
-        #msg { flex: 1; padding: 12px 15px; border-radius: 25px; border: 1px solid #333; font-size: 15px; background: #222; color: white; outline: none; transition: border 0.2s; }
-        #msg:focus { border-color: #7c3aed; }
-        #btn { background: linear-gradient(135deg, #7c3aed, #5b21b6); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        #micBtn { background: #222; color: white; border: 1px solid #333; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        #micBtn.active { background: #e11d48; border-color: #e11d48; }
     </style>
 </head>
 <body>
-    <div id="login">
-        <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
-        <h2>YUUTO</h2>
-        <p>Ton ami IA anime 🎌</p>
-        <input id="nom" type="text" placeholder="Ton prenom..."/>
-        <button onclick="seConnecter()">Entrer ✨</button>
-        <span id="erreur">Acces refuse 😤</span>
-    </div>
 
-    <!-- MODALS -->
-    <div class="modal" id="menuScreen">
-        <div class="modalBox">
-            <h2>⚙️ Paramètres</h2>
-            <div class="menu-option">
-                <label>🎨 Couleur du fond</label>
-                <input type="color" id="couleurFond" value="#1a1a1a" oninput="changerCouleur()"/>
+<div id="login">
+    <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+    <h2>YUUTO</h2>
+    <p>Ton ami IA anime 🎌</p>
+    <input id="nom" type="text" placeholder="Ton prenom..."/>
+    <button onclick="seConnecter()">Entrer ✨</button>
+    <span id="erreur">Acces refuse 😤</span>
+</div>
+
+<!-- MODALS -->
+<div class="modal" id="menuScreen">
+    <div class="modalBox">
+        <h2>⚙️ Paramètres</h2>
+        <div class="menu-option">
+            <label>🎨 Couleur du fond</label>
+            <input type="color" id="couleurFond" value="#1a1a1a" oninput="changerCouleur()"/>
+        </div>
+        <div class="menu-option">
+            <label>👤 Changer ton nom</label>
+            <input type="text" id="nouveauNom" placeholder="Nouveau nom..."/>
+            <button onclick="changerNom()">Changer</button>
+        </div>
+        <button class="modalBtn secondary" onclick="fermerModal('menuScreen')">Fermer</button>
+    </div>
+</div>
+
+<div class="modal" id="premiumScreen">
+    <div class="modalBox">
+        <h2>⭐ YUUTO Premium</h2>
+        <div class="prix">2 000 FCFA</div>
+        <div class="feature">🎭 5 transformations de personnage</div>
+        <div class="feature">⚡ Accès illimité au mode Battle</div>
+        <div class="feature">🌟 Badge Premium exclusif</div>
+        <div class="wave-info">
+            <strong style="color:#22c55e">💚 Paye via Wave</strong><br/>
+            Envoie 2000 FCFA au<br/>
+            <strong style="color:white;font-size:16px">+225 07 67 07 9692</strong><br/>
+            Puis entre le code reçu
+        </div>
+        <input class="modalInput" id="codeInput" type="text" placeholder="Code secret..."/>
+        <span id="codeErreur" style="color:red;font-size:13px;display:none">Code incorrect 😤</span>
+        <button class="modalBtn primary" onclick="verifierCode()">✅ Activer Premium</button>
+        <button class="modalBtn secondary" onclick="fermerModal('premiumScreen')">Fermer</button>
+    </div>
+</div>
+
+<div class="modal" id="persoScreen">
+    <div class="modalBox">
+        <h2>🎭 Mode Personnage</h2>
+        <p id="persoCompteur" style="color:#aaa;text-align:center;font-size:13px"></p>
+        <input class="modalInput" id="persoInput" type="text" placeholder="Ex: Naruto, Levi, Goku..."/>
+        <button class="modalBtn primary" onclick="activerPersonnage()">✨ Transformer !</button>
+        <button class="modalBtn secondary" onclick="resetPersonnage()">Redevenir YUUTO</button>
+        <button class="modalBtn secondary" onclick="fermerModal('persoScreen')">Fermer</button>
+    </div>
+</div>
+
+<div class="modal" id="battleScreen">
+    <div class="modalBox">
+        <h2>⚔️ Mode Battle !</h2>
+        <input class="battle-input" id="perso1Input" type="text" placeholder="Personnage 1"/>
+        <input class="battle-input" id="perso2Input" type="text" placeholder="Personnage 2"/>
+        <button class="modalBtn danger" onclick="lancerBattle()">⚔️ BATTLE !</button>
+        <button class="modalBtn secondary" onclick="fermerModal('battleScreen')">Fermer</button>
+    </div>
+</div>
+
+<div class="modal" id="searchScreen">
+    <div class="modalBox">
+        <h2>🔍 Chercher un anime</h2>
+        <div id="genreButtons">
+            <button class="genre-btn" onclick="chercherAnime('action',1)">💥 Action</button>
+            <button class="genre-btn" onclick="chercherAnime('romance',22)">💕 Romance</button>
+            <button class="genre-btn" onclick="chercherAnime('comedie',4)">😂 Comedie</button>
+            <button class="genre-btn" onclick="chercherAnime('horreur',14)">👻 Horreur</button>
+            <button class="genre-btn" onclick="chercherAnime('fantasy',10)">🧙 Fantasy</button>
+            <button class="genre-btn" onclick="chercherAnime('sport',30)">⚽ Sport</button>
+            <button class="genre-btn" onclick="chercherAnime('mystere',7)">🔎 Mystere</button>
+            <button class="genre-btn" onclick="chercherAnime('sci-fi',24)">🚀 Sci-Fi</button>
+            <button class="genre-btn" onclick="chercherAnime('aventure',2)">🗺️ Aventure</button>
+            <button class="genre-btn" onclick="chercherAnime('drame',8)">😢 Drame</button>
+        </div>
+        <button class="modalBtn secondary" onclick="fermerModal('searchScreen')" style="margin-top:10px">Fermer</button>
+    </div>
+</div>
+
+<!-- VIDEO CALL -->
+<div id="videoCallScreen">
+    <div id="videoCallName">YUUTO</div>
+    <div id="videoCallStatus">En appel...</div>
+    <div id="vtuberContainer">
+        <svg id="vtuberSVG" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="bgG" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:#2a1a5e"/><stop offset="100%" style="stop-color:#0a0a2e"/></radialGradient>
+                <radialGradient id="skinG" cx="50%" cy="40%" r="60%"><stop offset="0%" style="stop-color:#ffe8c8"/><stop offset="100%" style="stop-color:#ffcc99"/></radialGradient>
+                <radialGradient id="eyeG" cx="30%" cy="30%" r="70%"><stop offset="0%" style="stop-color:#60a5fa"/><stop offset="100%" style="stop-color:#1d4ed8"/></radialGradient>
+                <filter id="glow"><feGaussianBlur stdDeviation="3" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <circle cx="140" cy="160" r="130" fill="url(#bgG)" opacity="0.8"/>
+            <ellipse cx="140" cy="285" rx="70" ry="50" fill="#5b21b6"/>
+            <ellipse cx="140" cy="265" rx="55" ry="40" fill="#7c3aed"/>
+            <polygon points="120,220 140,240 160,220 155,215 140,230 125,215" fill="white" opacity="0.9"/>
+            <rect x="125" y="220" width="30" height="3" fill="#f59e0b" rx="2"/>
+            <rect x="128" y="190" width="24" height="30" rx="8" fill="url(#skinG)"/>
+            <ellipse cx="140" cy="120" rx="72" ry="75" fill="#1a1a3e"/>
+            <path d="M75,130 Q50,180 60,230 Q65,250 70,240 Q65,200 80,160 Z" fill="#1a1a3e"/>
+            <path d="M205,130 Q230,180 220,230 Q215,250 210,240 Q215,200 200,160 Z" fill="#1a1a3e"/>
+            <ellipse id="faceEl" cx="140" cy="145" rx="62" ry="68" fill="url(#skinG)"/>
+            <path d="M78,115 Q85,80 140,75 Q195,80 202,115 Q195,95 140,90 Q85,95 78,115 Z" fill="#1a1a3e"/>
+            <path d="M130,75 Q140,60 150,75 Q145,85 140,90 Q135,85 130,75 Z" fill="#2a2a5e"/>
+            <ellipse cx="78" cy="148" rx="10" ry="13" fill="#ffcc99"/>
+            <ellipse cx="202" cy="148" rx="10" ry="13" fill="#ffcc99"/>
+            <circle cx="78" cy="158" r="5" fill="#7c3aed" filter="url(#glow)"/>
+            <circle cx="202" cy="158" r="5" fill="#7c3aed" filter="url(#glow)"/>
+            <path d="M108,118 Q118,113 128,116" stroke="#5a3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M152,116 Q162,113 172,118" stroke="#5a3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <g id="eyeLeftGroup" transform="translate(113,140)">
+                <ellipse cx="0" cy="0" rx="16" ry="18" fill="white"/>
+                <ellipse id="irisLeft" cx="0" cy="0" rx="12" ry="14" fill="url(#eyeG)"/>
+                <ellipse cx="0" cy="0" rx="7" ry="8" fill="#0a0a2e"/>
+                <ellipse cx="4" cy="-4" rx="3" ry="3" fill="white"/>
+                <ellipse id="blinkLeft" cx="0" cy="0" rx="16" ry="0" fill="#ffcc99" opacity="0"/>
+            </g>
+            <g id="eyeRightGroup" transform="translate(167,140)">
+                <ellipse cx="0" cy="0" rx="16" ry="18" fill="white"/>
+                <ellipse id="irisRight" cx="0" cy="0" rx="12" ry="14" fill="url(#eyeG)"/>
+                <ellipse cx="0" cy="0" rx="7" ry="8" fill="#0a0a2e"/>
+                <ellipse cx="4" cy="-4" rx="3" ry="3" fill="white"/>
+                <ellipse id="blinkRight" cx="0" cy="0" rx="16" ry="0" fill="#ffcc99" opacity="0"/>
+            </g>
+            <path d="M136,163 Q140,170 144,163" stroke="#dda07a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <g id="mouthGroup">
+                <path id="mouthNormal" d="M122,178 Q140,192 158,178" stroke="#c06070" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <ellipse id="mouthTalk" cx="140" cy="182" rx="0" ry="0" fill="#c06070"/>
+                <ellipse id="mouthInner" cx="140" cy="183" rx="0" ry="0" fill="#8b2252"/>
+            </g>
+            <ellipse cx="100" cy="168" rx="18" ry="10" fill="#ffb3b3" opacity="0.5"/>
+            <ellipse cx="180" cy="168" rx="18" ry="10" fill="#ffb3b3" opacity="0.5"/>
+            <path d="M115,82 L120,70 L125,80 L130,65 L135,78 L140,62 L145,78 L150,65 L155,80 L160,70 L165,82" stroke="#f59e0b" stroke-width="2" fill="none" filter="url(#glow)"/>
+            <circle cx="140" cy="62" r="4" fill="#f59e0b" filter="url(#glow)"/>
+            <path d="M85,240 Q60,260 55,290" stroke="#7c3aed" stroke-width="18" stroke-linecap="round" fill="none"/>
+            <ellipse cx="52" cy="295" rx="12" ry="10" fill="#ffcc99"/>
+            <path d="M195,240 Q220,260 225,290" stroke="#7c3aed" stroke-width="18" stroke-linecap="round" fill="none"/>
+            <ellipse cx="228" cy="295" rx="12" ry="10" fill="#ffcc99"/>
+        </svg>
+    </div>
+    <div id="videoCallBubble">Salut ! Appuie sur le micro 😊</div>
+    <div id="videoCallBtns">
+        <button id="videoMicBtn" onclick="toggleVideoMic()">🎤</button>
+        <button id="videoEndBtn" onclick="terminerVideoAppel()">📵</button>
+    </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+    <div id="overlay" onclick="toggleSidebar()"></div>
+
+    <div id="sidebar">
+        <div id="sidebarHeader">
+            <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+            <span id="sidebarTitle">YUUTO ✨</span>
+        </div>
+        <button id="newChatBtn" onclick="nouvelleConversation()">✏️ Nouvelle conversation</button>
+        <div id="historyLabel">Conversations</div>
+        <div id="historyList"></div>
+        <div id="sidebarFooter">
+            <button class="sidebarBtn" onclick="ouvrirModal('premiumScreen')">⭐ Pass Premium</button>
+            <button class="sidebarBtn" onclick="ouvrirModal('menuScreen')">⚙️ Paramètres</button>
+            <div id="userInfo">
+                <div id="userAvatar">A</div>
+                <span id="userName">Utilisateur</span>
+                <span id="premiumBadgeSide">⭐</span>
             </div>
-            <div class="menu-option">
-                <label>👤 Changer ton nom</label>
-                <input type="text" id="nouveauNom" placeholder="Ton nouveau nom..."/>
-                <button onclick="changerNom()">Changer</button>
-            </div>
-            <button class="modalBtn secondary" onclick="fermerModal('menuScreen')">Fermer</button>
         </div>
     </div>
 
-    <div class="modal" id="premiumScreen">
-        <div class="modalBox" id="premiumBox">
-            <h2>⭐ YUUTO Premium</h2>
-            <div class="prix">2 000 FCFA</div>
-            <div class="feature">🎭 5 transformations de personnage</div>
-            <div class="feature">⚡ Accès illimité au mode Battle</div>
-            <div class="feature">🌟 Badge Premium exclusif</div>
-            <div class="wave-info">
-                <strong style="color:#22c55e">💚 Paye via Wave</strong><br/>
-                Envoie 2000 FCFA au<br/>
-                <strong style="color:white;font-size:16px">+225 07 67 07 9692</strong><br/>
-                Puis entre le code reçu ci-dessous
-            </div>
-            <input class="modalInput" id="codeInput" type="text" placeholder="Entre ton code secret..."/>
-            <span id="codeErreur" style="color:red;font-size:13px;display:none">Code incorrect 😤</span>
-            <button class="modalBtn primary" onclick="verifierCode()">✅ Activer Premium</button>
-            <button class="modalBtn secondary" onclick="fermerModal('premiumScreen')">Fermer</button>
-        </div>
-    </div>
-
-    <div class="modal" id="persoScreen">
-        <div class="modalBox">
-            <h2>🎭 Mode Personnage</h2>
-            <p id="persoCompteur" style="color:#aaa;text-align:center;font-size:13px"></p>
-            <input class="modalInput" id="persoInput" type="text" placeholder="Ex: Naruto, Levi, Goku..."/>
-            <button class="modalBtn primary" onclick="activerPersonnage()">✨ Transformer YUUTO !</button>
-            <button class="modalBtn secondary" onclick="resetPersonnage()">Redevenir YUUTO</button>
-            <button class="modalBtn secondary" onclick="fermerModal('persoScreen')">Fermer</button>
-        </div>
-    </div>
-
-    <div class="modal" id="battleScreen">
-        <div class="modalBox">
-            <h2>⚔️ Mode Battle !</h2>
-            <p style="color:#aaa;text-align:center;font-size:13px">Choisis deux personnages !</p>
-            <input class="battle-input" id="perso1Input" type="text" placeholder="Personnage 1 (ex: Naruto)"/>
-            <input class="battle-input" id="perso2Input" type="text" placeholder="Personnage 2 (ex: Sasuke)"/>
-            <button class="modalBtn danger" onclick="lancerBattle()">⚔️ BATTLE !</button>
-            <button class="modalBtn secondary" onclick="fermerModal('battleScreen')">Fermer</button>
-        </div>
-    </div>
-
-    <div class="modal" id="searchScreen">
-        <div class="modalBox">
-            <h2>🔍 Chercher un anime</h2>
-            <p style="color:#aaa;text-align:center;font-size:13px">Quel genre tu veux ?</p>
-            <div id="genreButtons">
-                <button class="genre-btn" onclick="chercherAnime('action', 1)">💥 Action</button>
-                <button class="genre-btn" onclick="chercherAnime('romance', 22)">💕 Romance</button>
-                <button class="genre-btn" onclick="chercherAnime('comedie', 4)">😂 Comedie</button>
-                <button class="genre-btn" onclick="chercherAnime('horreur', 14)">👻 Horreur</button>
-                <button class="genre-btn" onclick="chercherAnime('fantasy', 10)">🧙 Fantasy</button>
-                <button class="genre-btn" onclick="chercherAnime('sport', 30)">⚽ Sport</button>
-                <button class="genre-btn" onclick="chercherAnime('mystere', 7)">🔎 Mystere</button>
-                <button class="genre-btn" onclick="chercherAnime('sci-fi', 24)">🚀 Sci-Fi</button>
-                <button class="genre-btn" onclick="chercherAnime('aventure', 2)">🗺️ Aventure</button>
-                <button class="genre-btn" onclick="chercherAnime('drame', 8)">😢 Drame</button>
-            </div>
-            <button class="modalBtn secondary" onclick="fermerModal('searchScreen')" style="margin-top:10px">Fermer</button>
-        </div>
-    </div>
-
-    <!-- VIDEO CALL -->
-    <div id="videoCallScreen">
-        <div id="videoCallName">YUUTO</div>
-        <div id="videoCallStatus">En appel...</div>
-        <div id="vtuberContainer">
-            <svg id="vtuberSVG" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:#2a1a5e"/><stop offset="100%" style="stop-color:#0a0a2e"/></radialGradient>
-                    <radialGradient id="skinGrad" cx="50%" cy="40%" r="60%"><stop offset="0%" style="stop-color:#ffe8c8"/><stop offset="100%" style="stop-color:#ffcc99"/></radialGradient>
-                    <radialGradient id="eyeGrad" cx="30%" cy="30%" r="70%"><stop offset="0%" style="stop-color:#60a5fa"/><stop offset="100%" style="stop-color:#1d4ed8"/></radialGradient>
-                    <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                </defs>
-                <circle cx="140" cy="160" r="130" fill="url(#bgGrad)" opacity="0.8"/>
-                <ellipse cx="140" cy="285" rx="70" ry="50" fill="#5b21b6"/>
-                <ellipse cx="140" cy="265" rx="55" ry="40" fill="#7c3aed"/>
-                <polygon points="120,220 140,240 160,220 155,215 140,230 125,215" fill="white" opacity="0.9"/>
-                <rect x="125" y="220" width="30" height="3" fill="#f59e0b" rx="2"/>
-                <rect x="128" y="190" width="24" height="30" rx="8" fill="url(#skinGrad)"/>
-                <ellipse cx="140" cy="120" rx="72" ry="75" fill="#1a1a3e"/>
-                <path d="M75,130 Q50,180 60,230 Q65,250 70,240 Q65,200 80,160 Z" fill="#1a1a3e"/>
-                <path d="M205,130 Q230,180 220,230 Q215,250 210,240 Q215,200 200,160 Z" fill="#1a1a3e"/>
-                <ellipse id="faceEl" cx="140" cy="145" rx="62" ry="68" fill="url(#skinGrad)"/>
-                <path d="M78,115 Q85,80 140,75 Q195,80 202,115 Q195,95 140,90 Q85,95 78,115 Z" fill="#1a1a3e"/>
-                <path d="M130,75 Q140,60 150,75 Q145,85 140,90 Q135,85 130,75 Z" fill="#2a2a5e"/>
-                <ellipse cx="78" cy="148" rx="10" ry="13" fill="#ffcc99"/>
-                <ellipse cx="202" cy="148" rx="10" ry="13" fill="#ffcc99"/>
-                <circle cx="78" cy="158" r="5" fill="#7c3aed" filter="url(#glow)"/>
-                <circle cx="202" cy="158" r="5" fill="#7c3aed" filter="url(#glow)"/>
-                <path d="M108,118 Q118,113 128,116" stroke="#5a3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                <path d="M152,116 Q162,113 172,118" stroke="#5a3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                <g id="eyeLeftGroup" transform="translate(113,140)">
-                    <ellipse cx="0" cy="0" rx="16" ry="18" fill="white"/>
-                    <ellipse id="irisLeft" cx="0" cy="0" rx="12" ry="14" fill="url(#eyeGrad)"/>
-                    <ellipse cx="0" cy="0" rx="7" ry="8" fill="#0a0a2e"/>
-                    <ellipse cx="4" cy="-4" rx="3" ry="3" fill="white"/>
-                    <ellipse id="blinkLeft" cx="0" cy="0" rx="16" ry="0" fill="#ffcc99" opacity="0"/>
-                </g>
-                <g id="eyeRightGroup" transform="translate(167,140)">
-                    <ellipse cx="0" cy="0" rx="16" ry="18" fill="white"/>
-                    <ellipse id="irisRight" cx="0" cy="0" rx="12" ry="14" fill="url(#eyeGrad)"/>
-                    <ellipse cx="0" cy="0" rx="7" ry="8" fill="#0a0a2e"/>
-                    <ellipse cx="4" cy="-4" rx="3" ry="3" fill="white"/>
-                    <ellipse id="blinkRight" cx="0" cy="0" rx="16" ry="0" fill="#ffcc99" opacity="0"/>
-                </g>
-                <path d="M136,163 Q140,170 144,163" stroke="#dda07a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                <g id="mouthGroup">
-                    <path id="mouthNormal" d="M122,178 Q140,192 158,178" stroke="#c06070" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                    <ellipse id="mouthTalk" cx="140" cy="182" rx="0" ry="0" fill="#c06070"/>
-                    <ellipse id="mouthInner" cx="140" cy="183" rx="0" ry="0" fill="#8b2252"/>
-                </g>
-                <ellipse cx="100" cy="168" rx="18" ry="10" fill="#ffb3b3" opacity="0.5"/>
-                <ellipse cx="180" cy="168" rx="18" ry="10" fill="#ffb3b3" opacity="0.5"/>
-                <path d="M115,82 L120,70 L125,80 L130,65 L135,78 L140,62 L145,78 L150,65 L155,80 L160,70 L165,82" stroke="#f59e0b" stroke-width="2" fill="none" filter="url(#glow)"/>
-                <circle cx="140" cy="62" r="4" fill="#f59e0b" filter="url(#glow)"/>
-                <path d="M85,240 Q60,260 55,290" stroke="#7c3aed" stroke-width="18" stroke-linecap="round" fill="none"/>
-                <ellipse cx="52" cy="295" rx="12" ry="10" fill="#ffcc99"/>
-                <path d="M195,240 Q220,260 225,290" stroke="#7c3aed" stroke-width="18" stroke-linecap="round" fill="none"/>
-                <ellipse cx="228" cy="295" rx="12" ry="10" fill="#ffcc99"/>
-            </svg>
-        </div>
-        <div id="videoCallBubble">Salut ! Appuie sur le micro 😊</div>
-        <div id="videoCallBtns">
-            <button id="videoMicBtn" onclick="toggleVideoMic()">🎤</button>
-            <button id="videoEndBtn" onclick="terminerVideoAppel()">📵</button>
-        </div>
-    </div>
-
-    <!-- MAIN APP -->
-    <div id="app">
-        <!-- OVERLAY -->
-        <div id="overlay" onclick="toggleSidebar()"></div>
-
-        <!-- SIDEBAR -->
-        <div id="sidebar" class="hidden">
-            <div id="sidebarHeader">
-                <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
-                <span id="sidebarTitle">YUUTO ✨</span>
-            </div>
-            <button id="newChatBtn" onclick="nouvelleConversation()">
-                ✏️ Nouvelle conversation
-            </button>
-            <div id="historyLabel">Conversations</div>
-            <div id="historyList"></div>
-            <div id="sidebarFooter">
-                <button class="sidebarBtn" onclick="ouvrirModal('premiumScreen')">⭐ Pass Premium</button>
-                <button class="sidebarBtn" onclick="ouvrirModal('menuScreen')">⚙️ Paramètres</button>
-                <div id="userInfo">
-                    <div id="userAvatar">A</div>
-                    <span id="userName">Utilisateur</span>
-                    <span id="premiumBadgeSide" style="display:none">⭐</span>
+    <div id="mainContent">
+        <div id="header">
+            <button id="toggleSidebar" onclick="toggleSidebar()">☰</button>
+            <div id="headerCenter">
+                <div id="headerTitle">YUUTO</div>
+                <div style="display:flex;gap:8px">
+                    <span id="humeur"></span>
+                    <span id="modePerso"></span>
                 </div>
             </div>
+            <div id="headerBtns">
+                <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
+            </div>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div id="mainContent">
-            <div id="header">
-                <button id="toggleSidebar" onclick="toggleSidebar()">☰</button>
-                <div style="flex:1">
-                    <div id="headerTitle">YUUTO</div>
-                    <div style="display:flex;gap:8px;align-items:center">
-                        <span id="humeur"></span>
-                        <span id="modePerso"></span>
-                    </div>
-                </div>
-                <div id="headerBtns">
-                    <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
-                    <button id="premiumBtn" onclick="ouvrirModal('premiumScreen')" style="display:none">⭐</button>
-                </div>
+        <div id="chat"></div>
+
+        <div id="inputArea">
+            <div id="quickBtns">
+                <button class="quickBtn" onclick="recommander()">🎌 Anime</button>
+                <button class="quickBtn" onclick="ouvrirModal('persoScreen')">🎭 Perso</button>
+                <button class="quickBtn" onclick="getActu()">📺 Actu</button>
+                <button class="quickBtn" onclick="ouvrirModal('battleScreen')">⚔️ Battle</button>
+                <button class="quickBtn" onclick="ouvrirModal('searchScreen')">🔍 Chercher</button>
+                <button class="quickBtn" onclick="ouvrirModal('premiumScreen')">⭐ Premium</button>
             </div>
-            <div id="chat"></div>
-            <div id="inputArea">
-                <div id="quickBtns">
-                    <button class="quickBtn" onclick="recommander()">🎌 Anime</button>
-                    <button class="quickBtn" onclick="ouvrirModal('persoScreen')">🎭 Perso</button>
-                    <button class="quickBtn" onclick="getActu()">📺 Actu</button>
-                    <button class="quickBtn" onclick="ouvrirModal('battleScreen')">⚔️ Battle</button>
-                    <button class="quickBtn" onclick="ouvrirModal('searchScreen')">🔍 Chercher</button>
-                </div>
-                <div id="inputRow">
-                    <button id="micBtn" onclick="toggleMic()">🎤</button>
-                    <input id="msg" type="text" placeholder="Message YUUTO..." onkeydown="if(event.key==='Enter')envoyer()"/>
-                    <button id="btn" onclick="envoyer()">➤</button>
-                </div>
+            <div id="inputRow">
+                <button id="micBtn" onclick="toggleMic()">🎤</button>
+                <input id="msg" type="text" placeholder="Message YUUTO..." onkeydown="if(event.key==='Enter')envoyer()"/>
+                <button id="btn" onclick="envoyer()">➤</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg";
-        const CODE_PREMIUM = "2013";
-        const MAX_TRANSFO_GRATUIT = 2;
-        const MAX_TRANSFO_PREMIUM = 5;
+<script>
+    const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg";
+    const CODE_PREMIUM = "2013";
+    const MAX_TRANSFO_GRATUIT = 2;
+    const MAX_TRANSFO_PREMIUM = 5;
 
-        const historique = [];
-        const animesDejaRecommandes = [];
-        let conversations = [];
-        let convActuelle = 0;
-        let loadingId = 0;
-        let estAntoine = false;
-        let memoire = {};
-        let recognition = null;
-        let isListening = false;
-        let enVideoAppel = false;
-        let yuutoParle = false;
-        let personnageActuel = null;
-        let estPremium = false;
-        let nbTransfo = 0;
-        let animFrame = null;
-        let blinkTimer = 0;
-        let isTalking = false;
-        let headBob = 0;
-        let talkTimer = 0;
-        let sidebarVisible = false;
+    const historique = [];
+    const animesDejaRecommandes = [];
+    let conversations = [];
+    let loadingId = 0;
+    let estAntoine = false;
+    let memoire = {};
+    let recognition = null;
+    let isListening = false;
+    let enVideoAppel = false;
+    let yuutoParle = false;
+    let personnageActuel = null;
+    let estPremium = false;
+    let nbTransfo = 0;
+    let animFrame = null;
+    let blinkTimer = 0;
+    let isTalking = false;
+    let headBob = 0;
+    let talkTimer = 0;
+    let sidebarVisible = false;
 
-        // SIDEBAR
-        function toggleSidebar() {
-            sidebarVisible = !sidebarVisible;
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            if (sidebarVisible) {
-                sidebar.classList.remove('hidden');
-                overlay.style.display = 'block';
-            } else {
-                sidebar.classList.add('hidden');
-                overlay.style.display = 'none';
-            }
+    function toggleSidebar() {
+        sidebarVisible = !sidebarVisible;
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        if (sidebarVisible) {
+            sidebar.classList.add('open');
+            overlay.style.display = 'block';
+        } else {
+            sidebar.classList.remove('open');
+            overlay.style.display = 'none';
         }
+    }
 
-        function nouvelleConversation() {
-            if (historique.length > 0) {
-                const titre = historique[0]?.content?.substring(0, 30) + '...' || 'Conversation';
-                conversations.unshift({ titre, messages: [...historique] });
-                historique.length = 0;
-                majHistorique();
-            }
-            document.getElementById('chat').innerHTML = '';
-            const hi = getHumeur(estAntoine);
-            window.humeurInfo = hi;
-            const intro = estAntoine ? `YOOO 🔥 nouvelle conv !` : `Salut ${memoire.prenom} ! 😊 Nouvelle conversation !`;
-            ajouterMessageBot(intro);
-            toggleSidebar();
-        }
-
-        function majHistorique() {
-            const list = document.getElementById('historyList');
-            list.innerHTML = '';
-            conversations.forEach((conv, i) => {
-                const item = document.createElement('div');
-                item.className = 'historyItem';
-                item.innerHTML = `<span class="icon">💬</span> ${conv.titre}`;
-                item.onclick = () => chargerConversation(i);
-                list.appendChild(item);
-            });
-            if (conversations.length === 0) {
-                list.innerHTML = '<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>';
-            }
-        }
-
-        function chargerConversation(index) {
+    function nouvelleConversation() {
+        if (historique.length > 0) {
+            const titre = historique[0]?.content?.substring(0, 30) + '...' || 'Conversation';
+            conversations.unshift({ titre, messages: [...historique] });
             historique.length = 0;
-            conversations[index].messages.forEach(m => historique.push(m));
-            document.getElementById('chat').innerHTML = '';
-            conversations[index].messages.forEach(m => {
-                if (m.role === 'user') document.getElementById('chat').innerHTML += `<div class="moi">${m.content}</div>`;
-                else ajouterMessageBot(m.content);
-            });
-            toggleSidebar();
+            majHistorique();
         }
+        document.getElementById('chat').innerHTML = '';
+        const intro = estAntoine ? `YOOO 🔥 nouvelle conv !` : `Salut ${memoire.prenom} ! 😊 Nouvelle conversation !`;
+        ajouterMessageBot(intro);
+        toggleSidebar();
+    }
 
-        // MODALS
-        function ouvrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function fermerModal(id) { document.getElementById(id).style.display = 'none'; }
+    function majHistorique() {
+        const list = document.getElementById('historyList');
+        list.innerHTML = conversations.length === 0
+            ? '<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>'
+            : '';
+        conversations.forEach((conv, i) => {
+            const item = document.createElement('div');
+            item.className = 'historyItem';
+            item.innerHTML = `💬 ${conv.titre}`;
+            item.onclick = () => chargerConversation(i);
+            list.appendChild(item);
+        });
+    }
 
-        // VTuber animations
-        function animerVTuber() {
-            animFrame = requestAnimationFrame(animerVTuber);
-            const t = Date.now() * 0.001;
-            headBob += 0.02;
-            const faceEl = document.getElementById('faceEl');
-            if (faceEl) faceEl.setAttribute('cy', 145 + Math.sin(headBob) * 3);
-            const irisL = document.getElementById('irisLeft');
-            const irisR = document.getElementById('irisRight');
-            if (irisL) irisL.setAttribute('transform', `translate(${Math.sin(t*0.7)*3},${Math.sin(t*0.5)*2})`);
-            if (irisR) irisR.setAttribute('transform', `translate(${Math.sin(t*0.7)*3},${Math.sin(t*0.5)*2})`);
-            blinkTimer++;
-            if (blinkTimer > 200) { blinkTimer = 0; blinker(); }
-            if (isTalking) {
-                talkTimer += 0.3;
-                const o = Math.abs(Math.sin(talkTimer)) * 12;
-                const mt = document.getElementById('mouthTalk');
-                const mi = document.getElementById('mouthInner');
-                const mn = document.getElementById('mouthNormal');
-                if (mt) { mt.setAttribute('rx', o*1.5); mt.setAttribute('ry', o); }
-                if (mi) { mi.setAttribute('rx', o*1.2); mi.setAttribute('ry', o*0.7); }
-                if (mn) mn.style.opacity = '0';
-            } else {
-                const mt = document.getElementById('mouthTalk');
-                const mi = document.getElementById('mouthInner');
-                const mn = document.getElementById('mouthNormal');
-                if (mt) { mt.setAttribute('rx', 0); mt.setAttribute('ry', 0); }
-                if (mi) { mi.setAttribute('rx', 0); mi.setAttribute('ry', 0); }
-                if (mn) mn.style.opacity = '1';
-            }
-        }
+    function chargerConversation(index) {
+        historique.length = 0;
+        conversations[index].messages.forEach(m => historique.push(m));
+        document.getElementById('chat').innerHTML = '';
+        conversations[index].messages.forEach(m => {
+            if (m.role === 'user') document.getElementById('chat').innerHTML += `<div class="moi">${m.content}</div>`;
+            else ajouterMessageBot(m.content);
+        });
+        toggleSidebar();
+    }
 
-        function blinker() {
-            const bL = document.getElementById('blinkLeft'), bR = document.getElementById('blinkRight');
-            if (!bL || !bR) return;
-            let ry = 0;
-            const c = setInterval(() => {
-                ry += 3; bL.setAttribute('ry', ry); bL.setAttribute('opacity','1'); bR.setAttribute('ry', ry); bR.setAttribute('opacity','1');
-                if (ry >= 18) { clearInterval(c); setTimeout(() => { const o = setInterval(() => { ry -= 3; bL.setAttribute('ry',ry); bR.setAttribute('ry',ry); if(ry<=0){bL.setAttribute('opacity','0');bR.setAttribute('opacity','0');clearInterval(o);}},20);},100);}
-            }, 20);
-        }
+    function ouvrirModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function fermerModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        window.onload = function() {
-            const couleur = localStorage.getItem('yuuto_couleur');
-            if (couleur) { document.body.style.background = couleur; document.getElementById('couleurFond').value = couleur; }
-            estPremium = localStorage.getItem('yuuto_premium') === 'true';
-            nbTransfo = parseInt(localStorage.getItem('yuuto_transfo') || '0');
-            if (estPremium) { document.getElementById('premiumBadgeSide').style.display = 'inline'; }
-            const nomSauvegarde = localStorage.getItem('yuuto_nom');
-            if (nomSauvegarde) { document.getElementById('nom').value = nomSauvegarde; seConnecter(); }
+    function animerVTuber() {
+        animFrame = requestAnimationFrame(animerVTuber);
+        const t = Date.now() * 0.001;
+        headBob += 0.02;
+        const faceEl = document.getElementById('faceEl');
+        if (faceEl) faceEl.setAttribute('cy', 145 + Math.sin(headBob) * 3);
+        const iL = document.getElementById('irisLeft'), iR = document.getElementById('irisRight');
+        if (iL) iL.setAttribute('transform', `translate(${Math.sin(t*0.7)*3},${Math.sin(t*0.5)*2})`);
+        if (iR) iR.setAttribute('transform', `translate(${Math.sin(t*0.7)*3},${Math.sin(t*0.5)*2})`);
+        blinkTimer++;
+        if (blinkTimer > 200) { blinkTimer = 0; blinker(); }
+        if (isTalking) {
+            talkTimer += 0.3;
+            const o = Math.abs(Math.sin(talkTimer)) * 12;
+            const mt = document.getElementById('mouthTalk'), mi = document.getElementById('mouthInner'), mn = document.getElementById('mouthNormal');
+            if (mt) { mt.setAttribute('rx', o*1.5); mt.setAttribute('ry', o); }
+            if (mi) { mi.setAttribute('rx', o*1.2); mi.setAttribute('ry', o*0.7); }
+            if (mn) mn.style.opacity = '0';
+        } else {
+            const mt = document.getElementById('mouthTalk'), mi = document.getElementById('mouthInner'), mn = document.getElementById('mouthNormal');
+            if (mt) { mt.setAttribute('rx', 0); mt.setAttribute('ry', 0); }
+            if (mi) { mi.setAttribute('rx', 0); mi.setAttribute('ry', 0); }
+            if (mn) mn.style.opacity = '1';
         }
+    }
 
-        function ouvrirMenu() { ouvrirModal('menuScreen'); }
-        function changerCouleur() {
-            const c = document.getElementById('couleurFond').value;
-            document.body.style.background = c;
-            localStorage.setItem('yuuto_couleur', c);
-        }
-        function changerNom() {
-            const n = document.getElementById('nouveauNom').value.trim();
-            if (!n) return;
-            localStorage.setItem('yuuto_nom', n);
-            memoire.prenom = n;
-            estAntoine = n.toLowerCase() === "antoine gatore";
-            document.getElementById('userName').textContent = n;
-            document.getElementById('userAvatar').textContent = n[0].toUpperCase();
-            sauvegarderMemoire();
-            fermerModal('menuScreen');
-            ajouterMessageBot(estAntoine ? `wsh nom change !` : `Nom change en ${n} ! 😊`);
-        }
+    function blinker() {
+        const bL = document.getElementById('blinkLeft'), bR = document.getElementById('blinkRight');
+        if (!bL || !bR) return;
+        let ry = 0;
+        const c = setInterval(() => {
+            ry += 3; bL.setAttribute('ry', ry); bL.setAttribute('opacity','1'); bR.setAttribute('ry', ry); bR.setAttribute('opacity','1');
+            if (ry >= 18) { clearInterval(c); setTimeout(() => { const o = setInterval(() => { ry -= 3; bL.setAttribute('ry',ry); bR.setAttribute('ry',ry); if(ry<=0){bL.setAttribute('opacity','0');bR.setAttribute('opacity','0');clearInterval(o);}},20);},100);}
+        }, 20);
+    }
 
-        function verifierCode() {
-            if (document.getElementById('codeInput').value.trim() === CODE_PREMIUM) {
-                estPremium = true;
-                localStorage.setItem('yuuto_premium', 'true');
-                document.getElementById('premiumBadgeSide').style.display = 'inline';
-                fermerModal('premiumScreen');
-                ajouterMessageBot("Bienvenue Premium ! 🌟");
-            } else document.getElementById('codeErreur').style.display = 'block';
-        }
+    window.onload = function() {
+        const couleur = localStorage.getItem('yuuto_couleur');
+        if (couleur) { document.body.style.background = couleur; document.getElementById('couleurFond').value = couleur; }
+        estPremium = localStorage.getItem('yuuto_premium') === 'true';
+        nbTransfo = parseInt(localStorage.getItem('yuuto_transfo') || '0');
+        if (estPremium) document.getElementById('premiumBadgeSide').style.display = 'inline';
+        const nom = localStorage.getItem('yuuto_nom');
+        if (nom) { document.getElementById('nom').value = nom; seConnecter(); }
+    }
 
-        function ouvrirPerso() { ouvrirModal('persoScreen'); }
-        function activerPersonnage() {
-            const p = document.getElementById('persoInput').value.trim();
-            if (!p) return;
-            const max = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
-            if (!estAntoine && nbTransfo >= max) { fermerModal('persoScreen'); ouvrirModal('premiumScreen'); return; }
-            personnageActuel = p;
-            if (!estAntoine) { nbTransfo++; localStorage.setItem('yuuto_transfo', nbTransfo.toString()); }
-            document.getElementById('modePerso').textContent = `🎭 ${p}`;
-            fermerModal('persoScreen');
-            historique.length = 0;
-            ajouterMessageBot(`Je suis ${p} ! 🎭`, p);
-        }
-        function resetPersonnage() {
-            personnageActuel = null;
-            document.getElementById('modePerso').textContent = '';
-            fermerModal('persoScreen');
-            historique.length = 0;
-            ajouterMessageBot(`Je suis de retour ! 😄`);
-        }
+    function changerCouleur() { const c = document.getElementById('couleurFond').value; document.body.style.background = c; localStorage.setItem('yuuto_couleur', c); }
 
-        async function demarrerVideoAppel() {
-            enVideoAppel = true;
-            document.getElementById('videoCallScreen').style.display = 'flex';
-            document.getElementById('videoCallName').textContent = personnageActuel || 'YUUTO';
-            animerVTuber();
-            const intro = estAntoine ? "Wsh Antoine tu mappelles en video !" : `Salut ${memoire.prenom} tu mappelles en video !`;
-            document.getElementById('videoCallBubble').textContent = intro;
-            parlerVideo(intro, () => { document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro pour parler'; });
-        }
+    function changerNom() {
+        const n = document.getElementById('nouveauNom').value.trim();
+        if (!n) return;
+        localStorage.setItem('yuuto_nom', n);
+        memoire.prenom = n; estAntoine = n.toLowerCase() === "antoine gatore";
+        document.getElementById('userName').textContent = n;
+        document.getElementById('userAvatar').textContent = n[0].toUpperCase();
+        sauvegarderMemoire(); fermerModal('menuScreen');
+        ajouterMessageBot(estAntoine ? `wsh nom change !` : `Nom change en ${n} ! 😊`);
+    }
 
-        function terminerVideoAppel() {
-            enVideoAppel = false; yuutoParle = false; isTalking = false; stopMic();
-            window.speechSynthesis.cancel();
-            if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
-            document.getElementById('videoCallScreen').style.display = 'none';
-        }
+    function verifierCode() {
+        if (document.getElementById('codeInput').value.trim() === CODE_PREMIUM) {
+            estPremium = true; localStorage.setItem('yuuto_premium', 'true');
+            document.getElementById('premiumBadgeSide').style.display = 'inline';
+            fermerModal('premiumScreen'); ajouterMessageBot("Bienvenue Premium ! 🌟");
+        } else document.getElementById('codeErreur').style.display = 'block';
+    }
 
-        function parlerVideo(texte, callback) {
-            const synth = window.speechSynthesis;
-            if (!synth) { if (callback) callback(); return; }
-            synth.cancel(); yuutoParle = true; isTalking = true;
-            const u = new SpeechSynthesisUtterance(texte);
-            u.lang = 'fr-FR'; u.rate = 1; u.pitch = 1.1;
-            u.onend = () => { yuutoParle = false; isTalking = false; if (callback) setTimeout(callback, 500); };
-            synth.speak(u);
-        }
+    function activerPersonnage() {
+        const p = document.getElementById('persoInput').value.trim();
+        if (!p) return;
+        const max = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
+        if (!estAntoine && nbTransfo >= max) { fermerModal('persoScreen'); ouvrirModal('premiumScreen'); return; }
+        personnageActuel = p;
+        if (!estAntoine) { nbTransfo++; localStorage.setItem('yuuto_transfo', nbTransfo.toString()); }
+        document.getElementById('modePerso').textContent = `🎭 ${p}`;
+        fermerModal('persoScreen'); historique.length = 0;
+        ajouterMessageBot(`Je suis ${p} ! 🎭`, p);
+    }
 
-        function toggleVideoMic() {
-            if (!yuutoParle) {
-                if (isListening) stopMic();
-                else if (recognition) {
-                    try {
-                        recognition.onresult = (e) => { stopMic(); envoyerVideoAppel(e.results[0][0].transcript); };
-                        recognition.start(); isListening = true;
-                        document.getElementById('videoMicBtn').classList.add('active');
-                        document.getElementById('videoMicBtn').textContent = '🔴';
-                        document.getElementById('videoCallStatus').textContent = 'Tu parles...';
-                    } catch(e) {}
-                }
-            }
-        }
+    function resetPersonnage() {
+        personnageActuel = null; document.getElementById('modePerso').textContent = '';
+        fermerModal('persoScreen'); historique.length = 0;
+        ajouterMessageBot(`Je suis de retour ! 😄`);
+    }
 
-        async function envoyerVideoAppel(msg) {
-            document.getElementById('videoCallStatus').textContent = 'YUUTO reflechit...';
-            document.getElementById('videoMicBtn').classList.remove('active');
-            document.getElementById('videoMicBtn').textContent = '🎤';
-            historique.push({"role":"user","content":msg});
-            const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},
-                body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" Reponds en 1-2 phrases."},...historique]})
-            });
+    async function demarrerVideoAppel() {
+        enVideoAppel = true;
+        document.getElementById('videoCallScreen').style.display = 'flex';
+        document.getElementById('videoCallName').textContent = personnageActuel || 'YUUTO';
+        animerVTuber();
+        const intro = estAntoine ? "Wsh Antoine tu mappelles !" : `Salut ${memoire.prenom} tu mappelles !`;
+        document.getElementById('videoCallBubble').textContent = intro;
+        parlerVideo(intro, () => { document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro'; });
+    }
+
+    function terminerVideoAppel() {
+        enVideoAppel = false; yuutoParle = false; isTalking = false; stopMic();
+        window.speechSynthesis.cancel();
+        if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
+        document.getElementById('videoCallScreen').style.display = 'none';
+    }
+
+    function parlerVideo(texte, callback) {
+        const s = window.speechSynthesis;
+        if (!s) { if (callback) callback(); return; }
+        s.cancel(); yuutoParle = true; isTalking = true;
+        const u = new SpeechSynthesisUtterance(texte);
+        u.lang = 'fr-FR'; u.rate = 1; u.pitch = 1.1;
+        u.onend = () => { yuutoParle = false; isTalking = false; if (callback) setTimeout(callback, 500); };
+        s.speak(u);
+    }
+
+    function toggleVideoMic() {
+        if (!yuutoParle && recognition) {
+            if (isListening) stopMic();
+            else try {
+                recognition.onresult = (e) => { stopMic(); envoyerVideoAppel(e.results[0][0].transcript); };
+                recognition.start(); isListening = true;
+                document.getElementById('videoMicBtn').classList.add('active');
+                document.getElementById('videoMicBtn').textContent = '🔴';
+                document.getElementById('videoCallStatus').textContent = 'Tu parles...';
+            } catch(e) {}
+        }
+    }
+
+    async function envoyerVideoAppel(msg) {
+        document.getElementById('videoCallStatus').textContent = 'Reflechit...';
+        document.getElementById('videoMicBtn').classList.remove('active');
+        document.getElementById('videoMicBtn').textContent = '🎤';
+        historique.push({"role":"user","content":msg});
+        const r = await fetch('https://api.groq.com/openai/v1/chat/completions', { method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer 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'}, body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]}) });
+        const d = await r.json();
+        const rep = d.choices[0].message.content;
+        historique.push({"role":"assistant","content":rep});
+        document.getElementById('videoCallBubble').textContent = rep;
+        document.getElementById('videoCallStatus').textContent = 'Parle...';
+        parlerVideo(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''), () => {
+            if (enVideoAppel) document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro';
+        });
+    }
+
+    async function chercherAnime(genre, genreId) {
+        fermerModal('searchScreen');
+        document.getElementById('chat').innerHTML += `<div class="moi">🔍 ${genre} !</div>`;
+        loadingId++; const id = 'loading'+loadingId;
+        document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 🔍</div></div>`;
+        try {
+            const r = await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);
+            const d = await r.json();
+            let l = `Meilleurs ${genre} 🎌<br><br>`;
+            d.data.forEach((a,i) => { l += `${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>${a.synopsis?a.synopsis.substring(0,80)+'...<br><br>':''}`; });
+            document.getElementById(id).innerHTML = `YUUTO : ${l}`;
+        } catch(e) { document.getElementById(id).innerHTML = "Desole 😅"; }
+        document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+    }
+
+    async function lancerBattle() {
+        const p1 = document.getElementById('perso1Input').value.trim();
+        const p2 = document.getElementById('perso2Input').value.trim();
+        if (!p1||!p2) return;
+        fermerModal('battleScreen');
+        document.getElementById('chat').innerHTML += `<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;
+        const hist = [];
+        for (let i=0;i<4;i++) {
+            const pa=i%2===0?p1:p2, pb=i%2===0?p2:p1;
+            const prompt = hist.length===0 ? `Tu es ${pa}. Lance une pique a ${pb}. 2 phrases. Francais.` : `Tu es ${pa}. Reponds:"${hist[hist.length-1]}". 2 phrases. Francais.`;
+            const r = await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});
             const d = await r.json();
             const rep = d.choices[0].message.content;
+            hist.push(rep);
+            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;
+            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+            await new Promise(r=>setTimeout(r,500));
+        }
+        ajouterMessageBot("ptdr trop chauds 😂🔥");
+    }
+
+    async function getActu() {
+        document.getElementById('chat').innerHTML += `<div class="moi">📺 Actu !</div>`;
+        loadingId++; const id = 'loading'+loadingId;
+        document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 📺</div></div>`;
+        try {
+            const r = await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');
+            const d = await r.json();
+            let l = "Animes du moment 📺<br><br>";
+            d.data.forEach((a,i) => { l += `${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`; });
+            document.getElementById(id).innerHTML = `YUUTO : ${l}`;
+        } catch(e) { document.getElementById(id).innerHTML = "Desole 😅"; }
+        document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+    }
+
+    async function recommander() {
+        const h = new Date().getHours();
+        const hum = h>=6&&h<12?"fatigue":h>=12&&h<18?"energique":h>=18&&h<22?"calme":"mysterieux";
+        const d = animesDejaRecommandes.length>0?`Ne recommande PAS:${animesDejaRecommandes.join(',')}.`:"";
+        document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande !</div>`;
+        const r = await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:window.humeurInfo.personnalite},{role:'user',content:`Recommande UN anime. ${d} Humeur:${hum}. ${Math.random()}`}]})});
+        const data = await r.json();
+        const rep = data.choices[0].message.content;
+        animesDejaRecommandes.push(rep.split('\n')[0]);
+        ajouterMessageBot(rep);
+    }
+
+    function initMic() {
+        const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+        if (!SR) return;
+        recognition = new SR();
+        recognition.lang='fr-FR'; recognition.continuous=false;
+        recognition.onresult=(e)=>{const t=e.results[0][0].transcript;stopMic();document.getElementById('msg').value=t;envoyer();};
+        recognition.onend=()=>{isListening=false;document.getElementById('micBtn').classList.remove('active');document.getElementById('micBtn').textContent='🎤';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';};
+    }
+
+    function toggleMic(){if(isListening)stopMic();else{if(!recognition)return;try{recognition.start();isListening=true;document.getElementById('micBtn').classList.add('active');document.getElementById('micBtn').textContent='🔴';}catch(e){}}}
+    function stopMic(){try{if(recognition)recognition.stop();}catch(e){}isListening=false;}
+    function parler(t,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';u.rate=1;u.pitch=1;u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};s.speak(u);}
+    function nettoyerTexte(t){return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");}
+
+    function ajouterMessageBot(texte, nom) {
+        const t=nettoyerTexte(texte), n=nom||'YUUTO';
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${n} : ${texte}<br><button class="audio-btn" onclick="parler('${t}')">🔊 Ecouter</button></div></div>`;
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+
+    function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d)memoire=JSON.parse(d);}
+    function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
+    function getMemoireTexte(){let t="";if(memoire.animes)t+=`animes:${memoire.animes}. `;if(memoire.prenom)t+=`prenom:${memoire.prenom}. `;return t?"Tu sais:"+t:"";}
+    function getSystemPrompt(){if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;return window.humeurInfo.personnalite;}
+
+    const creation="Tu as ete cree par Antoine Gatore.";
+    const styleFam="Pote familier,'bro','ptdr','oe','wsh'.Court.Emojis.Francais.";
+    const styleNorm="Sympa chaleureux.Emojis.Francais.";
+
+    function getHumeur(fam){
+        const h=new Date().getHours(),s=fam?styleFam:styleNorm,m=getMemoireTexte();
+        if(h>=6&&h<12)return{humeur:"😴 Endormi",personnalite:creation+" YUUTO endormi. "+m+s};
+        if(h>=12&&h<18)return{humeur:"⚡ Energique",personnalite:creation+" YUUTO energique. "+m+s};
+        if(h>=18&&h<22)return{humeur:"🌙 Calme",personnalite:creation+" YUUTO calme. "+m+s};
+        return{humeur:"✨ Mysterieux",personnalite:creation+" YUUTO mysterieux. "+m+s};
+    }
+
+    function seConnecter(){
+        const n=document.getElementById('nom').value.trim();
+        if(n.toLowerCase()==="antoine gatore"){estAntoine=true;memoire.prenom="Antoine";}
+        else if(n.length>0){estAntoine=false;memoire.prenom=n;}
+        else{document.getElementById('erreur').style.display='block';return;}
+        localStorage.setItem('yuuto_nom',n);
+        chargerMemoire();demarrer();
+    }
+
+    function demarrer(){
+        document.getElementById('login').style.display='none';
+        document.getElementById('app').style.display='block';
+        initMic();
+        majHistorique();
+
+        const hi=getHumeur(estAntoine);
+        document.getElementById('humeur').textContent=hi.humeur;
+        window.humeurInfo=hi;
+        memoire.visites=(memoire.visites||0)+1;
+        sauvegarderMemoire();
+
+        document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';
+        document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
+
+        const im={f:{"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
+        let intro=estAntoine?im.f[hi.humeur]:im.n[hi.humeur];
+        if(!estAntoine&&!estPremium)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
+
+        document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
+    }
+
+    async function envoyer(){
+        const msg=document.getElementById('msg').value;
+        if(!msg)return;
+        document.getElementById('msg').value='';
+        document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
+        const ml=msg.toLowerCase();
+        if(ml.includes("j'aime")||ml.includes('mon anime')){memoire.animes=msg;sauvegarderMemoire();}
+        if(ml.includes('genere')||ml.includes('génère')||ml.includes('image de')){
+            const prompt=msg.replace(/genere|génère|une image de|image de|image/gi,'').trim()+' anime manga style 4k';
+            loadingId++;const id='loading'+loadingId;
+            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Generation... 🎨</div></div>`;
+            try{const img=await puter.ai.txt2img(prompt);document.getElementById(id).innerHTML=`Voila 🎨<br><img src="${img.src}" style="max-width:200px;border-radius:10px;margin-top:5px;display:block;"/>`;}
+            catch(e){document.getElementById(id).innerHTML="Desole 😅";}
+        }else{
+            historique.push({"role":"user","content":msg});
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
+            const d=await r.json();
+            const rep=d.choices[0].message.content;
             historique.push({"role":"assistant","content":rep});
-            document.getElementById('videoCallBubble').textContent = rep;
-            document.getElementById('videoCallStatus').textContent = 'YUUTO parle...';
-            parlerVideo(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''), () => {
-                if (enVideoAppel) document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro pour parler';
-            });
+            ajouterMessageBot(rep,personnageActuel);
         }
-
-        async function chercherAnime(genre, genreId) {
-            fermerModal('searchScreen');
-            document.getElementById('chat').innerHTML += `<div class="moi">🔍 ${genre} !</div>`;
-            loadingId++;
-            const id = 'loading'+loadingId;
-            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 🔍</div></div>`;
-            try {
-                const r = await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);
-                const d = await r.json();
-                let l = `Meilleurs ${genre} 🎌<br><br>`;
-                d.data.forEach((a,i) => { l += `${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>${a.synopsis?a.synopsis.substring(0,80)+'...<br><br>':''}`; });
-                document.getElementById(id).innerHTML = `YUUTO : ${l}`;
-            } catch(e) { document.getElementById(id).innerHTML = "Desole 😅"; }
-            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-        }
-
-        async function lancerBattle() {
-            const p1 = document.getElementById('perso1Input').value.trim();
-            const p2 = document.getElementById('perso2Input').value.trim();
-            if (!p1||!p2) return;
-            fermerModal('battleScreen');
-            document.getElementById('chat').innerHTML += `<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;
-            const hist = [];
-            for (let i=0;i<4;i++) {
-                const pa=i%2===0?p1:p2, pb=i%2===0?p2:p1;
-                const prompt = hist.length===0?`Tu es ${pa}. Lance une pique a ${pb}. 2 phrases. Francais.`:`Tu es ${pa}. Reponds:"${hist[hist.length-1]}". 2 phrases. Francais.`;
-                const r = await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});
-                const d = await r.json();
-                const rep = d.choices[0].message.content;
-                hist.push(rep);
-                document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;
-                document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-                await new Promise(r=>setTimeout(r,500));
-            }
-            ajouterMessageBot("ptdr trop chauds 😂🔥");
-        }
-
-        async function getActu() {
-            document.getElementById('chat').innerHTML += `<div class="moi">📺 Actu anime !</div>`;
-            loadingId++;
-            const id = 'loading'+loadingId;
-            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 📺</div></div>`;
-            try {
-                const r = await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');
-                const d = await r.json();
-                let l = "Animes du moment 📺<br><br>";
-                d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`;});
-                document.getElementById(id).innerHTML = `YUUTO : ${l}`;
-            } catch(e){document.getElementById(id).innerHTML="Desole 😅";}
-            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-        }
-
-        async function recommander() {
-            const h = new Date().getHours();
-            const hum = h>=6&&h<12?"fatigue":h>=12&&h<18?"energique":h>=18&&h<22?"calme":"mysterieux";
-            const d = animesDejaRecommandes.length>0?`Ne recommande PAS:${animesDejaRecommandes.join(',')}.`:"";
-            document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande !</div>`;
-            const r = await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:window.humeurInfo.personnalite},{role:'user',content:`Recommande UN anime. ${d} Humeur:${hum}. ${Math.random()}`}]})});
-            const data = await r.json();
-            const rep = data.choices[0].message.content;
-            animesDejaRecommandes.push(rep.split('\n')[0]);
-            ajouterMessageBot(rep);
-        }
-
-        function initMic() {
-            const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
-            if (!SR) return;
-            recognition = new SR();
-            recognition.lang='fr-FR'; recognition.continuous=false;
-            recognition.onresult=(e)=>{const t=e.results[0][0].transcript;stopMic();document.getElementById('msg').value=t;envoyer();};
-            recognition.onend=()=>{isListening=false;document.getElementById('micBtn').classList.remove('active');document.getElementById('micBtn').textContent='🎤';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';};
-        }
-
-        function toggleMic(){if(isListening)stopMic();else{if(!recognition)return;try{recognition.start();isListening=true;document.getElementById('micBtn').classList.add('active');document.getElementById('micBtn').textContent='🔴';}catch(e){}}}
-        function stopMic(){try{if(recognition)recognition.stop();}catch(e){}isListening=false;}
-
-        function parler(texte,callback){const s=window.speechSynthesis;if(!s){if(callback)callback();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(texte);u.lang='fr-FR';u.rate=1;u.pitch=1;u.onend=()=>{yuutoParle=false;if(callback)setTimeout(callback,800);};s.speak(u);}
-
-        function nettoyerTexte(t){return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");}
-
-        function ajouterMessageBot(texte,nom){
-            const t=nettoyerTexte(texte),n=nom||'YUUTO';
-            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${n} : ${texte}<br><button class="audio-btn" onclick="parler('${t}')">🔊 Ecouter</button></div></div>`;
-            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-        }
-
-        function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d)memoire=JSON.parse(d);}
-        function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
-        function getMemoireTexte(){let t="";if(memoire.animes)t+=`animes:${memoire.animes}. `;if(memoire.prenom)t+=`prenom:${memoire.prenom}. `;return t?"Tu sais:"+t:"";}
-
-        const creation="Tu as ete cree par Antoine Gatore. Reponds fierement si on te le demande.";
-        const styleFam="Pote familier,'bro','ptdr','oe','wsh'.Court.Emojis.Francais.";
-        const styleNorm="Sympa chaleureux.Emojis.Francais.";
-
-        function getHumeur(fam){
-            const h=new Date().getHours(),s=fam?styleFam:styleNorm,m=getMemoireTexte();
-            if(h>=6&&h<12)return{humeur:"😴 Endormi...",personnalite:creation+" YUUTO endormi matin. "+m+s};
-            if(h>=12&&h<18)return{humeur:"⚡ Energique !",personnalite:creation+" YUUTO energique apres-midi. "+m+s};
-            if(h>=18&&h<22)return{humeur:"🌙 Philosophe",personnalite:creation+" YUUTO calme soir. "+m+s};
-            return{humeur:"✨ Mysterieux",personnalite:creation+" YUUTO mysterieux nuit. "+m+s};
-        }
-
-        function getSystemPrompt(){if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;return window.humeurInfo.personnalite;}
-
-        function seConnecter(){
-            const n=document.getElementById('nom').value.trim();
-            if(n.toLowerCase()==="antoine gatore"){estAntoine=true;memoire.prenom="Antoine";}
-            else if(n.length>0){estAntoine=false;memoire.prenom=n;}
-            else{document.getElementById('erreur').style.display='block';return;}
-            localStorage.setItem('yuuto_nom',n);
-            chargerMemoire();demarrer();
-        }
-
-        function demarrer(){
-            document.getElementById('login').style.display='none';
-            document.getElementById('app').style.display='flex';
-            initMic();
-            majHistorique();
-
-            const hi=getHumeur(estAntoine);
-            document.getElementById('humeur').textContent=hi.humeur;
-            window.humeurInfo=hi;
-            memoire.visites=(memoire.visites||0)+1;
-            sauvegarderMemoire();
-
-            document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';
-            document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
-
-            const introMap={
-                f:{"😴 Endormi...":"wsh... 😴","⚡ Energique !":"YOOO 🔥 Antoine !","🌙 Philosophe":"wsh... 🌙","✨ Mysterieux":"...✨"},
-                n:{"😴 Endormi...":"Bonjour... 😴","⚡ Energique !":`Salut ${memoire.prenom} ! ⚡`,"🌙 Philosophe":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}
-            };
-
-            let intro=estAntoine?introMap.f[hi.humeur]:introMap.n[hi.humeur];
-            if(!estAntoine&&!estPremium)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
-
-            document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
-        }
-
-        async function envoyer(){
-            const msg=document.getElementById('msg').value;
-            if(!msg)return;
-            document.getElementById('msg').value='';
-            document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
-
-            const ml=msg.toLowerCase();
-            if(ml.includes("j'aime")||ml.includes('mon anime')){memoire.animes=msg;sauvegarderMemoire();}
-
-            if(ml.includes('genere')||ml.includes('génère')||ml.includes('image de')){
-                const prompt=msg.replace(/genere|génère|une image de|image de|image/gi,'').trim()+' anime manga style 4k';
-                loadingId++;const id='loading'+loadingId;
-                document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Generation... 🎨</div></div>`;
-                try{const img=await puter.ai.txt2img(prompt);document.getElementById(id).innerHTML=`Voila 🎨<br><img src="${img.src}" style="max-width:200px;border-radius:10px;margin-top:5px;display:block;"/>`;}
-                catch(e){document.getElementById(id).innerHTML="Desole 😅";}
-            }else{
-                historique.push({"role":"user","content":msg});
-                const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
-                const d=await r.json();
-                const rep=d.choices[0].message.content;
-                historique.push({"role":"assistant","content":rep});
-                ajouterMessageBot(rep,personnageActuel);
-            }
-            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-        }
-    </script>
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+</script>
 </body>
 </html>
