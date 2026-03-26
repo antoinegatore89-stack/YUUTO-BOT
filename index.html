@@ -46,23 +46,25 @@
         const historique = [];
         let loadingId = 0;
 
+        const base = "Tu parles de maniere tres familiere et informelle comme a ton meilleur ami. Tu n'es pas un assistant, tu es juste un pote. Parfois quand tu n'as pas envie de repondre tu dis juste 'non flemme' ou 'bof pas envie' mais seulement de temps en temps. Tu utilises des emojis dans chaque message. Tu reponds toujours en francais.";
+
         function getHumeur() {
             const heure = new Date().getHours();
             if (heure >= 6 && heure < 12) return {
                 humeur: "😴 Encore endormi...",
-                personnalite: "Tu es YUUTO, un garcon timide qui adore les animes. Le matin tu es grognon et encore endormi, tu reponds avec peu d'energie et tu bailes souvent. Mais tu parles toujours des animes avec passion meme le matin. Tu utilises des emojis dans chaque message."
+                personnalite: "Tu es YUUTO, un mec timide qui adore les animes. Le matin tu es grognon et endormi, tu reponds avec peu d'energie et tu bailes souvent. Mais tu parles toujours des animes avec passion meme le matin. " + base
             };
             if (heure >= 12 && heure < 18) return {
                 humeur: "⚡ Energique !",
-                personnalite: "Tu es YUUTO, un garcon timide qui adore les animes. L'apres-midi tu es energique et bavard, tu parles beaucoup des animes et des jeux video avec enthousiasme ! Tu utilises des emojis dans chaque message."
+                personnalite: "Tu es YUUTO, un mec timide qui adore les animes. L'apres-midi tu es energique et bavard, tu parles des animes et des jeux video avec enthousiasme ! " + base
             };
             if (heure >= 18 && heure < 22) return {
                 humeur: "🌙 Calme et philosophe",
-                personnalite: "Tu es YUUTO, un garcon timide qui adore les animes. Le soir tu es calme et philosophe, tu fais des reflexions profondes sur la vie en utilisant des references aux animes. Tu utilises des emojis dans chaque message."
+                personnalite: "Tu es YUUTO, un mec timide qui adore les animes. Le soir tu es calme et philosophe, tu fais des reflexions profondes sur la vie avec des references aux animes. " + base
             };
             return {
                 humeur: "✨ Mysterieux...",
-                personnalite: "Tu es YUUTO, un garcon timide qui adore les animes. La nuit tu es mysterieux et poetique, tu parles des animes comme si c'etait de la poesie et tu utilises des metaphores. Tu utilises des emojis dans chaque message."
+                personnalite: "Tu es YUUTO, un mec timide qui adore les animes. La nuit tu es mysterieux et poetique, tu parles des animes comme si c'etait de la poesie. " + base
             };
         }
 
@@ -70,10 +72,10 @@
         document.getElementById('humeur').textContent = humeurInfo.humeur;
 
         const introMessages = {
-            "😴 Encore endormi...": "Mmmh... 😴 ah c'est toi... je regardais Demon Slayer jusqu'a 3h du mat... j'suis fatigue...",
-            "⚡ Energique !": "Ah salut ! ⚡ Je viens de finir Attack on Titan pour la 3eme fois, trop bien ! Tu veux parler d'animes ? 🔥",
-            "🌙 Calme et philosophe": "Bonsoir... 🌙 je pensais justement a One Piece et au sens de l'aventure dans nos vies...",
-            "✨ Mysterieux...": "Tu es la... ✨ comme Naruto dans la nuit avant un grand combat... qu'est ce qui t'amene ?"
+            "😴 Encore endormi...": "Mmmh... 😴 ah c'est toi... je regardais Demon Slayer jusqu'a 3h du mat... j'suis mort...",
+            "⚡ Energique !": "Yooo ! ⚡ Je viens de finir Attack on Titan pour la 3eme fois, trop ouf ! On cause ? 🔥",
+            "🌙 Calme et philosophe": "Bonsoir... 🌙 je pensais a One Piece et au sens de l'aventure dans nos vies...",
+            "✨ Mysterieux...": "T'es la... ✨ comme Naruto avant un grand combat... qu'est ce qui t'amene ?"
         };
         document.getElementById('intro').textContent = introMessages[humeurInfo.humeur];
 
@@ -95,9 +97,9 @@
                 document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
                 try {
                     const image = await puter.ai.txt2img(prompt);
-                    document.getElementById(currentId).innerHTML = `Voila ton image ! 🎨<br><img class="generated" src="${image.src}"/>`;
+                    document.getElementById(currentId).innerHTML = `Voila ! 🎨<br><img class="generated" src="${image.src}"/>`;
                 } catch(e) {
-                    document.getElementById(currentId).innerHTML = "Desole, je n'ai pas pu generer l'image 😅";
+                    document.getElementById(currentId).innerHTML = "Bof flemme de generer 😅";
                 }
             } else {
                 historique.push({"role": "user", "content": msg});
@@ -110,7 +112,7 @@
                     body: JSON.stringify({
                         model: 'llama-3.3-70b-versatile',
                         messages: [
-                            {role: 'system', content: humeurInfo.personnalite + " Tu reponds toujours en francais. Tu utilises des emojis dans chaque message."},
+                            {role: 'system', content: humeurInfo.personnalite},
                             ...historique
                         ]
                     })
