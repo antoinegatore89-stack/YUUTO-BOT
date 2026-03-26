@@ -19,7 +19,8 @@
         #login button { background: linear-gradient(90deg, #7c3aed, #5b21b6); color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #erreur { color: red; display: none; font-size: 14px; }
 
-        #app { display: none; height: 100vh; position: relative; }
+        #app { display: none; height: 100vh; flex-direction: column; position: relative; }
+
         #sidebar { display: none; position: fixed; top: 0; left: 0; width: 270px; height: 100vh; background: #111; flex-direction: column; z-index: 100; border-right: 1px solid #222; }
         #sidebar.open { display: flex; }
         #sidebarHeader { padding: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #222; }
@@ -190,7 +191,7 @@
             <div class="toggle-row">
                 <div>
                     <label style="color:#00d4ff">🧠 Mode Codex</label>
-                    <div class="codex-desc">YUUTO-BOT devient un expert sérieux et détaillé</div>
+                    <div class="codex-desc">YUUTO-BOT devient expert sérieux</div>
                 </div>
                 <label class="toggle">
                     <input type="checkbox" id="codexToggle" onchange="toggleCodex()"/>
@@ -199,9 +200,7 @@
             </div>
             <div id="codexInfo" style="display:none;margin-top:10px;padding:10px;background:#0a1a2e;border-radius:8px;font-size:12px;color:#00d4ff;border:1px solid #00d4ff">
                 ✅ Mode Codex activé !<br/>
-                📚 Devoirs, culture générale, explications<br/>
-                🔬 Sciences, maths, histoire...<br/>
-                💡 Réponses détaillées et précises
+                📚 Devoirs, sciences, maths, histoire...
             </div>
         </div>
         <button class="modalBtn secondary" onclick="fermerModal('menuScreen')">Fermer</button>
@@ -400,17 +399,13 @@
         document.getElementById('codexInfo').style.display = modeCodex ? 'block' : 'none';
         document.getElementById('codexBadge').style.display = modeCodex ? 'inline' : 'none';
         document.getElementById('msg').className = modeCodex ? 'codex-active' : '';
-        document.getElementById('msg').placeholder = modeCodex ? '🧠 Pose ta question sérieuse...' : `Message ${NOM_BOT}...`;
-        if (modeCodex) {
-            fermerModal('menuScreen');
-            ajouterMessageBot("Mode Codex activé 🧠 Je suis maintenant en mode expert. Pose moi n'importe quelle question sérieuse : devoirs, sciences, histoire, maths... Je vais répondre de façon détaillée et précise !", null, true);
-        } else {
-            ajouterMessageBot(`Mode Codex désactivé 😊 Je redeviens ton ${NOM_BOT} normal !`);
-        }
+        document.getElementById('msg').placeholder = modeCodex ? '🧠 Pose ta question...' : `Message ${NOM_BOT}...`;
+        if (modeCodex) { fermerModal('menuScreen'); ajouterMessageBot("Mode Codex activé 🧠 Pose moi tes questions sérieuses !", null, true); }
+        else { ajouterMessageBot(`Mode Codex désactivé 😊 Je redeviens ${NOM_BOT} !`); }
     }
 
     function getSystemPrompt() {
-        if (modeCodex) return `Tu es ${NOM_BOT} en mode Codex. Tu es un assistant expert, sérieux et très précis. Tu réponds de façon détaillée, structurée et pédagogique. Tu peux aider avec les devoirs, les sciences, les maths, l'histoire, la géographie, la culture générale. Tu utilises des exemples clairs. Tu réponds toujours en français.`;
+        if (modeCodex) return `Tu es ${NOM_BOT} en mode Codex. Expert sérieux et précis. Réponds de façon détaillée et pédagogique. Devoirs, sciences, maths, histoire, culture générale. Français.`;
         if (personnageActuel) return `Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;
         return window.humeurInfo.personnalite;
     }
@@ -432,7 +427,7 @@
     function majHistorique() {
         const list=document.getElementById('historyList');
         list.innerHTML=conversations.length===0?'<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>':'';
-        conversations.forEach((conv,i)=>{
+        conversations.forEach((conv)=>{
             const item=document.createElement('div');item.className='historyItem';item.innerHTML=`💬 ${conv.titre}`;
             item.onclick=()=>{historique.length=0;conv.messages.forEach(m=>historique.push(m));document.getElementById('chat').innerHTML='';conv.messages.forEach(m=>{if(m.role==='user')document.getElementById('chat').innerHTML+=`<div class="moi">${m.content}</div>`;else ajouterMessageBot(m.content);});toggleSidebar();};
             list.appendChild(item);
@@ -543,7 +538,7 @@
             document.getElementById('codexInfo').style.display='block';
             document.getElementById('codexBadge').style.display='inline';
             document.getElementById('msg').className='codex-active';
-            document.getElementById('msg').placeholder='🧠 Pose ta question sérieuse...';
+            document.getElementById('msg').placeholder='🧠 Pose ta question...';
         }
         const nom=localStorage.getItem('yuuto_nom');
         if(nom){document.getElementById('nom').value=nom;seConnecter();}
@@ -671,7 +666,7 @@
 
     function demarrer(){
         document.getElementById('login').style.display='none';
-        document.getElementById('app').style.display='block';
+        document.getElementById('app').style.display='flex'; // ✅ CORRIGE ICI
         initMic();majHistorique();
         const hi=getHumeur(estAntoine);
         document.getElementById('humeur').textContent=hi.humeur;
