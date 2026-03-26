@@ -1,17 +1,10 @@
 {
-  "name": "YUUTO",
-  "short_name": "YUUTO",
+  "name": "YUUTO-BOT",
+  "short_name": "YUUTO-BOT",
   "description": "Ton ami IA qui adore les animes",
   "start_url": "/YUUTO-BOT/",
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#7c3aed",
-  "icons": [
-    {
-      "src": "android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
+  "icons": [{"src": "android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"}]
 }
