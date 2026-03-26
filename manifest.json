@@ -8,9 +8,10 @@
   "theme_color": "#7c3aed",
   "icons": [
     {
-      "src": "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg",
-      "sizes": "512x512",
-      "type": "image/jpeg"
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
