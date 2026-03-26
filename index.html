@@ -43,6 +43,21 @@
         #persoConfirm { background: #f59e0b; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #persoReset { background: #333; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 14px; cursor: pointer; }
         #persoClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+
+        /* Premium Screen */
+        #premiumScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; justify-content: center; align-items: center; }
+        #premiumBox { background: #222; border-radius: 20px; padding: 25px; width: 85%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; text-align: center; }
+        #premiumBox h2 { margin: 0; color: #f59e0b; }
+        #premiumBox .prix { font-size: 32px; font-weight: bold; color: #f59e0b; }
+        #premiumBox .feature { background: #333; padding: 10px; border-radius: 10px; font-size: 14px; }
+        #premiumBox .wave-info { background: #1a3a1a; padding: 15px; border-radius: 12px; font-size: 13px; color: #aaa; }
+        #premiumBox .wave-info strong { color: #22c55e; display: block; font-size: 16px; margin-bottom: 5px; }
+        #codeInput { padding: 12px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; text-align: center; }
+        #codeConfirm { background: #f59e0b; color: black; border: none; padding: 12px; border-radius: 20px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        #codeErreur { color: red; font-size: 13px; display: none; }
+        #premiumClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+        #premiumBadge { background: #f59e0b; color: black; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; }
+
         #battleScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 998; justify-content: center; align-items: center; }
         #battleBox { background: #222; border-radius: 20px; padding: 25px; width: 85%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
         #battleBox h2 { margin: 0; text-align: center; }
@@ -105,10 +120,30 @@
         </div>
     </div>
 
+    <div id="premiumScreen">
+        <div id="premiumBox">
+            <h2>⭐ YUUTO Premium</h2>
+            <div class="prix">2 000 FCFA</div>
+            <div class="feature">🎭 5 transformations de personnage</div>
+            <div class="feature">⚡ Accès illimité au mode Battle</div>
+            <div class="feature">🌟 Badge Premium exclusif</div>
+            <div class="wave-info">
+                <strong>💚 Paye via Wave</strong>
+                Envoie 2000 FCFA au<br/>
+                <strong style="color:white">+225 07 67 07 9692</strong><br/>
+                Puis entre le code reçu ci-dessous
+            </div>
+            <input id="codeInput" type="text" placeholder="Entre ton code secret..."/>
+            <span id="codeErreur">Code incorrect 😤</span>
+            <button id="codeConfirm" onclick="verifierCode()">✅ Activer Premium</button>
+            <button id="premiumClose" onclick="fermerPremium()">Fermer</button>
+        </div>
+    </div>
+
     <div id="persoScreen">
         <div id="persoBox">
             <h2>🎭 Mode Personnage</h2>
-            <p>Quel personnage d'anime tu veux ?</p>
+            <p id="persoCompteur"></p>
             <input id="persoInput" type="text" placeholder="Ex: Naruto, Levi, Goku..."/>
             <button id="persoConfirm" onclick="activerPersonnage()">Transformer YUUTO !</button>
             <button id="persoReset" onclick="resetPersonnage()">Redevenir YUUTO</button>
@@ -141,7 +176,7 @@
         <div id="header">
             <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
             <div>
-                <span>YUUTO</span><br/>
+                <span>YUUTO</span> <span id="premiumBadge" style="display:none">⭐ Premium</span><br/>
                 <span id="humeur"></span>
                 <span id="modePerso"></span>
             </div>
@@ -168,6 +203,10 @@
 
     <script>
         const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg";
+        const CODE_PREMIUM = "2013";
+        const MAX_TRANSFO_GRATUIT = 2;
+        const MAX_TRANSFO_PREMIUM = 5;
+
         const historique = [];
         const animesDejaRecommandes = [];
         let loadingId = 0;
@@ -178,23 +217,26 @@
         let enAppel = false;
         let yuutoParle = false;
         let personnageActuel = null;
+        let estPremium = false;
+        let nbTransfo = 0;
 
         window.onload = function() {
             const couleur = localStorage.getItem('yuuto_couleur');
             if (couleur) { document.body.style.background = couleur; document.getElementById('couleurFond').value = couleur; }
+            estPremium = localStorage.getItem('yuuto_premium') === 'true';
+            nbTransfo = parseInt(localStorage.getItem('yuuto_transfo') || '0');
+            if (estPremium) document.getElementById('premiumBadge').style.display = 'inline';
             const nomSauvegarde = localStorage.getItem('yuuto_nom');
             if (nomSauvegarde) { document.getElementById('nom').value = nomSauvegarde; seConnecter(); }
         }
 
         function ouvrirMenu() { document.getElementById('menuScreen').style.display = 'flex'; }
         function fermerMenu() { document.getElementById('menuScreen').style.display = 'none'; }
-
         function changerCouleur() {
             const couleur = document.getElementById('couleurFond').value;
             document.body.style.background = couleur;
             localStorage.setItem('yuuto_couleur', couleur);
         }
-
         function changerNom() {
             const nouveauNom = document.getElementById('nouveauNom').value.trim();
             if (!nouveauNom) return;
@@ -206,7 +248,35 @@
             ajouterMessageBot(estAntoine ? `wsh ${nouveauNom} ! 😄 nom change !` : `Nom change en ${nouveauNom} ! 😊`);
         }
 
-        function ouvrirPerso() { document.getElementById('persoScreen').style.display = 'flex'; }
+        function ouvrirPremium() { document.getElementById('premiumScreen').style.display = 'flex'; }
+        function fermerPremium() { document.getElementById('premiumScreen').style.display = 'none'; }
+
+        function verifierCode() {
+            const code = document.getElementById('codeInput').value.trim();
+            if (code === CODE_PREMIUM) {
+                estPremium = true;
+                localStorage.setItem('yuuto_premium', 'true');
+                document.getElementById('premiumBadge').style.display = 'inline';
+                fermerPremium();
+                ajouterMessageBot("Bienvenue dans le Premium ! 🌟 Tu peux maintenant transformer YUUTO 5 fois !");
+            } else {
+                document.getElementById('codeErreur').style.display = 'block';
+            }
+        }
+
+        function ouvrirPerso() {
+            const maxTransfo = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
+            if (nbTransfo >= maxTransfo && !estAntoine) {
+                ouvrirPremium();
+                return;
+            }
+            const restant = estAntoine ? "∞" : `${maxTransfo - nbTransfo}`;
+            document.getElementById('persoCompteur').textContent = estPremium
+                ? `⭐ Premium — ${maxTransfo - nbTransfo} transformations restantes`
+                : `${nbTransfo >= maxTransfo ? '0' : restant} transformation(s) gratuite(s) restante(s)`;
+            document.getElementById('persoScreen').style.display = 'flex';
+        }
+
         function fermerPerso() { document.getElementById('persoScreen').style.display = 'none'; }
         function ouvrirBattle() { document.getElementById('battleScreen').style.display = 'flex'; }
         function fermerBattle() { document.getElementById('battleScreen').style.display = 'none'; }
@@ -214,7 +284,17 @@
         function activerPersonnage() {
             const perso = document.getElementById('persoInput').value.trim();
             if (!perso) return;
+            const maxTransfo = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
+            if (!estAntoine && nbTransfo >= maxTransfo) {
+                fermerPerso();
+                ouvrirPremium();
+                return;
+            }
             personnageActuel = perso;
+            if (!estAntoine) {
+                nbTransfo++;
+                localStorage.setItem('yuuto_transfo', nbTransfo.toString());
+            }
             document.getElementById('modePerso').textContent = `🎭 ${perso}`;
             document.getElementById('persoScreen').style.display = 'none';
             historique.length = 0;
@@ -230,9 +310,7 @@
         }
 
         function getSystemPrompt() {
-            if (personnageActuel) {
-                return `Tu joues le role de ${personnageActuel}, un personnage d'anime. Tu parles exactement comme ce personnage. Tu reponds en francais.`;
-            }
+            if (personnageActuel) return `Tu joues le role de ${personnageActuel}, un personnage d'anime. Tu parles exactement comme ce personnage. Tu reponds en francais.`;
             return window.humeurInfo.personnalite;
         }
 
@@ -247,8 +325,8 @@
                 const persoActuel = i % 2 === 0 ? perso1 : perso2;
                 const persoAdversaire = i % 2 === 0 ? perso2 : perso1;
                 const prompt = battleHistory.length === 0
-                    ? `Tu es ${persoActuel}. Lance une pique a ${persoAdversaire} en restant dans ton personnage. Sois drole et agressif. Maximum 2 phrases. En francais.`
-                    : `Tu es ${persoActuel}. Reponds a : "${battleHistory[battleHistory.length-1]}". Sois dans ton personnage, drole et agressif. Maximum 2 phrases. En francais.`;
+                    ? `Tu es ${persoActuel}. Lance une pique a ${persoAdversaire}. Sois drole et agressif. 2 phrases max. En francais.`
+                    : `Tu es ${persoActuel}. Reponds a : "${battleHistory[battleHistory.length-1]}". 2 phrases max. En francais.`;
                 const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
@@ -271,13 +349,11 @@
             loadingId++;
             const currentId = 'loading' + loadingId;
             document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${currentId}">Je cherche l'actu... 📺</div></div>`;
-            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
             try {
                 const response = await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');
                 const data = await response.json();
-                const animes = data.data;
                 let liste = estAntoine ? "wsh bro voila les animes qui cartonnent 🔥<br><br>" : "Voila les animes du moment 📺<br><br>";
-                animes.forEach((anime, i) => {
+                data.data.forEach((anime, i) => {
                     liste += `${i + 1}. <strong>${anime.title}</strong> ⭐${anime.score || '?'}/10<br>`;
                     if (anime.synopsis) liste += `${anime.synopsis.substring(0, 80)}...<br><br>`;
                 });
@@ -290,8 +366,7 @@
 
         async function recommander() {
             const heure = new Date().getHours();
-            let humeurActuelle = heure >= 6 && heure < 12 ? "fatigue le matin" : heure >= 12 && heure < 18 ? "energique l'apres-midi" : heure >= 18 && heure < 22 ? "calme le soir" : "mysterieux la nuit";
-            const animesPrefs = memoire.animes ? `Animes preferes : ${memoire.animes}.` : "";
+            let humeurActuelle = heure >= 6 && heure < 12 ? "fatigue" : heure >= 12 && heure < 18 ? "energique" : heure >= 18 && heure < 22 ? "calme" : "mysterieux";
             const dejarecommandes = animesDejaRecommandes.length > 0 ? `Ne recommande PAS : ${animesDejaRecommandes.join(', ')}.` : "";
             document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande moi un anime !</div>`;
             const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -300,7 +375,7 @@
                 body: JSON.stringify({
                     model: 'llama-3.3-70b-versatile',
                     messages: [{ role: 'system', content: window.humeurInfo.personnalite }, {
-                        role: 'user', content: `Recommande UN anime DIFFERENT. ${dejarecommandes} ${humeurActuelle}. ${animesPrefs} Numero : ${Math.floor(Math.random() * 10000)}`
+                        role: 'user', content: `Recommande UN anime DIFFERENT. ${dejarecommandes} Humeur : ${humeurActuelle}. Numero : ${Math.floor(Math.random() * 10000)}`
                     }]
                 })
             });
@@ -371,10 +446,8 @@
         async function demarrerAppel() {
             enAppel = true;
             document.getElementById('callScreen').style.display = 'flex';
-            document.getElementById('callStatus').textContent = 'Connexion...';
-            const nom = personnageActuel || 'YUUTO';
             const intro = estAntoine ? `Wsh Antoine ! Tu mappelles ?` : `Salut ${memoire.prenom} ! Tu mappelles ?`;
-            document.getElementById('callName').textContent = nom;
+            document.getElementById('callName').textContent = personnageActuel || 'YUUTO';
             parler(intro, () => { document.getElementById('callStatus').textContent = 'Appuie sur le micro pour parler'; });
         }
 
@@ -419,22 +492,10 @@
             const heure = new Date().getHours();
             const base = familier ? baseFamilier : baseNormal;
             const memTxt = getMemoireTexte();
-            if (heure >= 6 && heure < 12) return {
-                humeur: "😴 Encore endormi...",
-                personnalite: "Tu es YUUTO qui adore les animes. Le matin t'es endormi et tu as peu d'energie. " + memTxt + base
-            };
-            if (heure >= 12 && heure < 18) return {
-                humeur: "⚡ Energique !",
-                personnalite: "Tu es YUUTO qui adore les animes. L'apres-midi t'es energique et enthousiaste. " + memTxt + base
-            };
-            if (heure >= 18 && heure < 22) return {
-                humeur: "🌙 Calme et philosophe",
-                personnalite: "Tu es YUUTO qui adore les animes. Le soir t'es calme et tu fais des reflexions profondes. " + memTxt + base
-            };
-            return {
-                humeur: "✨ Mysterieux...",
-                personnalite: "Tu es YUUTO qui adore les animes. La nuit t'es mysterieux et poetique. " + memTxt + base
-            };
+            if (heure >= 6 && heure < 12) return { humeur: "😴 Encore endormi...", personnalite: "Tu es YUUTO qui adore les animes. Le matin t'es endormi. " + memTxt + base };
+            if (heure >= 12 && heure < 18) return { humeur: "⚡ Energique !", personnalite: "Tu es YUUTO qui adore les animes. L'apres-midi t'es energique. " + memTxt + base };
+            if (heure >= 18 && heure < 22) return { humeur: "🌙 Calme et philosophe", personnalite: "Tu es YUUTO qui adore les animes. Le soir t'es calme. " + memTxt + base };
+            return { humeur: "✨ Mysterieux...", personnalite: "Tu es YUUTO qui adore les animes. La nuit t'es mysterieux. " + memTxt + base };
         }
 
         function seConnecter() {
@@ -463,6 +524,10 @@
             let intro = estAntoine
                 ? (dejaVenu ? `wsh Antoine ! 😄 t'es de retour !` : `YOOO 🔥 t'es la !`)
                 : (dejaVenu ? `Salut ${memoire.prenom} ! 😊 Content de te revoir !` : `Salut ${memoire.prenom} ! 😊 Je suis YUUTO !`);
+
+            if (!estAntoine && !estPremium) {
+                intro += `<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT - nbTransfo} transformation(s) gratuite(s) restante(s) — <a href="#" onclick="ouvrirPremium()" style="color:#f59e0b">Passe Premium !</a></small>`;
+            }
 
             document.getElementById('chat').innerHTML = `
                 <div class="bot"><img class="avatar" src="${AVATAR}"/>
