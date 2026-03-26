@@ -33,6 +33,7 @@
         .menu-option label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
         .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
         .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 10px; border: none; background: #444; color: white; font-size: 14px; box-sizing: border-box; }
+        .menu-option select { width: 100%; padding: 8px; border-radius: 10px; border: none; background: #444; color: white; font-size: 14px; box-sizing: border-box; }
         .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; width: 100%; }
         #closeMenu { background: #555; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #premiumScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; justify-content: center; align-items: center; }
@@ -67,27 +68,14 @@
         #genreButtons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .genre-btn { background: #333; color: white; border: none; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         #searchClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
-
-        /* VIDEO CALL VTUBER STYLE */
-        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #0a0a2e 0%, #1a0a3e 100%); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; box-sizing: border-box; }
-        #videoCallTop { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        #videoCallName { font-size: 22px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 10px #f59e0b; }
-        #videoCallStatus { font-size: 13px; color: #aaa; }
-
-        /* SVG VTuber Character */
-        #vtuberContainer { position: relative; width: 280px; height: 320px; }
-        #vtuberSVG { width: 100%; height: 100%; filter: drop-shadow(0 0 20px rgba(124,58,237,0.5)); }
-
-        /* Particules autour */
-        .particle { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #7c3aed; animation: floatParticle 3s infinite; }
-        @keyframes floatParticle { 0% { opacity: 0; transform: translateY(0) scale(0); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(-60px) scale(1.5); } }
-
-        #videoCallBubble { background: rgba(34,34,34,0.9); border: 1px solid #7c3aed; border-radius: 20px; padding: 12px 20px; width: 90%; max-width: 320px; font-size: 14px; text-align: center; color: white; min-height: 45px; }
-        #videoCallBtns { display: flex; gap: 20px; margin-bottom: 10px; }
-        #videoMicBtn { background: #333; color: white; border: 2px solid #555; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; transition: all 0.3s; }
-        #videoMicBtn.active { background: #22c55e; border-color: #22c55e; box-shadow: 0 0 15px #22c55e; }
-        #videoEndBtn { background: #e11d48; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
-
+        #callScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #111; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 999; }
+        #callScreen img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #22c55e; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 70% { box-shadow: 0 0 0 20px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+        #callStatus { font-size: 18px; color: #aaa; }
+        #callName { font-size: 24px; font-weight: bold; }
+        #endCallBtn { background: red; border: none; color: white; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
+        #micCallBtn { background: #333; border: none; color: white; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
+        #micCallBtn.active { background: #22c55e; }
         #chat { flex: 1; overflow-y: auto; padding: 10px; }
         .moi { background: #0084ff; padding: 10px; border-radius: 10px; margin: 5px; text-align: right; }
         .bot { display: flex; align-items: flex-start; gap: 8px; margin: 5px; }
@@ -127,6 +115,16 @@
             <div class="menu-option">
                 <label>🎨 Couleur du fond</label>
                 <input type="color" id="couleurFond" value="#1a1a1a" oninput="changerCouleur()"/>
+            </div>
+            <div class="menu-option">
+                <label>✍️ Police d'ecriture</label>
+                <select id="policeSelect" onchange="changerPolice()">
+                    <option value="Arial">Normale</option>
+                    <option value="'Comic Sans MS'">Manga 😄</option>
+                    <option value="Georgia">Elegante</option>
+                    <option value="'Courier New'">Retro</option>
+                    <option value="Verdana">Moderne</option>
+                </select>
             </div>
             <div class="menu-option">
                 <label>👤 Changer ton nom</label>
@@ -199,157 +197,13 @@
         </div>
     </div>
 
-    <!-- VTuber Video Call -->
-    <div id="videoCallScreen">
-        <div id="videoCallTop">
-            <div id="videoCallName">YUUTO</div>
-            <div id="videoCallStatus">En appel...</div>
-        </div>
-
-        <div id="vtuberContainer">
-            <!-- Particules -->
-            <div class="particle" style="left:20px;top:200px;animation-delay:0s;background:#7c3aed"></div>
-            <div class="particle" style="left:240px;top:180px;animation-delay:1s;background:#f59e0b"></div>
-            <div class="particle" style="left:50px;top:100px;animation-delay:2s;background:#22c55e"></div>
-            <div class="particle" style="left:200px;top:250px;animation-delay:0.5s;background:#7c3aed"></div>
-
-            <!-- SVG VTuber anime character -->
-            <svg id="vtuberSVG" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
-                <!-- Fond dégradé -->
-                <defs>
-                    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" style="stop-color:#2a1a5e;stop-opacity:1"/>
-                        <stop offset="100%" style="stop-color:#0a0a2e;stop-opacity:1"/>
-                    </radialGradient>
-                    <radialGradient id="skinGrad" cx="50%" cy="40%" r="60%">
-                        <stop offset="0%" style="stop-color:#ffe8c8"/>
-                        <stop offset="100%" style="stop-color:#ffcc99"/>
-                    </radialGradient>
-                    <radialGradient id="eyeGrad" cx="30%" cy="30%" r="70%">
-                        <stop offset="0%" style="stop-color:#60a5fa"/>
-                        <stop offset="100%" style="stop-color:#1d4ed8"/>
-                    </radialGradient>
-                    <filter id="glow">
-                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                </defs>
-
-                <!-- Cercle fond -->
-                <circle cx="140" cy="160" r="130" fill="url(#bgGrad)" opacity="0.8"/>
-
-                <!-- Corps/Uniforme -->
-                <ellipse cx="140" cy="285" rx="70" ry="50" fill="#5b21b6"/>
-                <ellipse cx="140" cy="265" rx="55" ry="40" fill="#7c3aed"/>
-                <!-- Col -->
-                <polygon points="120,220 140,240 160,220 155,215 140,230 125,215" fill="white" opacity="0.9"/>
-                <!-- Détails uniforme -->
-                <rect x="125" y="220" width="30" height="3" fill="#f59e0b" rx="2"/>
-
-                <!-- Cou -->
-                <rect x="128" y="190" width="24" height="30" rx="8" fill="url(#skinGrad)"/>
-
-                <!-- Cheveux arrière -->
-                <ellipse cx="140" cy="120" rx="72" ry="75" fill="#1a1a3e"/>
-                <!-- Mèches longues -->
-                <path d="M75,130 Q50,180 60,230 Q65,250 70,240 Q65,200 80,160 Z" fill="#1a1a3e"/>
-                <path d="M205,130 Q230,180 220,230 Q215,250 210,240 Q215,200 200,160 Z" fill="#1a1a3e"/>
-                <!-- Mèche avant gauche -->
-                <path d="M90,95 Q75,130 80,155 Q85,165 88,155 Q85,135 95,105 Z" fill="#2a2a5e"/>
-                <!-- Mèche avant droite -->
-                <path d="M190,95 Q205,130 200,155 Q195,165 192,155 Q195,135 185,105 Z" fill="#2a2a5e"/>
-
-                <!-- Visage -->
-                <ellipse id="faceEl" cx="140" cy="145" rx="62" ry="68" fill="url(#skinGrad)"/>
-
-                <!-- Cheveux avant/frange -->
-                <path d="M78,115 Q85,80 140,75 Q195,80 202,115 Q195,95 140,90 Q85,95 78,115 Z" fill="#1a1a3e"/>
-                <!-- Mèche centrale -->
-                <path d="M130,75 Q140,60 150,75 Q145,85 140,90 Q135,85 130,75 Z" fill="#2a2a5e"/>
-
-                <!-- Oreilles -->
-                <ellipse cx="78" cy="148" rx="10" ry="13" fill="#ffcc99"/>
-                <ellipse cx="202" cy="148" rx="10" ry="13" fill="#ffcc99"/>
-                <!-- Boucles oreilles -->
-                <circle cx="78" cy="158" r="5" fill="#7c3aed" filter="url(#glow)"/>
-                <circle cx="202" cy="158" r="5" fill="#7c3aed" filter="url(#glow)"/>
-
-                <!-- Sourcils -->
-                <path d="M108,118 Q118,113 128,116" stroke="#5a3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                <path d="M152,116 Q162,113 172,118" stroke="#5a3a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-
-                <!-- Oeil gauche -->
-                <g id="eyeLeftGroup" transform="translate(113,140)">
-                    <ellipse cx="0" cy="0" rx="16" ry="18" fill="white"/>
-                    <ellipse id="irisLeft" cx="0" cy="0" rx="12" ry="14" fill="url(#eyeGrad)"/>
-                    <ellipse cx="0" cy="0" rx="7" ry="8" fill="#0a0a2e"/>
-                    <ellipse cx="4" cy="-4" rx="3" ry="3" fill="white"/>
-                    <ellipse cx="-3" cy="4" rx="1.5" ry="1.5" fill="white" opacity="0.7"/>
-                    <!-- Cils -->
-                    <line x1="-16" y1="-8" x2="-19" y2="-12" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="-10" y1="-17" x2="-11" y2="-21" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="0" y1="-18" x2="0" y2="-22" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="10" y1="-17" x2="12" y2="-21" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="16" y1="-8" x2="19" y2="-12" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <!-- Paupiere blink -->
-                    <ellipse id="blinkLeft" cx="0" cy="0" rx="16" ry="0" fill="#ffcc99" opacity="0"/>
-                </g>
-
-                <!-- Oeil droit -->
-                <g id="eyeRightGroup" transform="translate(167,140)">
-                    <ellipse cx="0" cy="0" rx="16" ry="18" fill="white"/>
-                    <ellipse id="irisRight" cx="0" cy="0" rx="12" ry="14" fill="url(#eyeGrad)"/>
-                    <ellipse cx="0" cy="0" rx="7" ry="8" fill="#0a0a2e"/>
-                    <ellipse cx="4" cy="-4" rx="3" ry="3" fill="white"/>
-                    <ellipse cx="-3" cy="4" rx="1.5" ry="1.5" fill="white" opacity="0.7"/>
-                    <!-- Cils -->
-                    <line x1="-16" y1="-8" x2="-19" y2="-12" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="-10" y1="-17" x2="-11" y2="-21" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="0" y1="-18" x2="0" y2="-22" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="10" y1="-17" x2="12" y2="-21" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="16" y1="-8" x2="19" y2="-12" stroke="#1a1a3e" stroke-width="2" stroke-linecap="round"/>
-                    <!-- Paupiere blink -->
-                    <ellipse id="blinkRight" cx="0" cy="0" rx="16" ry="0" fill="#ffcc99" opacity="0"/>
-                </g>
-
-                <!-- Nez -->
-                <path d="M136,163 Q140,170 144,163" stroke="#dda07a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-                <!-- Bouche -->
-                <g id="mouthGroup">
-                    <!-- Bouche normale - sourire -->
-                    <path id="mouthNormal" d="M122,178 Q140,192 158,178" stroke="#c06070" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                    <!-- Bouche qui parle -->
-                    <ellipse id="mouthTalk" cx="140" cy="182" rx="0" ry="0" fill="#c06070"/>
-                    <ellipse id="mouthInner" cx="140" cy="183" rx="0" ry="0" fill="#8b2252"/>
-                </g>
-
-                <!-- Joues roses -->
-                <ellipse cx="100" cy="168" rx="18" ry="10" fill="#ffb3b3" opacity="0.5"/>
-                <ellipse cx="180" cy="168" rx="18" ry="10" fill="#ffb3b3" opacity="0.5"/>
-
-                <!-- Marques anime (petites étoiles) -->
-                <text x="88" y="138" font-size="10" fill="#f59e0b" opacity="0.8">✦</text>
-                <text x="182" y="138" font-size="10" fill="#f59e0b" opacity="0.8">✦</text>
-
-                <!-- Couronne/accessoire cheveux -->
-                <path d="M115,82 L120,70 L125,80 L130,65 L135,78 L140,62 L145,78 L150,65 L155,80 L160,70 L165,82" stroke="#f59e0b" stroke-width="2" fill="none" filter="url(#glow)"/>
-                <circle cx="140" cy="62" r="4" fill="#f59e0b" filter="url(#glow)"/>
-
-                <!-- Bras gauche -->
-                <path d="M85,240 Q60,260 55,290" stroke="#7c3aed" stroke-width="18" stroke-linecap="round" fill="none"/>
-                <ellipse cx="52" cy="295" rx="12" ry="10" fill="#ffcc99"/>
-
-                <!-- Bras droit -->
-                <path d="M195,240 Q220,260 225,290" stroke="#7c3aed" stroke-width="18" stroke-linecap="round" fill="none"/>
-                <ellipse cx="228" cy="295" rx="12" ry="10" fill="#ffcc99"/>
-            </svg>
-        </div>
-
-        <div id="videoCallBubble">Salut ! Appuie sur le micro 😊</div>
-        <div id="videoCallBtns">
-            <button id="videoMicBtn" onclick="toggleVideoMic()">🎤</button>
-            <button id="videoEndBtn" onclick="terminerVideoAppel()">📵</button>
+    <div id="callScreen">
+        <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+        <div id="callName">YUUTO</div>
+        <div id="callStatus">En appel...</div>
+        <div style="display:flex;gap:20px;margin-top:20px;">
+            <button id="micCallBtn" onclick="toggleMicAppel()">🎤</button>
+            <button id="endCallBtn" onclick="terminerAppel()">📵</button>
         </div>
     </div>
 
@@ -362,7 +216,7 @@
                 <span id="modePerso"></span>
             </div>
             <div id="headerBtns">
-                <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
+                <button id="callBtn" onclick="demarrerAppel()">📞</button>
                 <button id="menuBtn" onclick="ouvrirMenu()">⚙️</button>
             </div>
         </div>
@@ -398,94 +252,29 @@
         let memoire = {};
         let recognition = null;
         let isListening = false;
-        let enVideoAppel = false;
+        let enAppel = false;
         let yuutoParle = false;
         let personnageActuel = null;
         let estPremium = false;
         let nbTransfo = 0;
-        let animFrame = null;
-        let blinkTimer = 0;
-        let talkTimer = 0;
-        let isTalking = false;
-        let headBob = 0;
-        let eyeMoveX = 0, eyeMoveY = 0;
 
-        function animerVTuber() {
-            animFrame = requestAnimationFrame(animerVTuber);
-            const t = Date.now() * 0.001;
-
-            // Tete qui bouge doucement
-            headBob += 0.02;
-            const faceEl = document.getElementById('faceEl');
-            if (faceEl) {
-                faceEl.setAttribute('cy', 145 + Math.sin(headBob) * 3);
-            }
-
-            // Yeux qui bougent
-            eyeMoveX = Math.sin(t * 0.7) * 3;
-            eyeMoveY = Math.sin(t * 0.5) * 2;
-            const irisL = document.getElementById('irisLeft');
-            const irisR = document.getElementById('irisRight');
-            if (irisL) irisL.setAttribute('transform', `translate(${eyeMoveX},${eyeMoveY})`);
-            if (irisR) irisR.setAttribute('transform', `translate(${eyeMoveX},${eyeMoveY})`);
-
-            // Clignement
-            blinkTimer++;
-            if (blinkTimer > 200) {
-                blinkTimer = 0;
-                blinker();
-            }
-
-            // Bouche qui parle
-            if (isTalking) {
-                talkTimer += 0.3;
-                const openAmount = Math.abs(Math.sin(talkTimer)) * 12;
-                const mouthT = document.getElementById('mouthTalk');
-                const mouthI = document.getElementById('mouthInner');
-                const mouthN = document.getElementById('mouthNormal');
-                if (mouthT) { mouthT.setAttribute('rx', openAmount * 1.5); mouthT.setAttribute('ry', openAmount); }
-                if (mouthI) { mouthI.setAttribute('rx', openAmount * 1.2); mouthI.setAttribute('ry', openAmount * 0.7); }
-                if (mouthN) mouthN.style.opacity = '0';
-            } else {
-                const mouthT = document.getElementById('mouthTalk');
-                const mouthI = document.getElementById('mouthInner');
-                const mouthN = document.getElementById('mouthNormal');
-                if (mouthT) { mouthT.setAttribute('rx', 0); mouthT.setAttribute('ry', 0); }
-                if (mouthI) { mouthI.setAttribute('rx', 0); mouthI.setAttribute('ry', 0); }
-                if (mouthN) mouthN.style.opacity = '1';
-            }
-        }
-
-        function blinker() {
-            const bL = document.getElementById('blinkLeft');
-            const bR = document.getElementById('blinkRight');
-            if (!bL || !bR) return;
-            let ry = 0;
-            const closing = setInterval(() => {
-                ry += 3;
-                bL.setAttribute('ry', ry); bL.setAttribute('opacity', '1');
-                bR.setAttribute('ry', ry); bR.setAttribute('opacity', '1');
-                if (ry >= 18) {
-                    clearInterval(closing);
-                    setTimeout(() => {
-                        const opening = setInterval(() => {
-                            ry -= 3;
-                            bL.setAttribute('ry', ry);
-                            bR.setAttribute('ry', ry);
-                            if (ry <= 0) {
-                                bL.setAttribute('opacity', '0');
-                                bR.setAttribute('opacity', '0');
-                                clearInterval(opening);
-                            }
-                        }, 20);
-                    }, 100);
-                }
-            }, 20);
+        function appliquerPolice(police) {
+            document.body.style.fontFamily = police;
+            const chat = document.getElementById('chat');
+            const msg = document.getElementById('msg');
+            if (chat) chat.style.fontFamily = police;
+            if (msg) msg.style.fontFamily = police;
         }
 
         window.onload = function() {
             const couleur = localStorage.getItem('yuuto_couleur');
             if (couleur) { document.body.style.background = couleur; document.getElementById('couleurFond').value = couleur; }
+            const police = localStorage.getItem('yuuto_police');
+            if (police) {
+                appliquerPolice(police);
+                const sel = document.getElementById('policeSelect');
+                if (sel) sel.value = police;
+            }
             estPremium = localStorage.getItem('yuuto_premium') === 'true';
             nbTransfo = parseInt(localStorage.getItem('yuuto_transfo') || '0');
             if (estPremium) document.getElementById('premiumBadge').style.display = 'inline';
@@ -493,105 +282,58 @@
             if (nomSauvegarde) { document.getElementById('nom').value = nomSauvegarde; seConnecter(); }
         }
 
-        async function demarrerVideoAppel() {
-            enVideoAppel = true;
-            document.getElementById('videoCallScreen').style.display = 'flex';
-            const nom = personnageActuel || 'YUUTO';
-            document.getElementById('videoCallName').textContent = nom;
-            animerVTuber();
+        function ouvrirMenu() { document.getElementById('menuScreen').style.display = 'flex'; }
+        function fermerMenu() { document.getElementById('menuScreen').style.display = 'none'; }
 
-            const intro = estAntoine ? "Wsh Antoine tu mappelles en video !" : `Salut ${memoire.prenom} tu mappelles en video !`;
-            document.getElementById('videoCallBubble').textContent = intro;
-            document.getElementById('videoCallStatus').textContent = `${nom} parle...`;
-            parlerVideo(intro, () => {
-                document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro pour parler';
-            });
+        function changerCouleur() {
+            const couleur = document.getElementById('couleurFond').value;
+            document.body.style.background = couleur;
+            localStorage.setItem('yuuto_couleur', couleur);
         }
 
-        function terminerVideoAppel() {
-            enVideoAppel = false; yuutoParle = false; isTalking = false; stopMic();
-            window.speechSynthesis.cancel();
-            if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
-            document.getElementById('videoCallScreen').style.display = 'none';
+        function changerPolice() {
+            const police = document.getElementById('policeSelect').value;
+            appliquerPolice(police);
+            localStorage.setItem('yuuto_police', police);
         }
 
-        function parlerVideo(texte, callback) {
-            const synth = window.speechSynthesis;
-            if (!synth) { if (callback) callback(); return; }
-            synth.cancel(); yuutoParle = true; isTalking = true;
-            const u = new SpeechSynthesisUtterance(texte);
-            u.lang = 'fr-FR'; u.rate = 1; u.pitch = 1.1;
-            u.onend = () => { yuutoParle = false; isTalking = false; if (callback) setTimeout(callback, 500); };
-            synth.speak(u);
+        function changerNom() {
+            const nouveauNom = document.getElementById('nouveauNom').value.trim();
+            if (!nouveauNom) return;
+            localStorage.setItem('yuuto_nom', nouveauNom);
+            memoire.prenom = nouveauNom;
+            estAntoine = nouveauNom.toLowerCase() === "antoine gatore";
+            sauvegarderMemoire();
+            fermerMenu();
+            ajouterMessageBot(estAntoine ? `wsh ${nouveauNom} ! 😄 nom change !` : `Nom change en ${nouveauNom} ! 😊`);
         }
 
-        function toggleVideoMic() {
-            if (!yuutoParle) {
-                if (isListening) stopMic();
-                else {
-                    if (!recognition) { alert("Micro non supporte"); return; }
-                    try {
-                        recognition.onresult = (e) => {
-                            const texte = e.results[0][0].transcript;
-                            stopMic();
-                            envoyerVideoAppel(texte);
-                        };
-                        recognition.start(); isListening = true;
-                        document.getElementById('videoMicBtn').classList.add('active');
-                        document.getElementById('videoMicBtn').textContent = '🔴';
-                        document.getElementById('videoCallStatus').textContent = 'Tu parles...';
-                    } catch(e) {}
-                }
+        function ouvrirPremium() { document.getElementById('premiumScreen').style.display = 'flex'; }
+        function fermerPremium() { document.getElementById('premiumScreen').style.display = 'none'; }
+
+        function verifierCode() {
+            const code = document.getElementById('codeInput').value.trim();
+            if (code === CODE_PREMIUM) {
+                estPremium = true;
+                localStorage.setItem('yuuto_premium', 'true');
+                document.getElementById('premiumBadge').style.display = 'inline';
+                fermerPremium();
+                ajouterMessageBot("Bienvenue dans le Premium ! 🌟 Tu peux maintenant transformer YUUTO 5 fois !");
+            } else {
+                document.getElementById('codeErreur').style.display = 'block';
             }
         }
 
-        async function envoyerVideoAppel(msg) {
-            document.getElementById('videoCallStatus').textContent = 'YUUTO reflechit...';
-            document.getElementById('videoMicBtn').classList.remove('active');
-            document.getElementById('videoMicBtn').textContent = '🎤';
-            historique.push({"role": "user", "content": msg});
-            const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
-                body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: getSystemPrompt() + " Reponds en 1-2 phrases." }, ...historique] })
-            });
-            const data = await rep.json();
-            const reponse = data.choices[0].message.content;
-            historique.push({"role": "assistant", "content": reponse});
-            document.getElementById('videoCallBubble').textContent = reponse;
-            document.getElementById('videoCallStatus').textContent = 'YUUTO parle...';
-            parlerVideo(reponse.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, ''), () => {
-                if (enVideoAppel) document.getElementById('videoCallStatus').textContent = 'Appuie sur le micro pour parler';
-            });
-        }
-
-        function ouvrirMenu() { document.getElementById('menuScreen').style.display = 'flex'; }
-        function fermerMenu() { document.getElementById('menuScreen').style.display = 'none'; }
-        function changerCouleur() { const c = document.getElementById('couleurFond').value; document.body.style.background = c; localStorage.setItem('yuuto_couleur', c); }
-        function changerNom() {
-            const n = document.getElementById('nouveauNom').value.trim();
-            if (!n) return;
-            localStorage.setItem('yuuto_nom', n);
-            memoire.prenom = n;
-            estAntoine = n.toLowerCase() === "antoine gatore";
-            sauvegarderMemoire(); fermerMenu();
-            ajouterMessageBot(estAntoine ? `wsh nom change !` : `Nom change en ${n} ! 😊`);
-        }
-        function ouvrirPremium() { document.getElementById('premiumScreen').style.display = 'flex'; }
-        function fermerPremium() { document.getElementById('premiumScreen').style.display = 'none'; }
-        function verifierCode() {
-            if (document.getElementById('codeInput').value.trim() === CODE_PREMIUM) {
-                estPremium = true; localStorage.setItem('yuuto_premium', 'true');
-                document.getElementById('premiumBadge').style.display = 'inline';
-                fermerPremium(); ajouterMessageBot("Bienvenue Premium ! 🌟");
-            } else document.getElementById('codeErreur').style.display = 'block';
-        }
         function ouvrirPerso() {
-            const max = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
-            if (nbTransfo >= max && !estAntoine) { ouvrirPremium(); return; }
-            document.getElementById('persoCompteur').textContent = estAntoine ? '∞ illimite' : `${max - nbTransfo} restante(s)`;
+            const maxTransfo = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
+            if (nbTransfo >= maxTransfo && !estAntoine) { ouvrirPremium(); return; }
+            const restant = estAntoine ? "∞" : `${maxTransfo - nbTransfo}`;
+            document.getElementById('persoCompteur').textContent = estPremium
+                ? `⭐ Premium — ${maxTransfo - nbTransfo} transformations restantes`
+                : `${restant} transformation(s) gratuite(s) restante(s)`;
             document.getElementById('persoScreen').style.display = 'flex';
         }
+
         function fermerPerso() { document.getElementById('persoScreen').style.display = 'none'; }
         function ouvrirBattle() { document.getElementById('battleScreen').style.display = 'flex'; }
         function fermerBattle() { document.getElementById('battleScreen').style.display = 'none'; }
@@ -599,168 +341,301 @@
         function fermerRecherche() { document.getElementById('searchScreen').style.display = 'none'; }
 
         function activerPersonnage() {
-            const p = document.getElementById('persoInput').value.trim();
-            if (!p) return;
-            const max = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
-            if (!estAntoine && nbTransfo >= max) { fermerPerso(); ouvrirPremium(); return; }
-            personnageActuel = p;
+            const perso = document.getElementById('persoInput').value.trim();
+            if (!perso) return;
+            const maxTransfo = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
+            if (!estAntoine && nbTransfo >= maxTransfo) { fermerPerso(); ouvrirPremium(); return; }
+            personnageActuel = perso;
             if (!estAntoine) { nbTransfo++; localStorage.setItem('yuuto_transfo', nbTransfo.toString()); }
-            document.getElementById('modePerso').textContent = `🎭 ${p}`;
+            document.getElementById('modePerso').textContent = `🎭 ${perso}`;
             document.getElementById('persoScreen').style.display = 'none';
             historique.length = 0;
-            ajouterMessageBot(`Je suis ${p} ! 🎭`, p);
+            ajouterMessageBot(`Je suis maintenant ${perso} ! Parle moi ! 🎭`, perso);
         }
+
         function resetPersonnage() {
             personnageActuel = null;
             document.getElementById('modePerso').textContent = '';
             document.getElementById('persoScreen').style.display = 'none';
             historique.length = 0;
-            ajouterMessageBot(`Je suis de retour ! 😄`);
+            ajouterMessageBot(`Je suis de retour, c'est YUUTO ! 😄`);
         }
+
         function getSystemPrompt() {
-            if (personnageActuel) return `Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;
+            if (personnageActuel) return `Tu joues le role de ${personnageActuel}, un personnage d'anime. Tu parles exactement comme ce personnage. Tu reponds en francais.`;
             return window.humeurInfo.personnalite;
         }
 
         async function chercherAnime(genre, genreId) {
             fermerRecherche();
-            document.getElementById('chat').innerHTML += `<div class="moi">🔍 ${genre} !</div>`;
+            document.getElementById('chat').innerHTML += `<div class="moi">🔍 Meilleurs animes ${genre} !</div>`;
             loadingId++;
-            const id = 'loading' + loadingId;
-            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 🔍</div></div>`;
+            const currentId = 'loading' + loadingId;
+            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${currentId}">Je cherche les meilleurs animes ${genre}... 🔍</div></div>`;
+            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
             try {
-                const r = await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);
-                const d = await r.json();
-                let l = `Meilleurs ${genre} 🎌<br><br>`;
-                d.data.forEach((a, i) => { l += `${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>${a.synopsis?a.synopsis.substring(0,80)+'...<br><br>':''}`; });
-                document.getElementById(id).innerHTML = `YUUTO : ${l}`;
-            } catch(e) { document.getElementById(id).innerHTML = "Desole 😅"; }
+                const response = await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);
+                const data = await response.json();
+                let liste = estAntoine ? `wsh bro voila les meilleurs animes ${genre} 🔥<br><br>` : `Voila les meilleurs animes ${genre} 🎌<br><br>`;
+                data.data.forEach((anime, i) => {
+                    liste += `${i + 1}. <strong>${anime.title}</strong> ⭐${anime.score || '?'}/10<br>`;
+                    if (anime.synopsis) liste += `${anime.synopsis.substring(0, 100)}...<br><br>`;
+                });
+                document.getElementById(currentId).innerHTML = `YUUTO : ${liste}`;
+            } catch(e) {
+                document.getElementById(currentId).innerHTML = estAntoine ? "nah ca bug 😅" : "Desole je peux pas chercher 😅";
+            }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
 
         async function lancerBattle() {
-            const p1 = document.getElementById('perso1Input').value.trim();
-            const p2 = document.getElementById('perso2Input').value.trim();
-            if (!p1 || !p2) return;
+            const perso1 = document.getElementById('perso1Input').value.trim();
+            const perso2 = document.getElementById('perso2Input').value.trim();
+            if (!perso1 || !perso2) return;
             fermerBattle();
-            document.getElementById('chat').innerHTML += `<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;
-            const hist = [];
+            document.getElementById('chat').innerHTML += `<div class="moi">⚔️ Battle ${perso1} VS ${perso2} !</div>`;
+            const battleHistory = [];
             for (let i = 0; i < 4; i++) {
-                const pa = i%2===0?p1:p2, pb = i%2===0?p2:p1;
-                const prompt = hist.length===0 ? `Tu es ${pa}. Lance une pique a ${pb}. 2 phrases. Francais.` : `Tu es ${pa}. Reponds : "${hist[hist.length-1]}". 2 phrases. Francais.`;
-                const r = await fetch('https://api.groq.com/openai/v1/chat/completions', { method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer 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'}, body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]}) });
-                const d = await r.json();
-                const rep = d.choices[0].message.content;
-                hist.push(rep);
-                document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa} :</strong> ${rep}</div></div>`;
+                const persoActuel = i % 2 === 0 ? perso1 : perso2;
+                const persoAdversaire = i % 2 === 0 ? perso2 : perso1;
+                const prompt = battleHistory.length === 0
+                    ? `Tu es ${persoActuel}. Lance une pique a ${persoAdversaire}. Sois drole et agressif. 2 phrases max. En francais.`
+                    : `Tu es ${persoActuel}. Reponds a : "${battleHistory[battleHistory.length-1]}". 2 phrases max. En francais.`;
+                const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+                    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'user', content: prompt }] })
+                });
+                const data = await rep.json();
+                const reponse = data.choices[0].message.content;
+                battleHistory.push(reponse);
+                const couleurMsg = i % 2 === 0 ? 'perso1-msg' : 'perso2-msg';
+                document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${couleurMsg}"><strong>${persoActuel} :</strong> ${reponse}</div></div>`;
                 document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
                 await new Promise(r => setTimeout(r, 500));
             }
-            ajouterMessageBot("ptdr trop chauds 😂🔥");
+            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">YUUTO : ptdr ils sont trop chauds 😂🔥</div></div>`;
+            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
 
         async function getActu() {
-            document.getElementById('chat').innerHTML += `<div class="moi">📺 Actu !</div>`;
+            document.getElementById('chat').innerHTML += `<div class="moi">📺 Actu anime du moment !</div>`;
             loadingId++;
-            const id = 'loading' + loadingId;
-            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 📺</div></div>`;
+            const currentId = 'loading' + loadingId;
+            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${currentId}">Je cherche l'actu... 📺</div></div>`;
             try {
-                const r = await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');
-                const d = await r.json();
-                let l = "Animes du moment 📺<br><br>";
-                d.data.forEach((a,i) => { l += `${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`; });
-                document.getElementById(id).innerHTML = `YUUTO : ${l}`;
-            } catch(e) { document.getElementById(id).innerHTML = "Desole 😅"; }
+                const response = await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');
+                const data = await response.json();
+                let liste = estAntoine ? "wsh bro voila les animes qui cartonnent 🔥<br><br>" : "Voila les animes du moment 📺<br><br>";
+                data.data.forEach((anime, i) => {
+                    liste += `${i + 1}. <strong>${anime.title}</strong> ⭐${anime.score || '?'}/10<br>`;
+                    if (anime.synopsis) liste += `${anime.synopsis.substring(0, 80)}...<br><br>`;
+                });
+                document.getElementById(currentId).innerHTML = `YUUTO : ${liste}`;
+            } catch(e) {
+                document.getElementById(currentId).innerHTML = "Desole je peux pas recuperer l'actu 😅";
+            }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
 
         async function recommander() {
-            const h = new Date().getHours();
-            const hum = h>=6&&h<12?"fatigue":h>=12&&h<18?"energique":h>=18&&h<22?"calme":"mysterieux";
-            const d = animesDejaRecommandes.length>0?`Ne recommande PAS : ${animesDejaRecommandes.join(', ')}.`:"";
-            document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande !</div>`;
-            const r = await fetch('https://api.groq.com/openai/v1/chat/completions', { method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer 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'}, body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:window.humeurInfo.personnalite},{role:'user',content:`Recommande UN anime. ${d} Humeur:${hum}. ${Math.random()}`}]}) });
-            const data = await r.json();
-            const rep = data.choices[0].message.content;
-            animesDejaRecommandes.push(rep.split('\n')[0]);
-            ajouterMessageBot(rep);
+            const heure = new Date().getHours();
+            let humeurActuelle = heure >= 6 && heure < 12 ? "fatigue" : heure >= 12 && heure < 18 ? "energique" : heure >= 18 && heure < 22 ? "calme" : "mysterieux";
+            const dejarecommandes = animesDejaRecommandes.length > 0 ? `Ne recommande PAS : ${animesDejaRecommandes.join(', ')}.` : "";
+            document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande moi un anime !</div>`;
+            const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+                body: JSON.stringify({
+                    model: 'llama-3.3-70b-versatile',
+                    messages: [{ role: 'system', content: window.humeurInfo.personnalite }, {
+                        role: 'user', content: `Recommande UN anime DIFFERENT. ${dejarecommandes} Humeur : ${humeurActuelle}. Numero : ${Math.floor(Math.random() * 10000)}`
+                    }]
+                })
+            });
+            const data = await rep.json();
+            const reponse = data.choices[0].message.content;
+            animesDejaRecommandes.push(reponse.split('\n')[0]);
+            ajouterMessageBot(reponse);
         }
 
         function initMic() {
-            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SR) return;
-            recognition = new SR();
-            recognition.lang = 'fr-FR'; recognition.continuous = false;
-            recognition.onresult = (e) => { const t = e.results[0][0].transcript; stopMic(); document.getElementById('msg').value = t; envoyer(); };
-            recognition.onend = () => { isListening = false; document.getElementById('micBtn').classList.remove('active'); document.getElementById('micBtn').textContent = '🎤'; document.getElementById('videoMicBtn').classList.remove('active'); document.getElementById('videoMicBtn').textContent = '🎤'; };
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) return;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'fr-FR';
+            recognition.continuous = false;
+            recognition.onresult = (e) => {
+                const texte = e.results[0][0].transcript;
+                stopMic();
+                if (enAppel) envoyerAppel(texte);
+                else { document.getElementById('msg').value = texte; envoyer(); }
+            };
+            recognition.onend = () => {
+                isListening = false;
+                if (enAppel) { document.getElementById('micCallBtn').classList.remove('active'); document.getElementById('micCallBtn').textContent = '🎤'; }
+                else { document.getElementById('micBtn').classList.remove('active'); document.getElementById('micBtn').textContent = '🎤'; }
+            };
         }
 
-        function toggleMic() { if (isListening) stopMic(); else { if (!recognition) return; try { recognition.start(); isListening=true; document.getElementById('micBtn').classList.add('active'); document.getElementById('micBtn').textContent='🔴'; } catch(e){} } }
-        function stopMic() { try { if (recognition) recognition.stop(); } catch(e){} isListening=false; }
+        function toggleMic() { if (isListening) stopMic(); else startMic(false); }
+        function toggleMicAppel() { if (!yuutoParle) { if (isListening) stopMic(); else startMic(true); } }
+
+        function startMic(appel) {
+            if (!recognition) { alert("Micro non supporte"); return; }
+            try {
+                recognition.start(); isListening = true;
+                if (appel) { document.getElementById('micCallBtn').classList.add('active'); document.getElementById('micCallBtn').textContent = '🔴'; document.getElementById('callStatus').textContent = 'Tu parles...'; }
+                else { document.getElementById('micBtn').classList.add('active'); document.getElementById('micBtn').textContent = '🔴'; }
+            } catch(e) {}
+        }
+
+        function stopMic() { try { if (recognition) recognition.stop(); } catch(e) {} isListening = false; }
 
         function parler(texte, callback) {
-            const s = window.speechSynthesis;
-            if (!s) { if (callback) callback(); return; }
-            s.cancel(); yuutoParle=true;
-            const u = new SpeechSynthesisUtterance(texte);
-            u.lang='fr-FR'; u.rate=1; u.pitch=1;
-            u.onend = () => { yuutoParle=false; if (callback) setTimeout(callback,800); };
-            s.speak(u);
+            const synth = window.speechSynthesis;
+            if (!synth) { if (callback) callback(); return; }
+            synth.cancel(); yuutoParle = true;
+            const utterance = new SpeechSynthesisUtterance(texte);
+            utterance.lang = 'fr-FR'; utterance.rate = 1; utterance.pitch = 1;
+            utterance.onend = () => { yuutoParle = false; if (callback) setTimeout(callback, 800); };
+            synth.speak(utterance);
         }
 
-        function nettoyerTexte(t) { return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'"); }
+        function nettoyerTexte(texte) {
+            return texte.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').replace(/'/g, "\\'");
+        }
 
         function ajouterMessageBot(texte, nom) {
-            const t = nettoyerTexte(texte), n = nom||'YUUTO';
-            document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${n} : ${texte}<br><button class="audio-btn" onclick="parler('${t}')">🔊 Ecouter</button></div></div>`;
+            const texteNettoy = nettoyerTexte(texte);
+            const nomAffiche = nom || 'YUUTO';
+            document.getElementById('chat').innerHTML += `
+                <div class="bot"><img class="avatar" src="${AVATAR}"/>
+                <div class="bot-msg">${nomAffiche} : ${texte}<br>
+                <button class="audio-btn" onclick="parler('${texteNettoy}')">🔊 Ecouter</button>
+                </div></div>`;
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
 
-        function chargerMemoire() { const d = localStorage.getItem('yuuto_memoire'); if (d) memoire=JSON.parse(d); }
+        async function demarrerAppel() {
+            enAppel = true;
+            document.getElementById('callScreen').style.display = 'flex';
+            const intro = estAntoine ? `Wsh Antoine ! Tu mappelles ?` : `Salut ${memoire.prenom} ! Tu mappelles ?`;
+            document.getElementById('callName').textContent = personnageActuel || 'YUUTO';
+            parler(intro, () => { document.getElementById('callStatus').textContent = 'Appuie sur le micro pour parler'; });
+        }
+
+        function terminerAppel() {
+            enAppel = false; yuutoParle = false; stopMic();
+            window.speechSynthesis.cancel();
+            document.getElementById('callScreen').style.display = 'none';
+        }
+
+        async function envoyerAppel(msg) {
+            document.getElementById('callStatus').textContent = 'Reflechit...';
+            historique.push({"role": "user", "content": msg});
+            const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+                body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: getSystemPrompt() + " Reponds en phrases courtes." }, ...historique] })
+            });
+            const data = await rep.json();
+            const reponse = data.choices[0].message.content;
+            historique.push({"role": "assistant", "content": reponse});
+            parler(reponse.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, ''), () => {
+                if (enAppel) document.getElementById('callStatus').textContent = 'Appuie sur le micro pour parler';
+            });
+        }
+
+        function chargerMemoire() { const data = localStorage.getItem('yuuto_memoire'); if (data) memoire = JSON.parse(data); }
         function sauvegarderMemoire() { localStorage.setItem('yuuto_memoire', JSON.stringify(memoire)); }
-        function getMemoireTexte() { let t=""; if(memoire.animes) t+=`animes:${memoire.animes}. `; if(memoire.prenom) t+=`prenom:${memoire.prenom}. `; return t?"Tu sais:"+t:""; }
 
-        const creation = "Tu as ete cree par Antoine Gatore. Reponds fièrement si on te le demande.";
-        const styleFam = "Pote familier, 'bro','ptdr','oe','wsh'. Court. Emojis. Francais.";
-        const styleNorm = "Sympa chaleureux. Emojis. Francais.";
+        function getMemoireTexte() {
+            let texte = "";
+            if (memoire.animes) texte += `ses animes preferes sont ${memoire.animes}. `;
+            if (memoire.jeux) texte += `ses jeux preferes sont ${memoire.jeux}. `;
+            if (memoire.prenom) texte += `son prenom est ${memoire.prenom}. `;
+            return texte ? "Voici ce que tu sais : " + texte : "";
+        }
 
-        function getHumeur(fam) {
-            const h = new Date().getHours(), s = fam?styleFam:styleNorm, m = getMemoireTexte();
-            if (h>=6&&h<12) return {humeur:"😴 Encore endormi...", personnalite:creation+" YUUTO endormi matin. "+m+s};
-            if (h>=12&&h<18) return {humeur:"⚡ Energique !", personnalite:creation+" YUUTO energique apres-midi. "+m+s};
-            if (h>=18&&h<22) return {humeur:"🌙 Calme et philosophe", personnalite:creation+" YUUTO calme soir. "+m+s};
-            return {humeur:"✨ Mysterieux...", personnalite:creation+" YUUTO mysterieux nuit. "+m+s};
+        const creation = "Tu as ete cree par Antoine Gatore. Si quelqu'un te demande qui t'a cree, reponds fierement que c'est Antoine Gatore.";
+        const styleFamilier = "Tu parles comme un vrai pote de longue date, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes. Parfois tu reponds juste 'nah flemme' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
+        const styleNormal = "Tu es accessible et chaleureux. Tu utilises des emojis. Tu reponds en francais.";
+
+        function getHumeur(familier) {
+            const heure = new Date().getHours();
+            const style = familier ? styleFamilier : styleNormal;
+            const memTxt = getMemoireTexte();
+            if (heure >= 6 && heure < 12) return {
+                humeur: "😴 Encore endormi...",
+                personnalite: creation + " Tu es YUUTO qui adore les animes. Le matin t'es endormi, tu as peu d'energie. " + memTxt + style
+            };
+            if (heure >= 12 && heure < 18) return {
+                humeur: "⚡ Energique !",
+                personnalite: creation + " Tu es YUUTO qui adore les animes. L'apres-midi t'es energique et enthousiaste. " + memTxt + style
+            };
+            if (heure >= 18 && heure < 22) return {
+                humeur: "🌙 Calme et philosophe",
+                personnalite: creation + " Tu es YUUTO qui adore les animes. Le soir t'es calme et philosophe. " + memTxt + style
+            };
+            return {
+                humeur: "✨ Mysterieux...",
+                personnalite: creation + " Tu es YUUTO qui adore les animes. La nuit t'es mysterieux et poetique. " + memTxt + style
+            };
         }
 
         function seConnecter() {
-            const n = document.getElementById('nom').value.trim();
-            if (n.toLowerCase()==="antoine gatore") { estAntoine=true; memoire.prenom="Antoine"; }
-            else if (n.length>0) { estAntoine=false; memoire.prenom=n; }
-            else { document.getElementById('erreur').style.display='block'; return; }
-            localStorage.setItem('yuuto_nom', n);
-            chargerMemoire(); demarrer();
+            const nom = document.getElementById('nom').value.trim();
+            if (nom.toLowerCase() === "antoine gatore") { estAntoine = true; memoire.prenom = "Antoine"; }
+            else if (nom.length > 0) { estAntoine = false; memoire.prenom = nom; }
+            else { document.getElementById('erreur').style.display = 'block'; return; }
+            localStorage.setItem('yuuto_nom', nom);
+            chargerMemoire();
+            demarrer();
         }
 
         function demarrer() {
-            document.getElementById('login').style.display='none';
-            document.getElementById('app').style.display='flex';
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('app').style.display = 'flex';
             initMic();
 
-            const hi = getHumeur(estAntoine);
-            document.getElementById('humeur').textContent = hi.humeur;
-            window.humeurInfo = hi;
-            memoire.visites = (memoire.visites||0)+1;
+            const police = localStorage.getItem('yuuto_police');
+            if (police) appliquerPolice(police);
+
+            const humeurInfo = getHumeur(estAntoine);
+            document.getElementById('humeur').textContent = humeurInfo.humeur;
+            window.humeurInfo = humeurInfo;
+
+            const dejaVenu = memoire.visites && memoire.visites > 0;
+            memoire.visites = (memoire.visites || 0) + 1;
             sauvegarderMemoire();
 
-            const introMap = {
-                fam: {"😴 Encore endormi...":"wsh... 😴","⚡ Energique !":"YOOO 🔥 Antoine !","🌙 Calme et philosophe":"wsh... 🌙","✨ Mysterieux...":"...✨"},
-                norm: {"😴 Encore endormi...":"Bonjour... 😴","⚡ Energique !": `Salut ${memoire.prenom} ! ⚡`,"🌙 Calme et philosophe":"Bonsoir... 🌙","✨ Mysterieux...":"Tu es la... ✨"}
+            const introsFamilier = {
+                "😴 Encore endormi...": `wsh... 😴 j'ai meme pas dormi j'ai mate des animes toute la nuit...`,
+                "⚡ Energique !": `YOOO 🔥 t'es la Antoine ! j'suis chaud, on cause de quoi ?`,
+                "🌙 Calme et philosophe": `wsh... 🌙 je pensais a un truc random sur One Piece... t'arrives bien`,
+                "✨ Mysterieux...": `...t'es la ✨ comme Naruto avant un fight... c'est quoi`
+            };
+            const introsNormal = {
+                "😴 Encore endormi...": `Bonjour... 😴 j'ai veille tard sur des animes. Comment je peux t'aider ?`,
+                "⚡ Energique !": `Salut ${memoire.prenom} ! ⚡ Content de te voir !`,
+                "🌙 Calme et philosophe": `Bonsoir... 🌙 Comment je peux t'aider ?`,
+                "✨ Mysterieux...": `Tu es la... ✨ qu'est ce qui t'amene ?`
             };
 
-            let intro = estAntoine ? introMap.fam[hi.humeur] : introMap.norm[hi.humeur];
-            if (!estAntoine&&!estPremium) intro += `<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirPremium()" style="color:#f59e0b">Premium !</a></small>`;
+            let intro = estAntoine
+                ? introsFamilier[humeurInfo.humeur]
+                : (dejaVenu ? `Salut ${memoire.prenom} ! 😊 Content de te revoir !` : introsNormal[humeurInfo.humeur]);
 
-            document.getElementById('chat').innerHTML = `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
+            if (!estAntoine && !estPremium) {
+                intro += `<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT - nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirPremium()" style="color:#f59e0b">Passe Premium !</a></small>`;
+            }
+
+            document.getElementById('chat').innerHTML = `
+                <div class="bot"><img class="avatar" src="${AVATAR}"/>
+                <div class="bot-msg">${intro}<br>
+                <button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button>
+                </div></div>`;
         }
 
         async function envoyer() {
@@ -769,23 +644,31 @@
             document.getElementById('msg').value = '';
             document.getElementById('chat').innerHTML += `<div class="moi">${msg}</div>`;
 
-            const ml = msg.toLowerCase();
-            if (ml.includes("j'aime")||ml.includes('mon anime')) { memoire.animes=msg; sauvegarderMemoire(); }
+            const msgLower = msg.toLowerCase();
+            if (msgLower.includes('j\'aime') || msgLower.includes('mon anime')) { memoire.animes = msg; sauvegarderMemoire(); }
+            if (msgLower.includes('mon jeu') || msgLower.includes('je joue a')) { memoire.jeux = msg; sauvegarderMemoire(); }
 
-            if (ml.includes('genere')||ml.includes('génère')||ml.includes('image de')) {
-                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi,'').trim()+' anime manga style 4k';
+            if (msgLower.includes('genere') || msgLower.includes('génère') || msgLower.includes('image de')) {
+                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi, '').trim() + ' anime manga style, high quality, detailed, 4k';
                 loadingId++;
-                const id = 'loading'+loadingId;
-                document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Generation... 🎨</div></div>`;
-                try { const img = await puter.ai.txt2img(prompt); document.getElementById(id).innerHTML = `Voila 🎨<br><img src="${img.src}" style="max-width:200px;border-radius:10px;margin-top:5px;display:block;"/>`; }
-                catch(e) { document.getElementById(id).innerHTML = "Desole 😅"; }
+                const currentId = 'loading' + loadingId;
+                document.getElementById('chat').innerHTML += `<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${currentId}">${estAntoine ? 'oe attends... 🎨' : 'Generation en cours... 🎨'}</div></div>`;
+                document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+                try {
+                    const image = await puter.ai.txt2img(prompt);
+                    document.getElementById(currentId).innerHTML = `${estAntoine ? 'tiens 🎨' : 'Voila 🎨'}<br><img src="${image.src}" style="max-width:200px;border-radius:10px;margin-top:5px;display:block;"/>`;
+                } catch(e) { document.getElementById(currentId).innerHTML = estAntoine ? "nah flemme 😅" : "Desole 😅"; }
             } else {
-                historique.push({"role":"user","content":msg});
-                const r = await fetch('https://api.groq.com/openai/v1/chat/completions', { method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer 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'}, body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]}) });
-                const d = await r.json();
-                const rep = d.choices[0].message.content;
-                historique.push({"role":"assistant","content":rep});
-                ajouterMessageBot(rep, personnageActuel);
+                historique.push({"role": "user", "content": msg});
+                const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+                    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: getSystemPrompt() }, ...historique] })
+                });
+                const data = await rep.json();
+                const reponse = data.choices[0].message.content;
+                historique.push({"role": "assistant", "content": reponse});
+                ajouterMessageBot(reponse, personnageActuel);
             }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
