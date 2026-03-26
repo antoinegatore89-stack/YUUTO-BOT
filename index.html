@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>YUUTO</title>
+    <title>YUUTO-BOT</title>
     <link rel="manifest" href="manifest.json"/>
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
     <link rel="icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
@@ -167,7 +167,7 @@
 
 <div id="login">
     <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
-    <h2>YUUTO</h2>
+    <h2>YUUTO-BOT</h2>
     <p>Ton ami IA anime 🎌</p>
     <input id="nom" type="text" placeholder="Ton prenom..."/>
     <button onclick="seConnecter()">Entrer ✨</button>
@@ -190,7 +190,7 @@
             <div class="toggle-row">
                 <div>
                     <label style="color:#00d4ff">🧠 Mode Codex</label>
-                    <div class="codex-desc">YUUTO devient un expert sérieux et détaillé</div>
+                    <div class="codex-desc">YUUTO-BOT devient un expert sérieux et détaillé</div>
                 </div>
                 <label class="toggle">
                     <input type="checkbox" id="codexToggle" onchange="toggleCodex()"/>
@@ -210,7 +210,7 @@
 
 <div class="modal" id="premiumScreen">
     <div class="modalBox">
-        <h2>⭐ YUUTO Premium</h2>
+        <h2>⭐ YUUTO-BOT Premium</h2>
         <div class="prix">2 000 FCFA</div>
         <div class="feature">🎭 5 transformations de personnage</div>
         <div class="feature">⚡ Accès illimité au mode Battle</div>
@@ -239,7 +239,7 @@
         <p style="color:#555;text-align:center;font-size:12px">⚠️ Personnages dangereux interdits</p>
         <input class="modalInput" id="persoInput" type="text" placeholder="Ex: Naruto, Levi, Goku..."/>
         <button class="modalBtn primary" onclick="activerPersonnage()">✨ Transformer !</button>
-        <button class="modalBtn secondary" onclick="resetPersonnage()">Redevenir YUUTO</button>
+        <button class="modalBtn secondary" onclick="resetPersonnage()">Redevenir YUUTO-BOT</button>
         <button class="modalBtn secondary" onclick="fermerModal('persoScreen')">Fermer</button>
     </div>
 </div>
@@ -275,7 +275,7 @@
 
 <div id="videoCallScreen">
     <div id="videoCallTop">
-        <div id="videoCallName">YUUTO</div>
+        <div id="videoCallName">YUUTO-BOT</div>
         <div id="videoCallStatus">En appel...</div>
     </div>
     <div id="animeChar">
@@ -318,7 +318,7 @@
     <div id="sidebar">
         <div id="sidebarHeader">
             <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
-            <span id="sidebarTitle">YUUTO ✨</span>
+            <span id="sidebarTitle">YUUTO-BOT ✨</span>
         </div>
         <button id="newChatBtn" onclick="nouvelleConversation()">✏️ Nouvelle conversation</button>
         <div id="historyLabel">Conversations</div>
@@ -337,7 +337,7 @@
         <div id="header">
             <button id="toggleSidebar" onclick="toggleSidebar()">☰</button>
             <div id="headerCenter">
-                <div id="headerTitle">YUUTO</div>
+                <div id="headerTitle">YUUTO-BOT</div>
                 <div style="display:flex;gap:8px;align-items:center">
                     <span id="humeur"></span>
                     <span id="modePerso"></span>
@@ -360,7 +360,7 @@
             </div>
             <div id="inputRow">
                 <button id="micBtn" onclick="toggleMic()">🎤</button>
-                <input id="msg" type="text" placeholder="Message YUUTO..." onkeydown="if(event.key==='Enter')envoyer()"/>
+                <input id="msg" type="text" placeholder="Message YUUTO-BOT..." onkeydown="if(event.key==='Enter')envoyer()"/>
                 <button id="btn" onclick="envoyer()">➤</button>
             </div>
         </div>
@@ -369,6 +369,7 @@
 
 <script>
     const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png";
+    const NOM_BOT = "YUUTO-BOT";
     const CODE_PREMIUM = "2013";
     const MAX_TRANSFO_GRATUIT = 2;
     const MAX_TRANSFO_PREMIUM = 5;
@@ -399,24 +400,24 @@
         document.getElementById('codexInfo').style.display = modeCodex ? 'block' : 'none';
         document.getElementById('codexBadge').style.display = modeCodex ? 'inline' : 'none';
         document.getElementById('msg').className = modeCodex ? 'codex-active' : '';
-        document.getElementById('msg').placeholder = modeCodex ? '🧠 Pose ta question sérieuse...' : 'Message YUUTO...';
+        document.getElementById('msg').placeholder = modeCodex ? '🧠 Pose ta question sérieuse...' : `Message ${NOM_BOT}...`;
         if (modeCodex) {
             fermerModal('menuScreen');
             ajouterMessageBot("Mode Codex activé 🧠 Je suis maintenant en mode expert. Pose moi n'importe quelle question sérieuse : devoirs, sciences, histoire, maths... Je vais répondre de façon détaillée et précise !", null, true);
         } else {
-            ajouterMessageBot("Mode Codex désactivé 😊 Je redeviens ton YUUTO normal !");
+            ajouterMessageBot(`Mode Codex désactivé 😊 Je redeviens ton ${NOM_BOT} normal !`);
         }
     }
 
     function getSystemPrompt() {
-        if (modeCodex) return `Tu es YUUTO en mode Codex. Tu es un assistant expert, sérieux et très précis. Tu réponds de façon détaillée, structurée et pédagogique. Tu peux aider avec les devoirs, les sciences, les maths, l'histoire, la géographie, la culture générale. Tu utilises des exemples clairs. Tu réponds toujours en français.`;
+        if (modeCodex) return `Tu es ${NOM_BOT} en mode Codex. Tu es un assistant expert, sérieux et très précis. Tu réponds de façon détaillée, structurée et pédagogique. Tu peux aider avec les devoirs, les sciences, les maths, l'histoire, la géographie, la culture générale. Tu utilises des exemples clairs. Tu réponds toujours en français.`;
         if (personnageActuel) return `Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;
         return window.humeurInfo.personnalite;
     }
 
     function toggleSidebar() {
         sidebarVisible = !sidebarVisible;
-        const sb=document.getElementById('sidebar'), ov=document.getElementById('overlay');
+        const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');
         if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}
         else{sb.classList.remove('open');ov.style.display='none';}
     }
@@ -474,7 +475,7 @@
     async function demarrerVideoAppel(){
         enVideoAppel=true;
         document.getElementById('videoCallScreen').style.display='flex';
-        document.getElementById('videoCallName').textContent=personnageActuel||'YUUTO';
+        document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;
         const h=new Date().getHours();
         if(h>=6&&h<12)setHumeur('sleepy');
         else if(h>=12&&h<18)setHumeur('excited');
@@ -575,7 +576,7 @@
     }
     function resetPersonnage(){
         personnageActuel=null;document.getElementById('modePerso').textContent='';
-        fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis de retour ! 😄`);
+        fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis de retour ! Je suis ${NOM_BOT} ! 😄`);
     }
 
     async function chercherAnime(genre,genreId){
@@ -587,7 +588,7 @@
             const r=await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);
             const d=await r.json();let l=`Meilleurs ${genre} 🎌<br><br>`;
             d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>${a.synopsis?a.synopsis.substring(0,80)+'...<br><br>':''}`;});
-            document.getElementById(id).innerHTML=`YUUTO : ${l}`;
+            document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;
         }catch(e){document.getElementById(id).innerHTML="Desole 😅";}
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
@@ -617,7 +618,7 @@
             const r=await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');
             const d=await r.json();let l="Animes du moment 📺<br><br>";
             d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`;});
-            document.getElementById(id).innerHTML=`YUUTO : ${l}`;
+            document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;
         }catch(e){document.getElementById(id).innerHTML="Desole 😅";}
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
@@ -644,7 +645,7 @@
     function nettoyerTexte(t){return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");}
 
     function ajouterMessageBot(texte,nom,isCodex=false){
-        const t=nettoyerTexte(texte),n=nom||'YUUTO';
+        const t=nettoyerTexte(texte),n=nom||NOM_BOT;
         const cls=isCodex||modeCodex?'bot-msg codex':'bot-msg';
         const prefix=isCodex||modeCodex?'🧠 ':'';
         document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${cls}">${prefix}${n} : ${texte}<br><button class="audio-btn" onclick="parler('${t}')">🔊 Ecouter</button></div></div>`;
@@ -655,10 +656,10 @@
     function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
     function getMemoireTexte(){let t="";if(memoire.animes)t+=`animes:${memoire.animes}. `;if(memoire.prenom)t+=`prenom:${memoire.prenom}. `;return t?"Tu sais:"+t:"";}
 
-    const creation="Tu as ete cree par Antoine Gatore. Reponds fierement si on te le demande.";
+    const creation=`Tu t'appelles ${NOM_BOT}. Tu as ete cree par Antoine Gatore. Reponds fierement si on te le demande.`;
     const styleFam="Pote familier,'bro','ptdr','oe','wsh'.Court.Emojis.Francais.";
     const styleNorm="Sympa chaleureux.Emojis.Francais.";
-    function getHumeur(fam){const h=new Date().getHours(),s=fam?styleFam:styleNorm,m=getMemoireTexte();if(h>=6&&h<12)return{humeur:"😴 Endormi",personnalite:creation+" YUUTO endormi. "+m+s};if(h>=12&&h<18)return{humeur:"⚡ Energique",personnalite:creation+" YUUTO energique. "+m+s};if(h>=18&&h<22)return{humeur:"🌙 Calme",personnalite:creation+" YUUTO calme. "+m+s};return{humeur:"✨ Mysterieux",personnalite:creation+" YUUTO mysterieux. "+m+s};}
+    function getHumeur(fam){const h=new Date().getHours(),s=fam?styleFam:styleNorm,m=getMemoireTexte();if(h>=6&&h<12)return{humeur:"😴 Endormi",personnalite:creation+" endormi. "+m+s};if(h>=12&&h<18)return{humeur:"⚡ Energique",personnalite:creation+" energique. "+m+s};if(h>=18&&h<22)return{humeur:"🌙 Calme",personnalite:creation+" calme. "+m+s};return{humeur:"✨ Mysterieux",personnalite:creation+" mysterieux. "+m+s};}
 
     function seConnecter(){
         const n=document.getElementById('nom').value.trim();
