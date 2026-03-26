@@ -2,9 +2,11 @@
 <html>
 <head>
     <title>YUUTO</title>
+    <link rel="manifest" href="manifest.json"/>
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
     <link rel="icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#7c3aed"/>
     <script src="https://js.puter.com/v2/"></script>
     <style>
         body { font-family: Arial; margin: 0; background: #1a1a1a; color: white; }
@@ -154,8 +156,7 @@
                 body: JSON.stringify({
                     model: 'llama-3.3-70b-versatile',
                     messages: [{
-                        role: 'system',
-                        content: window.humeurInfo.personnalite
+                        role: 'system', content: window.humeurInfo.personnalite
                     }, {
                         role: 'user',
                         content: `Recommande moi UN anime DIFFERENT a chaque fois. ${dejarecommandes} Tiens compte de : ${humeurActuelle}. ${animesPrefs} Donne le nom, une courte description et pourquoi tu le recommandes. Reponds de maniere ${estAntoine ? 'tres familiere comme a un pote' : 'sympa'}. Numero aleatoire : ${Math.floor(Math.random() * 10000)}`
