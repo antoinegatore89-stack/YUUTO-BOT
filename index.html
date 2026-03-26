@@ -27,12 +27,13 @@
         #callBtn { background: #22c55e; border: none; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; cursor: pointer; }
         #menuBtn { background: #333; border: none; color: white; padding: 8px 12px; border-radius: 20px; font-size: 18px; cursor: pointer; }
         #menuScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
-        #menuBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
+        #menuBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; max-height: 80vh; overflow-y: auto; }
         #menuBox h2 { margin: 0; text-align: center; }
         .menu-option { background: #333; padding: 15px; border-radius: 12px; }
         .menu-option label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
         .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
         .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 10px; border: none; background: #444; color: white; font-size: 14px; box-sizing: border-box; }
+        .menu-option select { width: 100%; padding: 8px; border-radius: 10px; border: none; background: #444; color: white; font-size: 14px; box-sizing: border-box; }
         .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; width: 100%; }
         #closeMenu { background: #555; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #premiumScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; justify-content: center; align-items: center; }
@@ -114,6 +115,16 @@
             <div class="menu-option">
                 <label>🎨 Couleur du fond</label>
                 <input type="color" id="couleurFond" value="#1a1a1a" oninput="changerCouleur()"/>
+            </div>
+            <div class="menu-option">
+                <label>✍️ Police d'ecriture</label>
+                <select id="policeSelect" onchange="changerPolice()">
+                    <option value="Arial">Normale</option>
+                    <option value="'Comic Sans MS'">Manga 😄</option>
+                    <option value="Georgia">Elegante</option>
+                    <option value="'Courier New'">Retro</option>
+                    <option value="Verdana">Moderne</option>
+                </select>
             </div>
             <div class="menu-option">
                 <label>👤 Changer ton nom</label>
@@ -250,6 +261,8 @@
         window.onload = function() {
             const couleur = localStorage.getItem('yuuto_couleur');
             if (couleur) { document.body.style.background = couleur; document.getElementById('couleurFond').value = couleur; }
+            const police = localStorage.getItem('yuuto_police');
+            if (police) { document.body.style.fontFamily = police; document.getElementById('policeSelect').value = police; }
             estPremium = localStorage.getItem('yuuto_premium') === 'true';
             nbTransfo = parseInt(localStorage.getItem('yuuto_transfo') || '0');
             if (estPremium) document.getElementById('premiumBadge').style.display = 'inline';
@@ -263,6 +276,11 @@
             const couleur = document.getElementById('couleurFond').value;
             document.body.style.background = couleur;
             localStorage.setItem('yuuto_couleur', couleur);
+        }
+        function changerPolice() {
+            const police = document.getElementById('policeSelect').value;
+            document.body.style.fontFamily = police;
+            localStorage.setItem('yuuto_police', police);
         }
         function changerNom() {
             const nouveauNom = document.getElementById('nouveauNom').value.trim();
@@ -620,7 +638,7 @@
                 document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
                 try {
                     const image = await puter.ai.txt2img(prompt);
-                    document.getElementById(currentId).innerHTML = `${estAntoine ? 'tiens 🎨' : 'Voila 🎨'}<br><img class="generated" src="${image.src}" style="max-width:200px;border-radius:10px;margin-top:5px;display:block;"/>`;
+                    document.getElementById(currentId).innerHTML = `${estAntoine ? 'tiens 🎨' : 'Voila 🎨'}<br><img src="${image.src}" style="max-width:200px;border-radius:10px;margin-top:5px;display:block;"/>`;
                 } catch(e) { document.getElementById(currentId).innerHTML = estAntoine ? "nah flemme 😅" : "Desole 😅"; }
             } else {
                 historique.push({"role": "user", "content": msg});
