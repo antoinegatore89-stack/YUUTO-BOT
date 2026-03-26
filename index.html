@@ -20,10 +20,8 @@
         #login button { background: linear-gradient(90deg, #7c3aed, #5b21b6); color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #erreur { color: red; display: none; font-size: 14px; }
 
-        /* APP */
         #app { display: none; height: 100vh; position: relative; }
 
-        /* SIDEBAR - position fixe par dessus */
         #sidebar { display: none; position: fixed; top: 0; left: 0; width: 270px; height: 100vh; background: #111; flex-direction: column; z-index: 100; border-right: 1px solid #222; }
         #sidebar.open { display: flex; }
         #sidebarHeader { padding: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #222; }
@@ -42,13 +40,10 @@
         #userName { font-size: 14px; color: #ddd; }
         #premiumBadgeSide { background: #f59e0b; color: black; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; display: none; }
 
-        /* OVERLAY */
         #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
 
-        /* MAIN - prend tout l'espace */
         #mainContent { display: flex; flex-direction: column; height: 100vh; width: 100%; }
 
-        /* HEADER */
         #header { display: flex; align-items: center; padding: 10px 15px; background: #111; border-bottom: 1px solid #222; gap: 10px; flex-shrink: 0; }
         #toggleSidebar { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 5px 8px; border-radius: 8px; }
         #toggleSidebar:hover { background: #222; }
@@ -59,7 +54,6 @@
         #headerBtns { display: flex; gap: 8px; }
         #callBtn { background: #22c55e; border: none; color: white; padding: 7px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
 
-        /* CHAT */
         #chat { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
         #chat::-webkit-scrollbar { width: 4px; }
         #chat::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
@@ -67,12 +61,11 @@
         .bot { display: flex; align-items: flex-start; gap: 10px; max-width: 92%; }
         .bot img.avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #7c3aed; margin-top: 3px; }
         .bot-msg { background: #1e1e2e; padding: 10px 15px; border-radius: 4px 18px 18px 18px; font-size: 14px; border: 1px solid #2a2a4e; line-height: 1.5; }
+        .bot-msg.urgent { background: #1a0a0a; border-color: #7c3aed; }
         .perso1-msg { background: #1e3a5f; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .perso2-msg { background: #3a1e1e; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .audio-btn { background: none; border: none; color: #555; font-size: 12px; cursor: pointer; margin-top: 5px; display: block; padding: 0; }
-        .audio-btn:hover { color: #aaa; }
 
-        /* INPUT */
         #inputArea { padding: 10px 15px; border-top: 1px solid #222; background: #111; flex-shrink: 0; }
         #quickBtns { display: flex; gap: 6px; margin-bottom: 8px; overflow-x: auto; padding-bottom: 3px; }
         #quickBtns::-webkit-scrollbar { display: none; }
@@ -85,7 +78,6 @@
         #micBtn { background: #222; color: white; border: 1px solid #333; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; flex-shrink: 0; }
         #micBtn.active { background: #e11d48; border-color: #e11d48; }
 
-        /* MODALS */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 998; justify-content: center; align-items: center; }
         .modalBox { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 25px; width: 88%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; max-height: 88vh; overflow-y: auto; }
         .modalBox h2 { text-align: center; font-size: 18px; }
@@ -107,7 +99,6 @@
         .genre-btn { background: #222; color: white; border: 1px solid #333; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         .genre-btn:hover { background: #7c3aed; border-color: #7c3aed; }
 
-        /* VIDEO CALL */
         #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg,#0a0a2e,#1a0a3e); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 20px; }
         #videoCallName { font-size: 22px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 10px #f59e0b; margin-top: 10px; }
         #videoCallStatus { font-size: 13px; color: #aaa; }
@@ -131,7 +122,6 @@
     <span id="erreur">Acces refuse 😤</span>
 </div>
 
-<!-- MODALS -->
 <div class="modal" id="menuScreen">
     <div class="modalBox">
         <h2>⚙️ Paramètres</h2>
@@ -172,6 +162,7 @@
     <div class="modalBox">
         <h2>🎭 Mode Personnage</h2>
         <p id="persoCompteur" style="color:#aaa;text-align:center;font-size:13px"></p>
+        <p style="color:#555;text-align:center;font-size:12px">⚠️ Personnages dangereux interdits</p>
         <input class="modalInput" id="persoInput" type="text" placeholder="Ex: Naruto, Levi, Goku..."/>
         <button class="modalBtn primary" onclick="activerPersonnage()">✨ Transformer !</button>
         <button class="modalBtn secondary" onclick="resetPersonnage()">Redevenir YUUTO</button>
@@ -208,7 +199,6 @@
     </div>
 </div>
 
-<!-- VIDEO CALL -->
 <div id="videoCallScreen">
     <div id="videoCallName">YUUTO</div>
     <div id="videoCallStatus">En appel...</div>
@@ -275,10 +265,8 @@
     </div>
 </div>
 
-<!-- APP -->
 <div id="app">
     <div id="overlay" onclick="toggleSidebar()"></div>
-
     <div id="sidebar">
         <div id="sidebarHeader">
             <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
@@ -312,9 +300,7 @@
                 <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
             </div>
         </div>
-
         <div id="chat"></div>
-
         <div id="inputArea">
             <div id="quickBtns">
                 <button class="quickBtn" onclick="recommander()">🎌 Anime</button>
@@ -338,6 +324,9 @@
     const CODE_PREMIUM = "2013";
     const MAX_TRANSFO_GRATUIT = 2;
     const MAX_TRANSFO_PREMIUM = 5;
+
+    const PERSONNAGES_BANNIS = ['hitler', 'staline', 'mussolini', 'bin laden', 'pol pot', 'mao zedong', 'saddam'];
+    const MOTS_SENSIBLES = ['suicide', 'me tuer', 'me suicider', 'comment mourir', 'me pendre', 'me noyer', 'finir ma vie', 'mettre fin'];
 
     const historique = [];
     const animesDejaRecommandes = [];
@@ -363,13 +352,8 @@
         sidebarVisible = !sidebarVisible;
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
-        if (sidebarVisible) {
-            sidebar.classList.add('open');
-            overlay.style.display = 'block';
-        } else {
-            sidebar.classList.remove('open');
-            overlay.style.display = 'none';
-        }
+        if (sidebarVisible) { sidebar.classList.add('open'); overlay.style.display = 'block'; }
+        else { sidebar.classList.remove('open'); overlay.style.display = 'none'; }
     }
 
     function nouvelleConversation() {
@@ -387,9 +371,7 @@
 
     function majHistorique() {
         const list = document.getElementById('historyList');
-        list.innerHTML = conversations.length === 0
-            ? '<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>'
-            : '';
+        list.innerHTML = conversations.length === 0 ? '<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>' : '';
         conversations.forEach((conv, i) => {
             const item = document.createElement('div');
             item.className = 'historyItem';
@@ -483,6 +465,10 @@
     function activerPersonnage() {
         const p = document.getElementById('persoInput').value.trim();
         if (!p) return;
+        if (PERSONNAGES_BANNIS.some(b => p.toLowerCase().includes(b))) {
+            alert("Ce personnage est banni 🚫 Choisis un personnage d'anime !");
+            return;
+        }
         const max = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
         if (!estAntoine && nbTransfo >= max) { fermerModal('persoScreen'); ouvrirModal('premiumScreen'); return; }
         personnageActuel = p;
@@ -578,7 +564,7 @@
         const hist = [];
         for (let i=0;i<4;i++) {
             const pa=i%2===0?p1:p2, pb=i%2===0?p2:p1;
-            const prompt = hist.length===0 ? `Tu es ${pa}. Lance une pique a ${pb}. 2 phrases. Francais.` : `Tu es ${pa}. Reponds:"${hist[hist.length-1]}". 2 phrases. Francais.`;
+            const prompt = hist.length===0?`Tu es ${pa}. Lance une pique a ${pb}. 2 phrases. Francais.`:`Tu es ${pa}. Reponds:"${hist[hist.length-1]}". 2 phrases. Francais.`;
             const r = await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});
             const d = await r.json();
             const rep = d.choices[0].message.content;
@@ -641,7 +627,7 @@
     function getMemoireTexte(){let t="";if(memoire.animes)t+=`animes:${memoire.animes}. `;if(memoire.prenom)t+=`prenom:${memoire.prenom}. `;return t?"Tu sais:"+t:"";}
     function getSystemPrompt(){if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;return window.humeurInfo.personnalite;}
 
-    const creation="Tu as ete cree par Antoine Gatore.";
+    const creation="Tu as ete cree par Antoine Gatore. Reponds fierement si on te le demande.";
     const styleFam="Pote familier,'bro','ptdr','oe','wsh'.Court.Emojis.Francais.";
     const styleNorm="Sympa chaleureux.Emojis.Francais.";
 
@@ -690,7 +676,16 @@
         document.getElementById('msg').value='';
         document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
         const ml=msg.toLowerCase();
+
         if(ml.includes("j'aime")||ml.includes('mon anime')){memoire.animes=msg;sauvegarderMemoire();}
+
+        // Détection mots sensibles suicide
+        if(MOTS_SENSIBLES.some(m=>ml.includes(m))){
+            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Je suis pas qualifie pour repondre a ca. Si tu traverses quelque chose de difficile parle a quelqu'un de confiance. Tu n'es pas seul 💙</div></div>`;
+            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+            return;
+        }
+
         if(ml.includes('genere')||ml.includes('génère')||ml.includes('image de')){
             const prompt=msg.replace(/genere|génère|une image de|image de|image/gi,'').trim()+' anime manga style 4k';
             loadingId++;const id='loading'+loadingId;
