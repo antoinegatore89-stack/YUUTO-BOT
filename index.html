@@ -20,15 +20,29 @@
         #header img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
         #header span { font-size: 18px; font-weight: bold; }
         #humeur { font-size: 12px; color: #aaa; }
-        #callBtn { margin-left: auto; background: #22c55e; border: none; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+        #headerBtns { margin-left: auto; display: flex; gap: 8px; }
+        #callBtn { background: #22c55e; border: none; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+        #menuBtn { background: #333; border: none; color: white; padding: 8px 12px; border-radius: 20px; font-size: 18px; cursor: pointer; }
+
+        /* Menu */
+        #menuScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
+        #menuBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; }
+        #menuBox h2 { margin: 0 0 20px 0; text-align: center; }
+        .menu-option { background: #333; padding: 15px; border-radius: 12px; margin-bottom: 10px; }
+        .menu-option label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
+        .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
+        #closeMenu { background: #7c3aed; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; width: 100%; margin-top: 10px; cursor: pointer; }
+
+        /* Appel */
         #callScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #111; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 999; }
         #callScreen img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #22c55e; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 70% { box-shadow: 0 0 0 20px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
         #callStatus { font-size: 18px; color: #aaa; }
         #callName { font-size: 24px; font-weight: bold; }
-        #endCallBtn { background: red; border: none; color: white; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; margin-top: 20px; }
+        #endCallBtn { background: red; border: none; color: white; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
         #micCallBtn { background: #333; border: none; color: white; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
         #micCallBtn.active { background: #22c55e; }
+
         #chat { flex: 1; overflow-y: auto; padding: 10px; }
         .moi { background: #0084ff; padding: 10px; border-radius: 10px; margin: 5px; text-align: right; }
         .bot { display: flex; align-items: flex-start; gap: 8px; margin: 5px; }
@@ -53,6 +67,17 @@
         <span id="erreur">Acces refuse 😤</span>
     </div>
 
+    <div id="menuScreen">
+        <div id="menuBox">
+            <h2>⚙️ Paramètres</h2>
+            <div class="menu-option">
+                <label>🎨 Couleur du fond</label>
+                <input type="color" id="couleurFond" value="#1a1a1a" oninput="changerCouleur()"/>
+            </div>
+            <button id="closeMenu" onclick="fermerMenu()">Fermer</button>
+        </div>
+    </div>
+
     <div id="callScreen">
         <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
         <div id="callName">YUUTO</div>
@@ -70,7 +95,10 @@
                 <span>YUUTO</span><br/>
                 <span id="humeur"></span>
             </div>
-            <button id="callBtn" onclick="demarrerAppel()">📞 Appeler</button>
+            <div id="headerBtns">
+                <button id="callBtn" onclick="demarrerAppel()">📞</button>
+                <button id="menuBtn" onclick="ouvrirMenu()">⚙️</button>
+            </div>
         </div>
         <div id="chat"></div>
         <div id="bas">
@@ -91,13 +119,31 @@
         let enAppel = false;
         let yuutoParle = false;
 
-        // Connexion automatique si nom deja sauvegarde
         window.onload = function() {
+            const couleur = localStorage.getItem('yuuto_couleur');
+            if (couleur) {
+                document.body.style.background = couleur;
+                document.getElementById('couleurFond').value = couleur;
+            }
             const nomSauvegarde = localStorage.getItem('yuuto_nom');
             if (nomSauvegarde) {
                 document.getElementById('nom').value = nomSauvegarde;
                 seConnecter();
             }
+        }
+
+        function ouvrirMenu() {
+            document.getElementById('menuScreen').style.display = 'flex';
+        }
+
+        function fermerMenu() {
+            document.getElementById('menuScreen').style.display = 'none';
+        }
+
+        function changerCouleur() {
+            const couleur = document.getElementById('couleurFond').value;
+            document.body.style.background = couleur;
+            localStorage.setItem('yuuto_couleur', couleur);
         }
 
         function initMic() {
@@ -109,57 +155,30 @@
             recognition.onresult = (e) => {
                 const texte = e.results[0][0].transcript;
                 stopMic();
-                if (enAppel) {
-                    envoyerAppel(texte);
-                } else {
-                    document.getElementById('msg').value = texte;
-                    envoyer();
-                }
+                if (enAppel) envoyerAppel(texte);
+                else { document.getElementById('msg').value = texte; envoyer(); }
             };
             recognition.onend = () => {
                 isListening = false;
-                if (enAppel) {
-                    document.getElementById('micCallBtn').classList.remove('active');
-                    document.getElementById('micCallBtn').textContent = '🎤';
-                } else {
-                    document.getElementById('micBtn').classList.remove('active');
-                    document.getElementById('micBtn').textContent = '🎤';
-                }
+                if (enAppel) { document.getElementById('micCallBtn').classList.remove('active'); document.getElementById('micCallBtn').textContent = '🎤'; }
+                else { document.getElementById('micBtn').classList.remove('active'); document.getElementById('micBtn').textContent = '🎤'; }
             };
         }
 
-        function toggleMic() {
-            if (isListening) stopMic();
-            else startMic(false);
-        }
-
-        function toggleMicAppel() {
-            if (!yuutoParle) {
-                if (isListening) stopMic();
-                else startMic(true);
-            }
-        }
+        function toggleMic() { if (isListening) stopMic(); else startMic(false); }
+        function toggleMicAppel() { if (!yuutoParle) { if (isListening) stopMic(); else startMic(true); } }
 
         function startMic(appel) {
             if (!recognition) { alert("Micro non supporte"); return; }
             try {
                 recognition.start();
                 isListening = true;
-                if (appel) {
-                    document.getElementById('micCallBtn').classList.add('active');
-                    document.getElementById('micCallBtn').textContent = '🔴';
-                    document.getElementById('callStatus').textContent = 'Tu parles...';
-                } else {
-                    document.getElementById('micBtn').classList.add('active');
-                    document.getElementById('micBtn').textContent = '🔴';
-                }
+                if (appel) { document.getElementById('micCallBtn').classList.add('active'); document.getElementById('micCallBtn').textContent = '🔴'; document.getElementById('callStatus').textContent = 'Tu parles...'; }
+                else { document.getElementById('micBtn').classList.add('active'); document.getElementById('micBtn').textContent = '🔴'; }
             } catch(e) {}
         }
 
-        function stopMic() {
-            try { if (recognition) recognition.stop(); } catch(e) {}
-            isListening = false;
-        }
+        function stopMic() { try { if (recognition) recognition.stop(); } catch(e) {} isListening = false; }
 
         function parler(texte, callback) {
             const synth = window.speechSynthesis;
@@ -170,11 +189,7 @@
             utterance.lang = 'fr-FR';
             utterance.rate = 1;
             utterance.pitch = 1;
-            utterance.volume = 1;
-            utterance.onend = () => {
-                yuutoParle = false;
-                if (callback) setTimeout(callback, 800);
-            };
+            utterance.onend = () => { yuutoParle = false; if (callback) setTimeout(callback, 800); };
             synth.speak(utterance);
         }
 
@@ -185,13 +200,10 @@
         function ajouterMessageBot(texte) {
             const texteNettoy = nettoyerTexte(texte);
             document.getElementById('chat').innerHTML += `
-                <div class="bot">
-                    <img class="avatar" src="${AVATAR}"/>
-                    <div class="bot-msg">
-                        YUUTO : ${texte}
-                        <br><button class="audio-btn" onclick="parler('${texteNettoy}')">🔊 Ecouter</button>
-                    </div>
-                </div>`;
+                <div class="bot"><img class="avatar" src="${AVATAR}"/>
+                <div class="bot-msg">YUUTO : ${texte}<br>
+                <button class="audio-btn" onclick="parler('${texteNettoy}')">🔊 Ecouter</button>
+                </div></div>`;
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
 
@@ -199,18 +211,13 @@
             enAppel = true;
             document.getElementById('callScreen').style.display = 'flex';
             document.getElementById('callStatus').textContent = 'Connexion...';
-
             const intro = estAntoine ? "Wsh Antoine ! Tu mappelles ?" : `Salut ${memoire.prenom} ! Tu mappelles ?`;
             document.getElementById('callStatus').textContent = 'YUUTO parle...';
-            parler(intro, () => {
-                document.getElementById('callStatus').textContent = 'Appuie sur le micro pour parler';
-            });
+            parler(intro, () => { document.getElementById('callStatus').textContent = 'Appuie sur le micro pour parler'; });
         }
 
         function terminerAppel() {
-            enAppel = false;
-            yuutoParle = false;
-            stopMic();
+            enAppel = false; yuutoParle = false; stopMic();
             window.speechSynthesis.cancel();
             document.getElementById('callScreen').style.display = 'none';
         }
@@ -221,32 +228,19 @@
             const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
-                body: JSON.stringify({
-                    model: 'llama-3.3-70b-versatile',
-                    messages: [
-                        { role: 'system', content: window.humeurInfo.personnalite + " Tu reponds en phrases courtes car tu es en appel vocal." },
-                        ...historique
-                    ]
-                })
+                body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: window.humeurInfo.personnalite + " Tu reponds en phrases courtes." }, ...historique] })
             });
             const data = await rep.json();
             const reponse = data.choices[0].message.content;
             historique.push({"role": "assistant", "content": reponse});
             document.getElementById('callStatus').textContent = 'YUUTO parle...';
-            const reponseNettoy = reponse.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
-            parler(reponseNettoy, () => {
+            parler(reponse.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, ''), () => {
                 if (enAppel) document.getElementById('callStatus').textContent = 'Appuie sur le micro pour parler';
             });
         }
 
-        function chargerMemoire() {
-            const data = localStorage.getItem('yuuto_memoire');
-            if (data) memoire = JSON.parse(data);
-        }
-
-        function sauvegarderMemoire() {
-            localStorage.setItem('yuuto_memoire', JSON.stringify(memoire));
-        }
+        function chargerMemoire() { const data = localStorage.getItem('yuuto_memoire'); if (data) memoire = JSON.parse(data); }
+        function sauvegarderMemoire() { localStorage.setItem('yuuto_memoire', JSON.stringify(memoire)); }
 
         function getMemoireTexte() {
             let texte = "";
@@ -256,7 +250,7 @@
             return texte ? "Voici ce que tu sais : " + texte : "";
         }
 
-        const baseFamilier = "Tu es le meilleur ami de la personne depuis toujours. Tu parles comme un vrai pote, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes et naturelles. Parfois tu reponds juste 'nah flemme' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
+        const baseFamilier = "Tu es le meilleur ami de la personne depuis toujours. Tu parles comme un vrai pote, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes. Parfois tu reponds juste 'nah flemme' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
         const baseNormal = "Tu es YUUTO, un assistant sympa et timide qui adore les animes. Tu es poli. Tu utilises des emojis. Tu reponds en francais.";
 
         function getHumeur(familier) {
@@ -271,16 +265,9 @@
 
         function seConnecter() {
             const nom = document.getElementById('nom').value.trim();
-            if (nom.toLowerCase() === "antoine gatore") {
-                estAntoine = true;
-                memoire.prenom = "Antoine";
-            } else if (nom.length > 0) {
-                estAntoine = false;
-                memoire.prenom = nom;
-            } else {
-                document.getElementById('erreur').style.display = 'block';
-                return;
-            }
+            if (nom.toLowerCase() === "antoine gatore") { estAntoine = true; memoire.prenom = "Antoine"; }
+            else if (nom.length > 0) { estAntoine = false; memoire.prenom = nom; }
+            else { document.getElementById('erreur').style.display = 'block'; return; }
             localStorage.setItem('yuuto_nom', nom);
             chargerMemoire();
             demarrer();
@@ -303,15 +290,11 @@
                 ? (dejaVenu ? `wsh Antoine ! 😄 t'es de retour !` : `YOOO 🔥 t'es la !`)
                 : (dejaVenu ? `Salut ${memoire.prenom} ! 😊 Content de te revoir !` : `Salut ${memoire.prenom} ! 😊 Je suis YUUTO !`);
 
-            const texteNettoy = nettoyerTexte(intro);
             document.getElementById('chat').innerHTML = `
-                <div class="bot">
-                    <img class="avatar" src="${AVATAR}"/>
-                    <div class="bot-msg">
-                        ${intro}
-                        <br><button class="audio-btn" onclick="parler('${texteNettoy}')">🔊 Ecouter</button>
-                    </div>
-                </div>`;
+                <div class="bot"><img class="avatar" src="${AVATAR}"/>
+                <div class="bot-msg">${intro}<br>
+                <button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button>
+                </div></div>`;
         }
 
         async function envoyer() {
@@ -333,18 +316,13 @@
                 try {
                     const image = await puter.ai.txt2img(prompt);
                     document.getElementById(currentId).innerHTML = `${estAntoine ? 'tiens 🎨' : 'Voila 🎨'}<br><img class="generated" src="${image.src}"/>`;
-                } catch(e) {
-                    document.getElementById(currentId).innerHTML = estAntoine ? "nah flemme 😅" : "Desole 😅";
-                }
+                } catch(e) { document.getElementById(currentId).innerHTML = estAntoine ? "nah flemme 😅" : "Desole 😅"; }
             } else {
                 historique.push({"role": "user", "content": msg});
                 const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
-                    body: JSON.stringify({
-                        model: 'llama-3.3-70b-versatile',
-                        messages: [{ role: 'system', content: window.humeurInfo.personnalite }, ...historique]
-                    })
+                    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: window.humeurInfo.personnalite }, ...historique] })
                 });
                 const data = await rep.json();
                 const reponse = data.choices[0].message.content;
