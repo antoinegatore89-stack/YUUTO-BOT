@@ -3,8 +3,8 @@
 <head>
     <title>YUUTO</title>
     <link rel="manifest" href="manifest.json"/>
-    <link rel="apple-touch-icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
-    <link rel="icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
+    <link rel="icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#7c3aed"/>
     <style>
@@ -82,13 +82,11 @@
         .modalBtn.primary { background: linear-gradient(90deg,#7c3aed,#5b21b6); color: white; }
         .modalBtn.secondary { background: #333; color: white; }
         .modalBtn.danger { background: #e11d48; color: white; }
-        .modalBtn.codex { background: linear-gradient(90deg,#00d4ff,#0077ff); color: white; }
         .menu-option { background: #222; padding: 15px; border-radius: 12px; border: 1px solid #333; }
         .menu-option label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
         .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
         .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 10px; border: 1px solid #333; background: #333; color: white; font-size: 14px; }
         .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; width: 100%; }
-        /* Toggle switch */
         .toggle-row { display: flex; align-items: center; justify-content: space-between; }
         .toggle { position: relative; width: 50px; height: 26px; }
         .toggle input { opacity: 0; width: 0; height: 0; }
@@ -168,7 +166,7 @@
 <body>
 
 <div id="login">
-    <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+    <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
     <h2>YUUTO</h2>
     <p>Ton ami IA anime 🎌</p>
     <input id="nom" type="text" placeholder="Ton prenom..."/>
@@ -176,7 +174,6 @@
     <span id="erreur">Acces refuse 😤</span>
 </div>
 
-<!-- SETTINGS avec Codex -->
 <div class="modal" id="menuScreen">
     <div class="modalBox">
         <h2>⚙️ Paramètres</h2>
@@ -189,7 +186,6 @@
             <input type="text" id="nouveauNom" placeholder="Nouveau nom..."/>
             <button onclick="changerNom()">Changer</button>
         </div>
-        <!-- MODE CODEX -->
         <div class="menu-option" style="border-color:#00d4ff">
             <div class="toggle-row">
                 <div>
@@ -321,7 +317,7 @@
     <div id="overlay" onclick="toggleSidebar()"></div>
     <div id="sidebar">
         <div id="sidebarHeader">
-            <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+            <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
             <span id="sidebarTitle">YUUTO ✨</span>
         </div>
         <button id="newChatBtn" onclick="nouvelleConversation()">✏️ Nouvelle conversation</button>
@@ -372,7 +368,7 @@
 </div>
 
 <script>
-    const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg";
+    const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png";
     const CODE_PREMIUM = "2013";
     const MAX_TRANSFO_GRATUIT = 2;
     const MAX_TRANSFO_PREMIUM = 5;
@@ -397,7 +393,6 @@
     let humeurVideo = 'normal';
     let modeCodex = false;
 
-    // CODEX
     function toggleCodex() {
         modeCodex = document.getElementById('codexToggle').checked;
         localStorage.setItem('yuuto_codex', modeCodex.toString());
@@ -414,84 +409,69 @@
     }
 
     function getSystemPrompt() {
-        if (modeCodex) {
-            return `Tu es YUUTO en mode Codex. Tu es un assistant expert, sérieux et très précis. Tu réponds de façon détaillée, structurée et pédagogique. Tu peux aider avec les devoirs, les sciences, les maths, l'histoire, la géographie, la culture générale et tout autre sujet sérieux. Tu utilises des exemples clairs. Tu réponds toujours en français. Tu restes bienveillant mais professionnel.`;
-        }
+        if (modeCodex) return `Tu es YUUTO en mode Codex. Tu es un assistant expert, sérieux et très précis. Tu réponds de façon détaillée, structurée et pédagogique. Tu peux aider avec les devoirs, les sciences, les maths, l'histoire, la géographie, la culture générale. Tu utilises des exemples clairs. Tu réponds toujours en français.`;
         if (personnageActuel) return `Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;
         return window.humeurInfo.personnalite;
     }
 
     function toggleSidebar() {
         sidebarVisible = !sidebarVisible;
-        const sb = document.getElementById('sidebar');
-        const ov = document.getElementById('overlay');
-        if (sidebarVisible) { sb.classList.add('open'); ov.style.display = 'block'; }
-        else { sb.classList.remove('open'); ov.style.display = 'none'; }
+        const sb=document.getElementById('sidebar'), ov=document.getElementById('overlay');
+        if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}
+        else{sb.classList.remove('open');ov.style.display='none';}
     }
 
     function nouvelleConversation() {
-        if (historique.length > 0) {
-            conversations.unshift({ titre: historique[0]?.content?.substring(0,30)+'...', messages: [...historique] });
-            historique.length = 0; majHistorique();
-        }
-        document.getElementById('chat').innerHTML = '';
-        ajouterMessageBot(estAntoine ? `YOOO 🔥 nouvelle conv !` : `Salut ${memoire.prenom} ! 😊 Nouvelle conversation !`);
+        if(historique.length>0){conversations.unshift({titre:historique[0]?.content?.substring(0,30)+'...',messages:[...historique]});historique.length=0;majHistorique();}
+        document.getElementById('chat').innerHTML='';
+        ajouterMessageBot(estAntoine?`YOOO 🔥 nouvelle conv !`:`Salut ${memoire.prenom} ! 😊 Nouvelle conversation !`);
         toggleSidebar();
     }
 
     function majHistorique() {
-        const list = document.getElementById('historyList');
-        list.innerHTML = conversations.length === 0 ? '<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>' : '';
-        conversations.forEach((conv, i) => {
-            const item = document.createElement('div');
-            item.className = 'historyItem';
-            item.innerHTML = `💬 ${conv.titre}`;
-            item.onclick = () => {
-                historique.length = 0;
-                conv.messages.forEach(m => historique.push(m));
-                document.getElementById('chat').innerHTML = '';
-                conv.messages.forEach(m => { if(m.role==='user') document.getElementById('chat').innerHTML+=`<div class="moi">${m.content}</div>`; else ajouterMessageBot(m.content); });
-                toggleSidebar();
-            };
+        const list=document.getElementById('historyList');
+        list.innerHTML=conversations.length===0?'<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>':'';
+        conversations.forEach((conv,i)=>{
+            const item=document.createElement('div');item.className='historyItem';item.innerHTML=`💬 ${conv.titre}`;
+            item.onclick=()=>{historique.length=0;conv.messages.forEach(m=>historique.push(m));document.getElementById('chat').innerHTML='';conv.messages.forEach(m=>{if(m.role==='user')document.getElementById('chat').innerHTML+=`<div class="moi">${m.content}</div>`;else ajouterMessageBot(m.content);});toggleSidebar();};
             list.appendChild(item);
         });
     }
 
-    function ouvrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function fermerModal(id) { document.getElementById(id).style.display = 'none'; }
+    function ouvrirModal(id){document.getElementById(id).style.display='flex';}
+    function fermerModal(id){document.getElementById(id).style.display='none';}
 
     function setHumeur(humeur) {
-        humeurVideo = humeur;
-        const eL=document.getElementById('eyeLeft'), eR=document.getElementById('eyeRight');
-        const mouth=document.getElementById('mouthShape');
-        const zzz=document.getElementById('acZzz'), sparkle=document.getElementById('acSparkle'), stars=document.getElementById('acStars');
-        zzz.style.display='none'; sparkle.style.display='none'; stars.style.display='none';
-        eL.style.height='28px'; eR.style.height='28px';
-        if (humeur==='sleepy') { eL.style.height='12px'; eR.style.height='12px'; mouth.className='mouth-sleepy'; zzz.style.display='block'; }
-        else if (humeur==='excited') { eL.style.height='32px'; eR.style.height='32px'; mouth.className='mouth-excited'; sparkle.style.display='block'; }
-        else if (humeur==='mysterious') { mouth.className='mouth-smile'; stars.style.display='block'; }
-        else { mouth.className='mouth-smile'; }
+        humeurVideo=humeur;
+        const eL=document.getElementById('eyeLeft'),eR=document.getElementById('eyeRight'),mouth=document.getElementById('mouthShape');
+        const zzz=document.getElementById('acZzz'),sparkle=document.getElementById('acSparkle'),stars=document.getElementById('acStars');
+        zzz.style.display='none';sparkle.style.display='none';stars.style.display='none';
+        eL.style.height='28px';eR.style.height='28px';
+        if(humeur==='sleepy'){eL.style.height='12px';eR.style.height='12px';mouth.className='mouth-sleepy';zzz.style.display='block';}
+        else if(humeur==='excited'){eL.style.height='32px';eR.style.height='32px';mouth.className='mouth-excited';sparkle.style.display='block';}
+        else if(humeur==='mysterious'){mouth.className='mouth-smile';stars.style.display='block';}
+        else{mouth.className='mouth-smile';}
     }
 
-    function startTalking() { document.getElementById('mouthShape').className='mouth-talk'; document.getElementById('armLeft').classList.add('wave'); }
-    function stopTalking() {
+    function startTalking(){document.getElementById('mouthShape').className='mouth-talk';document.getElementById('armLeft').classList.add('wave');}
+    function stopTalking(){
         const m=document.getElementById('mouthShape');
-        if (humeurVideo==='sleepy') m.className='mouth-sleepy';
-        else if (humeurVideo==='excited') m.className='mouth-excited';
+        if(humeurVideo==='sleepy')m.className='mouth-sleepy';
+        else if(humeurVideo==='excited')m.className='mouth-excited';
         else m.className='mouth-smile';
         document.getElementById('armLeft').classList.remove('wave');
     }
 
-    function startBlink() {
-        blinkInterval = setInterval(() => {
-            const bL=document.getElementById('blinkLeft'), bR=document.getElementById('blinkRight');
-            if (!bL||!bR) return;
-            bL.style.height='100%'; bR.style.height='100%';
-            setTimeout(()=>{bL.style.height='0'; bR.style.height='0';}, 120);
-        }, 3500);
+    function startBlink(){
+        blinkInterval=setInterval(()=>{
+            const bL=document.getElementById('blinkLeft'),bR=document.getElementById('blinkRight');
+            if(!bL||!bR)return;
+            bL.style.height='100%';bR.style.height='100%';
+            setTimeout(()=>{bL.style.height='0';bR.style.height='0';},120);
+        },3500);
     }
 
-    async function demarrerVideoAppel() {
+    async function demarrerVideoAppel(){
         enVideoAppel=true;
         document.getElementById('videoCallScreen').style.display='flex';
         document.getElementById('videoCallName').textContent=personnageActuel||'YUUTO';
@@ -508,14 +488,14 @@
         parlerVideo(intro,()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro pour parler';});
     }
 
-    function terminerVideoAppel() {
+    function terminerVideoAppel(){
         enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();
         window.speechSynthesis.cancel();
         if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}
         document.getElementById('videoCallScreen').style.display='none';
     }
 
-    function parlerVideo(texte,callback) {
+    function parlerVideo(texte,callback){
         const s=window.speechSynthesis;if(!s){if(callback)callback();return;}
         s.cancel();yuutoParle=true;startTalking();
         const u=new SpeechSynthesisUtterance(texte);
@@ -524,7 +504,7 @@
         s.speak(u);
     }
 
-    function toggleVideoMic() {
+    function toggleVideoMic(){
         if(!yuutoParle&&recognition){
             if(isListening)stopMic();
             else try{
@@ -537,7 +517,7 @@
         }
     }
 
-    async function envoyerVideoAppel(msg) {
+    async function envoyerVideoAppel(msg){
         document.getElementById('videoCallStatus').textContent='Reflechit...';
         document.getElementById('videoMicBtn').classList.remove('active');
         document.getElementById('videoMicBtn').textContent='🎤';
@@ -550,7 +530,7 @@
         parlerVideo(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''),()=>{if(enVideoAppel)document.getElementById('videoCallStatus').textContent='Appuie sur le micro pour parler';});
     }
 
-    window.onload = function() {
+    window.onload=function(){
         const couleur=localStorage.getItem('yuuto_couleur');
         if(couleur){document.body.style.background=couleur;document.getElementById('couleurFond').value=couleur;}
         estPremium=localStorage.getItem('yuuto_premium')==='true';
@@ -580,7 +560,7 @@
             estPremium=true;localStorage.setItem('yuuto_premium','true');
             document.getElementById('premiumBadgeSide').style.display='inline';
             fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Premium ! 🌟");
-        } else document.getElementById('codeErreur').style.display='block';
+        }else document.getElementById('codeErreur').style.display='block';
     }
     function activerPersonnage(){
         const p=document.getElementById('persoInput').value.trim();if(!p)return;
@@ -663,10 +643,10 @@
     function parler(t,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';u.rate=1;u.pitch=1;u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};s.speak(u);}
     function nettoyerTexte(t){return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");}
 
-    function ajouterMessageBot(texte, nom, isCodex=false) {
-        const t=nettoyerTexte(texte), n=nom||'YUUTO';
-        const cls = isCodex || modeCodex ? 'bot-msg codex' : 'bot-msg';
-        const prefix = isCodex || modeCodex ? '🧠 ' : '';
+    function ajouterMessageBot(texte,nom,isCodex=false){
+        const t=nettoyerTexte(texte),n=nom||'YUUTO';
+        const cls=isCodex||modeCodex?'bot-msg codex':'bot-msg';
+        const prefix=isCodex||modeCodex?'🧠 ':'';
         document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${cls}">${prefix}${n} : ${texte}<br><button class="audio-btn" onclick="parler('${t}')">🔊 Ecouter</button></div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
@@ -726,7 +706,7 @@
             const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
             const d=await r.json();const rep=d.choices[0].message.content;
             historique.push({"role":"assistant","content":rep});
-            ajouterMessageBot(rep, personnageActuel, modeCodex);
+            ajouterMessageBot(rep,personnageActuel,modeCodex);
         }
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
