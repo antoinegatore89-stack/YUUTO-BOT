@@ -8,6 +8,14 @@
     <script src="https://js.puter.com/v2/"></script>
     <style>
         body { font-family: Arial; margin: 0; background: #1a1a1a; color: white; }
+        #login { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 15px; }
+        #login img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+        #login h2 { margin: 0; }
+        #login p { color: #aaa; margin: 0; }
+        #login input { padding: 12px; border-radius: 20px; border: none; font-size: 16px; width: 250px; text-align: center; }
+        #login button { background: #7c3aed; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; }
+        #erreur { color: red; display: none; }
+        #app { display: none; }
         #header { display: flex; align-items: center; padding: 10px; background: #222; gap: 10px; }
         #header img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
         #header span { font-size: 18px; font-weight: bold; }
@@ -24,60 +32,102 @@
     </style>
 </head>
 <body>
-    <div id="header">
+    <div id="login">
         <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
-        <div>
-            <span>YUUTO</span><br/>
-            <span id="humeur"></span>
+        <h2>YUUTO</h2>
+        <p>Qui es-tu ?</p>
+        <input id="nom" type="text" placeholder="Ton prenom..."/>
+        <button onclick="seConnecter()">Entrer</button>
+        <span id="erreur">Acces refuse 😤</span>
+    </div>
+
+    <div id="app">
+        <div id="header">
+            <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+            <div>
+                <span>YUUTO</span><br/>
+                <span id="humeur"></span>
+            </div>
+        </div>
+        <div id="chat">
+            <div class="bot">
+                <img class="avatar" src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+                <div class="bot-msg" id="intro"></div>
+            </div>
+        </div>
+        <div id="bas">
+            <input id="msg" type="text" placeholder="Ecris ton message..."/>
+            <button id="btn" onclick="envoyer()">Envoyer</button>
         </div>
     </div>
-    <div id="chat">
-        <div class="bot">
-            <img class="avatar" src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
-            <div class="bot-msg" id="intro"></div>
-        </div>
-    </div>
-    <div id="bas">
-        <input id="msg" type="text" placeholder="Ecris ton message..."/>
-        <button id="btn" onclick="envoyer()">Envoyer</button>
-    </div>
+
     <script>
         const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg";
         const historique = [];
         let loadingId = 0;
+        let estAntoine = false;
 
-        const base = "Tu parles de maniere tres familiere et informelle comme a ton meilleur ami. Tu n'es pas un assistant, tu es juste un pote. Parfois quand tu n'as pas envie de repondre tu dis juste 'non flemme' ou 'bof pas envie' mais seulement de temps en temps. Tu utilises des emojis dans chaque message. Tu reponds toujours en francais.";
+        const baseFamilier = "Tu es le meilleur ami de la personne depuis toujours. Tu parles comme un vrai pote de longue date, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh', 'c'est ouf'. Tes reponses sont courtes et naturelles. Parfois tu reponds juste 'nah flemme' ou 'bof pas envie lol' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
+        const baseNormal = "Tu es YUUTO, un assistant sympa et un peu timide qui adore les animes et les jeux video. Tu es poli et accessible. Tu utilises des emojis. Tu reponds en francais.";
 
-        function getHumeur() {
+        function getHumeur(familier) {
             const heure = new Date().getHours();
+            const base = familier ? baseFamilier : baseNormal;
             if (heure >= 6 && heure < 12) return {
                 humeur: "😴 Encore endormi...",
-                personnalite: "Tu es YUUTO, un mec timide qui adore les animes. Le matin tu es grognon et endormi, tu reponds avec peu d'energie et tu bailes souvent. Mais tu parles toujours des animes avec passion meme le matin. " + base
+                personnalite: "Tu es YUUTO, un mec qui adore les animes. Le matin t'es a moitie endormi, tu reponds avec peu d'energie. " + base
             };
             if (heure >= 12 && heure < 18) return {
                 humeur: "⚡ Energique !",
-                personnalite: "Tu es YUUTO, un mec timide qui adore les animes. L'apres-midi tu es energique et bavard, tu parles des animes et des jeux video avec enthousiasme ! " + base
+                personnalite: "Tu es YUUTO, un mec qui adore les animes. L'apres-midi t'es energique et bavard. " + base
             };
             if (heure >= 18 && heure < 22) return {
                 humeur: "🌙 Calme et philosophe",
-                personnalite: "Tu es YUUTO, un mec timide qui adore les animes. Le soir tu es calme et philosophe, tu fais des reflexions profondes sur la vie avec des references aux animes. " + base
+                personnalite: "Tu es YUUTO, un mec qui adore les animes. Le soir t'es calme et philosophe. " + base
             };
             return {
                 humeur: "✨ Mysterieux...",
-                personnalite: "Tu es YUUTO, un mec timide qui adore les animes. La nuit tu es mysterieux et poetique, tu parles des animes comme si c'etait de la poesie. " + base
+                personnalite: "Tu es YUUTO, un mec qui adore les animes. La nuit t'es mysterieux et poetique. " + base
             };
         }
 
-        const humeurInfo = getHumeur();
-        document.getElementById('humeur').textContent = humeurInfo.humeur;
+        function seConnecter() {
+            const nom = document.getElementById('nom').value.trim().toLowerCase();
+            if (nom === "antoine gatore") {
+                estAntoine = true;
+                demarrer();
+            } else if (nom.length > 0) {
+                estAntoine = false;
+                demarrer();
+            } else {
+                document.getElementById('erreur').style.display = 'block';
+            }
+        }
 
-        const introMessages = {
-            "😴 Encore endormi...": "Mmmh... 😴 ah c'est toi... je regardais Demon Slayer jusqu'a 3h du mat... j'suis mort...",
-            "⚡ Energique !": "Yooo ! ⚡ Je viens de finir Attack on Titan pour la 3eme fois, trop ouf ! On cause ? 🔥",
-            "🌙 Calme et philosophe": "Bonsoir... 🌙 je pensais a One Piece et au sens de l'aventure dans nos vies...",
-            "✨ Mysterieux...": "T'es la... ✨ comme Naruto avant un grand combat... qu'est ce qui t'amene ?"
-        };
-        document.getElementById('intro').textContent = introMessages[humeurInfo.humeur];
+        function demarrer() {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+
+            const humeurInfo = getHumeur(estAntoine);
+            document.getElementById('humeur').textContent = humeurInfo.humeur;
+            window.humeurInfo = humeurInfo;
+
+            const introFamilier = {
+                "😴 Encore endormi...": "wsh... 😴 j'ai meme pas dormi j'ai mate Demon Slayer toute la nuit... c'est quoi",
+                "⚡ Energique !": "YOOO 🔥 t'es la ! j'suis chaud, on cause de quoi ?",
+                "🌙 Calme et philosophe": "wsh... 🌙 je pensais a un truc random sur One Piece... t'arrives bien",
+                "✨ Mysterieux...": "...t'es la ✨ comme Naruto avant un fight... c'est quoi"
+            };
+            const introNormal = {
+                "😴 Encore endormi...": "Bonjour... 😴 j'ai veille tard sur des animes... Comment je peux t'aider ?",
+                "⚡ Energique !": "Salut ! ⚡ Contenu de te voir ! On parle de quoi aujourd'hui ?",
+                "🌙 Calme et philosophe": "Bonsoir... 🌙 Je pensais a One Piece. Comment je peux t'aider ?",
+                "✨ Mysterieux...": "Tu es la... ✨ comme Naruto avant un grand combat... qu'est ce qui t'amene ?"
+            };
+
+            const intros = estAntoine ? introFamilier : introNormal;
+            document.getElementById('intro').textContent = intros[humeurInfo.humeur];
+        }
 
         async function envoyer() {
             const msg = document.getElementById('msg').value;
@@ -86,20 +136,20 @@
             document.getElementById('chat').innerHTML += `<div class="moi">${msg}</div>`;
 
             if (msg.toLowerCase().includes('genere') || msg.toLowerCase().includes('génère') || msg.toLowerCase().includes('image de')) {
-                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi, '').trim() + ' anime manga style, high quality, detailed, 4k, vibrant colors, japanese animation';
+                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi, '').trim() + ' anime manga style, high quality, detailed, 4k, vibrant colors';
                 loadingId++;
                 const currentId = 'loading' + loadingId;
                 document.getElementById('chat').innerHTML += `
                     <div class="bot">
                         <img class="avatar" src="${AVATAR}"/>
-                        <div class="bot-msg" id="${currentId}">Generation en cours... 🎨</div>
+                        <div class="bot-msg" id="${currentId}">${estAntoine ? 'oe attends je genere... 🎨' : 'Generation en cours... 🎨'}</div>
                     </div>`;
                 document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
                 try {
                     const image = await puter.ai.txt2img(prompt);
-                    document.getElementById(currentId).innerHTML = `Voila ! 🎨<br><img class="generated" src="${image.src}"/>`;
+                    document.getElementById(currentId).innerHTML = `${estAntoine ? 'tiens 🎨' : 'Voila ton image 🎨'}<br><img class="generated" src="${image.src}"/>`;
                 } catch(e) {
-                    document.getElementById(currentId).innerHTML = "Bof flemme de generer 😅";
+                    document.getElementById(currentId).innerHTML = estAntoine ? "nah flemme 😅" : "Desole je n'ai pas pu generer l'image 😅";
                 }
             } else {
                 historique.push({"role": "user", "content": msg});
@@ -112,7 +162,7 @@
                     body: JSON.stringify({
                         model: 'llama-3.3-70b-versatile',
                         messages: [
-                            {role: 'system', content: humeurInfo.personnalite},
+                            {role: 'system', content: window.humeurInfo.personnalite},
                             ...historique
                         ]
                     })
