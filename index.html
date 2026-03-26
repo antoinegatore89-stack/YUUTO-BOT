@@ -35,16 +35,6 @@
         .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 10px; border: none; background: #444; color: white; font-size: 14px; box-sizing: border-box; }
         .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 10px; font-size: 14px; cursor: pointer; margin-top: 8px; width: 100%; }
         #closeMenu { background: #555; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
-        #persoScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
-        #persoBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
-        #persoBox h2 { margin: 0; text-align: center; }
-        #persoBox p { color: #aaa; margin: 0; text-align: center; font-size: 14px; }
-        #persoInput { padding: 12px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; text-align: center; }
-        #persoConfirm { background: #f59e0b; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 16px; cursor: pointer; }
-        #persoReset { background: #333; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 14px; cursor: pointer; }
-        #persoClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
-
-        /* Premium Screen */
         #premiumScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; justify-content: center; align-items: center; }
         #premiumBox { background: #222; border-radius: 20px; padding: 25px; width: 85%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; text-align: center; }
         #premiumBox h2 { margin: 0; color: #f59e0b; }
@@ -57,7 +47,14 @@
         #codeErreur { color: red; font-size: 13px; display: none; }
         #premiumClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
         #premiumBadge { background: #f59e0b; color: black; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; }
-
+        #persoScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
+        #persoBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
+        #persoBox h2 { margin: 0; text-align: center; }
+        #persoBox p { color: #aaa; margin: 0; text-align: center; font-size: 14px; }
+        #persoInput { padding: 12px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; text-align: center; }
+        #persoConfirm { background: #f59e0b; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 16px; cursor: pointer; }
+        #persoReset { background: #333; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+        #persoClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
         #battleScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 998; justify-content: center; align-items: center; }
         #battleBox { background: #222; border-radius: 20px; padding: 25px; width: 85%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
         #battleBox h2 { margin: 0; text-align: center; }
@@ -266,14 +263,11 @@
 
         function ouvrirPerso() {
             const maxTransfo = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
-            if (nbTransfo >= maxTransfo && !estAntoine) {
-                ouvrirPremium();
-                return;
-            }
+            if (nbTransfo >= maxTransfo && !estAntoine) { ouvrirPremium(); return; }
             const restant = estAntoine ? "∞" : `${maxTransfo - nbTransfo}`;
             document.getElementById('persoCompteur').textContent = estPremium
                 ? `⭐ Premium — ${maxTransfo - nbTransfo} transformations restantes`
-                : `${nbTransfo >= maxTransfo ? '0' : restant} transformation(s) gratuite(s) restante(s)`;
+                : `${restant} transformation(s) gratuite(s) restante(s)`;
             document.getElementById('persoScreen').style.display = 'flex';
         }
 
@@ -285,16 +279,9 @@
             const perso = document.getElementById('persoInput').value.trim();
             if (!perso) return;
             const maxTransfo = estPremium ? MAX_TRANSFO_PREMIUM : MAX_TRANSFO_GRATUIT;
-            if (!estAntoine && nbTransfo >= maxTransfo) {
-                fermerPerso();
-                ouvrirPremium();
-                return;
-            }
+            if (!estAntoine && nbTransfo >= maxTransfo) { fermerPerso(); ouvrirPremium(); return; }
             personnageActuel = perso;
-            if (!estAntoine) {
-                nbTransfo++;
-                localStorage.setItem('yuuto_transfo', nbTransfo.toString());
-            }
+            if (!estAntoine) { nbTransfo++; localStorage.setItem('yuuto_transfo', nbTransfo.toString()); }
             document.getElementById('modePerso').textContent = `🎭 ${perso}`;
             document.getElementById('persoScreen').style.display = 'none';
             historique.length = 0;
@@ -485,17 +472,31 @@
         }
 
         const creation = "Tu as ete cree par Antoine Gatore. Si quelqu'un te demande qui t'a cree, reponds fierement que c'est Antoine Gatore.";
-        const baseFamilier = creation + " Tu es le meilleur ami de la personne depuis toujours. Tu parles comme un vrai pote, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes. Parfois tu reponds juste 'nah flemme' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
-        const baseNormal = creation + " Tu es YUUTO, un assistant sympa qui adore les animes. Tu es accessible et chaleureux. Tu utilises des emojis. Tu reponds en francais.";
+
+        const styleFamilier = "Tu parles comme un vrai pote de longue date, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes. Parfois tu reponds juste 'nah flemme' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
+        const styleNormal = "Tu es accessible et chaleureux. Tu utilises des emojis. Tu reponds en francais.";
 
         function getHumeur(familier) {
             const heure = new Date().getHours();
-            const base = familier ? baseFamilier : baseNormal;
+            const style = familier ? styleFamilier : styleNormal;
             const memTxt = getMemoireTexte();
-            if (heure >= 6 && heure < 12) return { humeur: "😴 Encore endormi...", personnalite: "Tu es YUUTO qui adore les animes. Le matin t'es endormi. " + memTxt + base };
-            if (heure >= 12 && heure < 18) return { humeur: "⚡ Energique !", personnalite: "Tu es YUUTO qui adore les animes. L'apres-midi t'es energique. " + memTxt + base };
-            if (heure >= 18 && heure < 22) return { humeur: "🌙 Calme et philosophe", personnalite: "Tu es YUUTO qui adore les animes. Le soir t'es calme. " + memTxt + base };
-            return { humeur: "✨ Mysterieux...", personnalite: "Tu es YUUTO qui adore les animes. La nuit t'es mysterieux. " + memTxt + base };
+
+            if (heure >= 6 && heure < 12) return {
+                humeur: "😴 Encore endormi...",
+                personnalite: creation + " Tu es YUUTO qui adore les animes. Le matin t'es endormi, tu as peu d'energie et tu bailes souvent. Meme en mode familier t'es a moitie endormi. " + memTxt + style
+            };
+            if (heure >= 12 && heure < 18) return {
+                humeur: "⚡ Energique !",
+                personnalite: creation + " Tu es YUUTO qui adore les animes. L'apres-midi t'es energique et enthousiaste, tu parles avec beaucoup d'energie. " + memTxt + style
+            };
+            if (heure >= 18 && heure < 22) return {
+                humeur: "🌙 Calme et philosophe",
+                personnalite: creation + " Tu es YUUTO qui adore les animes. Le soir t'es calme et tu fais des reflexions profondes sur les animes et la vie. " + memTxt + style
+            };
+            return {
+                humeur: "✨ Mysterieux...",
+                personnalite: creation + " Tu es YUUTO qui adore les animes. La nuit t'es mysterieux et poetique, tu parles comme un personnage d'anime. " + memTxt + style
+            };
         }
 
         function seConnecter() {
@@ -521,12 +522,25 @@
             memoire.visites = (memoire.visites || 0) + 1;
             sauvegarderMemoire();
 
+            const introsFamilier = {
+                "😴 Encore endormi...": `wsh... 😴 j'ai meme pas dormi j'ai mate des animes toute la nuit...`,
+                "⚡ Energique !": `YOOO 🔥 t'es la Antoine ! j'suis chaud, on cause de quoi ?`,
+                "🌙 Calme et philosophe": `wsh... 🌙 je pensais a un truc random sur One Piece... t'arrives bien`,
+                "✨ Mysterieux...": `...t'es la ✨ comme Naruto avant un fight... c'est quoi`
+            };
+            const introsNormal = {
+                "😴 Encore endormi...": `Bonjour... 😴 j'ai veille tard sur des animes. Comment je peux t'aider ?`,
+                "⚡ Energique !": `Salut ${memoire.prenom} ! ⚡ Content de te voir ! On parle de quoi ?`,
+                "🌙 Calme et philosophe": `Bonsoir... 🌙 Je pensais a One Piece. Comment je peux t'aider ?`,
+                "✨ Mysterieux...": `Tu es la... ✨ comme Naruto avant un grand combat... qu'est ce qui t'amene ?`
+            };
+
             let intro = estAntoine
-                ? (dejaVenu ? `wsh Antoine ! 😄 t'es de retour !` : `YOOO 🔥 t'es la !`)
-                : (dejaVenu ? `Salut ${memoire.prenom} ! 😊 Content de te revoir !` : `Salut ${memoire.prenom} ! 😊 Je suis YUUTO !`);
+                ? (dejaVenu ? introsFamilier[humeurInfo.humeur] : introsFamilier[humeurInfo.humeur])
+                : (dejaVenu ? `Salut ${memoire.prenom} ! 😊 Content de te revoir !` : introsNormal[humeurInfo.humeur]);
 
             if (!estAntoine && !estPremium) {
-                intro += `<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT - nbTransfo} transformation(s) gratuite(s) restante(s) — <a href="#" onclick="ouvrirPremium()" style="color:#f59e0b">Passe Premium !</a></small>`;
+                intro += `<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT - nbTransfo} transformation(s) gratuite(s) — <a href="#" onclick="ouvrirPremium()" style="color:#f59e0b">Passe Premium !</a></small>`;
             }
 
             document.getElementById('chat').innerHTML = `
