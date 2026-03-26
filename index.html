@@ -258,11 +258,23 @@
         let estPremium = false;
         let nbTransfo = 0;
 
+        function appliquerPolice(police) {
+            document.body.style.fontFamily = police;
+            const chat = document.getElementById('chat');
+            const msg = document.getElementById('msg');
+            if (chat) chat.style.fontFamily = police;
+            if (msg) msg.style.fontFamily = police;
+        }
+
         window.onload = function() {
             const couleur = localStorage.getItem('yuuto_couleur');
             if (couleur) { document.body.style.background = couleur; document.getElementById('couleurFond').value = couleur; }
             const police = localStorage.getItem('yuuto_police');
-            if (police) { document.body.style.fontFamily = police; document.getElementById('policeSelect').value = police; }
+            if (police) {
+                appliquerPolice(police);
+                const sel = document.getElementById('policeSelect');
+                if (sel) sel.value = police;
+            }
             estPremium = localStorage.getItem('yuuto_premium') === 'true';
             nbTransfo = parseInt(localStorage.getItem('yuuto_transfo') || '0');
             if (estPremium) document.getElementById('premiumBadge').style.display = 'inline';
@@ -272,16 +284,19 @@
 
         function ouvrirMenu() { document.getElementById('menuScreen').style.display = 'flex'; }
         function fermerMenu() { document.getElementById('menuScreen').style.display = 'none'; }
+
         function changerCouleur() {
             const couleur = document.getElementById('couleurFond').value;
             document.body.style.background = couleur;
             localStorage.setItem('yuuto_couleur', couleur);
         }
+
         function changerPolice() {
             const police = document.getElementById('policeSelect').value;
-            document.body.style.fontFamily = police;
+            appliquerPolice(police);
             localStorage.setItem('yuuto_police', police);
         }
+
         function changerNom() {
             const nouveauNom = document.getElementById('nouveauNom').value.trim();
             if (!nouveauNom) return;
@@ -583,6 +598,9 @@
             document.getElementById('login').style.display = 'none';
             document.getElementById('app').style.display = 'flex';
             initMic();
+
+            const police = localStorage.getItem('yuuto_police');
+            if (police) appliquerPolice(police);
 
             const humeurInfo = getHumeur(estAntoine);
             document.getElementById('humeur').textContent = humeurInfo.humeur;
