@@ -23,14 +23,43 @@
     </style>
 </head>
 <body>
+    <div <!DOCTYPE html>
+<html>
+<head>
+    <title>YUUTO</title>
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+    <link rel="icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://js.puter.com/v2/"></script>
+    <style>
+        body { font-family: Arial; margin: 0; background: #1a1a1a; color: white; }
+        #header { display: flex; align-items: center; padding: 10px; background: #222; gap: 10px; }
+        #header img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+        #header span { font-size: 18px; font-weight: bold; }
+        #humeur { font-size: 12px; color: #aaa; }
+        #chat { height: 73vh; overflow-y: auto; padding: 10px; }
+        .moi { background: #0084ff; padding: 10px; border-radius: 10px; margin: 5px; text-align: right; }
+        .bot { display: flex; align-items: flex-start; gap: 8px; margin: 5px; }
+        .bot img.avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        .bot-msg { background: #333; padding: 10px; border-radius: 10px; }
+        .bot-msg img.generated { max-width: 200px; border-radius: 10px; margin-top: 5px; display: block; }
+        #bas { display: flex; padding: 10px; gap: 10px; }
+        #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; }
+        #btn { background: #7c3aed; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 16px; }
+    </style>
+</head>
+<body>
     <div id="header">
         <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
-        <span>YUUTO</span>
+        <div>
+            <span>YUUTO</span><br/>
+            <span id="humeur"></span>
+        </div>
     </div>
     <div id="chat">
         <div class="bot">
             <img class="avatar" src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
-            <div class="bot-msg">Ah... salut ! Je suis YUUTO. Dis moi "genere une image de..." pour creer une image !</div>
+            <div class="bot-msg" id="intro"></div>
         </div>
     </div>
     <div id="bas">
@@ -42,6 +71,37 @@
         const historique = [];
         let loadingId = 0;
 
+        function getHumeur() {
+            const heure = new Date().getHours();
+            if (heure >= 6 && heure < 12) return {
+                humeur: "Encore endormi...",
+                personnalite: "Tu es YUUTO, un garcon timide qui adore les animes. Le matin tu es grognon et encore endormi, tu reponds avec peu d'energie et tu bailes souvent. Mais tu parles toujours des animes avec passion meme le matin."
+            };
+            if (heure >= 12 && heure < 18) return {
+                humeur: "Energique !",
+                personnalite: "Tu es YUUTO, un garcon timide qui adore les animes. L'apres-midi tu es energique et bavard, tu parles beaucoup des animes et des jeux video avec enthousiasme !"
+            };
+            if (heure >= 18 && heure < 22) return {
+                humeur: "Calme et philosophe",
+                personnalite: "Tu es YUUTO, un garcon timide qui adore les animes. Le soir tu es calme et philosophe, tu fais des reflexions profondes sur la vie en utilisant des references aux animes."
+            };
+            return {
+                humeur: "Mysterieux...",
+                personnalite: "Tu es YUUTO, un garcon timide qui adore les animes. La nuit tu es mysterieux et poetique, tu parles des animes comme si c'etait de la poesie et tu utilises des metaphores."
+            };
+        }
+
+        const humeurInfo = getHumeur();
+        document.getElementById('humeur').textContent = humeurInfo.humeur;
+
+        const introMessages = {
+            "Encore endormi...": "Mmmh... ah c'est toi... je regardais Demon Slayer jusqu'a 3h du mat... j'suis fatigue...",
+            "Energique !": "Ah salut ! Je viens de finir Attack on Titan pour la 3eme fois, trop bien ! Tu veux parler d'animes ?",
+            "Calme et philosophe": "Bonsoir... je pensais justement a One Piece et au sens de l'aventure dans nos vies...",
+            "Mysterieux...": "Tu es la... comme Naruto dans la nuit avant un grand combat... qu'est ce qui t'amene ?"
+        };
+        document.getElementById('intro').textContent = introMessages[humeurInfo.humeur];
+
         async function envoyer() {
             const msg = document.getElementById('msg').value;
             if (!msg) return;
@@ -49,7 +109,7 @@
             document.getElementById('chat').innerHTML += `<div class="moi">${msg}</div>`;
 
             if (msg.toLowerCase().includes('genere') || msg.toLowerCase().includes('génère') || msg.toLowerCase().includes('image de')) {
-                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi, '').trim() + ' anime style manga';
+                const prompt = msg.replace(/genere|génère|une image de|image de|image/gi, '').trim() + ' anime manga style, high quality, detailed, 4k, vibrant colors, japanese animation';
                 loadingId++;
                 const currentId = 'loading' + loadingId;
                 document.getElementById('chat').innerHTML += `
@@ -62,7 +122,7 @@
                     const image = await puter.ai.txt2img(prompt);
                     document.getElementById(currentId).innerHTML = `Voila ton image !<br><img class="generated" src="${image.src}"/>`;
                 } catch(e) {
-                    document.getElementById(currentId).innerHTML = "Desole, je n'ai pas pu generer l'image 😅";
+                    document.getElementById(currentId).innerHTML = "Desole, je n'ai pas pu generer l'image";
                 }
             } else {
                 historique.push({"role": "user", "content": msg});
@@ -75,7 +135,7 @@
                     body: JSON.stringify({
                         model: 'llama-3.3-70b-versatile',
                         messages: [
-                            {role: 'system', content: "Tu t'appelles YUUTO. Tu es un garcon un peu timide mais pas trop. Tu adores les animes et les jeux video. Tu es sympa et accessible. Tu reponds en francais."},
+                            {role: 'system', content: humeurInfo.personnalite + " Tu reponds toujours en francais."},
                             ...historique
                         ]
                     })
