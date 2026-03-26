@@ -111,6 +111,7 @@
     <script>
         const AVATAR = "https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg";
         const historique = [];
+        const animesDejaRecommandes = [];
         let loadingId = 0;
         let estAntoine = false;
         let memoire = {};
@@ -143,6 +144,7 @@
             else humeurActuelle = "la nuit tu es mysterieux";
 
             const animesPrefs = memoire.animes ? `Les animes preferes de la personne sont : ${memoire.animes}.` : "La personne n'a pas encore mentionne ses animes preferes.";
+            const dejarecommandes = animesDejaRecommandes.length > 0 ? `Ne recommande SURTOUT PAS ces animes deja recommandes : ${animesDejaRecommandes.join(', ')}.` : "";
 
             document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande moi un anime !</div>`;
 
@@ -156,12 +158,13 @@
                         content: window.humeurInfo.personnalite
                     }, {
                         role: 'user',
-                        content: `Recommande moi un anime en tenant compte de ces infos : ${humeurActuelle}. ${animesPrefs} Donne le nom de l'anime, une courte description et pourquoi tu le recommandes selon mon humeur et mes gouts. Reponds de maniere ${estAntoine ? 'tres familiere comme a un pote' : 'sympa'}.`
+                        content: `Recommande moi UN anime DIFFERENT a chaque fois. ${dejarecommandes} Tiens compte de : ${humeurActuelle}. ${animesPrefs} Donne le nom, une courte description et pourquoi tu le recommandes. Reponds de maniere ${estAntoine ? 'tres familiere comme a un pote' : 'sympa'}. Numero aleatoire : ${Math.floor(Math.random() * 10000)}`
                     }]
                 })
             });
             const data = await rep.json();
             const reponse = data.choices[0].message.content;
+            animesDejaRecommandes.push(reponse.split('\n')[0]);
             ajouterMessageBot(reponse);
         }
 
