@@ -22,6 +22,7 @@
         #header img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
         #header span { font-size: 18px; font-weight: bold; }
         #humeur { font-size: 12px; color: #aaa; }
+        #modePerso { font-size: 11px; color: #f59e0b; }
         #headerBtns { margin-left: auto; display: flex; gap: 8px; }
         #callBtn { background: #22c55e; border: none; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; cursor: pointer; }
         #menuBtn { background: #333; border: none; color: white; padding: 8px 12px; border-radius: 20px; font-size: 18px; cursor: pointer; }
@@ -32,6 +33,17 @@
         .menu-option label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
         .menu-option input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none; }
         #closeMenu { background: #7c3aed; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; width: 100%; margin-top: 10px; cursor: pointer; }
+
+        /* Popup personnage */
+        #persoScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
+        #persoBox { background: #222; border-radius: 20px; padding: 25px; width: 80%; max-width: 350px; display: flex; flex-direction: column; gap: 15px; }
+        #persoBox h2 { margin: 0; text-align: center; }
+        #persoBox p { color: #aaa; margin: 0; text-align: center; font-size: 14px; }
+        #persoInput { padding: 12px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; text-align: center; }
+        #persoConfirm { background: #f59e0b; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 16px; cursor: pointer; }
+        #persoReset { background: #333; color: white; border: none; padding: 12px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+        #persoClose { background: #555; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+
         #callScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #111; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 999; }
         #callScreen img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #22c55e; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 70% { box-shadow: 0 0 0 20px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
@@ -48,8 +60,10 @@
         .bot-msg img.generated { max-width: 200px; border-radius: 10px; margin-top: 5px; display: block; }
         .audio-btn { background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; margin-top: 5px; padding: 0; }
         #bas { display: flex; flex-direction: column; padding: 10px; gap: 8px; }
+        #basButtons2 { display: flex; gap: 5px; }
         #basButtons { display: flex; gap: 5px; }
-        #recommandeBtn { background: #f59e0b; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; width: 100%; }
+        #recommandeBtn { background: #f59e0b; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; flex: 1; }
+        #persoBtn { background: #e11d48; color: white; border: none; padding: 10px; border-radius: 20px; font-size: 14px; cursor: pointer; flex: 1; }
         #msg { flex: 1; padding: 10px; border-radius: 20px; border: none; font-size: 16px; background: #333; color: white; }
         #btn { background: #7c3aed; color: white; border: none; padding: 10px 15px; border-radius: 20px; font-size: 16px; }
         #micBtn { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 20px; font-size: 20px; }
@@ -77,6 +91,17 @@
         </div>
     </div>
 
+    <div id="persoScreen">
+        <div id="persoBox">
+            <h2>🎭 Mode Personnage</h2>
+            <p>Quel personnage d'anime tu veux ?</p>
+            <input id="persoInput" type="text" placeholder="Ex: Naruto, Levi, Goku..."/>
+            <button id="persoConfirm" onclick="activerPersonnage()">Transformer YUUTO !</button>
+            <button id="persoReset" onclick="resetPersonnage()">Redevenir YUUTO</button>
+            <button id="persoClose" onclick="fermerPerso()">Fermer</button>
+        </div>
+    </div>
+
     <div id="callScreen">
         <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1774477095/Fait_moi_un_cercle_un_peu_comme_chat_gpt_mais_fa%C3%A7ons_manga_20260325_054242_0000_xiedh6.jpg"/>
         <div id="callName">YUUTO</div>
@@ -93,6 +118,7 @@
             <div>
                 <span>YUUTO</span><br/>
                 <span id="humeur"></span>
+                <span id="modePerso"></span>
             </div>
             <div id="headerBtns">
                 <button id="callBtn" onclick="demarrerAppel()">📞</button>
@@ -101,7 +127,10 @@
         </div>
         <div id="chat"></div>
         <div id="bas">
-            <button id="recommandeBtn" onclick="recommander()">🎌 Recommande moi un anime !</button>
+            <div id="basButtons2">
+                <button id="recommandeBtn" onclick="recommander()">🎌 Anime</button>
+                <button id="persoBtn" onclick="ouvrirPerso()">🎭 Personnage</button>
+            </div>
             <div id="basButtons">
                 <button id="micBtn" onclick="toggleMic()">🎤</button>
                 <input id="msg" type="text" placeholder="Ecris ou parle..."/>
@@ -121,6 +150,7 @@
         let isListening = false;
         let enAppel = false;
         let yuutoParle = false;
+        let personnageActuel = null;
 
         window.onload = function() {
             const couleur = localStorage.getItem('yuuto_couleur');
@@ -137,29 +167,48 @@
             localStorage.setItem('yuuto_couleur', couleur);
         }
 
+        function ouvrirPerso() { document.getElementById('persoScreen').style.display = 'flex'; }
+        function fermerPerso() { document.getElementById('persoScreen').style.display = 'none'; }
+
+        function activerPersonnage() {
+            const perso = document.getElementById('persoInput').value.trim();
+            if (!perso) return;
+            personnageActuel = perso;
+            document.getElementById('modePerso').textContent = `🎭 Mode ${perso}`;
+            document.getElementById('persoScreen').style.display = 'none';
+            historique.length = 0;
+            ajouterMessageBot(`Hm... *transformation* Je suis maintenant ${perso} ! Parle moi ! 🎭`, perso);
+        }
+
+        function resetPersonnage() {
+            personnageActuel = null;
+            document.getElementById('modePerso').textContent = '';
+            document.getElementById('persoScreen').style.display = 'none';
+            historique.length = 0;
+            ajouterMessageBot(`Oe je suis de retour, c'est YUUTO ! 😄`);
+        }
+
+        function getSystemPrompt() {
+            if (personnageActuel) {
+                return `Tu joues le role de ${personnageActuel}, un personnage d'anime connu. Tu parles exactement comme ce personnage, tu utilises ses expressions typiques, sa personnalite, ses references. Tu restes dans son personnage en toutes circonstances. Tu reponds en francais.`;
+            }
+            return window.humeurInfo.personnalite;
+        }
+
         async function recommander() {
             const heure = new Date().getHours();
-            let humeurActuelle = "";
-            if (heure >= 6 && heure < 12) humeurActuelle = "le matin tu es fatigue";
-            else if (heure >= 12 && heure < 18) humeurActuelle = "l'apres-midi tu es energique";
-            else if (heure >= 18 && heure < 22) humeurActuelle = "le soir tu es calme et philosophe";
-            else humeurActuelle = "la nuit tu es mysterieux";
-
-            const animesPrefs = memoire.animes ? `Les animes preferes de la personne sont : ${memoire.animes}.` : "La personne n'a pas encore mentionne ses animes preferes.";
-            const dejarecommandes = animesDejaRecommandes.length > 0 ? `Ne recommande SURTOUT PAS ces animes deja recommandes : ${animesDejaRecommandes.join(', ')}.` : "";
+            let humeurActuelle = heure >= 6 && heure < 12 ? "fatigue le matin" : heure >= 12 && heure < 18 ? "energique l'apres-midi" : heure >= 18 && heure < 22 ? "calme le soir" : "mysterieux la nuit";
+            const animesPrefs = memoire.animes ? `Animes preferes : ${memoire.animes}.` : "";
+            const dejarecommandes = animesDejaRecommandes.length > 0 ? `Ne recommande PAS : ${animesDejaRecommandes.join(', ')}.` : "";
 
             document.getElementById('chat').innerHTML += `<div class="moi">🎌 Recommande moi un anime !</div>`;
-
             const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
                 body: JSON.stringify({
                     model: 'llama-3.3-70b-versatile',
-                    messages: [{
-                        role: 'system', content: window.humeurInfo.personnalite
-                    }, {
-                        role: 'user',
-                        content: `Recommande moi UN anime DIFFERENT a chaque fois. ${dejarecommandes} Tiens compte de : ${humeurActuelle}. ${animesPrefs} Donne le nom, une courte description et pourquoi tu le recommandes. Reponds de maniere ${estAntoine ? 'tres familiere comme a un pote' : 'sympa'}. Numero aleatoire : ${Math.floor(Math.random() * 10000)}`
+                    messages: [{ role: 'system', content: window.humeurInfo.personnalite }, {
+                        role: 'user', content: `Recommande UN anime DIFFERENT. ${dejarecommandes} ${humeurActuelle}. ${animesPrefs} Numero : ${Math.floor(Math.random() * 10000)}`
                     }]
                 })
             });
@@ -216,11 +265,12 @@
             return texte.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').replace(/'/g, "\\'");
         }
 
-        function ajouterMessageBot(texte) {
+        function ajouterMessageBot(texte, nom) {
             const texteNettoy = nettoyerTexte(texte);
+            const nomAffiche = nom || 'YUUTO';
             document.getElementById('chat').innerHTML += `
                 <div class="bot"><img class="avatar" src="${AVATAR}"/>
-                <div class="bot-msg">YUUTO : ${texte}<br>
+                <div class="bot-msg">${nomAffiche} : ${texte}<br>
                 <button class="audio-btn" onclick="parler('${texteNettoy}')">🔊 Ecouter</button>
                 </div></div>`;
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
@@ -230,8 +280,10 @@
             enAppel = true;
             document.getElementById('callScreen').style.display = 'flex';
             document.getElementById('callStatus').textContent = 'Connexion...';
-            const intro = estAntoine ? "Wsh Antoine ! Tu mappelles ?" : `Salut ${memoire.prenom} ! Tu mappelles ?`;
-            document.getElementById('callStatus').textContent = 'YUUTO parle...';
+            const nom = personnageActuel || 'YUUTO';
+            const intro = estAntoine ? `Wsh Antoine ! Tu mappelles ?` : `Salut ${memoire.prenom} ! Tu mappelles ?`;
+            document.getElementById('callName').textContent = nom;
+            document.getElementById('callStatus').textContent = `${nom} parle...`;
             parler(intro, () => { document.getElementById('callStatus').textContent = 'Appuie sur le micro pour parler'; });
         }
 
@@ -242,17 +294,17 @@
         }
 
         async function envoyerAppel(msg) {
-            document.getElementById('callStatus').textContent = 'YUUTO reflechit...';
+            document.getElementById('callStatus').textContent = 'Reflechit...';
             historique.push({"role": "user", "content": msg});
             const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
-                body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: window.humeurInfo.personnalite + " Tu reponds en phrases courtes." }, ...historique] })
+                body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: getSystemPrompt() + " Reponds en phrases courtes." }, ...historique] })
             });
             const data = await rep.json();
             const reponse = data.choices[0].message.content;
             historique.push({"role": "assistant", "content": reponse});
-            document.getElementById('callStatus').textContent = 'YUUTO parle...';
+            document.getElementById('callStatus').textContent = 'Parle...';
             parler(reponse.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, ''), () => {
                 if (enAppel) document.getElementById('callStatus').textContent = 'Appuie sur le micro pour parler';
             });
@@ -270,7 +322,6 @@
         }
 
         const creation = "Tu as ete cree par Antoine Gatore. Si quelqu'un te demande qui t'a cree, reponds fierement que c'est Antoine Gatore.";
-
         const baseFamilier = creation + " Tu es le meilleur ami de la personne depuis toujours. Tu parles comme un vrai pote, tres familier, tu dis 'bro', 'ptdr', 'oe', 'nah', 'wsh'. Tes reponses sont courtes. Parfois tu reponds juste 'nah flemme' mais seulement de temps en temps. Tu utilises des emojis. Tu reponds en francais.";
         const baseNormal = creation + " Tu es YUUTO, un assistant sympa et timide qui adore les animes. Tu es poli. Tu utilises des emojis. Tu reponds en francais.";
 
@@ -343,12 +394,12 @@
                 const rep = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
-                    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: window.humeurInfo.personnalite }, ...historique] })
+                    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'system', content: getSystemPrompt() }, ...historique] })
                 });
                 const data = await rep.json();
                 const reponse = data.choices[0].message.content;
                 historique.push({"role": "assistant", "content": reponse});
-                ajouterMessageBot(reponse);
+                ajouterMessageBot(reponse, personnageActuel);
             }
             document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
         }
