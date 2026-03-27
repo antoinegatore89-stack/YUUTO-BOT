@@ -3,15 +3,20 @@
 <head>
     <title>YUUTO-BOT</title>
     <link rel="manifest" href="manifest.json"/>
-    <link rel="apple-touch-icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
-    <link rel="icon" href="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
+    <link rel="apple-touch-icon" href="icon.png"/>
+    <link rel="icon" href="icon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#7c3aed"/>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial; background: #1a1a1a; color: white; height: 100vh; overflow: hidden; }
 
-        #login { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 15px; }
+        /* FOND MANGA JAPONAIS */
+        #mangaBg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
+        #mangaBg span { position: absolute; bottom: -50px; opacity: 0.08; color: #7c3aed; animation: floatSymbol linear infinite; }
+        @keyframes floatSymbol { 0%{transform:translateY(0) rotate(0deg);opacity:0.08} 50%{opacity:0.12} 100%{transform:translateY(-110vh) rotate(360deg);opacity:0} }
+
+        #login { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 15px; position: relative; z-index: 1; }
         #login img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #7c3aed; }
         #login h2 { font-size: 28px; background: linear-gradient(90deg, #7c3aed, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         #login p { color: #aaa; }
@@ -19,7 +24,7 @@
         #login button { background: linear-gradient(90deg, #7c3aed, #5b21b6); color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #erreur { color: red; display: none; font-size: 14px; }
 
-        #app { display: none; flex-direction: row; height: 100vh; width: 100%; overflow: hidden; }
+        #app { display: none; flex-direction: row; height: 100vh; width: 100%; overflow: hidden; position: relative; z-index: 1; }
 
         #sidebar { display: none; position: fixed; top: 0; left: 0; width: 270px; height: 100vh; background: #111; flex-direction: column; z-index: 100; border-right: 1px solid #222; }
         #sidebar.open { display: flex; }
@@ -157,7 +162,7 @@
         .ac-zzz { position: absolute; top: -25px; right: 5px; font-size: 18px; z-index: 10; display: none; animation: floatZzz 2s infinite; }
         .ac-sparkle { position: absolute; top: -20px; left: 5px; font-size: 16px; z-index: 10; display: none; animation: sparkleAnim 1s infinite alternate; }
         .ac-stars { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 14px; z-index: 10; display: none; animation: starsAnim 1.5s infinite; }
-        @keyframes floatZzz { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-20px)} }
+        @keyframes floatZzz { 0%{opacity:0.08;transform:translateY(0)} 100%{opacity:0;transform:translateY(-20px)} }
         @keyframes sparkleAnim { 0%{opacity:0.5;transform:scale(0.8)} 100%{opacity:1;transform:scale(1.3)} }
         @keyframes starsAnim { 0%,100%{opacity:1} 50%{opacity:0.3} }
         #videoCallBubble { background: rgba(20,20,40,0.92); border: 1px solid #7c3aed; border-radius: 20px; padding: 12px 20px; width: 90%; max-width: 320px; font-size: 14px; text-align: center; color: white; min-height: 45px; }
@@ -168,6 +173,9 @@
     </style>
 </head>
 <body>
+
+<!-- FOND MANGA JAPONAIS -->
+<div id="mangaBg"></div>
 
 <div id="login">
     <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
@@ -376,6 +384,7 @@
     const MAX_TRANSFO_PREMIUM=5;
     const PERSONNAGES_BANNIS=['hitler','staline','mussolini','bin laden','pol pot','mao zedong','saddam'];
     const MOTS_SENSIBLES=['suicide','me tuer','me suicider','comment mourir','me pendre','me noyer','finir ma vie','mettre fin'];
+    const SYMBOLES_MANGA=['⛩️','🎌','忍','侍','武','道','龍','神','夢','愛','力','心','剣','炎','風','雷'];
 
     const historique=[];
     const animesDejaRecommandes=[];
@@ -394,6 +403,26 @@
     let blinkInterval=null;
     let humeurVideo='normal';
     let modeCodex=false;
+
+    function activerFondManga(){
+        const bg=document.getElementById('mangaBg');
+        bg.style.display='block';
+        bg.innerHTML='';
+        for(let i=0;i<25;i++){
+            const s=document.createElement('span');
+            s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];
+            s.style.left=Math.random()*100+'%';
+            s.style.bottom='-50px';
+            s.style.position='absolute';
+            s.style.fontSize=(18+Math.random()*22)+'px';
+            s.style.animationDuration=(8+Math.random()*12)+'s';
+            s.style.animationDelay=(Math.random()*8)+'s';
+            s.style.opacity='0.08';
+            s.style.color=Math.random()>0.5?'#7c3aed':'#f59e0b';
+            s.style.animation=`floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite`;
+            bg.appendChild(s);
+        }
+    }
 
     function toggleCodex(){
         modeCodex=document.getElementById('codexToggle').checked;
@@ -551,6 +580,8 @@
         const n=document.getElementById('nouveauNom').value.trim();if(!n)return;
         localStorage.setItem('yuuto_nom',n);memoire.prenom=n;estAntoine=n.toLowerCase()==="antoine gatore";
         document.getElementById('userName').textContent=n;document.getElementById('userAvatar').textContent=n[0].toUpperCase();
+        if(estAntoine)activerFondManga();
+        else document.getElementById('mangaBg').style.display='none';
         sauvegarderMemoire();fermerModal('menuScreen');ajouterMessageBot(estAntoine?`wsh nom change !`:`Nom change en ${n} ! 😊`);
     }
     function verifierCode(){
@@ -668,15 +699,19 @@
 
     function demarrer(){
         document.getElementById('login').style.display='none';
-        document.getElementById('app').style.display='flex'; // ✅ CORRIGE
+        document.getElementById('app').style.display='flex';
         initMic();majHistorique();
+
+        // FOND MANGA UNIQUEMENT POUR ANTOINE 🎌
+        if(estAntoine) activerFondManga();
+
         const hi=getHumeur(estAntoine);
         document.getElementById('humeur').textContent=hi.humeur;
         window.humeurInfo=hi;
         memoire.visites=(memoire.visites||0)+1;sauvegarderMemoire();
         document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';
         document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
-        const im={f:{"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
+        const im={f:{"😴 Endormi":"wsh... 😴 les symboles bougent 🎌","⚡ Energique":"YOOO 🔥 Antoine ! 忍","🌙 Calme":"wsh... 🌙 calme ce soir","✨ Mysterieux":"...✨ 龍"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
         let intro=estAntoine?im.f[hi.humeur]:im.n[hi.humeur];
         if(!estAntoine&&!estPremium)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
         document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
