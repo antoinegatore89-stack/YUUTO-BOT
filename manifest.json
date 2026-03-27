@@ -1,16 +1,17 @@
 {
   "name": "YUUTO-BOT",
   "short_name": "YUUTO-BOT",
-  "description": "Ton ami IA qui adore les animes",
+  "description": "Ton ami IA anime",
   "start_url": "/YUUTO-BOT/",
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#7c3aed",
   "icons": [
     {
-      "src": "https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ]
+}
