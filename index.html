@@ -44,9 +44,6 @@
         #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
         #mainContent { display: flex; flex-direction: column; flex: 1; height: 100vh; overflow: hidden; width: 100%; }
 
-        /* BOUTON JAPONAIS ROND */
-        #japonaisBtn { position: fixed; top: 10px; right: 65px; width: 38px; height: 38px; background: linear-gradient(135deg, #7c3aed, #f59e0b); border: none; border-radius: 50%; font-size: 18px; cursor: pointer; z-index: 50; box-shadow: 0 0 12px rgba(124,58,237,0.6); display: none; }
-
         #header { display: flex; align-items: center; padding: 10px 15px; background: #111; border-bottom: 1px solid #222; gap: 10px; flex-shrink: 0; }
         #toggleSidebar { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 5px 8px; border-radius: 8px; }
         #headerCenter { flex: 1; }
@@ -118,12 +115,10 @@
         .jap-level-btn .level-title { font-size: 16px; font-weight: bold; color: #f59e0b; }
         .jap-level-btn .level-desc { font-size: 12px; color: #aaa; margin-top: 3px; }
 
-        /* VIDEO CALL */
         #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #05051a 0%, #0d0525 50%, #120830 100%); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; }
         #videoCallTop { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 10px; }
         #videoCallName { font-size: 22px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 15px rgba(245,158,11,0.8); }
         #videoCallStatus { font-size: 13px; color: #888; }
-
         #vtuberChar { position: relative; width: 240px; height: 310px; filter: drop-shadow(0 0 20px rgba(124,58,237,0.4)); animation: charFloat 3s ease-in-out infinite; }
         @keyframes charFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
         .vt-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 155px; height: 155px; background: linear-gradient(180deg, #1a1a2e, #0d0d1e); border-radius: 8px 8px 15px 15px; }
@@ -162,20 +157,16 @@
         .vt-earring-r { position: absolute; top: 52px; right: -7px; width: 7px; height: 7px; background: #f59e0b; border-radius: 50%; z-index: 5; box-shadow: 0 0 6px #f59e0b; }
         .vt-brow-l { position: absolute; top: 25px; left: 12px; width: 36px; height: 6px; background: linear-gradient(90deg, #888890, #707080); border-radius: 2px; z-index: 8; transform: rotate(-4deg); }
         .vt-brow-r { position: absolute; top: 25px; right: 12px; width: 36px; height: 6px; background: linear-gradient(90deg, #707080, #888890); border-radius: 2px; z-index: 8; transform: rotate(4deg); }
-
-        /* YEUX PLUS GRANDS */
         .vt-eye-l { position: absolute; top: 38px; left: 10px; width: 42px; height: 34px; background: white; border-radius: 40% 40% 45% 45%; z-index: 8; overflow: hidden; transition: height 0.15s; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
         .vt-iris-l { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 26px; height: 26px; background: radial-gradient(circle at 33% 28%, #93c5fd, #3b82f6, #1d4ed8, #1e3a8a); border-radius: 50%; animation: eyeMove 5s ease-in-out infinite; box-shadow: 0 0 8px rgba(59,130,246,0.6); }
         .vt-pupil-l { position: absolute; top: 50%; left: 50%; transform: translate(-45%,-45%); width: 13px; height: 13px; background: #020215; border-radius: 50%; }
         .vt-shine-l { position: absolute; top: 18%; left: 55%; width: 8px; height: 8px; background: white; border-radius: 50%; opacity: 0.95; }
         .vt-shine-l2 { position: absolute; top: 58%; left: 20%; width: 4px; height: 4px; background: white; border-radius: 50%; opacity: 0.6; }
-
         .vt-eye-r { position: absolute; top: 38px; right: 10px; width: 42px; height: 34px; background: white; border-radius: 40% 40% 45% 45%; z-index: 8; overflow: hidden; transition: height 0.15s; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
         .vt-iris-r { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 26px; height: 26px; background: radial-gradient(circle at 33% 28%, #86efac, #22c55e, #16a34a, #14532d); border-radius: 50%; animation: eyeMove 5s ease-in-out infinite; box-shadow: 0 0 8px rgba(34,197,94,0.6); }
         .vt-pupil-r { position: absolute; top: 50%; left: 50%; transform: translate(-45%,-45%); width: 13px; height: 13px; background: #011501; border-radius: 50%; }
         .vt-shine-r { position: absolute; top: 18%; left: 55%; width: 8px; height: 8px; background: white; border-radius: 50%; opacity: 0.95; }
         .vt-shine-r2 { position: absolute; top: 58%; left: 20%; width: 4px; height: 4px; background: white; border-radius: 50%; opacity: 0.6; }
-
         @keyframes eyeMove { 0%,100%{transform:translate(-50%,-50%)} 25%{transform:translate(-42%,-50%)} 75%{transform:translate(-58%,-50%)} }
         .vt-blink-l { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: #ffd0a0; z-index: 10; transition: height 0.08s; }
         .vt-blink-r { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: #ffd0a0; z-index: 10; transition: height 0.08s; }
@@ -394,8 +385,8 @@
                 </div>
             </div>
             <div id="headerBtns">
-                <!-- BOUTON JAPONAIS ROND -->
-                <button id="japonaisBtn" onclick="ouvrirModal('japonaisScreen')" style="width:38px;height:38px;background:linear-gradient(135deg,#7c3aed,#f59e0b);border:none;border-radius:50%;font-size:16px;cursor:pointer;box-shadow:0 0 10px rgba(124,58,237,0.5);">🎌</button>
+                <!-- BOUTON JAPONAIS ROND ✅ -->
+                <button onclick="ouvrirModal('japonaisScreen')" style="width:38px;height:38px;background:linear-gradient(135deg,#7c3aed,#f59e0b);border:none;border-radius:50%;font-size:16px;cursor:pointer;box-shadow:0 0 10px rgba(124,58,237,0.5);">🎌</button>
                 <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
             </div>
         </div>
