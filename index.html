@@ -11,10 +11,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial; background: #1a1a1a; color: white; height: 100vh; overflow: hidden; }
 
-        /* FOND MANGA JAPONAIS */
         #mangaBg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
-        #mangaBg span { position: absolute; bottom: -50px; opacity: 0.08; color: #7c3aed; animation: floatSymbol linear infinite; }
-        @keyframes floatSymbol { 0%{transform:translateY(0) rotate(0deg);opacity:0.08} 50%{opacity:0.12} 100%{transform:translateY(-110vh) rotate(360deg);opacity:0} }
+        #mangaBg span { position: absolute; bottom: -50px; opacity: 0.08; animation: floatSymbol linear infinite; }
+        @keyframes floatSymbol { 0%{transform:translateY(0) rotate(0deg);opacity:0.08} 50%{opacity:0.13} 100%{transform:translateY(-110vh) rotate(360deg);opacity:0} }
 
         #login { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 15px; position: relative; z-index: 1; }
         #login img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #7c3aed; }
@@ -112,69 +111,30 @@
         .genre-btn { background: #222; color: white; border: 1px solid #333; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         .genre-btn:hover { background: #7c3aed; border-color: #7c3aed; }
 
-        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #0a0a2e 0%, #1a0a3e 100%); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; }
+        /* VIDEO CALL */
+        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #05051a 0%, #0d0520 50%, #150a30 100%); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; }
         #videoCallTop { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 10px; }
-        #videoCallName { font-size: 20px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 10px #f59e0b; }
-        #videoCallStatus { font-size: 13px; color: #aaa; }
-        #animeChar { position: relative; width: 220px; height: 280px; }
-        .ac-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 130px; height: 140px; background: linear-gradient(180deg, #7c3aed, #4c1d95); border-radius: 15px 15px 25px 25px; }
-        .ac-body::before { content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 40px; height: 20px; background: rgba(255,255,255,0.15); border-radius: 10px; }
-        .ac-neck { position: absolute; bottom: 135px; left: 50%; transform: translateX(-50%); width: 28px; height: 25px; background: #fde8c8; border-radius: 5px; }
-        .ac-arm-left { position: absolute; bottom: 80px; left: calc(50% - 80px); width: 28px; height: 90px; background: linear-gradient(180deg, #7c3aed, #4c1d95); border-radius: 14px; transform-origin: top center; animation: armSwayLeft 3s ease-in-out infinite; }
-        .ac-arm-left::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 22px; height: 22px; background: #fde8c8; border-radius: 50%; }
-        .ac-arm-right { position: absolute; bottom: 80px; right: calc(50% - 80px); width: 28px; height: 90px; background: linear-gradient(180deg, #7c3aed, #4c1d95); border-radius: 14px; transform-origin: top center; animation: armSwayRight 3s ease-in-out infinite; }
-        .ac-arm-right::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 22px; height: 22px; background: #fde8c8; border-radius: 50%; }
-        @keyframes armSwayLeft { 0%,100%{transform:rotate(8deg)} 50%{transform:rotate(15deg)} }
-        @keyframes armSwayRight { 0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(-15deg)} }
-        .ac-arm-left.wave { animation: waveArm 0.4s ease-in-out infinite alternate; }
-        @keyframes waveArm { 0%{transform:rotate(-30deg)} 100%{transform:rotate(30deg)} }
-        .ac-head { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 115px; background: linear-gradient(180deg, #fde8c8, #f8d4a8); border-radius: 55% 55% 48% 48%; border: 2px solid #f0c080; animation: headBob 2s ease-in-out infinite; z-index: 5; }
-        @keyframes headBob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-4px)} }
-        .ac-hair { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 130px; height: 70px; background: linear-gradient(180deg, #f8f8f8, #e8e8e8); border-radius: 55% 55% 0 0; z-index: 6; }
-        .ac-hair::before { content: ''; position: absolute; width: 35px; height: 55px; background: linear-gradient(180deg, #f8f8f8, #e8e8e8); border-radius: 0 0 50% 80%; left: -8px; top: 25px; }
-        .ac-hair::after { content: ''; position: absolute; width: 35px; height: 55px; background: linear-gradient(180deg, #f8f8f8, #e8e8e8); border-radius: 0 0 80% 50%; right: -8px; top: 25px; }
-        .ac-hair-front { position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 25px; height: 40px; background: linear-gradient(180deg, #ffffff, #f0f0f0); border-radius: 50% 50% 30% 30%; z-index: 7; }
-        .ac-ear-left { position: absolute; top: 38px; left: -8px; width: 16px; height: 20px; background: #fde8c8; border-radius: 50%; z-index: 4; }
-        .ac-ear-right { position: absolute; top: 38px; right: -8px; width: 16px; height: 20px; background: #fde8c8; border-radius: 50%; z-index: 4; }
-        .ac-brow-left { position: absolute; top: 28px; left: 18px; width: 28px; height: 4px; background: #bbb; border-radius: 2px; z-index: 8; transform: rotate(-5deg); }
-        .ac-brow-right { position: absolute; top: 28px; right: 18px; width: 28px; height: 4px; background: #bbb; border-radius: 2px; z-index: 8; transform: rotate(5deg); }
-        .ac-eye-left { position: absolute; top: 40px; left: 16px; width: 28px; height: 28px; background: white; border-radius: 50%; z-index: 8; overflow: hidden; transition: height 0.15s; }
-        .ac-eye-left-iris { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 20px; height: 20px; background: radial-gradient(circle at 35% 35%, #60a5fa, #1d4ed8, #1e3a8a); border-radius: 50%; animation: eyeMove 4s ease-in-out infinite; }
-        .ac-eye-left-pupil { position: absolute; top: 50%; left: 50%; transform: translate(-40%,-40%); width: 10px; height: 10px; background: #0a0a2e; border-radius: 50%; }
-        .ac-eye-left-shine { position: absolute; top: 25%; left: 60%; width: 6px; height: 6px; background: white; border-radius: 50%; }
-        .ac-eye-right { position: absolute; top: 40px; right: 16px; width: 28px; height: 28px; background: white; border-radius: 50%; z-index: 8; overflow: hidden; transition: height 0.15s; }
-        .ac-eye-right-iris { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 20px; height: 20px; background: radial-gradient(circle at 35% 35%, #4ade80, #16a34a, #14532d); border-radius: 50%; animation: eyeMove 4s ease-in-out infinite; }
-        .ac-eye-right-pupil { position: absolute; top: 50%; left: 50%; transform: translate(-40%,-40%); width: 10px; height: 10px; background: #0a2e0a; border-radius: 50%; }
-        .ac-eye-right-shine { position: absolute; top: 25%; left: 60%; width: 6px; height: 6px; background: white; border-radius: 50%; }
-        @keyframes eyeMove { 0%,100%{transform:translate(-50%,-50%)} 25%{transform:translate(-40%,-50%)} 75%{transform:translate(-60%,-50%)} }
-        .ac-blink-left { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: #fde8c8; z-index: 9; transition: height 0.1s; }
-        .ac-blink-right { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: #fde8c8; z-index: 9; transition: height 0.1s; }
-        .ac-nose { position: absolute; top: 68px; left: 50%; transform: translateX(-50%); z-index: 8; }
-        .ac-nose::before { content: ''; display: block; width: 6px; height: 6px; border-right: 2px solid #e8b89a; border-bottom: 2px solid #e8b89a; border-radius: 0 0 3px 0; }
-        .ac-blush-left { position: absolute; top: 62px; left: 8px; width: 22px; height: 12px; background: rgba(255,150,150,0.45); border-radius: 50%; z-index: 7; }
-        .ac-blush-right { position: absolute; top: 62px; right: 8px; width: 22px; height: 12px; background: rgba(255,150,150,0.45); border-radius: 50%; z-index: 7; }
-        .ac-mouth { position: absolute; top: 82px; left: 50%; transform: translateX(-50%); z-index: 8; transition: all 0.2s; }
-        .mouth-smile { width: 28px; height: 14px; border-bottom: 3px solid #c06070; border-radius: 0 0 14px 14px; }
-        .mouth-talk { width: 22px; height: 16px; background: #8b2252; border-radius: 50%; animation: talkAnim 0.25s ease-in-out infinite alternate; }
-        .mouth-sleepy { width: 18px; height: 8px; border-bottom: 2px solid #c06070; border-radius: 0 0 9px 9px; opacity: 0.6; }
-        .mouth-excited { width: 32px; height: 16px; border-bottom: 3px solid #c06070; border-radius: 0 0 16px 16px; }
-        @keyframes talkAnim { 0%{height:8px} 100%{height:20px} }
-        .ac-zzz { position: absolute; top: -25px; right: 5px; font-size: 18px; z-index: 10; display: none; animation: floatZzz 2s infinite; }
-        .ac-sparkle { position: absolute; top: -20px; left: 5px; font-size: 16px; z-index: 10; display: none; animation: sparkleAnim 1s infinite alternate; }
-        .ac-stars { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 14px; z-index: 10; display: none; animation: starsAnim 1.5s infinite; }
-        @keyframes floatZzz { 0%{opacity:0.08;transform:translateY(0)} 100%{opacity:0;transform:translateY(-20px)} }
-        @keyframes sparkleAnim { 0%{opacity:0.5;transform:scale(0.8)} 100%{opacity:1;transform:scale(1.3)} }
-        @keyframes starsAnim { 0%,100%{opacity:1} 50%{opacity:0.3} }
-        #videoCallBubble { background: rgba(20,20,40,0.92); border: 1px solid #7c3aed; border-radius: 20px; padding: 12px 20px; width: 90%; max-width: 320px; font-size: 14px; text-align: center; color: white; min-height: 45px; }
+        #videoCallName { font-size: 22px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 15px #f59e0b, 0 0 30px rgba(245,158,11,0.3); }
+        #videoCallStatus { font-size: 13px; color: #888; }
+
+        /* PERSONNAGE SVG AMELIORE */
+        #charContainer { position: relative; width: 280px; height: 340px; }
+        #charSVG { width: 100%; height: 100%; filter: drop-shadow(0 0 25px rgba(124,58,237,0.4)); animation: charFloat 3s ease-in-out infinite; }
+        @keyframes charFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+        /* Particules autour */
+        .charParticle { position: absolute; border-radius: 50%; animation: particleFloat linear infinite; }
+        @keyframes particleFloat { 0%{opacity:0;transform:translateY(0) scale(0)} 20%{opacity:1} 80%{opacity:1} 100%{opacity:0;transform:translateY(-80px) scale(1.5)} }
+
+        #videoCallBubble { background: rgba(15,10,35,0.95); border: 1px solid rgba(124,58,237,0.6); border-radius: 20px; padding: 12px 20px; width: 92%; max-width: 320px; font-size: 14px; text-align: center; color: white; min-height: 45px; box-shadow: 0 0 20px rgba(124,58,237,0.2); }
         #videoCallBtns { display: flex; gap: 20px; margin-bottom: 10px; }
-        #videoMicBtn { background: #333; color: white; border: 2px solid #555; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
-        #videoMicBtn.active { background: #22c55e; border-color: #22c55e; }
-        #videoEndBtn { background: #e11d48; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 24px; cursor: pointer; }
+        #videoMicBtn { background: #222; color: white; border: 2px solid #444; width: 62px; height: 62px; border-radius: 50%; font-size: 24px; cursor: pointer; transition: all 0.3s; }
+        #videoMicBtn.active { background: #22c55e; border-color: #22c55e; box-shadow: 0 0 20px rgba(34,197,94,0.5); }
+        #videoEndBtn { background: #e11d48; color: white; border: none; width: 62px; height: 62px; border-radius: 50%; font-size: 24px; cursor: pointer; box-shadow: 0 0 15px rgba(225,29,72,0.4); }
     </style>
 </head>
 <body>
 
-<!-- FOND MANGA JAPONAIS -->
 <div id="mangaBg"></div>
 
 <div id="login">
@@ -282,39 +242,268 @@
     </div>
 </div>
 
+<!-- VIDEO CALL AVEC NOUVEAU PERSONNAGE -->
 <div id="videoCallScreen">
     <div id="videoCallTop">
         <div id="videoCallName">YUUTO-BOT</div>
         <div id="videoCallStatus">En appel...</div>
     </div>
-    <div id="animeChar">
-        <div class="ac-zzz" id="acZzz">💤</div>
-        <div class="ac-sparkle" id="acSparkle">✨</div>
-        <div class="ac-stars" id="acStars">⭐</div>
-        <div class="ac-hair"><div class="ac-hair-front"></div></div>
-        <div class="ac-head">
-            <div class="ac-ear-left"></div>
-            <div class="ac-ear-right"></div>
-            <div class="ac-brow-left"></div>
-            <div class="ac-brow-right"></div>
-            <div class="ac-eye-left" id="eyeLeft">
-                <div class="ac-eye-left-iris"><div class="ac-eye-left-pupil"></div><div class="ac-eye-left-shine"></div></div>
-                <div class="ac-blink-left" id="blinkLeft"></div>
-            </div>
-            <div class="ac-eye-right" id="eyeRight">
-                <div class="ac-eye-right-iris"><div class="ac-eye-right-pupil"></div><div class="ac-eye-right-shine"></div></div>
-                <div class="ac-blink-right" id="blinkRight"></div>
-            </div>
-            <div class="ac-nose"></div>
-            <div class="ac-blush-left"></div>
-            <div class="ac-blush-right"></div>
-            <div class="ac-mouth"><div class="mouth-smile" id="mouthShape"></div></div>
-        </div>
-        <div class="ac-neck"></div>
-        <div class="ac-arm-left" id="armLeft"></div>
-        <div class="ac-arm-right"></div>
-        <div class="ac-body"></div>
+
+    <div id="charContainer">
+        <!-- Particules -->
+        <div class="charParticle" style="width:8px;height:8px;background:#7c3aed;left:20px;top:250px;animation-duration:4s;animation-delay:0s"></div>
+        <div class="charParticle" style="width:5px;height:5px;background:#f59e0b;left:240px;top:230px;animation-duration:3.5s;animation-delay:1s"></div>
+        <div class="charParticle" style="width:6px;height:6px;background:#60a5fa;left:40px;top:180px;animation-duration:5s;animation-delay:2s"></div>
+        <div class="charParticle" style="width:4px;height:4px;background:#4ade80;left:220px;top:280px;animation-duration:4.5s;animation-delay:0.5s"></div>
+        <div class="charParticle" style="width:7px;height:7px;background:#7c3aed;left:130px;top:310px;animation-duration:3s;animation-delay:1.5s"></div>
+
+        <svg id="charSVG" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <!-- Gradients -->
+                <radialGradient id="bgCircle" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:#1a0a3e;stop-opacity:0.8"/>
+                    <stop offset="100%" style="stop-color:#05051a;stop-opacity:0.3"/>
+                </radialGradient>
+                <radialGradient id="skinGrad" cx="45%" cy="35%" r="65%">
+                    <stop offset="0%" style="stop-color:#fff0d8"/>
+                    <stop offset="60%" style="stop-color:#fde0b0"/>
+                    <stop offset="100%" style="stop-color:#f5c87a"/>
+                </radialGradient>
+                <radialGradient id="skinShadow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:#f5c87a;stop-opacity:0"/>
+                    <stop offset="100%" style="stop-color:#d4a055;stop-opacity:0.4"/>
+                </radialGradient>
+                <radialGradient id="eyeBlue" cx="30%" cy="25%" r="70%">
+                    <stop offset="0%" style="stop-color:#93c5fd"/>
+                    <stop offset="40%" style="stop-color:#3b82f6"/>
+                    <stop offset="100%" style="stop-color:#1e3a8a"/>
+                </radialGradient>
+                <radialGradient id="eyeGreen" cx="30%" cy="25%" r="70%">
+                    <stop offset="0%" style="stop-color:#86efac"/>
+                    <stop offset="40%" style="stop-color:#22c55e"/>
+                    <stop offset="100%" style="stop-color:#14532d"/>
+                </radialGradient>
+                <radialGradient id="hairGrad" cx="50%" cy="20%" r="80%">
+                    <stop offset="0%" style="stop-color:#ffffff"/>
+                    <stop offset="50%" style="stop-color:#e8e8f0"/>
+                    <stop offset="100%" style="stop-color:#c8c8d8"/>
+                </radialGradient>
+                <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#8b5cf6"/>
+                    <stop offset="50%" style="stop-color:#7c3aed"/>
+                    <stop offset="100%" style="stop-color:#4c1d95"/>
+                </linearGradient>
+                <linearGradient id="collarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#1e1e3e"/>
+                    <stop offset="100%" style="stop-color:#0a0a1e"/>
+                </linearGradient>
+                <filter id="softGlow">
+                    <feGaussianBlur stdDeviation="2" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="strongGlow">
+                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <clipPath id="eyeLeftClip"><ellipse cx="0" cy="0" rx="17" ry="20"/></clipPath>
+                <clipPath id="eyeRightClip"><ellipse cx="0" cy="0" rx="17" ry="20"/></clipPath>
+            </defs>
+
+            <!-- Cercle fond lumineux -->
+            <circle cx="140" cy="170" r="135" fill="url(#bgCircle)"/>
+            <circle cx="140" cy="170" r="130" fill="none" stroke="#7c3aed" stroke-width="0.5" opacity="0.3"/>
+
+            <!-- CORPS -->
+            <!-- Torse principal -->
+            <path d="M75,310 Q70,265 80,245 Q100,225 140,222 Q180,225 200,245 Q210,265 205,310 Z" fill="url(#bodyGrad)"/>
+            <!-- Détail vêtement - ligne centrale -->
+            <path d="M140,222 L140,310" stroke="#5b21b6" stroke-width="1.5" opacity="0.6"/>
+            <!-- Boutons vêtement -->
+            <circle cx="140" cy="245" r="3" fill="#a78bfa" opacity="0.8"/>
+            <circle cx="140" cy="260" r="3" fill="#a78bfa" opacity="0.8"/>
+            <circle cx="140" cy="275" r="3" fill="#a78bfa" opacity="0.8"/>
+            <!-- Col vêtement -->
+            <path d="M110,230 Q125,215 140,222 Q155,215 170,230 Q160,235 140,232 Q120,235 110,230 Z" fill="url(#collarGrad)"/>
+            <!-- Bordure col dorée -->
+            <path d="M112,228 Q126,214 140,220 Q154,214 168,228" stroke="#f59e0b" stroke-width="1.5" fill="none" opacity="0.8"/>
+
+            <!-- BRAS GAUCHE -->
+            <path d="M80,248 Q60,268 55,300 Q53,308 58,312 Q63,316 67,308 Q70,292 88,272 Z" fill="url(#bodyGrad)"/>
+            <!-- Main gauche -->
+            <ellipse cx="57" cy="314" rx="11" ry="13" fill="url(#skinGrad)"/>
+            <!-- Doigts gauche -->
+            <path d="M48,308 Q44,302 46,296" stroke="#fde0b0" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M50,305 Q47,298 50,292" stroke="#fde0b0" stroke-width="4" stroke-linecap="round" fill="none" id="fingerL1"/>
+
+            <!-- BRAS DROIT -->
+            <path d="M200,248 Q220,268 225,300 Q227,308 222,312 Q217,316 213,308 Q210,292 192,272 Z" fill="url(#bodyGrad)" id="armRight"/>
+            <!-- Main droite -->
+            <ellipse cx="223" cy="314" rx="11" ry="13" fill="url(#skinGrad)"/>
+            <!-- Doigts droit -->
+            <path d="M232,308 Q236,302 234,296" stroke="#fde0b0" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M230,305 Q233,298 230,292" stroke="#fde0b0" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+            <!-- COU -->
+            <path d="M122,205 Q130,215 140,217 Q150,215 158,205 Q155,195 140,192 Q125,195 122,205 Z" fill="url(#skinGrad)"/>
+            <!-- Ombre cou -->
+            <path d="M125,207 Q132,216 140,217 Q148,216 155,207" stroke="#d4a055" stroke-width="1" fill="none" opacity="0.4"/>
+
+            <!-- CHEVEUX ARRIERE -->
+            <ellipse cx="140" cy="115" rx="78" ry="82" fill="url(#hairGrad)" opacity="0.9"/>
+            <!-- Mèches longues côtés -->
+            <path d="M68,120 Q48,165 52,220 Q55,235 60,230 Q58,200 72,165 Q78,145 80,125 Z" fill="url(#hairGrad)" opacity="0.85"/>
+            <path d="M212,120 Q232,165 228,220 Q225,235 220,230 Q222,200 208,165 Q202,145 200,125 Z" fill="url(#hairGrad)" opacity="0.85"/>
+            <!-- Mèches arrière longues -->
+            <path d="M100,195 Q90,230 95,270 Q97,280 102,275 Q100,245 108,215 Z" fill="url(#hairGrad)" opacity="0.7"/>
+            <path d="M180,195 Q190,230 185,270 Q183,280 178,275 Q180,245 172,215 Z" fill="url(#hairGrad)" opacity="0.7"/>
+
+            <!-- VISAGE -->
+            <ellipse id="faceEl" cx="140" cy="140" rx="66" ry="72" fill="url(#skinGrad)"/>
+            <!-- Ombre visage côtés -->
+            <ellipse cx="140" cy="140" rx="66" ry="72" fill="url(#skinShadow)"/>
+            <!-- Ligne mâchoire -->
+            <path d="M100,175 Q120,195 140,198 Q160,195 180,175" stroke="#d4a055" stroke-width="1" fill="none" opacity="0.3"/>
+
+            <!-- CHEVEUX AVANT / FRANGE -->
+            <!-- Frange principale -->
+            <path d="M74,105 Q82,68 140,62 Q198,68 206,105 Q198,82 140,78 Q82,82 74,105 Z" fill="url(#hairGrad)"/>
+            <!-- Mèche centrale longue -->
+            <path d="M128,62 Q135,45 140,42 Q145,45 152,62 Q147,72 140,76 Q133,72 128,62 Z" fill="url(#hairGrad)"/>
+            <!-- Mèches côtés frange -->
+            <path d="M74,105 Q68,92 72,78 Q76,70 82,75 Q78,88 80,105 Z" fill="url(#hairGrad)" opacity="0.9"/>
+            <path d="M206,105 Q212,92 208,78 Q204,70 198,75 Q202,88 200,105 Z" fill="url(#hairGrad)" opacity="0.9"/>
+            <!-- Mèches frange détaillées -->
+            <path d="M90,78 Q95,58 103,55 Q108,60 105,75 Z" fill="url(#hairGrad)" opacity="0.95"/>
+            <path d="M190,78 Q185,58 177,55 Q172,60 175,75 Z" fill="url(#hairGrad)" opacity="0.95"/>
+            <path d="M110,65 Q115,48 122,46 Q126,52 122,65 Z" fill="url(#hairGrad)"/>
+            <path d="M170,65 Q165,48 158,46 Q154,52 158,65 Z" fill="url(#hairGrad)"/>
+            <!-- Reflets cheveux -->
+            <path d="M105,72 Q118,60 133,58" stroke="white" stroke-width="2" fill="none" opacity="0.5" stroke-linecap="round"/>
+            <path d="M148,58 Q160,60 170,68" stroke="white" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+
+            <!-- OREILLES -->
+            <ellipse cx="74" cy="142" rx="11" ry="15" fill="url(#skinGrad)"/>
+            <ellipse cx="74" cy="142" rx="7" ry="10" fill="#f0b878" opacity="0.4"/>
+            <ellipse cx="206" cy="142" rx="11" ry="15" fill="url(#skinGrad)"/>
+            <ellipse cx="206" cy="142" rx="7" ry="10" fill="#f0b878" opacity="0.4"/>
+            <!-- Boucles d'oreilles -->
+            <circle cx="74" cy="154" r="5" fill="#7c3aed" filter="url(#softGlow)" opacity="0.9"/>
+            <circle cx="74" cy="154" r="2" fill="#a78bfa"/>
+            <circle cx="206" cy="154" r="5" fill="#7c3aed" filter="url(#softGlow)" opacity="0.9"/>
+            <circle cx="206" cy="154" r="2" fill="#a78bfa"/>
+
+            <!-- SOURCILS -->
+            <!-- Sourcil gauche - plus épais et expressif -->
+            <path d="M103,112 Q113,106 127,109" stroke="#8a7a6a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M104,113 Q114,108 127,110" stroke="#6a5a4a" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <!-- Sourcil droit -->
+            <path d="M153,109 Q167,106 177,112" stroke="#8a7a6a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M153,110 Q167,108 176,113" stroke="#6a5a4a" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- OEIL GAUCHE - BLEU - Plus grand et détaillé -->
+            <g id="eyeLeftGroup" transform="translate(113,136)">
+                <!-- Blanc de l'oeil -->
+                <ellipse cx="0" cy="0" rx="17" ry="20" fill="white"/>
+                <!-- Ombre blanc oeil -->
+                <ellipse cx="0" cy="3" rx="17" ry="17" fill="#e8e8f8" opacity="0.3"/>
+                <!-- Iris bleu -->
+                <ellipse id="irisLeft" cx="0" cy="0" rx="13" ry="15" fill="url(#eyeBlue)"/>
+                <!-- Pupille -->
+                <ellipse cx="0" cy="1" rx="7" ry="8" fill="#050520"/>
+                <!-- Reflet principal -->
+                <ellipse cx="5" cy="-5" rx="4" ry="4" fill="white" opacity="0.95"/>
+                <!-- Reflet secondaire -->
+                <ellipse cx="-4" cy="5" rx="2" ry="2" fill="white" opacity="0.6"/>
+                <!-- Brillance iris -->
+                <ellipse cx="3" cy="-8" rx="5" ry="2" fill="#93c5fd" opacity="0.4"/>
+                <!-- Cils supérieurs -->
+                <path d="M-17,-8 Q-20,-14 -18,-18" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M-10,-18 Q-11,-23 -8,-25" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M0,-20 Q0,-25 2,-27" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M10,-18 Q12,-23 14,-24" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M17,-8 Q21,-12 20,-16" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <!-- Cil inférieur -->
+                <path d="M-14,12 Q-16,16 -13,18" stroke="#1a1a2e" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+                <path d="M0,20 Q0,24 2,25" stroke="#1a1a2e" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+                <path d="M14,12 Q16,16 13,18" stroke="#1a1a2e" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+                <!-- Paupière blink -->
+                <ellipse id="blinkLeft" cx="0" cy="-2" rx="17" ry="0" fill="#fde0b0" opacity="0"/>
+            </g>
+
+            <!-- OEIL DROIT - VERT - Plus grand et détaillé -->
+            <g id="eyeRightGroup" transform="translate(167,136)">
+                <!-- Blanc de l'oeil -->
+                <ellipse cx="0" cy="0" rx="17" ry="20" fill="white"/>
+                <!-- Ombre blanc oeil -->
+                <ellipse cx="0" cy="3" rx="17" ry="17" fill="#e8f8e8" opacity="0.3"/>
+                <!-- Iris vert -->
+                <ellipse id="irisRight" cx="0" cy="0" rx="13" ry="15" fill="url(#eyeGreen)"/>
+                <!-- Pupille -->
+                <ellipse cx="0" cy="1" rx="7" ry="8" fill="#051505"/>
+                <!-- Reflet principal -->
+                <ellipse cx="5" cy="-5" rx="4" ry="4" fill="white" opacity="0.95"/>
+                <!-- Reflet secondaire -->
+                <ellipse cx="-4" cy="5" rx="2" ry="2" fill="white" opacity="0.6"/>
+                <!-- Brillance iris -->
+                <ellipse cx="3" cy="-8" rx="5" ry="2" fill="#86efac" opacity="0.4"/>
+                <!-- Cils supérieurs -->
+                <path d="M-17,-8 Q-20,-14 -18,-18" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M-10,-18 Q-11,-23 -8,-25" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M0,-20 Q0,-25 2,-27" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M10,-18 Q12,-23 14,-24" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M17,-8 Q21,-12 20,-16" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <!-- Cil inférieur -->
+                <path d="M-14,12 Q-16,16 -13,18" stroke="#1a1a2e" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+                <path d="M0,20 Q0,24 2,25" stroke="#1a1a2e" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+                <path d="M14,12 Q16,16 13,18" stroke="#1a1a2e" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+                <!-- Paupière blink -->
+                <ellipse id="blinkRight" cx="0" cy="-2" rx="17" ry="0" fill="#fde0b0" opacity="0"/>
+            </g>
+
+            <!-- NEZ - Plus détaillé -->
+            <path d="M133,162 Q137,170 140,172 Q143,170 147,162" stroke="#d4a055" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <path d="M136,170 Q138,173 140,174 Q142,173 144,170" stroke="#c49045" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- JOUES -->
+            <ellipse cx="97" cy="160" rx="20" ry="12" fill="#ffaaaa" opacity="0.35"/>
+            <ellipse cx="183" cy="160" rx="20" ry="12" fill="#ffaaaa" opacity="0.35"/>
+            <!-- Petits points joues style anime -->
+            <circle cx="91" cy="158" r="2" fill="#ff8888" opacity="0.2"/>
+            <circle cx="189" cy="158" r="2" fill="#ff8888" opacity="0.2"/>
+
+            <!-- BOUCHE -->
+            <g id="mouthGroup">
+                <!-- Lèvres supérieures -->
+                <path id="lipTop" d="M125,178 Q132,174 140,175 Q148,174 155,178" stroke="#c06878" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <!-- Sourire normal -->
+                <path id="mouthNormal" d="M124,180 Q132,191 140,193 Q148,191 156,180" stroke="#c06878" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <!-- Bouche parlante -->
+                <ellipse id="mouthTalk" cx="140" cy="184" rx="0" ry="0" fill="#8b2252"/>
+                <ellipse id="mouthInner" cx="140" cy="185" rx="0" ry="0" fill="#6b1232"/>
+                <!-- Dents -->
+                <ellipse id="mouthTeeth" cx="140" cy="183" rx="0" ry="0" fill="white" opacity="0.9"/>
+            </g>
+
+            <!-- MARQUE ANIME / CICATRICE stylisée -->
+            <path d="M96,128 Q98,125 100,128" stroke="#c0a080" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+            <!-- ACCESSOIRE CHEVEUX - Bandeau/ornement -->
+            <path d="M112,76 L118,62 L124,74 L130,58 L136,72 L140,55 L144,72 L150,58 L156,74 L162,62 L168,76" stroke="#f59e0b" stroke-width="2.5" fill="none" filter="url(#softGlow)" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Gemme centrale -->
+            <ellipse cx="140" cy="55" rx="6" ry="5" fill="#f59e0b" filter="url(#strongGlow)"/>
+            <ellipse cx="140" cy="55" rx="3" ry="2.5" fill="white" opacity="0.6"/>
+            <!-- Petites gemmes côtés -->
+            <circle cx="118" cy="62" r="3" fill="#a78bfa" opacity="0.8"/>
+            <circle cx="162" cy="62" r="3" fill="#a78bfa" opacity="0.8"/>
+
+            <!-- EFFETS HUMEUR -->
+            <text id="acZzz" x="185" y="70" font-size="20" fill="#aaaaff" opacity="0" style="display:none">💤</text>
+            <text id="acSparkle" x="60" y="75" font-size="18" fill="#f59e0b" opacity="0" style="display:none">✨</text>
+            <text id="acStars" x="120" y="45" font-size="16" fill="#f59e0b" opacity="0" style="display:none">⭐</text>
+
+        </svg>
     </div>
+
     <div id="videoCallBubble">Salut ! Appuie sur le micro 😊</div>
     <div id="videoCallBtns">
         <button id="videoMicBtn" onclick="toggleVideoMic()">🎤</button>
@@ -403,23 +592,17 @@
     let blinkInterval=null;
     let humeurVideo='normal';
     let modeCodex=false;
+    let headBobTimer=0;
+    let animFrameId=null;
+    let talkPhase=0;
 
     function activerFondManga(){
         const bg=document.getElementById('mangaBg');
-        bg.style.display='block';
-        bg.innerHTML='';
+        bg.style.display='block';bg.innerHTML='';
         for(let i=0;i<25;i++){
             const s=document.createElement('span');
             s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];
-            s.style.left=Math.random()*100+'%';
-            s.style.bottom='-50px';
-            s.style.position='absolute';
-            s.style.fontSize=(18+Math.random()*22)+'px';
-            s.style.animationDuration=(8+Math.random()*12)+'s';
-            s.style.animationDelay=(Math.random()*8)+'s';
-            s.style.opacity='0.08';
-            s.style.color=Math.random()>0.5?'#7c3aed':'#f59e0b';
-            s.style.animation=`floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite`;
+            s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${18+Math.random()*22}px;color:${Math.random()>0.5?'#7c3aed':'#f59e0b'};animation:floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;
             bg.appendChild(s);
         }
     }
@@ -468,34 +651,107 @@
     function ouvrirModal(id){document.getElementById(id).style.display='flex';}
     function fermerModal(id){document.getElementById(id).style.display='none';}
 
-    function setHumeur(humeur){
-        humeurVideo=humeur;
-        const eL=document.getElementById('eyeLeft'),eR=document.getElementById('eyeRight'),mouth=document.getElementById('mouthShape');
-        const zzz=document.getElementById('acZzz'),sparkle=document.getElementById('acSparkle'),stars=document.getElementById('acStars');
-        zzz.style.display='none';sparkle.style.display='none';stars.style.display='none';
-        eL.style.height='28px';eR.style.height='28px';
-        if(humeur==='sleepy'){eL.style.height='12px';eR.style.height='12px';mouth.className='mouth-sleepy';zzz.style.display='block';}
-        else if(humeur==='excited'){eL.style.height='32px';eR.style.height='32px';mouth.className='mouth-excited';sparkle.style.display='block';}
-        else if(humeur==='mysterious'){mouth.className='mouth-smile';stars.style.display='block';}
-        else{mouth.className='mouth-smile';}
+    // ANIMATIONS PERSONNAGE AMELIORE
+    function animerPersonnage(){
+        animFrameId=requestAnimationFrame(animerPersonnage);
+        const t=Date.now()*0.001;
+
+        // Tete qui bouge doucement
+        const faceEl=document.getElementById('faceEl');
+        if(faceEl){
+            const bobY=Math.sin(t*0.8)*3;
+            faceEl.setAttribute('cy',140+bobY);
+        }
+
+        // Yeux qui bougent
+        const eyeMoveX=Math.sin(t*0.6)*4;
+        const eyeMoveY=Math.sin(t*0.4)*2;
+        const iL=document.getElementById('irisLeft'),iR=document.getElementById('irisRight');
+        if(iL)iL.setAttribute('transform',`translate(${eyeMoveX},${eyeMoveY})`);
+        if(iR)iR.setAttribute('transform',`translate(${eyeMoveX},${eyeMoveY})`);
+
+        // Clignement auto
+        headBobTimer++;
+        if(headBobTimer>180+Math.random()*120){headBobTimer=0;blinker();}
     }
 
-    function startTalking(){document.getElementById('mouthShape').className='mouth-talk';document.getElementById('armLeft').classList.add('wave');}
+    function blinker(){
+        const bL=document.getElementById('blinkLeft'),bR=document.getElementById('blinkRight');
+        if(!bL||!bR)return;
+        let ry=0;
+        const closing=setInterval(()=>{
+            ry+=4;bL.setAttribute('ry',ry);bL.setAttribute('opacity','1');bR.setAttribute('ry',ry);bR.setAttribute('opacity','1');
+            if(ry>=20){clearInterval(closing);setTimeout(()=>{const opening=setInterval(()=>{ry-=4;bL.setAttribute('ry',ry);bR.setAttribute('ry',ry);if(ry<=0){bL.setAttribute('opacity','0');bR.setAttribute('opacity','0');clearInterval(opening);}},15);},80);}
+        },15);
+    }
+
+    function setHumeur(humeur){
+        humeurVideo=humeur;
+        const eL=document.getElementById('eyeLeftGroup'),eR=document.getElementById('eyeRightGroup');
+        const mouth=document.getElementById('mouthNormal');
+        const zzz=document.getElementById('acZzz'),sparkle=document.getElementById('acSparkle'),stars=document.getElementById('acStars');
+
+        // Reset
+        if(zzz)zzz.style.display='none';
+        if(sparkle)sparkle.style.display='none';
+        if(stars)stars.style.display='none';
+
+        if(humeur==='sleepy'){
+            // Yeux mi-clos
+            if(eL)eL.setAttribute('transform','translate(113,140) scaleY(0.4)');
+            if(eR)eR.setAttribute('transform','translate(167,140) scaleY(0.4)');
+            if(zzz){zzz.style.display='block';zzz.setAttribute('opacity','0.8');}
+            stopTalking();
+        }else if(humeur==='excited'){
+            if(eL)eL.setAttribute('transform','translate(113,133) scaleY(1.15)');
+            if(eR)eR.setAttribute('transform','translate(167,133) scaleY(1.15)');
+            if(sparkle){sparkle.style.display='block';sparkle.setAttribute('opacity','0.9');}
+        }else if(humeur==='mysterious'){
+            if(eL)eL.setAttribute('transform','translate(113,138) scaleY(0.85)');
+            if(eR)eR.setAttribute('transform','translate(167,138) scaleY(0.85)');
+            if(stars){stars.style.display='block';stars.setAttribute('opacity','0.8');}
+        }else{
+            if(eL)eL.setAttribute('transform','translate(113,136)');
+            if(eR)eR.setAttribute('transform','translate(167,136)');
+        }
+    }
+
+    function startTalking(){
+        const mn=document.getElementById('mouthNormal'),mt=document.getElementById('mouthTalk');
+        const mi=document.getElementById('mouthInner'),teeth=document.getElementById('mouthTeeth');
+        const lt=document.getElementById('lipTop');
+        if(mn)mn.style.opacity='0';
+        if(lt)lt.style.opacity='0';
+        // Animation bouche parlante
+        let phase=0;
+        window._talkInterval=setInterval(()=>{
+            phase+=0.4;
+            const open=Math.abs(Math.sin(phase))*14;
+            if(mt){mt.setAttribute('rx',open*1.4);mt.setAttribute('ry',open);}
+            if(mi){mi.setAttribute('rx',open*1.1);mi.setAttribute('ry',open*0.65);}
+            if(teeth){teeth.setAttribute('rx',open*1.0);teeth.setAttribute('ry',open*0.35);}
+        },50);
+        // Bras qui wave
+        const armR=document.getElementById('armRight');
+        if(armR)armR.style.animation='armWave 0.5s ease-in-out infinite alternate';
+    }
+
     function stopTalking(){
-        const m=document.getElementById('mouthShape');
-        if(humeurVideo==='sleepy')m.className='mouth-sleepy';
-        else if(humeurVideo==='excited')m.className='mouth-excited';
-        else m.className='mouth-smile';
-        document.getElementById('armLeft').classList.remove('wave');
+        clearInterval(window._talkInterval);
+        const mn=document.getElementById('mouthNormal'),mt=document.getElementById('mouthTalk');
+        const mi=document.getElementById('mouthInner'),teeth=document.getElementById('mouthTeeth');
+        const lt=document.getElementById('lipTop');
+        if(mn)mn.style.opacity='1';
+        if(lt)lt.style.opacity='1';
+        if(mt){mt.setAttribute('rx',0);mt.setAttribute('ry',0);}
+        if(mi){mi.setAttribute('rx',0);mi.setAttribute('ry',0);}
+        if(teeth){teeth.setAttribute('rx',0);teeth.setAttribute('ry',0);}
+        const armR=document.getElementById('armRight');
+        if(armR)armR.style.animation='';
     }
 
     function startBlink(){
-        blinkInterval=setInterval(()=>{
-            const bL=document.getElementById('blinkLeft'),bR=document.getElementById('blinkRight');
-            if(!bL||!bR)return;
-            bL.style.height='100%';bR.style.height='100%';
-            setTimeout(()=>{bL.style.height='0';bR.style.height='0';},120);
-        },3500);
+        blinkInterval=setInterval(()=>{blinker();},3500+Math.random()*2000);
     }
 
     async function demarrerVideoAppel(){
@@ -508,6 +764,7 @@
         else if(h>=18&&h<22)setHumeur('normal');
         else setHumeur('mysterious');
         startBlink();
+        animerPersonnage();
         const intro=estAntoine?"Wsh Antoine tu mappelles en video !":`Salut ${memoire.prenom} tu mappelles en video !`;
         document.getElementById('videoCallBubble').textContent=intro;
         document.getElementById('videoCallStatus').textContent='Parle...';
@@ -519,6 +776,7 @@
         enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();
         window.speechSynthesis.cancel();
         if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}
+        if(animFrameId){cancelAnimationFrame(animFrameId);animFrameId=null;}
         document.getElementById('videoCallScreen').style.display='none';
     }
 
@@ -580,8 +838,7 @@
         const n=document.getElementById('nouveauNom').value.trim();if(!n)return;
         localStorage.setItem('yuuto_nom',n);memoire.prenom=n;estAntoine=n.toLowerCase()==="antoine gatore";
         document.getElementById('userName').textContent=n;document.getElementById('userAvatar').textContent=n[0].toUpperCase();
-        if(estAntoine)activerFondManga();
-        else document.getElementById('mangaBg').style.display='none';
+        if(estAntoine)activerFondManga();else document.getElementById('mangaBg').style.display='none';
         sauvegarderMemoire();fermerModal('menuScreen');ajouterMessageBot(estAntoine?`wsh nom change !`:`Nom change en ${n} ! 😊`);
     }
     function verifierCode(){
@@ -701,17 +958,14 @@
         document.getElementById('login').style.display='none';
         document.getElementById('app').style.display='flex';
         initMic();majHistorique();
-
-        // FOND MANGA UNIQUEMENT POUR ANTOINE 🎌
-        if(estAntoine) activerFondManga();
-
+        if(estAntoine)activerFondManga();
         const hi=getHumeur(estAntoine);
         document.getElementById('humeur').textContent=hi.humeur;
         window.humeurInfo=hi;
         memoire.visites=(memoire.visites||0)+1;sauvegarderMemoire();
         document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';
         document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
-        const im={f:{"😴 Endormi":"wsh... 😴 les symboles bougent 🎌","⚡ Energique":"YOOO 🔥 Antoine ! 忍","🌙 Calme":"wsh... 🌙 calme ce soir","✨ Mysterieux":"...✨ 龍"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
+        const im={f:{"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
         let intro=estAntoine?im.f[hi.humeur]:im.n[hi.humeur];
         if(!estAntoine&&!estPremium)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
         document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
