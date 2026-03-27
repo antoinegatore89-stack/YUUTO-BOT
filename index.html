@@ -43,7 +43,6 @@
         #premiumBadgeSide { background: #f59e0b; color: black; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; display: none; }
         #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
         #mainContent { display: flex; flex-direction: column; flex: 1; height: 100vh; overflow: hidden; width: 100%; }
-
         #header { display: flex; align-items: center; padding: 10px 15px; background: #111; border-bottom: 1px solid #222; gap: 10px; flex-shrink: 0; }
         #toggleSidebar { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 5px 8px; border-radius: 8px; }
         #headerCenter { flex: 1; }
@@ -63,6 +62,7 @@
         .bot-msg.codex { background: #0a1a2e; border-color: #00d4ff; border-left: 3px solid #00d4ff; }
         .bot-msg.urgent { background: #1a0a2a; border-color: #7c3aed; }
         .bot-msg.japonais { background: #1a1a0a; border-color: #f59e0b; border-left: 3px solid #f59e0b; }
+        .bot-msg.memoire { background: #0a2a1a; border-color: #22c55e; border-left: 3px solid #22c55e; }
         .perso1-msg { background: #1e3a5f; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .perso2-msg { background: #3a1e1e; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .audio-btn { background: none; border: none; color: #555; font-size: 12px; cursor: pointer; margin-top: 5px; display: block; padding: 0; }
@@ -114,6 +114,14 @@
         .jap-level-btn { padding: 15px; border-radius: 12px; border: 1px solid #f59e0b; background: #2a2a0a; color: white; font-size: 14px; cursor: pointer; text-align: left; }
         .jap-level-btn .level-title { font-size: 16px; font-weight: bold; color: #f59e0b; }
         .jap-level-btn .level-desc { font-size: 12px; color: #aaa; margin-top: 3px; }
+
+        /* MEMOIRE SCREEN */
+        #memoireScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
+        #memoireBox { background: #0a1a0a; border: 2px solid #22c55e; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 10px; max-height: 90vh; overflow-y: auto; }
+        #memoireBox h2 { text-align: center; font-size: 20px; background: linear-gradient(90deg, #22c55e, #86efac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .mem-item { background: #0f2a0f; padding: 12px; border-radius: 10px; border: 1px solid #22c55e; font-size: 13px; }
+        .mem-label { color: #22c55e; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+        .mem-value { color: #ddd; }
 
         #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #05051a 0%, #0d0525 50%, #120830 100%); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; }
         #videoCallTop { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 10px; }
@@ -222,6 +230,17 @@
     </div>
 </div>
 
+<!-- MODAL MEMOIRE -->
+<div id="memoireScreen">
+    <div id="memoireBox">
+        <h2>🧠 Mémoire de YUUTO-BOT</h2>
+        <p style="color:#aaa;text-align:center;font-size:12px">Tout ce que YUUTO sait sur toi 👇</p>
+        <div id="memoireContenu"></div>
+        <button class="modalBtn danger" onclick="effacerMemoire()" style="margin-top:5px">🗑️ Effacer la mémoire</button>
+        <button class="modalBtn secondary" onclick="fermerModal('memoireScreen')">Fermer</button>
+    </div>
+</div>
+
 <div class="modal" id="menuScreen">
     <div class="modalBox">
         <h2>⚙️ Paramètres</h2>
@@ -234,6 +253,7 @@
             </div>
             <div id="codexInfo" style="display:none;margin-top:10px;padding:10px;background:#0a1a2e;border-radius:8px;font-size:12px;color:#00d4ff;border:1px solid #00d4ff">✅ Mode Codex activé !<br/>📚 Devoirs, sciences, maths...</div>
         </div>
+        <button class="modalBtn secondary" onclick="ouvrirModal('memoireScreen');fermerModal('menuScreen')">🧠 Voir la mémoire</button>
         <button class="modalBtn secondary" onclick="fermerModal('menuScreen')">Fermer</button>
     </div>
 </div>
@@ -364,6 +384,7 @@
         <div id="historyLabel">Conversations</div>
         <div id="historyList"></div>
         <div id="sidebarFooter">
+            <button class="sidebarBtn" onclick="ouvrirModal('memoireScreen')">🧠 Mémoire</button>
             <button class="sidebarBtn" onclick="ouvrirModal('premiumScreen')">⭐ Pass Premium</button>
             <button class="sidebarBtn" onclick="ouvrirModal('menuScreen')">⚙️ Paramètres</button>
             <div id="userInfo">
@@ -385,7 +406,6 @@
                 </div>
             </div>
             <div id="headerBtns">
-                <!-- BOUTON JAPONAIS ROND ✅ -->
                 <button onclick="ouvrirModal('japonaisScreen')" style="width:38px;height:38px;background:linear-gradient(135deg,#7c3aed,#f59e0b);border:none;border-radius:50%;font-size:16px;cursor:pointer;box-shadow:0 0 10px rgba(124,58,237,0.5);">🎌</button>
                 <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
             </div>
@@ -436,6 +456,93 @@
     let blinkInterval=null;
     let humeurVideo='normal';
     let modeCodex=false;
+
+    // ===== SYSTEME MEMOIRE AVANCEE =====
+    function chargerMemoire(){
+        const d=localStorage.getItem('yuuto_memoire');
+        if(d)memoire=JSON.parse(d);
+    }
+
+    function sauvegarderMemoire(){
+        localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));
+    }
+
+    function mettreAJourMemoire(msg){
+        const ml=msg.toLowerCase();
+        const now=new Date().toLocaleDateString('fr-FR');
+        memoire.derniere_visite=now;
+
+        // Animes
+        if(ml.includes("j'aime")||ml.includes('mon anime préféré')||ml.includes('mon anime prefere')){
+            memoire.animes=msg;
+        }
+        // Jeux
+        if(ml.includes('mon jeu')||ml.includes("j'adore jouer")||ml.includes('je joue à')||ml.includes('je joue a')){
+            memoire.jeux=msg;
+        }
+        // Age
+        const ageMatch=msg.match(/j'ai (\d+) ans/i)||msg.match(/(\d+) ans/i);
+        if(ageMatch)memoire.age=ageMatch[1]+' ans';
+        // Pays/ville
+        if(ml.includes('je vis')||ml.includes('j\'habite')||ml.includes('je suis en')||ml.includes('je suis à')){
+            memoire.lieu=msg;
+        }
+        // Humeur
+        if(ml.includes('je suis triste')||ml.includes('je suis heureux')||ml.includes('je suis fatigué')||ml.includes('je suis content')){
+            memoire.humeur_user=msg;
+        }
+        // Sujets discutés
+        if(!memoire.sujets)memoire.sujets=[];
+        const sujetsKeys=['naruto','one piece','dragon ball','attack on titan','demon slayer','jujutsu','goku','luffy','code','python','foot','basketball'];
+        sujetsKeys.forEach(s=>{if(ml.includes(s)&&!memoire.sujets.includes(s))memoire.sujets.push(s);});
+        if(memoire.sujets.length>10)memoire.sujets=memoire.sujets.slice(-10);
+
+        sauvegarderMemoire();
+    }
+
+    function getMemoireTexte(){
+        let t="";
+        if(memoire.prenom)t+=`Prenom: ${memoire.prenom}. `;
+        if(memoire.age)t+=`Age: ${memoire.age}. `;
+        if(memoire.lieu)t+=`Lieu: ${memoire.lieu}. `;
+        if(memoire.animes)t+=`Animes aimes: ${memoire.animes}. `;
+        if(memoire.jeux)t+=`Jeux: ${memoire.jeux}. `;
+        if(memoire.sujets&&memoire.sujets.length>0)t+=`Sujets discutes: ${memoire.sujets.join(', ')}. `;
+        if(memoire.visites)t+=`Nombre de visites: ${memoire.visites}. `;
+        if(memoire.derniere_visite)t+=`Derniere visite: ${memoire.derniere_visite}. `;
+        return t?"[MEMOIRE DE YUUTO sur cet utilisateur]: "+t:"";
+    }
+
+    function afficherMemoire(){
+        const box=document.getElementById('memoireContenu');
+        const items=[
+            {label:'👤 Prénom',val:memoire.prenom},
+            {label:'🎂 Age',val:memoire.age},
+            {label:'📍 Lieu',val:memoire.lieu},
+            {label:'🎌 Animes aimés',val:memoire.animes},
+            {label:'🎮 Jeux',val:memoire.jeux},
+            {label:'💬 Sujets discutés',val:memoire.sujets?.join(', ')},
+            {label:'📅 Dernière visite',val:memoire.derniere_visite},
+            {label:'🔢 Nb visites',val:memoire.visites?.toString()},
+        ];
+        box.innerHTML=items.filter(i=>i.val).map(i=>`
+            <div class="mem-item">
+                <div class="mem-label">${i.label}</div>
+                <div class="mem-value">${i.val}</div>
+            </div>
+        `).join('')||'<div style="color:#aaa;text-align:center">Aucune info encore 😅</div>';
+    }
+
+    function effacerMemoire(){
+        const prenom=memoire.prenom;
+        memoire={prenom,visites:memoire.visites};
+        sauvegarderMemoire();
+        afficherMemoire();
+        ajouterMessageBot("Mémoire effacée 🗑️ Je recommence à apprendre sur toi ! 😊");
+        fermerModal('memoireScreen');
+    }
+
+    // ===== FIN MEMOIRE =====
 
     function activerFondManga(){
         const bg=document.getElementById('mangaBg');
@@ -492,9 +599,10 @@
     }
 
     function getSystemPrompt(){
-        if(modeCodex)return`Tu es ${NOM_BOT} en mode Codex. Expert sérieux. Réponds de façon détaillée. Français.`;
-        if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;
-        return window.humeurInfo.personnalite;
+        const mem=getMemoireTexte();
+        if(modeCodex)return`Tu es ${NOM_BOT} en mode Codex. Expert sérieux. Réponds de façon détaillée. Français. ${mem}`;
+        if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. Francais. ${mem}`;
+        return window.humeurInfo.personnalite+' '+mem;
     }
 
     function toggleSidebar(){
@@ -521,7 +629,10 @@
         });
     }
 
-    function ouvrirModal(id){document.getElementById(id).style.display='flex';}
+    function ouvrirModal(id){
+        document.getElementById(id).style.display='flex';
+        if(id==='memoireScreen')afficherMemoire();
+    }
     function fermerModal(id){document.getElementById(id).style.display='none';}
 
     function setHumeur(humeur){
@@ -720,11 +831,7 @@
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
-    function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d)memoire=JSON.parse(d);}
-    function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
-    function getMemoireTexte(){let t="";if(memoire.animes)t+=`animes:${memoire.animes}. `;if(memoire.prenom)t+=`prenom:${memoire.prenom}. `;return t?"Tu sais:"+t:"";}
-
-    const creation=`Tu t'appelles ${NOM_BOT}. Tu as ete cree par Antoine Gatore. Reponds fierement.`;
+    const creation=`Tu t'appelles ${NOM_BOT}. Tu as ete cree par Antoine Gatore. Reponds fierement. Tu te souviens de tout ce que l'utilisateur t'a dit. Utilise la memoire pour personnaliser tes reponses.`;
     const styleFam="Pote familier,'bro','ptdr','oe','wsh'.Court.Emojis.Francais.";
     const styleNorm="Sympa chaleureux.Emojis.Francais.";
     function getHumeur(fam){const h=new Date().getHours(),s=fam?styleFam:styleNorm,m=getMemoireTexte();if(h>=6&&h<12)return{humeur:"😴 Endormi",personnalite:creation+" endormi. "+m+s};if(h>=12&&h<18)return{humeur:"⚡ Energique",personnalite:creation+" energique. "+m+s};if(h>=18&&h<22)return{humeur:"🌙 Calme",personnalite:creation+" calme. "+m+s};return{humeur:"✨ Mysterieux",personnalite:creation+" mysterieux. "+m+s};}
@@ -745,11 +852,26 @@
         const hi=getHumeur(estAntoine);
         document.getElementById('humeur').textContent=hi.humeur;
         window.humeurInfo=hi;
-        memoire.visites=(memoire.visites||0)+1;sauvegarderMemoire();
+        memoire.visites=(memoire.visites||0)+1;
+        memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');
+        sauvegarderMemoire();
         document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';
         document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
-        const im={f:{"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
-        let intro=estAntoine?im.f[hi.humeur]:im.n[hi.humeur];
+
+        // Message de retour personnalisé selon mémoire
+        let intro='';
+        const estRetour=memoire.visites>1;
+        if(estAntoine){
+            const msgs={"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"};
+            intro=msgs[hi.humeur];
+            if(estRetour&&memoire.visites>2)intro+=` C'est ta ${memoire.visites}eme visite bro 🔥`;
+        }else{
+            const msgs={"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"};
+            intro=msgs[hi.humeur];
+            if(estRetour)intro+=` Content de te revoir ! 😊 Visite n°${memoire.visites} 🎉`;
+            if(memoire.animes)intro+=`<br>Je me souviens que tu aimes les animes ! 🎌`;
+        }
+
         if(!estAntoine&&!estPremium)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
         document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
     }
@@ -759,7 +881,10 @@
         document.getElementById('msg').value='';
         document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
         const ml=msg.toLowerCase();
-        if(ml.includes("j'aime")||ml.includes('mon anime')){memoire.animes=msg;sauvegarderMemoire();}
+
+        // MISE A JOUR MEMOIRE AUTOMATIQUE
+        mettreAJourMemoire(msg);
+
         if(MOTS_SENSIBLES.some(m=>ml.includes(m))){
             document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Je suis pas qualifie pour repondre a ca. Si tu traverses quelque chose de difficile parle a quelqu'un de confiance. Tu n'es pas seul 💙</div></div>`;
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;
