@@ -106,110 +106,69 @@
         .genre-btn { background: #222; color: white; border: 1px solid #333; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         .genre-btn:hover { background: #7c3aed; border-color: #7c3aed; }
 
-        /* ===== VIDEO CALL ===== */
         #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #05051a 0%, #0d0525 50%, #120830 100%); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; }
         #videoCallTop { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 10px; }
         #videoCallName { font-size: 22px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 15px rgba(245,158,11,0.8); }
         #videoCallStatus { font-size: 13px; color: #888; }
 
-        /* PERSONNAGE MASCULIN ANIME */
         #vtuberChar { position: relative; width: 240px; height: 310px; filter: drop-shadow(0 0 20px rgba(124,58,237,0.4)); animation: charFloat 3s ease-in-out infinite; }
         @keyframes charFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
-        /* CORPS MASCULIN */
-        .vt-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 155px; height: 155px; background: linear-gradient(180deg, #1a1a2e, #0d0d1e); border-radius: 8px 8px 15px 15px; box-shadow: inset 0 2px 10px rgba(255,255,255,0.05); }
-        /* Veste/uniforme */
+        .vt-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 155px; height: 155px; background: linear-gradient(180deg, #1a1a2e, #0d0d1e); border-radius: 8px 8px 15px 15px; }
         .vt-jacket { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 155px; height: 155px; background: linear-gradient(180deg, #1e1e3e, #0a0a1e); border-radius: 8px 8px 15px 15px; }
-        /* Col ouvert */
         .vt-jacket-left { position: absolute; bottom: 60px; left: calc(50% - 30px); width: 35px; height: 95px; background: linear-gradient(135deg, #2a2a4e, #1a1a3e); transform: rotate(-8deg); border-radius: 5px; }
         .vt-jacket-right { position: absolute; bottom: 60px; right: calc(50% - 30px); width: 35px; height: 95px; background: linear-gradient(225deg, #2a2a4e, #1a1a3e); transform: rotate(8deg); border-radius: 5px; }
-        /* Chemise intérieure visible */
         .vt-shirt { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); width: 25px; height: 105px; background: linear-gradient(180deg, #3a3a5e, #2a2a4e); border-radius: 3px; }
-        /* Épaules larges */
         .vt-shoulder-l { position: absolute; bottom: 105px; left: -5px; width: 40px; height: 55px; background: linear-gradient(180deg, #252540, #151528); border-radius: 8px 0 0 5px; }
         .vt-shoulder-r { position: absolute; bottom: 105px; right: -5px; width: 40px; height: 55px; background: linear-gradient(180deg, #252540, #151528); border-radius: 0 8px 5px 0; }
-        /* Bord veste doré */
         .vt-jacket-trim-l { position: absolute; bottom: 0; left: calc(50% - 78px); width: 3px; height: 155px; background: linear-gradient(180deg, #f59e0b, transparent); border-radius: 2px; opacity: 0.6; }
         .vt-jacket-trim-r { position: absolute; bottom: 0; right: calc(50% - 78px); width: 3px; height: 155px; background: linear-gradient(180deg, #f59e0b, transparent); border-radius: 2px; opacity: 0.6; }
-
-        /* COU MASCULIN */
         .vt-neck { position: absolute; bottom: 152px; left: 50%; transform: translateX(-50%); width: 30px; height: 25px; background: linear-gradient(180deg, #ffe0b8, #ffd0a0); border-radius: 4px; }
-
-        /* BRAS MASCULINS */
         .vt-arm-l { position: absolute; bottom: 80px; left: calc(50% - 105px); width: 35px; height: 110px; background: linear-gradient(180deg, #1e1e3e, #0a0a1e); border-radius: 5px 5px 12px 12px; transform-origin: top center; animation: armSwayL 3s ease-in-out infinite; }
         .vt-arm-r { position: absolute; bottom: 80px; right: calc(50% - 105px); width: 35px; height: 110px; background: linear-gradient(180deg, #1e1e3e, #0a0a1e); border-radius: 5px 5px 12px 12px; transform-origin: top center; animation: armSwayR 3s ease-in-out infinite; }
         @keyframes armSwayL { 0%,100%{transform:rotate(6deg)} 50%{transform:rotate(12deg)} }
         @keyframes armSwayR { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(-12deg)} }
         .vt-arm-l.wave { animation: waveAnim 0.45s ease-in-out infinite alternate !important; }
         @keyframes waveAnim { 0%{transform:rotate(-40deg)} 100%{transform:rotate(40deg)} }
-        /* Mains */
         .vt-hand-l { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; background: linear-gradient(135deg, #ffe0b8, #ffd0a0); border-radius: 50% 50% 45% 45%; }
         .vt-hand-r { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; background: linear-gradient(135deg, #ffe0b8, #ffd0a0); border-radius: 50% 50% 45% 45%; }
-
-        /* TETE MASCULINE - Plus carrée */
         .vt-head { position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 125px; height: 118px; background: linear-gradient(160deg, #fff2e0, #ffe0b8, #ffd0a0); border-radius: 42% 42% 40% 40%; box-shadow: inset -6px -4px 12px rgba(180,110,40,0.2), inset 4px 3px 8px rgba(255,255,255,0.3); animation: headBob 2.5s ease-in-out infinite; z-index: 5; }
         @keyframes headBob { 0%,100%{transform:translateX(-50%) translateY(0)} 40%{transform:translateX(-50%) translateY(-5px) rotate(-0.5deg)} 70%{transform:translateX(-50%) translateY(-3px) rotate(0.5deg)} }
-        /* Mâchoire définie */
         .vt-jaw { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 35px; background: linear-gradient(180deg, transparent, rgba(180,110,40,0.15)); border-radius: 0 0 40% 40%; z-index: 6; }
-
-        /* CHEVEUX BLANCS MASCULINS */
-        /* Base cheveux - épais et masculin */
         .vt-hair-base { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 145px; height: 75px; background: linear-gradient(180deg, #f8f8f8, #eeeeee, #e0e0e8); border-radius: 50% 50% 15% 15%; z-index: 6; box-shadow: inset 0 2px 6px rgba(200,200,220,0.4); }
-        /* Mèche centrale pointue vers le bas */
         .vt-hair-mid { position: absolute; top: -5px; left: 50%; transform: translateX(-52%); width: 30px; height: 48px; background: linear-gradient(180deg, #f8f8f8, #ececf4); border-radius: 45% 55% 40% 60%; z-index: 8; }
-        /* Mèches côtés rebelles */
         .vt-hair-spike-l1 { position: absolute; top: -12px; left: calc(50% - 58px); width: 20px; height: 42px; background: linear-gradient(150deg, #f8f8f8, #e8e8f0); border-radius: 60% 40% 50% 50%; z-index: 7; transform: rotate(-20deg); }
         .vt-hair-spike-r1 { position: absolute; top: -12px; right: calc(50% - 58px); width: 20px; height: 42px; background: linear-gradient(210deg, #f8f8f8, #e8e8f0); border-radius: 40% 60% 50% 50%; z-index: 7; transform: rotate(20deg); }
         .vt-hair-spike-l2 { position: absolute; top: -8px; left: calc(50% - 72px); width: 16px; height: 35px; background: linear-gradient(160deg, #f0f0f8, #e0e0ec); border-radius: 50% 50% 40% 60%; z-index: 6; transform: rotate(-35deg); }
         .vt-hair-spike-r2 { position: absolute; top: -8px; right: calc(50% - 72px); width: 16px; height: 35px; background: linear-gradient(200deg, #f0f0f8, #e0e0ec); border-radius: 50% 50% 60% 40%; z-index: 6; transform: rotate(35deg); }
-        /* Mèches latérales descendantes */
         .vt-hair-side-l { position: absolute; top: 30px; left: calc(50% - 78px); width: 18px; height: 65px; background: linear-gradient(180deg, #eeeeee, #d8d8e8, transparent); border-radius: 15px; z-index: 5; transform: rotate(-8deg); }
         .vt-hair-side-r { position: absolute; top: 30px; right: calc(50% - 78px); width: 18px; height: 65px; background: linear-gradient(180deg, #eeeeee, #d8d8e8, transparent); border-radius: 15px; z-index: 5; transform: rotate(8deg); }
-        /* Reflets cheveux */
-        .vt-hair-shine1 { position: absolute; top: -8px; left: 50%; transform: translateX(-20%); width: 40px; height: 12px; background: rgba(255,255,255,0.8); border-radius: 50%; z-index: 9; transform: translateX(-20%) rotate(-8deg); }
+        .vt-hair-shine1 { position: absolute; top: -8px; left: 50%; transform: translateX(-20%) rotate(-8deg); width: 40px; height: 12px; background: rgba(255,255,255,0.8); border-radius: 50%; z-index: 9; }
         .vt-hair-shine2 { position: absolute; top: -2px; left: 50%; transform: translateX(20%); width: 20px; height: 7px; background: rgba(255,255,255,0.5); border-radius: 50%; z-index: 9; }
-
-        /* OREILLES */
         .vt-ear-l { position: absolute; top: 40px; left: -9px; width: 16px; height: 22px; background: linear-gradient(135deg, #ffe0b8, #ffd0a0); border-radius: 50%; z-index: 4; }
         .vt-ear-r { position: absolute; top: 40px; right: -9px; width: 16px; height: 22px; background: linear-gradient(135deg, #ffe0b8, #ffd0a0); border-radius: 50%; z-index: 4; }
-        /* Boucle oreille petite */
         .vt-earring-l { position: absolute; top: 52px; left: -7px; width: 7px; height: 7px; background: #f59e0b; border-radius: 50%; z-index: 5; box-shadow: 0 0 6px #f59e0b; }
         .vt-earring-r { position: absolute; top: 52px; right: -7px; width: 7px; height: 7px; background: #f59e0b; border-radius: 50%; z-index: 5; box-shadow: 0 0 6px #f59e0b; }
-
-        /* SOURCILS MASCULINS - épais et droits */
         .vt-brow-l { position: absolute; top: 27px; left: 14px; width: 36px; height: 6px; background: linear-gradient(90deg, #888890, #707080); border-radius: 2px; z-index: 8; transform: rotate(-4deg); transition: all 0.3s; }
         .vt-brow-r { position: absolute; top: 27px; right: 14px; width: 36px; height: 6px; background: linear-gradient(90deg, #707080, #888890); border-radius: 2px; z-index: 8; transform: rotate(4deg); transition: all 0.3s; }
-
-        /* OEIL GAUCHE - BLEU - Forme en amande masculine */
         .vt-eye-l { position: absolute; top: 42px; left: 12px; width: 36px; height: 28px; background: white; border-radius: 40% 40% 45% 45%; z-index: 8; overflow: hidden; transition: height 0.15s; }
         .vt-iris-l { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 22px; height: 22px; background: radial-gradient(circle at 33% 28%, #93c5fd, #3b82f6, #1d4ed8, #1e3a8a); border-radius: 50%; animation: eyeMove 5s ease-in-out infinite; }
         .vt-pupil-l { position: absolute; top: 50%; left: 50%; transform: translate(-45%,-45%); width: 11px; height: 11px; background: #020215; border-radius: 50%; }
         .vt-shine-l { position: absolute; top: 20%; left: 55%; width: 7px; height: 7px; background: white; border-radius: 50%; opacity: 0.95; }
         .vt-shine-l2 { position: absolute; top: 60%; left: 20%; width: 3px; height: 3px; background: white; border-radius: 50%; opacity: 0.6; }
-
-        /* OEIL DROIT - VERT - Forme en amande masculine */
         .vt-eye-r { position: absolute; top: 42px; right: 12px; width: 36px; height: 28px; background: white; border-radius: 40% 40% 45% 45%; z-index: 8; overflow: hidden; transition: height 0.15s; }
         .vt-iris-r { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 22px; height: 22px; background: radial-gradient(circle at 33% 28%, #86efac, #22c55e, #16a34a, #14532d); border-radius: 50%; animation: eyeMove 5s ease-in-out infinite; }
         .vt-pupil-r { position: absolute; top: 50%; left: 50%; transform: translate(-45%,-45%); width: 11px; height: 11px; background: #011501; border-radius: 50%; }
         .vt-shine-r { position: absolute; top: 20%; left: 55%; width: 7px; height: 7px; background: white; border-radius: 50%; opacity: 0.95; }
         .vt-shine-r2 { position: absolute; top: 60%; left: 20%; width: 3px; height: 3px; background: white; border-radius: 50%; opacity: 0.6; }
-
         @keyframes eyeMove { 0%,100%{transform:translate(-50%,-50%)} 25%{transform:translate(-42%,-50%)} 75%{transform:translate(-58%,-50%)} }
-
-        /* Paupières blink */
         .vt-blink-l { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: #ffd0a0; z-index: 10; transition: height 0.08s; }
         .vt-blink-r { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: #ffd0a0; z-index: 10; transition: height 0.08s; }
-
-        /* NEZ MASCULIN */
         .vt-nose { position: absolute; top: 72px; left: 50%; transform: translateX(-50%); z-index: 8; width: 16px; height: 10px; }
         .vt-nose::before { content: ''; position: absolute; right: 0; bottom: 0; width: 7px; height: 7px; border-right: 2.5px solid rgba(180,110,40,0.6); border-bottom: 2.5px solid rgba(180,110,40,0.4); border-radius: 0 0 4px 0; }
         .vt-nose::after { content: ''; position: absolute; left: 0; bottom: 0; width: 7px; height: 7px; border-left: 2.5px solid rgba(180,110,40,0.6); border-bottom: 2.5px solid rgba(180,110,40,0.4); border-radius: 0 0 0 4px; }
-
-        /* JOUES légères */
         .vt-blush-l { position: absolute; top: 65px; left: 8px; width: 22px; height: 10px; background: radial-gradient(ellipse, rgba(255,140,140,0.3), transparent); border-radius: 50%; z-index: 7; }
         .vt-blush-r { position: absolute; top: 65px; right: 8px; width: 22px; height: 10px; background: radial-gradient(ellipse, rgba(255,140,140,0.3), transparent); border-radius: 50%; z-index: 7; }
-
-        /* BOUCHE MASCULINE */
         .vt-mouth { position: absolute; top: 87px; left: 50%; transform: translateX(-50%); z-index: 8; transition: all 0.15s; }
         .mouth-smile { width: 30px; height: 12px; border-bottom: 3px solid #b05868; border-radius: 0 0 12px 12px; }
         .mouth-talk { width: 24px; height: 16px; background: radial-gradient(ellipse, #7b1a2a, #5a1020); border-radius: 50%; animation: talkAnim 0.22s ease-in-out infinite alternate; }
@@ -217,12 +176,8 @@
         .mouth-excited { width: 34px; height: 14px; border-bottom: 3px solid #b05868; border-radius: 0 0 14px 14px; }
         .mouth-serious { width: 28px; height: 3px; background: #b05868; border-radius: 2px; }
         @keyframes talkAnim { 0%{height:8px;width:20px} 100%{height:19px;width:26px} }
-
-        /* AURA */
         .vt-aura { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.12), transparent 70%); z-index: 0; animation: auraAnim 3s ease-in-out infinite alternate; }
         @keyframes auraAnim { 0%{opacity:0.5;transform:translateX(-50%) scale(0.95)} 100%{opacity:1;transform:translateX(-50%) scale(1.08)} }
-
-        /* EFFETS HUMEUR */
         .vt-zzz { position: absolute; top: -28px; right: 5px; font-size: 18px; display: none; animation: floatEff 2s ease-in-out infinite; }
         .vt-sparkle { position: absolute; top: -22px; left: 5px; font-size: 16px; display: none; animation: sparkleEff 1s ease-in-out infinite alternate; }
         .vt-stars { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 15px; display: none; animation: starsEff 1.5s ease-in-out infinite; }
@@ -346,37 +301,27 @@
     </div>
 </div>
 
-<!-- VIDEO CALL -->
 <div id="videoCallScreen">
     <div id="videoCallTop">
         <div id="videoCallName">YUUTO-BOT</div>
         <div id="videoCallStatus">En appel...</div>
     </div>
-
     <div id="vtuberChar">
         <div class="vt-aura"></div>
         <div class="vt-zzz" id="vtZzz">💤</div>
         <div class="vt-sparkle" id="vtSparkle">✨</div>
         <div class="vt-stars" id="vtStars">⭐</div>
-
-        <!-- Cheveux longs derrière -->
         <div class="vt-hair-side-l"></div>
         <div class="vt-hair-side-r"></div>
-
-        <!-- Base cheveux blancs -->
         <div class="vt-hair-base">
             <div class="vt-hair-shine1"></div>
             <div class="vt-hair-shine2"></div>
         </div>
-
-        <!-- Mèches -->
         <div class="vt-hair-spike-l2"></div>
         <div class="vt-hair-spike-r2"></div>
         <div class="vt-hair-spike-l1"></div>
         <div class="vt-hair-spike-r1"></div>
         <div class="vt-hair-mid"></div>
-
-        <!-- Tete -->
         <div class="vt-head" id="vtHead">
             <div class="vt-jaw"></div>
             <div class="vt-ear-l"></div>
@@ -385,8 +330,6 @@
             <div class="vt-earring-r"></div>
             <div class="vt-brow-l" id="vtBrowL"></div>
             <div class="vt-brow-r" id="vtBrowR"></div>
-
-            <!-- Oeil gauche BLEU -->
             <div class="vt-eye-l" id="vtEyeL">
                 <div class="vt-iris-l" id="vtIrisL">
                     <div class="vt-pupil-l"></div>
@@ -395,8 +338,6 @@
                 </div>
                 <div class="vt-blink-l" id="vtBlinkL"></div>
             </div>
-
-            <!-- Oeil droit VERT -->
             <div class="vt-eye-r" id="vtEyeR">
                 <div class="vt-iris-r" id="vtIrisR">
                     <div class="vt-pupil-r"></div>
@@ -405,7 +346,6 @@
                 </div>
                 <div class="vt-blink-r" id="vtBlinkR"></div>
             </div>
-
             <div class="vt-nose"></div>
             <div class="vt-blush-l"></div>
             <div class="vt-blush-r"></div>
@@ -413,14 +353,9 @@
                 <div class="mouth-smile" id="vtMouthShape"></div>
             </div>
         </div>
-
         <div class="vt-neck"></div>
-
-        <!-- Epaules + Bras -->
         <div class="vt-arm-l" id="vtArmL"><div class="vt-hand-l"></div></div>
         <div class="vt-arm-r" id="vtArmR"><div class="vt-hand-r"></div></div>
-
-        <!-- Corps uniforme -->
         <div class="vt-jacket">
             <div class="vt-shoulder-l"></div>
             <div class="vt-shoulder-r"></div>
@@ -431,7 +366,6 @@
             <div class="vt-jacket-trim-r"></div>
         </div>
     </div>
-
     <div id="videoCallBubble">Salut ! Appuie sur le micro 😊</div>
     <div id="videoCallBtns">
         <button id="videoMicBtn" onclick="toggleVideoMic()">🎤</button>
@@ -583,24 +517,13 @@
         const zzz=document.getElementById('vtZzz'),sparkle=document.getElementById('vtSparkle'),stars=document.getElementById('vtStars');
         zzz.style.display='none';sparkle.style.display='none';stars.style.display='none';
         eL.style.height='28px';eR.style.height='28px';
-        if(humeur==='sleepy'){
-            eL.style.height='10px';eR.style.height='10px';
-            mouth.className='mouth-sleepy';zzz.style.display='block';
-        }else if(humeur==='excited'){
-            eL.style.height='30px';eR.style.height='30px';
-            mouth.className='mouth-excited';sparkle.style.display='block';
-        }else if(humeur==='mysterious'){
-            eL.style.height='20px';eR.style.height='20px';
-            mouth.className='mouth-serious';stars.style.display='block';
-        }else{
-            mouth.className='mouth-smile';
-        }
+        if(humeur==='sleepy'){eL.style.height='10px';eR.style.height='10px';mouth.className='mouth-sleepy';zzz.style.display='block';}
+        else if(humeur==='excited'){eL.style.height='30px';eR.style.height='30px';mouth.className='mouth-excited';sparkle.style.display='block';}
+        else if(humeur==='mysterious'){eL.style.height='20px';eR.style.height='20px';mouth.className='mouth-serious';stars.style.display='block';}
+        else{mouth.className='mouth-smile';}
     }
 
-    function startTalking(){
-        document.getElementById('vtMouthShape').className='mouth-talk';
-        document.getElementById('vtArmL').classList.add('wave');
-    }
+    function startTalking(){document.getElementById('vtMouthShape').className='mouth-talk';document.getElementById('vtArmL').classList.add('wave');}
     function stopTalking(){
         const m=document.getElementById('vtMouthShape');
         if(humeurVideo==='sleepy')m.className='mouth-sleepy';
@@ -643,11 +566,14 @@
         document.getElementById('videoCallScreen').style.display='none';
     }
 
+    // ✅ VOIX JAPONAISE
     function parlerVideo(texte,callback){
         const s=window.speechSynthesis;if(!s){if(callback)callback();return;}
         s.cancel();yuutoParle=true;startTalking();
         const u=new SpeechSynthesisUtterance(texte);
-        u.lang='fr-FR';u.rate=1;u.pitch=1.1;
+        u.lang='ja-JP'; // ✅ Accent japonais
+        u.rate=0.95;
+        u.pitch=1.2;
         u.onend=()=>{yuutoParle=false;stopTalking();if(callback)setTimeout(callback,500);};
         s.speak(u);
     }
@@ -789,7 +715,19 @@
 
     function toggleMic(){if(isListening)stopMic();else{if(!recognition)return;try{recognition.start();isListening=true;document.getElementById('micBtn').classList.add('active');document.getElementById('micBtn').textContent='🔴';}catch(e){}}}
     function stopMic(){try{if(recognition)recognition.stop();}catch(e){}isListening=false;}
-    function parler(t,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';u.rate=1;u.pitch=1;u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};s.speak(u);}
+
+    // ✅ VOIX JAPONAISE AUSSI POUR LE CHAT
+    function parler(t,cb){
+        const s=window.speechSynthesis;if(!s){if(cb)cb();return;}
+        s.cancel();yuutoParle=true;
+        const u=new SpeechSynthesisUtterance(t);
+        u.lang='ja-JP'; // ✅ Accent japonais
+        u.rate=0.95;
+        u.pitch=1.2;
+        u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};
+        s.speak(u);
+    }
+
     function nettoyerTexte(t){return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");}
 
     function ajouterMessageBot(texte,nom,isCodex=false){
