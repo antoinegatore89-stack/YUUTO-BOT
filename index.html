@@ -108,6 +108,20 @@
         .genre-btn { background: #222; color: white; border: 1px solid #333; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         .genre-btn:hover { background: #7c3aed; border-color: #7c3aed; }
 
+        /* MANGA STYLE */
+        .manga-container { background: #0a0a0a; border: 2px solid #333; border-radius: 12px; padding: 12px; margin-top: 8px; max-width: 100%; }
+        .manga-titre { font-size: 18px; font-weight: bold; text-align: center; color: #f59e0b; text-shadow: 0 0 10px rgba(245,158,11,0.5); margin-bottom: 10px; font-family: 'Arial Black', sans-serif; letter-spacing: 2px; }
+        .manga-genre-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; margin: 0 auto 10px; display: block; text-align: center; width: fit-content; }
+        .manga-case { border: 3px solid white; border-radius: 4px; margin-bottom: 8px; overflow: hidden; position: relative; background: #111; }
+        .manga-case img { width: 100%; display: block; border-radius: 1px; }
+        .manga-case-loading { width: 100%; height: 150px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 13px; background: #111; }
+        .manga-dialogue { background: white; color: black; border-radius: 15px 15px 15px 3px; padding: 8px 12px; font-size: 13px; font-weight: bold; margin: 5px 8px; position: relative; border: 2px solid #333; max-width: 80%; }
+        .manga-dialogue.right { border-radius: 15px 15px 3px 15px; margin-left: auto; margin-right: 8px; }
+        .manga-dialogue .perso { font-size: 10px; color: #7c3aed; font-weight: bold; margin-bottom: 2px; }
+        .manga-narrateur { background: rgba(0,0,0,0.8); color: #f59e0b; font-size: 11px; padding: 4px 8px; border-left: 3px solid #f59e0b; margin: 4px 8px; font-style: italic; }
+        .manga-sfx { font-size: 22px; font-weight: 900; color: white; text-shadow: 2px 2px 0 red, -2px -2px 0 #ff6600; text-align: center; padding: 5px; font-family: 'Arial Black'; letter-spacing: 3px; }
+        .manga-suite-btn { background: linear-gradient(90deg, #7c3aed, #f59e0b); border: none; color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; cursor: pointer; width: 100%; margin-top: 8px; font-weight: bold; }
+
         #japonaisScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
         #japonaisBox { background: #1a1a0a; border: 2px solid #f59e0b; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; max-height: 90vh; overflow-y: auto; }
         #japonaisBox h2 { text-align: center; font-size: 20px; background: linear-gradient(90deg, #f59e0b, #fcd34d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -115,7 +129,6 @@
         .jap-level-btn .level-title { font-size: 16px; font-weight: bold; color: #f59e0b; }
         .jap-level-btn .level-desc { font-size: 12px; color: #aaa; margin-top: 3px; }
 
-        /* MEMOIRE SCREEN */
         #memoireScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
         #memoireBox { background: #0a1a0a; border: 2px solid #22c55e; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 10px; max-height: 90vh; overflow-y: auto; }
         #memoireBox h2 { text-align: center; font-size: 20px; background: linear-gradient(90deg, #22c55e, #86efac); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -230,7 +243,6 @@
     </div>
 </div>
 
-<!-- MODAL MEMOIRE -->
 <div id="memoireScreen">
     <div id="memoireBox">
         <h2>🧠 Mémoire de YUUTO-BOT</h2>
@@ -422,7 +434,7 @@
             </div>
             <div id="inputRow">
                 <button id="micBtn" onclick="toggleMic()">🎤</button>
-                <input id="msg" type="text" placeholder="Message YUUTO-BOT..." onkeydown="if(event.key==='Enter')envoyer()"/>
+                <input id="msg" type="text" placeholder="Ex: fais moi un manga de romance 📖..." onkeydown="if(event.key==='Enter')envoyer()"/>
                 <button id="btn" onclick="envoyer()">➤</button>
             </div>
         </div>
@@ -438,6 +450,18 @@
     const PERSONNAGES_BANNIS=['hitler','staline','mussolini','bin laden','pol pot','mao zedong','saddam'];
     const MOTS_SENSIBLES=['suicide','me tuer','me suicider','comment mourir','me pendre','me noyer','finir ma vie','mettre fin'];
     const SYMBOLES_MANGA=['⛩️','🎌','忍','侍','武','道','龍','神','夢','愛','力','心','剣','炎','風','雷'];
+    const MANGA_THEMES={
+        'romance':{'emoji':'💕','couleur':'#ff6b9d','sfx':['DOKI DOKI','KYUN','BLUSHU'],'style':'romantic anime couple, cherry blossoms, soft pastel colors, shoujo manga style'},
+        'action':{'emoji':'⚔️','couleur':'#ff4444','sfx':['BOOM','SLASH','CRASH','SMASH'],'style':'epic battle scene, intense manga action, dynamic poses, shonen manga style'},
+        'comedie':{'emoji':'😂','couleur':'#f59e0b','sfx':['BAKA','NANI','LMAO','DOUF'],'style':'funny anime scene, chibi characters, comedy manga style, exaggerated expressions'},
+        'isekai':{'emoji':'🌀','couleur':'#7c3aed','sfx':['TRANSFER','KITA','REBORN','WOOSH'],'style':'fantasy isekai world, anime protagonist awakening, magical portal, fantasy landscape'},
+        'reincarnation':{'emoji':'✨','couleur':'#00d4ff','sfx':['REBIRTH','KIRA','TENSEI','GLOW'],'style':'reincarnation anime scene, glowing soul, new world fantasy, ethereal anime art'},
+        'horreur':{'emoji':'👻','couleur':'#666','sfx':['CREEP','SHRIEK','DOOM','GASP'],'style':'horror manga scene, dark atmosphere, scary anime art, gothic horror style'},
+        'mystere':{'emoji':'🔎','couleur':'#4a5568','sfx':['GASP','REVEAL','CLUE','AHA'],'style':'mystery anime detective scene, dramatic reveal, noir manga style'},
+        'aventure':{'emoji':'🗺️','couleur':'#22c55e','sfx':['DASH','EXPLORE','QUEST','YOSH'],'style':'adventure anime scene, epic journey, heroic pose, fantasy world exploration'},
+        'sports':{'emoji':'🏆','couleur':'#f97316','sfx':['GOAL','SCORE','WIN','DASH'],'style':'sports anime intense moment, determined athlete, dramatic sports scene, shonen sports manga'},
+        'fantasy':{'emoji':'🧙','couleur':'#a78bfa','sfx':['MAGIC','SPELL','ZAP','POWER'],'style':'fantasy anime magic scene, wizard casting spell, magical creatures, epic fantasy manga'}
+    };
 
     const historique=[];
     const animesDejaRecommandes=[];
@@ -456,121 +480,190 @@
     let blinkInterval=null;
     let humeurVideo='normal';
     let modeCodex=false;
+    let mangaEnCours=null;
 
-    // ===== SYSTEME MEMOIRE AVANCEE =====
-    function chargerMemoire(){
-        const d=localStorage.getItem('yuuto_memoire');
-        if(d)memoire=JSON.parse(d);
-    }
-
-    function sauvegarderMemoire(){
-        localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));
-    }
-
+    // ===== MEMOIRE =====
+    function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d)memoire=JSON.parse(d);}
+    function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
     function mettreAJourMemoire(msg){
         const ml=msg.toLowerCase();
-        const now=new Date().toLocaleDateString('fr-FR');
-        memoire.derniere_visite=now;
-
-        // Animes
-        if(ml.includes("j'aime")||ml.includes('mon anime préféré')||ml.includes('mon anime prefere')){
-            memoire.animes=msg;
-        }
-        // Jeux
-        if(ml.includes('mon jeu')||ml.includes("j'adore jouer")||ml.includes('je joue à')||ml.includes('je joue a')){
-            memoire.jeux=msg;
-        }
-        // Age
-        const ageMatch=msg.match(/j'ai (\d+) ans/i)||msg.match(/(\d+) ans/i);
-        if(ageMatch)memoire.age=ageMatch[1]+' ans';
-        // Pays/ville
-        if(ml.includes('je vis')||ml.includes('j\'habite')||ml.includes('je suis en')||ml.includes('je suis à')){
-            memoire.lieu=msg;
-        }
-        // Humeur
-        if(ml.includes('je suis triste')||ml.includes('je suis heureux')||ml.includes('je suis fatigué')||ml.includes('je suis content')){
-            memoire.humeur_user=msg;
-        }
-        // Sujets discutés
+        memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');
+        if(ml.includes("j'aime")||ml.includes('mon anime'))memoire.animes=msg;
+        if(ml.includes('mon jeu')||ml.includes("j'adore jouer"))memoire.jeux=msg;
+        const age=msg.match(/j'ai (\d+) ans/i);if(age)memoire.age=age[1]+' ans';
+        if(ml.includes('je vis')||ml.includes("j'habite"))memoire.lieu=msg;
         if(!memoire.sujets)memoire.sujets=[];
-        const sujetsKeys=['naruto','one piece','dragon ball','attack on titan','demon slayer','jujutsu','goku','luffy','code','python','foot','basketball'];
-        sujetsKeys.forEach(s=>{if(ml.includes(s)&&!memoire.sujets.includes(s))memoire.sujets.push(s);});
+        ['naruto','one piece','dragon ball','demon slayer','goku','luffy','code','foot','basketball'].forEach(s=>{if(ml.includes(s)&&!memoire.sujets.includes(s))memoire.sujets.push(s);});
         if(memoire.sujets.length>10)memoire.sujets=memoire.sujets.slice(-10);
-
         sauvegarderMemoire();
     }
-
     function getMemoireTexte(){
         let t="";
-        if(memoire.prenom)t+=`Prenom: ${memoire.prenom}. `;
-        if(memoire.age)t+=`Age: ${memoire.age}. `;
-        if(memoire.lieu)t+=`Lieu: ${memoire.lieu}. `;
-        if(memoire.animes)t+=`Animes aimes: ${memoire.animes}. `;
-        if(memoire.jeux)t+=`Jeux: ${memoire.jeux}. `;
-        if(memoire.sujets&&memoire.sujets.length>0)t+=`Sujets discutes: ${memoire.sujets.join(', ')}. `;
-        if(memoire.visites)t+=`Nombre de visites: ${memoire.visites}. `;
-        if(memoire.derniere_visite)t+=`Derniere visite: ${memoire.derniere_visite}. `;
-        return t?"[MEMOIRE DE YUUTO sur cet utilisateur]: "+t:"";
+        if(memoire.prenom)t+=`Prenom:${memoire.prenom}. `;
+        if(memoire.age)t+=`Age:${memoire.age}. `;
+        if(memoire.animes)t+=`Animes aimes:${memoire.animes}. `;
+        if(memoire.jeux)t+=`Jeux:${memoire.jeux}. `;
+        if(memoire.sujets&&memoire.sujets.length)t+=`Sujets:${memoire.sujets.join(',')}. `;
+        return t?"[MEMOIRE]:"+t:"";
     }
-
     function afficherMemoire(){
         const box=document.getElementById('memoireContenu');
         const items=[
-            {label:'👤 Prénom',val:memoire.prenom},
-            {label:'🎂 Age',val:memoire.age},
-            {label:'📍 Lieu',val:memoire.lieu},
-            {label:'🎌 Animes aimés',val:memoire.animes},
-            {label:'🎮 Jeux',val:memoire.jeux},
-            {label:'💬 Sujets discutés',val:memoire.sujets?.join(', ')},
-            {label:'📅 Dernière visite',val:memoire.derniere_visite},
-            {label:'🔢 Nb visites',val:memoire.visites?.toString()},
+            {label:'👤 Prénom',val:memoire.prenom},{label:'🎂 Age',val:memoire.age},
+            {label:'🎌 Animes',val:memoire.animes},{label:'🎮 Jeux',val:memoire.jeux},
+            {label:'💬 Sujets',val:memoire.sujets?.join(', ')},
+            {label:'📅 Dernière visite',val:memoire.derniere_visite},{label:'🔢 Visites',val:memoire.visites?.toString()},
         ];
-        box.innerHTML=items.filter(i=>i.val).map(i=>`
-            <div class="mem-item">
-                <div class="mem-label">${i.label}</div>
-                <div class="mem-value">${i.val}</div>
-            </div>
-        `).join('')||'<div style="color:#aaa;text-align:center">Aucune info encore 😅</div>';
+        box.innerHTML=items.filter(i=>i.val).map(i=>`<div class="mem-item"><div class="mem-label">${i.label}</div><div class="mem-value">${i.val}</div></div>`).join('')||'<div style="color:#aaa;text-align:center">Aucune info encore 😅</div>';
     }
-
     function effacerMemoire(){
-        const prenom=memoire.prenom;
-        memoire={prenom,visites:memoire.visites};
-        sauvegarderMemoire();
-        afficherMemoire();
+        const prenom=memoire.prenom;memoire={prenom,visites:memoire.visites};
+        sauvegarderMemoire();afficherMemoire();
         ajouterMessageBot("Mémoire effacée 🗑️ Je recommence à apprendre sur toi ! 😊");
         fermerModal('memoireScreen');
     }
 
-    // ===== FIN MEMOIRE =====
+    // ===== MODE MANGA =====
+    function detecterThemeManga(msg){
+        const ml=msg.toLowerCase();
+        const themes=Object.keys(MANGA_THEMES);
+        for(const t of themes){if(ml.includes(t))return t;}
+        if(ml.includes('amour'))return'romance';
+        if(ml.includes('combat')||ml.includes('guerre'))return'action';
+        if(ml.includes('drole')||ml.includes('funny'))return'comedie';
+        if(ml.includes('autre monde')||ml.includes('transported'))return'isekai';
+        if(ml.includes('peur')||ml.includes('terrifiant'))return'horreur';
+        if(ml.includes('magie')||ml.includes('sorcier'))return'fantasy';
+        return null;
+    }
 
-    function activerFondManga(){
-        const bg=document.getElementById('mangaBg');
-        bg.style.display='block';bg.innerHTML='';
-        for(let i=0;i<25;i++){
-            const s=document.createElement('span');
-            s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];
-            s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${18+Math.random()*22}px;color:${Math.random()>0.5?'#7c3aed':'#f59e0b'};animation:floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;
-            bg.appendChild(s);
+    async function creerManga(theme){
+        const info=MANGA_THEMES[theme]||MANGA_THEMES['action'];
+        loadingId++;const id='loading'+loadingId;
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">✍️ YUUTO-BOT crée ton manga ${info.emoji}...<br><small style="color:#aaa">Génération de l'histoire et des images...</small></div></div>`;
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+
+        // Générer histoire via Groq
+        const storyPrompt=`Crée un manga ${theme} original en français avec exactement ce format JSON (réponds UNIQUEMENT en JSON valide):
+{
+  "titre": "TITRE ÉPIQUE EN MAJUSCULES",
+  "synopsis": "Synopsis court 1 phrase",
+  "chapître": "Chapitre 1: Titre du chapitre",
+  "scenes": [
+    {"narrateur": "Texte narrateur court", "perso1": "Nom perso", "dialogue1": "Dialogue court", "perso2": "Nom perso2", "dialogue2": "Réponse courte", "action": "description courte de la scène pour image", "sfx": "SFX"},
+    {"narrateur": "Suite", "perso1": "Nom", "dialogue1": "Dialogue", "perso2": "Nom2", "dialogue2": "Réponse", "action": "description scène", "sfx": "SFX2"},
+    {"narrateur": "Fin chapitre", "perso1": "Nom", "dialogue1": "Dialogue final", "perso2": "Nom2", "dialogue2": "Réponse finale", "action": "description finale", "sfx": "SFX3"}
+  ]
+}`;
+
+        let histoire=null;
+        try{
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:storyPrompt}]})});
+            const d=await r.json();
+            const txt=d.choices[0].message.content.replace(/```json|```/g,'').trim();
+            histoire=JSON.parse(txt);
+        }catch(e){
+            histoire={titre:`MANGA ${theme.toUpperCase()}`,synopsis:"Une histoire épique commence...",chapître:"Chapitre 1: Le Début",
+            scenes:[
+                {narrateur:"Dans un monde inconnu...",perso1:"Héros",dialogue1:"Je dois devenir plus fort !",perso2:"Rival",dialogue2:"Tu n'es pas à ma hauteur !",action:`${theme} anime scene dramatic`,sfx:info.sfx[0]},
+                {narrateur:"Le combat commence...",perso1:"Héros",dialogue1:"Je ne abandonnerai jamais !",perso2:"Rival",dialogue2:"Impressionnant...",action:`intense ${theme} anime battle`,sfx:info.sfx[1]||info.sfx[0]},
+                {narrateur:"À suivre...",perso1:"Héros",dialogue1:"Mon voyage ne fait que commencer !",perso2:"Rival",dialogue2:"Nous nous reverrons...",action:`${theme} anime ending scene`,sfx:info.sfx[2]||info.sfx[0]}
+            ]};
         }
+
+        mangaEnCours={theme,info,histoire,scene:0};
+
+        // Construire le manga HTML
+        let html=`<div class="manga-container">
+            <div class="manga-titre">${histoire.titre}</div>
+            <div class="manga-genre-badge" style="background:${info.couleur};color:white">${info.emoji} ${theme.toUpperCase()} — ${histoire.chapître||'Chapitre 1'}</div>
+            <div style="color:#aaa;font-size:12px;text-align:center;margin-bottom:8px;font-style:italic">${histoire.synopsis||''}</div>`;
+
+        // Générer les 3 cases
+        for(let i=0;i<Math.min(3,histoire.scenes.length);i++){
+            const sc=histoire.scenes[i];
+            const imgPrompt=encodeURIComponent(`${info.style}, ${sc.action}, anime manga art, high quality, detailed, black and white manga style`);
+            const imgUrl=`https://image.pollinations.ai/prompt/${imgPrompt}?width=400&height=280&nologo=true&seed=${Math.floor(Math.random()*9999)+i}`;
+            html+=`
+            <div class="manga-case">
+                <div class="manga-narrateur">${sc.narrateur||''}</div>
+                <img src="${imgUrl}" alt="case manga" onerror="this.style.display='none'" loading="lazy"/>
+                <div class="manga-sfx">${sc.sfx||info.sfx[0]}</div>
+                <div class="manga-dialogue"><div class="perso">${sc.perso1||'??'}</div>${sc.dialogue1||'...'}</div>
+                <div class="manga-dialogue right"><div class="perso">${sc.perso2||'??'}</div>${sc.dialogue2||'...'}</div>
+            </div>`;
+        }
+
+        html+=`<button class="manga-suite-btn" onclick="suiteManga()">📖 Suite du manga →</button>
+        </div>`;
+
+        document.getElementById(id).innerHTML=`${NOM_BOT} : Voilà ton manga ${info.emoji} !${html}`;
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+
+    async function suiteManga(){
+        if(!mangaEnCours)return;
+        const {theme,info}=mangaEnCours;
+        loadingId++;const id='loading'+loadingId;
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">✍️ Suite du manga ${info.emoji}...</div></div>`;
+
+        const suitePrompt=`Continue le manga ${theme}. Crée un nouveau chapitre en JSON valide:
+{"chapître":"Chapitre 2: titre","scenes":[
+{"narrateur":"texte","perso1":"nom","dialogue1":"dialogue","perso2":"nom","dialogue2":"réponse","action":"description scène","sfx":"SFX"},
+{"narrateur":"texte","perso1":"nom","dialogue1":"dialogue","perso2":"nom","dialogue2":"réponse","action":"description","sfx":"SFX"},
+{"narrateur":"texte","perso1":"nom","dialogue1":"dialogue","perso2":"nom","dialogue2":"réponse","action":"description","sfx":"SFX"}
+]}`;
+
+        let suite=null;
+        try{
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:suitePrompt}]})});
+            const d=await r.json();
+            suite=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());
+        }catch(e){
+            suite={chapître:"Chapitre 2: La suite",scenes:[
+                {narrateur:"L'aventure continue...",perso1:"Héros",dialogue1:"Je suis prêt !",perso2:"Allié",dialogue2:"Ensemble on peut le faire !",action:`${theme} anime adventure scene`,sfx:info.sfx[0]},
+                {narrateur:"Un nouveau défi...",perso1:"Héros",dialogue1:"Jamais je n'abandonnerai !",perso2:"Ennemi",dialogue2:"Tu es plus fort que prévu...",action:`${theme} intense scene`,sfx:info.sfx[1]||info.sfx[0]},
+                {narrateur:"À suivre...",perso1:"Héros",dialogue1:"Le vrai combat commence maintenant !",perso2:"Allié",dialogue2:"On est avec toi !",action:`${theme} epic finale`,sfx:info.sfx[2]||info.sfx[0]}
+            ]};
+        }
+
+        let html=`<div class="manga-container">
+            <div class="manga-titre" style="font-size:15px">${mangaEnCours.histoire?.titre||'MANGA'}</div>
+            <div class="manga-genre-badge" style="background:${info.couleur};color:white">${info.emoji} ${suite.chapître||'Chapitre 2'}</div>`;
+
+        for(let i=0;i<suite.scenes.length;i++){
+            const sc=suite.scenes[i];
+            const imgPrompt=encodeURIComponent(`${info.style}, ${sc.action}, anime manga art, high quality, black and white manga style`);
+            const imgUrl=`https://image.pollinations.ai/prompt/${imgPrompt}?width=400&height=280&nologo=true&seed=${Math.floor(Math.random()*9999)+i+10}`;
+            html+=`<div class="manga-case">
+                <div class="manga-narrateur">${sc.narrateur||''}</div>
+                <img src="${imgUrl}" alt="case" onerror="this.style.display='none'" loading="lazy"/>
+                <div class="manga-sfx">${sc.sfx||info.sfx[0]}</div>
+                <div class="manga-dialogue"><div class="perso">${sc.perso1||'??'}</div>${sc.dialogue1||'...'}</div>
+                <div class="manga-dialogue right"><div class="perso">${sc.perso2||'??'}</div>${sc.dialogue2||'...'}</div>
+            </div>`;
+        }
+        html+=`<button class="manga-suite-btn" onclick="suiteManga()">📖 Chapitre suivant →</button></div>`;
+        document.getElementById(id).innerHTML=`Suite 📖${html}`;
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+
+    // ===== RESTE DES FONCTIONS =====
+    function activerFondManga(){
+        const bg=document.getElementById('mangaBg');bg.style.display='block';bg.innerHTML='';
+        for(let i=0;i<25;i++){const s=document.createElement('span');s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${18+Math.random()*22}px;color:${Math.random()>0.5?'#7c3aed':'#f59e0b'};animation:floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;bg.appendChild(s);}
     }
 
     async function lancerLecon(niveau){
         fermerModal('japonaisScreen');
-        const prompts={
-            debutant:`Tu es un professeur de japonais sympa. Enseigne les hiragana de base (あいうえお), les salutations et les chiffres 1-5. Explique en français avec des emojis.`,
-            intermediaire:`Tu es un professeur de japonais. Enseigne les katakana et 5 phrases utiles du quotidien. Japonais + romanisation + traduction. Emojis.`,
-            anime:`Tu es un prof fan d'anime. Enseigne 10 expressions populaires : Nani, Senpai, Nakama, Kawaii, Sugoi, Yatta, Itadakimasu, Ganbatte. Emojis.`,
-            kanji:`Enseigne 5 kanji essentiels : 日 (jour), 本 (livre), 人 (personne), 水 (eau), 火 (feu). Symbole + lecture + signification + exemple.`
-        };
+        const prompts={debutant:`Tu es un professeur de japonais sympa. Enseigne les hiragana de base, les salutations et les chiffres 1-5. Français avec emojis.`,intermediaire:`Enseigne les katakana et 5 phrases utiles. Japonais + romanisation + traduction.`,anime:`Enseigne 10 expressions anime : Nani, Senpai, Kawaii, Sugoi, Yatta, Itadakimasu, Ganbatte. Emojis.`,kanji:`Enseigne 5 kanji : 日 (jour), 本 (livre), 人 (personne), 水 (eau), 火 (feu).`};
         document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Lance la leçon !</div>`;
         loadingId++;const id='loading'+loadingId;
         document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">Préparation... 🎌</div></div>`;
-        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});
         const d=await r.json();const rep=d.choices[0].message.content;
         const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");
-        document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerJaponais('${t}')">🔊 Ecouter en japonais</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite de la leçon</button>`;
+        document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerJaponais('${t}')">🔊 Ecouter</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
@@ -578,7 +671,7 @@
         document.getElementById('chat').innerHTML+=`<div class="moi">➡️ Suite !</div>`;
         loadingId++;const id='loading'+loadingId;
         document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">Je continue... 🎌</div></div>`;
-        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue la leçon de japonais niveau ${niveau}. Donne un exercice ou la suite. Sois fun.`}]})});
+        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue la leçon de japonais niveau ${niveau}. Exercice ou suite.`}]})});
         const d=await r.json();const rep=d.choices[0].message.content;
         const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");
         document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerJaponais('${t}')">🔊 Ecouter</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;
@@ -593,24 +686,19 @@
         document.getElementById('codexInfo').style.display=modeCodex?'block':'none';
         document.getElementById('codexBadge').style.display=modeCodex?'inline':'none';
         document.getElementById('msg').className=modeCodex?'codex-active':'';
-        document.getElementById('msg').placeholder=modeCodex?'🧠 Pose ta question...':`Message ${NOM_BOT}...`;
+        document.getElementById('msg').placeholder=modeCodex?'🧠 Pose ta question...':'Ex: fais moi un manga de romance 📖...';
         if(modeCodex){fermerModal('menuScreen');ajouterMessageBot("Mode Codex activé 🧠",null,true);}
-        else{ajouterMessageBot(`Mode Codex désactivé 😊`);}
+        else ajouterMessageBot(`Mode Codex désactivé 😊`);
     }
 
     function getSystemPrompt(){
         const mem=getMemoireTexte();
-        if(modeCodex)return`Tu es ${NOM_BOT} en mode Codex. Expert sérieux. Réponds de façon détaillée. Français. ${mem}`;
+        if(modeCodex)return`Tu es ${NOM_BOT} en mode Codex. Expert sérieux. Français. ${mem}`;
         if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. Francais. ${mem}`;
         return window.humeurInfo.personnalite+' '+mem;
     }
 
-    function toggleSidebar(){
-        sidebarVisible=!sidebarVisible;
-        const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');
-        if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}
-        else{sb.classList.remove('open');ov.style.display='none';}
-    }
+    function toggleSidebar(){sidebarVisible=!sidebarVisible;const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}else{sb.classList.remove('open');ov.style.display='none';}}
 
     function nouvelleConversation(){
         if(historique.length>0){conversations.unshift({titre:historique[0]?.content?.substring(0,30)+'...',messages:[...historique]});historique.length=0;majHistorique();}
@@ -629,23 +717,19 @@
         });
     }
 
-    function ouvrirModal(id){
-        document.getElementById(id).style.display='flex';
-        if(id==='memoireScreen')afficherMemoire();
-    }
+    function ouvrirModal(id){document.getElementById(id).style.display='flex';if(id==='memoireScreen')afficherMemoire();}
     function fermerModal(id){document.getElementById(id).style.display='none';}
 
     function setHumeur(humeur){
         humeurVideo=humeur;
-        const eL=document.getElementById('vtEyeL'),eR=document.getElementById('vtEyeR');
-        const mouth=document.getElementById('vtMouthShape');
+        const eL=document.getElementById('vtEyeL'),eR=document.getElementById('vtEyeR'),mouth=document.getElementById('vtMouthShape');
         const zzz=document.getElementById('vtZzz'),sparkle=document.getElementById('vtSparkle'),stars=document.getElementById('vtStars');
         zzz.style.display='none';sparkle.style.display='none';stars.style.display='none';
         eL.style.height='34px';eR.style.height='34px';
         if(humeur==='sleepy'){eL.style.height='10px';eR.style.height='10px';mouth.className='mouth-sleepy';zzz.style.display='block';}
         else if(humeur==='excited'){eL.style.height='36px';eR.style.height='36px';mouth.className='mouth-excited';sparkle.style.display='block';}
         else if(humeur==='mysterious'){eL.style.height='22px';eR.style.height='22px';mouth.className='mouth-serious';stars.style.display='block';}
-        else{mouth.className='mouth-smile';}
+        else mouth.className='mouth-smile';
     }
 
     function startTalking(){document.getElementById('vtMouthShape').className='mouth-talk';document.getElementById('vtArmL').classList.add('wave');}
@@ -658,35 +742,20 @@
         document.getElementById('vtArmL').classList.remove('wave');
     }
 
-    function startBlink(){
-        blinkInterval=setInterval(()=>{
-            const bL=document.getElementById('vtBlinkL'),bR=document.getElementById('vtBlinkR');
-            if(!bL||!bR)return;
-            bL.style.height='100%';bR.style.height='100%';
-            setTimeout(()=>{bL.style.height='0';bR.style.height='0';},100);
-        },3200+Math.random()*2000);
-    }
+    function startBlink(){blinkInterval=setInterval(()=>{const bL=document.getElementById('vtBlinkL'),bR=document.getElementById('vtBlinkR');if(!bL||!bR)return;bL.style.height='100%';bR.style.height='100%';setTimeout(()=>{bL.style.height='0';bR.style.height='0';},100);},3200+Math.random()*2000);}
 
     async function demarrerVideoAppel(){
-        enVideoAppel=true;
-        document.getElementById('videoCallScreen').style.display='flex';
-        document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;
+        enVideoAppel=true;document.getElementById('videoCallScreen').style.display='flex';document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;
         const h=new Date().getHours();
-        if(h>=6&&h<12)setHumeur('sleepy');
-        else if(h>=12&&h<18)setHumeur('excited');
-        else if(h>=18&&h<22)setHumeur('normal');
-        else setHumeur('mysterious');
+        if(h>=6&&h<12)setHumeur('sleepy');else if(h>=12&&h<18)setHumeur('excited');else if(h>=18&&h<22)setHumeur('normal');else setHumeur('mysterious');
         startBlink();
         const intro=estAntoine?"Wsh Antoine tu mappelles en video !":`Salut ${memoire.prenom} tu mappelles en video !`;
-        document.getElementById('videoCallBubble').textContent=intro;
-        document.getElementById('videoCallStatus').textContent='Parle...';
-        startTalking();
-        parlerVideo(intro,()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro pour parler';});
+        document.getElementById('videoCallBubble').textContent=intro;document.getElementById('videoCallStatus').textContent='Parle...';
+        startTalking();parlerVideo(intro,()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro pour parler';});
     }
 
     function terminerVideoAppel(){
-        enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();
-        window.speechSynthesis.cancel();
+        enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();window.speechSynthesis.cancel();
         if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}
         document.getElementById('videoCallScreen').style.display='none';
     }
@@ -694,48 +763,31 @@
     function parlerVideo(texte,callback){
         const s=window.speechSynthesis;if(!s){if(callback)callback();return;}
         s.cancel();yuutoParle=true;startTalking();
-        const u=new SpeechSynthesisUtterance(texte);
-        u.lang='ja-JP';u.rate=1;u.pitch=1.1;
-        u.onend=()=>{yuutoParle=false;stopTalking();if(callback)setTimeout(callback,500);};
-        s.speak(u);
+        const u=new SpeechSynthesisUtterance(texte);u.lang='ja-JP';u.rate=1;u.pitch=1.1;
+        u.onend=()=>{yuutoParle=false;stopTalking();if(callback)setTimeout(callback,500);};s.speak(u);
     }
 
     function toggleVideoMic(){
-        if(!yuutoParle&&recognition){
-            if(isListening)stopMic();
-            else try{
-                recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};
-                recognition.start();isListening=true;
-                document.getElementById('videoMicBtn').classList.add('active');
-                document.getElementById('videoMicBtn').textContent='🔴';
-                document.getElementById('videoCallStatus').textContent='Tu parles...';
-            }catch(e){}
-        }
+        if(!yuutoParle&&recognition){if(isListening)stopMic();
+        else try{recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};recognition.start();isListening=true;document.getElementById('videoMicBtn').classList.add('active');document.getElementById('videoMicBtn').textContent='🔴';document.getElementById('videoCallStatus').textContent='Tu parles...';}catch(e){}}
     }
 
     async function envoyerVideoAppel(msg){
-        document.getElementById('videoCallStatus').textContent='Reflechit...';
-        document.getElementById('videoMicBtn').classList.remove('active');
-        document.getElementById('videoMicBtn').textContent='🎤';
+        document.getElementById('videoCallStatus').textContent='Reflechit...';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';
         historique.push({"role":"user","content":msg});
         const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]})});
         const d=await r.json();const rep=d.choices[0].message.content;
-        historique.push({"role":"assistant","content":rep});
-        document.getElementById('videoCallBubble').textContent=rep;
-        document.getElementById('videoCallStatus').textContent='Parle...';
+        historique.push({"role":"assistant","content":rep});document.getElementById('videoCallBubble').textContent=rep;document.getElementById('videoCallStatus').textContent='Parle...';
         parlerVideo(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''),()=>{if(enVideoAppel)document.getElementById('videoCallStatus').textContent='Appuie sur le micro pour parler';});
     }
 
     window.onload=function(){
-        const couleur=localStorage.getItem('yuuto_couleur');
-        if(couleur){document.body.style.background=couleur;document.getElementById('couleurFond').value=couleur;}
-        estPremium=localStorage.getItem('yuuto_premium')==='true';
-        nbTransfo=parseInt(localStorage.getItem('yuuto_transfo')||'0');
+        const couleur=localStorage.getItem('yuuto_couleur');if(couleur){document.body.style.background=couleur;document.getElementById('couleurFond').value=couleur;}
+        estPremium=localStorage.getItem('yuuto_premium')==='true';nbTransfo=parseInt(localStorage.getItem('yuuto_transfo')||'0');
         if(estPremium)document.getElementById('premiumBadgeSide').style.display='inline';
         modeCodex=localStorage.getItem('yuuto_codex')==='true';
         if(modeCodex){document.getElementById('codexToggle').checked=true;document.getElementById('codexInfo').style.display='block';document.getElementById('codexBadge').style.display='inline';document.getElementById('msg').className='codex-active';document.getElementById('msg').placeholder='🧠 Pose ta question...';}
-        const nom=localStorage.getItem('yuuto_nom');
-        if(nom){document.getElementById('nom').value=nom;seConnecter();}
+        const nom=localStorage.getItem('yuuto_nom');if(nom){document.getElementById('nom').value=nom;seConnecter();}
     }
 
     function changerCouleur(){const c=document.getElementById('couleurFond').value;document.body.style.background=c;localStorage.setItem('yuuto_couleur',c);}
@@ -747,30 +799,22 @@
         sauvegarderMemoire();fermerModal('menuScreen');ajouterMessageBot(estAntoine?`wsh nom change !`:`Nom change en ${n} ! 😊`);
     }
     function verifierCode(){
-        if(document.getElementById('codeInput').value.trim()===CODE_PREMIUM){
-            estPremium=true;localStorage.setItem('yuuto_premium','true');
-            document.getElementById('premiumBadgeSide').style.display='inline';
-            fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Premium ! 🌟");
-        }else document.getElementById('codeErreur').style.display='block';
+        if(document.getElementById('codeInput').value.trim()===CODE_PREMIUM){estPremium=true;localStorage.setItem('yuuto_premium','true');document.getElementById('premiumBadgeSide').style.display='inline';fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Premium ! 🌟");}
+        else document.getElementById('codeErreur').style.display='block';
     }
     function activerPersonnage(){
         const p=document.getElementById('persoInput').value.trim();if(!p)return;
         if(PERSONNAGES_BANNIS.some(b=>p.toLowerCase().includes(b))){alert("Ce personnage est banni 🚫");return;}
         const max=estPremium?MAX_TRANSFO_PREMIUM:MAX_TRANSFO_GRATUIT;
         if(!estAntoine&&nbTransfo>=max){fermerModal('persoScreen');ouvrirModal('premiumScreen');return;}
-        personnageActuel=p;
-        if(!estAntoine){nbTransfo++;localStorage.setItem('yuuto_transfo',nbTransfo.toString());}
-        document.getElementById('modePerso').textContent=`🎭 ${p}`;
-        fermerModal('persoScreen');historique.length=0;
-        ajouterMessageBot(`Je suis ${p} ! 🎭`,p);
+        personnageActuel=p;if(!estAntoine){nbTransfo++;localStorage.setItem('yuuto_transfo',nbTransfo.toString());}
+        document.getElementById('modePerso').textContent=`🎭 ${p}`;fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis ${p} ! 🎭`,p);
     }
     function resetPersonnage(){personnageActuel=null;document.getElementById('modePerso').textContent='';fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis de retour ! 😄`);}
 
     async function chercherAnime(genre,genreId){
-        fermerModal('searchScreen');
-        document.getElementById('chat').innerHTML+=`<div class="moi">🔍 ${genre} !</div>`;
-        loadingId++;const id='loading'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 🔍</div></div>`;
+        fermerModal('searchScreen');document.getElementById('chat').innerHTML+=`<div class="moi">🔍 ${genre} !</div>`;
+        loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 🔍</div></div>`;
         try{const r=await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);const d=await r.json();let l=`Meilleurs ${genre} 🎌<br><br>`;d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>${a.synopsis?a.synopsis.substring(0,80)+'...<br><br>':''}`;});document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;}
         catch(e){document.getElementById(id).innerHTML="Desole 😅";}
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
@@ -778,8 +822,7 @@
 
     async function lancerBattle(){
         const p1=document.getElementById('perso1Input').value.trim(),p2=document.getElementById('perso2Input').value.trim();
-        if(!p1||!p2)return;fermerModal('battleScreen');
-        document.getElementById('chat').innerHTML+=`<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;
+        if(!p1||!p2)return;fermerModal('battleScreen');document.getElementById('chat').innerHTML+=`<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;
         const hist=[];
         for(let i=0;i<4;i++){
             const pa=i%2===0?p1:p2,pb=i%2===0?p2:p1;
@@ -795,8 +838,7 @@
 
     async function getActu(){
         document.getElementById('chat').innerHTML+=`<div class="moi">📺 Actu !</div>`;
-        loadingId++;const id='loading'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 📺</div></div>`;
+        loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 📺</div></div>`;
         try{const r=await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');const d=await r.json();let l="Animes du moment 📺<br><br>";d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`;});document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;}
         catch(e){document.getElementById(id).innerHTML="Desole 😅";}
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
@@ -831,7 +873,7 @@
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
-    const creation=`Tu t'appelles ${NOM_BOT}. Tu as ete cree par Antoine Gatore. Reponds fierement. Tu te souviens de tout ce que l'utilisateur t'a dit. Utilise la memoire pour personnaliser tes reponses.`;
+    const creation=`Tu t'appelles ${NOM_BOT}. Tu as ete cree par Antoine Gatore. Tu peux creer des mangas. Reponds fierement. Tu te souviens de tout.`;
     const styleFam="Pote familier,'bro','ptdr','oe','wsh'.Court.Emojis.Francais.";
     const styleNorm="Sympa chaleureux.Emojis.Francais.";
     function getHumeur(fam){const h=new Date().getHours(),s=fam?styleFam:styleNorm,m=getMemoireTexte();if(h>=6&&h<12)return{humeur:"😴 Endormi",personnalite:creation+" endormi. "+m+s};if(h>=12&&h<18)return{humeur:"⚡ Energique",personnalite:creation+" energique. "+m+s};if(h>=18&&h<22)return{humeur:"🌙 Calme",personnalite:creation+" calme. "+m+s};return{humeur:"✨ Mysterieux",personnalite:creation+" mysterieux. "+m+s};}
@@ -845,33 +887,15 @@
     }
 
     function demarrer(){
-        document.getElementById('login').style.display='none';
-        document.getElementById('app').style.display='flex';
-        initMic();majHistorique();
-        if(estAntoine)activerFondManga();
-        const hi=getHumeur(estAntoine);
-        document.getElementById('humeur').textContent=hi.humeur;
-        window.humeurInfo=hi;
-        memoire.visites=(memoire.visites||0)+1;
-        memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');
-        sauvegarderMemoire();
-        document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';
-        document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
-
-        // Message de retour personnalisé selon mémoire
-        let intro='';
-        const estRetour=memoire.visites>1;
-        if(estAntoine){
-            const msgs={"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"};
-            intro=msgs[hi.humeur];
-            if(estRetour&&memoire.visites>2)intro+=` C'est ta ${memoire.visites}eme visite bro 🔥`;
-        }else{
-            const msgs={"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"};
-            intro=msgs[hi.humeur];
-            if(estRetour)intro+=` Content de te revoir ! 😊 Visite n°${memoire.visites} 🎉`;
-            if(memoire.animes)intro+=`<br>Je me souviens que tu aimes les animes ! 🎌`;
-        }
-
+        document.getElementById('login').style.display='none';document.getElementById('app').style.display='flex';
+        initMic();majHistorique();if(estAntoine)activerFondManga();
+        const hi=getHumeur(estAntoine);document.getElementById('humeur').textContent=hi.humeur;window.humeurInfo=hi;
+        memoire.visites=(memoire.visites||0)+1;memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');sauvegarderMemoire();
+        document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
+        const im={f:{"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
+        let intro=estAntoine?im.f[hi.humeur]:im.n[hi.humeur];
+        if(memoire.visites>1)intro+=` Visite n°${memoire.visites} 🎉`;
+        intro+=`<br><small style="color:#aaa">💡 Dis "fais moi un manga de romance" pour créer un manga !</small>`;
         if(!estAntoine&&!estPremium)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
         document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
     }
@@ -881,14 +905,21 @@
         document.getElementById('msg').value='';
         document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
         const ml=msg.toLowerCase();
-
-        // MISE A JOUR MEMOIRE AUTOMATIQUE
         mettreAJourMemoire(msg);
 
         if(MOTS_SENSIBLES.some(m=>ml.includes(m))){
             document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Je suis pas qualifie pour repondre a ca. Si tu traverses quelque chose de difficile parle a quelqu'un de confiance. Tu n'es pas seul 💙</div></div>`;
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;
         }
+
+        // DETECTION MANGA 📖
+        if((ml.includes('manga')||ml.includes('fais moi un')||ml.includes('crée un')||ml.includes('cree un'))&&(ml.includes('manga')||ml.includes('histoire')||ml.includes('comic'))){
+            const theme=detecterThemeManga(msg)||'action';
+            document.getElementById('chat').innerHTML+=`<div class="moi">📖 Crée un manga de ${theme} !</div>`;
+            await creerManga(theme);
+            return;
+        }
+
         if(ml.includes('genere')||ml.includes('génère')||ml.includes('image de')){
             const prompt=encodeURIComponent(msg.replace(/genere|génère|une image de|image de|image/gi,'').trim()+' anime manga style high quality 4k detailed');
             loadingId++;const id='loading'+loadingId;
@@ -900,8 +931,7 @@
             historique.push({"role":"user","content":msg});
             const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
             const d=await r.json();const rep=d.choices[0].message.content;
-            historique.push({"role":"assistant","content":rep});
-            ajouterMessageBot(rep,personnageActuel,modeCodex);
+            historique.push({"role":"assistant","content":rep});ajouterMessageBot(rep,personnageActuel,modeCodex);
         }
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
