@@ -10,9 +10,11 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial; background: #1a1a1a; color: white; height: 100vh; overflow: hidden; }
+
         #mangaBg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
         #mangaBg span { position: absolute; bottom: -50px; animation: floatSymbol linear infinite; }
         @keyframes floatSymbol { 0%{transform:translateY(0) rotate(0deg);opacity:0.08} 50%{opacity:0.13} 100%{transform:translateY(-110vh) rotate(360deg);opacity:0} }
+
         #login { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 15px; position: relative; z-index: 1; }
         #login img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #7c3aed; }
         #login h2 { font-size: 28px; background: linear-gradient(90deg, #7c3aed, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -20,65 +22,14 @@
         #login input { padding: 12px; border-radius: 20px; border: 2px solid #7c3aed; font-size: 16px; width: 250px; text-align: center; background: #222; color: white; outline: none; }
         #login button { background: linear-gradient(90deg, #7c3aed, #5b21b6); color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; }
         #erreur { color: red; display: none; font-size: 14px; }
-        #loginAntoine { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 15px; position: relative; z-index: 1; background: linear-gradient(180deg,#0a0a1a,#1a0a2e); }
-        #loginAntoine img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #f59e0b; box-shadow: 0 0 20px rgba(245,158,11,0.5); }
-        #loginAntoine h2 { font-size: 24px; background: linear-gradient(90deg,#f59e0b,#7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #loginAntoine p { color: #aaa; font-size: 13px; }
-        #mdpInput { padding: 12px; border-radius: 20px; border: 2px solid #f59e0b; font-size: 16px; width: 250px; text-align: center; background: #111; color: white; outline: none; }
-        #mdpBtn { background: linear-gradient(90deg,#f59e0b,#d97706); color: black; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; font-weight: bold; }
-        #mdpErreur { color: #e11d48; display: none; font-size: 14px; }
-        #mdpTentatives { color: #aaa; font-size: 12px; display: none; }
-
-        /* ANIME PLAYER */
-        #animePlayer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9998; flex-direction: column; }
-        #animeTop { position: relative; flex: 1; overflow: hidden; }
-        #animeImg { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease; }
-        #animeImgNext { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; }
-        #animeOverlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 20px 15px 15px; }
-        #animeNarrateur { color: #f59e0b; font-size: 12px; font-style: italic; margin-bottom: 6px; min-height: 16px; }
-        #animeDialogue { background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px 14px; font-size: 14px; line-height: 1.6; min-height: 50px; }
-        #animePersonnage { color: #7c3aed; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
-        #animeTexte { color: white; }
-        #animeControls { background: rgba(0,0,0,0.9); padding: 10px 15px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; border-top: 1px solid #222; }
-        #animeTitle { flex: 1; font-size: 13px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        #animeEpisode { font-size: 11px; color: #555; }
-        #animeBtns { display: flex; gap: 8px; }
-        .anime-btn { background: #222; border: none; color: white; width: 38px; height: 38px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .anime-btn.primary { background: #7c3aed; }
-        #animeProgress { width: 100%; height: 3px; background: #333; border-radius: 2px; margin: 6px 0; cursor: pointer; }
-        #animeProgressBar { height: 100%; background: linear-gradient(90deg, #7c3aed, #f59e0b); border-radius: 2px; transition: width 0.1s linear; width: 0%; }
-        #animeSceneInfo { font-size: 10px; color: #555; text-align: center; }
-        #animeLoading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
-        #animeLoading p { color: #aaa; font-size: 13px; margin-top: 10px; }
-        .anime-spinner { width: 40px; height: 40px; border: 3px solid #333; border-top-color: #7c3aed; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        #animeTypeIndicator { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.7); padding: 4px 10px; border-radius: 20px; font-size: 11px; color: #f59e0b; border: 1px solid #f59e0b; }
-        #animeCloseBtn { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.7); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; z-index: 10; }
-
-        /* LOGS */
-        #logsScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 9999; flex-direction: column; }
-        #logsHeader { background: #111; padding: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; flex-shrink: 0; }
-        #logsHeader h2 { font-size: 16px; color: #f59e0b; }
-        #logsClose { background: #333; border: none; color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; }
-        #logsList { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
-        .log-item { background: #111; border: 1px solid #222; border-radius: 10px; padding: 12px; font-size: 12px; }
-        #logsStats { background: #111; padding: 12px 15px; border-top: 1px solid #222; display: flex; gap: 10px; flex-wrap: wrap; flex-shrink: 0; }
-        .stat-item { background: #1a1a2e; padding: 8px 12px; border-radius: 8px; font-size: 11px; border: 1px solid #333; text-align: center; }
-        .stat-num { font-size: 20px; font-weight: bold; color: #f59e0b; display: block; }
-        .stat-label { color: #aaa; font-size: 10px; }
-        #logsFiltre { display: flex; gap: 6px; padding: 10px 15px; background: #111; border-bottom: 1px solid #222; overflow-x: auto; flex-shrink: 0; }
-        .filtre-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 5px 10px; border-radius: 15px; font-size: 11px; cursor: pointer; white-space: nowrap; }
-        .filtre-btn.active { background: #7c3aed; color: white; border-color: #7c3aed; }
-        #clearLogsBtn { background: #e11d48; border: none; color: white; padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; }
-        .user-card { background: #111; border: 1px solid #f59e0b; border-radius: 12px; padding: 14px; margin-bottom: 8px; }
 
         #app { display: none; flex-direction: row; height: 100vh; width: 100%; overflow: hidden; position: relative; z-index: 1; }
         #sidebar { display: none; position: fixed; top: 0; left: 0; width: 270px; height: 100vh; background: #111; flex-direction: column; z-index: 100; border-right: 1px solid #222; }
         #sidebar.open { display: flex; }
         #sidebarHeader { padding: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #222; }
         #sidebarHeader img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid #7c3aed; }
-        #sidebarTitle { font-size: 16px; font-weight: bold; background: linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #newChatBtn { margin: 10px; padding: 10px 15px; background: linear-gradient(90deg,#7c3aed,#5b21b6); border: none; color: white; border-radius: 10px; cursor: pointer; font-size: 14px; text-align: left; }
+        #sidebarTitle { font-size: 16px; font-weight: bold; background: linear-gradient(90deg, #7c3aed, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        #newChatBtn { margin: 10px; padding: 10px 15px; background: linear-gradient(90deg, #7c3aed, #5b21b6); border: none; color: white; border-radius: 10px; cursor: pointer; font-size: 14px; text-align: left; }
         #historyLabel { padding: 8px 15px; font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
         #historyList { flex: 1; overflow-y: auto; padding: 5px; }
         .historyItem { padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; color: #aaa; display: flex; align-items: center; gap: 8px; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -87,11 +38,12 @@
         .sidebarBtn { width: 100%; padding: 10px 12px; background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px; text-align: left; }
         .sidebarBtn:hover { background: #222; color: white; }
         #userInfo { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
-        #userAvatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg,#7c3aed,#f59e0b); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; flex-shrink: 0; }
+        #userAvatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #7c3aed, #f59e0b); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; flex-shrink: 0; }
         #userName { font-size: 14px; color: #ddd; }
         #premiumBadgeSide { background: #f59e0b; color: black; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; display: none; }
         #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
         #mainContent { display: flex; flex-direction: column; flex: 1; height: 100vh; overflow: hidden; width: 100%; }
+
         #header { display: flex; align-items: center; padding: 10px 15px; background: #111; border-bottom: 1px solid #222; gap: 10px; flex-shrink: 0; }
         #toggleSidebar { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 5px 8px; border-radius: 8px; }
         #headerCenter { flex: 1; }
@@ -99,7 +51,7 @@
         #humeur { font-size: 11px; color: #aaa; }
         #modePerso { font-size: 11px; color: #f59e0b; }
         #codexBadge { font-size: 11px; color: #00d4ff; display: none; }
-        #headerBtns { display: flex; gap: 6px; align-items: center; }
+        #headerBtns { display: flex; gap: 8px; align-items: center; }
         #callBtn { background: #22c55e; border: none; color: white; padding: 7px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         #chat { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
         #chat::-webkit-scrollbar { width: 4px; }
@@ -107,19 +59,10 @@
         .moi { background: #2a2a3e; padding: 10px 15px; border-radius: 18px 18px 4px 18px; margin-left: auto; max-width: 80%; font-size: 14px; border: 1px solid #3a3a5e; }
         .bot { display: flex; align-items: flex-start; gap: 10px; max-width: 92%; }
         .bot img.avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #7c3aed; margin-top: 3px; }
-        .bot-msg { background: #1e1e2e; padding: 10px 15px; border-radius: 4px 18px 18px 18px; font-size: 14px; border: 1px solid #2a2a4e; line-height: 1.8; }
+        .bot-msg { background: #1e1e2e; padding: 10px 15px; border-radius: 4px 18px 18px 18px; font-size: 14px; border: 1px solid #2a2a4e; line-height: 1.5; }
         .bot-msg.codex { background: #0a1a2e; border-color: #00d4ff; border-left: 3px solid #00d4ff; }
         .bot-msg.urgent { background: #1a0a2a; border-color: #7c3aed; }
         .bot-msg.japonais { background: #1a1a0a; border-color: #f59e0b; border-left: 3px solid #f59e0b; }
-        .recette-card { background: #0a0a0a; border: 2px solid #f97316; border-radius: 12px; padding: 15px; margin-top: 8px; }
-        .recette-card h3 { color: #f59e0b; font-size: 17px; margin-bottom: 10px; text-align: center; }
-        .recette-card img { width: 100%; border-radius: 10px; margin-bottom: 12px; display: block; }
-        .anecdote { background: #1a1000; padding: 12px; border-radius: 10px; color: #fcd34d; font-size: 13px; margin-bottom: 15px; border-left: 3px solid #f59e0b; line-height: 1.7; }
-        .section-titre { color: #f97316; font-weight: bold; font-size: 13px; margin: 15px 0 8px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .ingredient { background: #1a1000; padding: 8px 12px; border-radius: 8px; margin: 5px 0; font-size: 13px; line-height: 1.5; border-left: 2px solid #f97316; }
-        .etape { background: #0a1a0a; padding: 10px 14px; border-radius: 10px; margin: 8px 0; font-size: 13px; border-left: 3px solid #22c55e; line-height: 1.7; }
-        .etape-num { color: #22c55e; font-weight: bold; margin-right: 6px; font-size: 15px; }
-        .conseil-box { background: #0a0a1a; padding: 10px 14px; border-radius: 10px; margin-top: 12px; font-size: 13px; border-left: 3px solid #7c3aed; color: #a78bfa; line-height: 1.6; }
         .perso1-msg { background: #1e3a5f; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .perso2-msg { background: #3a1e1e; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .audio-btn { background: none; border: none; color: #555; font-size: 12px; cursor: pointer; margin-top: 5px; display: block; padding: 0; }
@@ -132,9 +75,10 @@
         #msg { flex: 1; padding: 11px 15px; border-radius: 25px; border: 1px solid #333; font-size: 15px; background: #222; color: white; outline: none; }
         #msg:focus { border-color: #7c3aed; }
         #msg.codex-active { border-color: #00d4ff; }
-        #btn { background: linear-gradient(135deg,#7c3aed,#5b21b6); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; flex-shrink: 0; }
+        #btn { background: linear-gradient(135deg, #7c3aed, #5b21b6); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; flex-shrink: 0; }
         #micBtn { background: #222; color: white; border: 1px solid #333; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; flex-shrink: 0; }
         #micBtn.active { background: #e11d48; border-color: #e11d48; }
+
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 998; justify-content: center; align-items: center; }
         .modalBox { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 25px; width: 88%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; max-height: 88vh; overflow-y: auto; }
         .modalBox h2 { text-align: center; font-size: 18px; }
@@ -153,7 +97,7 @@
         .toggle input { opacity: 0; width: 0; height: 0; }
         .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #333; border-radius: 26px; transition: 0.3s; }
         .toggle-slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
-        input:checked + .toggle-slider { background: linear-gradient(90deg,#00d4ff,#0077ff); }
+        input:checked + .toggle-slider { background: linear-gradient(90deg, #00d4ff, #0077ff); }
         input:checked + .toggle-slider:before { transform: translateX(24px); }
         .codex-desc { font-size: 12px; color: #aaa; margin-top: 5px; }
         .prix { font-size: 32px; font-weight: bold; color: #f59e0b; text-align: center; }
@@ -163,288 +107,118 @@
         #genreButtons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .genre-btn { background: #222; color: white; border: 1px solid #333; padding: 8px 12px; border-radius: 20px; font-size: 13px; cursor: pointer; }
         .genre-btn:hover { background: #7c3aed; border-color: #7c3aed; }
-        #animeCreatorScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
-        #animeCreatorBox { background: #0a0a1a; border: 2px solid #7c3aed; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 10px; max-height: 90vh; overflow-y: auto; }
-        #animeCreatorBox h2 { text-align: center; font-size: 20px; background: linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .anime-theme-btn { padding: 12px 15px; border-radius: 12px; border: 1px solid #7c3aed; background: #0a0a2e; color: white; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .anime-theme-btn:hover { background: #1a1a3e; }
-        .anime-theme-btn .theme-emoji { font-size: 22px; }
-        .anime-theme-btn .theme-name { font-weight: bold; color: #f59e0b; }
-        .anime-theme-btn .theme-desc { font-size: 11px; color: #aaa; }
-        #recetteScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
-        #recetteBox { background: #1a0a00; border: 2px solid #f97316; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 7px; max-height: 90vh; overflow-y: auto; }
-        #recetteBox h2 { text-align: center; font-size: 20px; background: linear-gradient(90deg,#f97316,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .recette-section { font-size: 11px; font-weight: bold; color: #f97316; text-transform: uppercase; letter-spacing: 1px; padding: 5px 0 2px; border-bottom: 1px solid #333; margin-top: 5px; }
-        .recette-btn { padding: 9px 12px; border-radius: 10px; border: 1px solid #f97316; background: #2a1000; color: white; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .recette-btn:hover { background: #3a1800; }
-        .recette-emoji { font-size: 20px; flex-shrink: 0; }
-        .recette-name { font-weight: bold; color: #f59e0b; font-size: 13px; }
-        .recette-anime { font-size: 10px; color: #aaa; }
+
         #japonaisScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
         #japonaisBox { background: #1a1a0a; border: 2px solid #f59e0b; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; max-height: 90vh; overflow-y: auto; }
-        #japonaisBox h2 { text-align: center; font-size: 20px; }
+        #japonaisBox h2 { text-align: center; font-size: 20px; background: linear-gradient(90deg, #f59e0b, #fcd34d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .jap-level-btn { padding: 15px; border-radius: 12px; border: 1px solid #f59e0b; background: #2a2a0a; color: white; font-size: 14px; cursor: pointer; text-align: left; }
         .jap-level-btn .level-title { font-size: 16px; font-weight: bold; color: #f59e0b; }
         .jap-level-btn .level-desc { font-size: 12px; color: #aaa; margin-top: 3px; }
-        #memoireScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
-        #memoireBox { background: #0a1a0a; border: 2px solid #22c55e; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 10px; max-height: 90vh; overflow-y: auto; }
-        #memoireBox h2 { text-align: center; font-size: 20px; }
-        .mem-item { background: #0f2a0f; padding: 12px; border-radius: 10px; border: 1px solid #22c55e; font-size: 13px; }
-        .mem-label { color: #22c55e; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
-        .mem-value { color: #ddd; }
-        #musicBar { position: fixed; bottom: 80px; right: 10px; background: #1a1a2e; border: 1px solid #7c3aed; border-radius: 20px; padding: 6px 12px; display: none; flex-direction: column; align-items: center; gap: 4px; z-index: 50; }
-        #musicBar.visible { display: flex; }
-        #musicTitle { font-size: 10px; color: #7c3aed; font-weight: bold; }
-        #musicControls { display: flex; gap: 8px; align-items: center; }
-        #musicControls button { background: none; border: none; color: white; font-size: 16px; cursor: pointer; }
-        #volumeSlider { width: 60px; height: 3px; accent-color: #7c3aed; }
-        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg,#05051a,#0d0525,#120830); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; }
+
+        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #05051a 0%, #0d0525 50%, #120830 100%); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; }
         #videoCallTop { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 10px; }
-        #videoCallName { font-size: 22px; font-weight: bold; color: #f59e0b; }
+        #videoCallName { font-size: 22px; font-weight: bold; color: #f59e0b; text-shadow: 0 0 15px rgba(245,158,11,0.8); }
         #videoCallStatus { font-size: 13px; color: #888; }
         #vtuberChar { position: relative; width: 240px; height: 310px; filter: drop-shadow(0 0 20px rgba(124,58,237,0.4)); animation: charFloat 3s ease-in-out infinite; }
-        @keyframes charFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-        .vt-body{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:155px;height:155px;background:linear-gradient(180deg,#1a1a2e,#0d0d1e);border-radius:8px 8px 15px 15px}
-        .vt-jacket{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:155px;height:155px;background:linear-gradient(180deg,#1e1e3e,#0a0a1e);border-radius:8px 8px 15px 15px}
-        .vt-jacket-left{position:absolute;bottom:60px;left:calc(50% - 30px);width:35px;height:95px;background:linear-gradient(135deg,#2a2a4e,#1a1a3e);transform:rotate(-8deg);border-radius:5px}
-        .vt-jacket-right{position:absolute;bottom:60px;right:calc(50% - 30px);width:35px;height:95px;background:linear-gradient(225deg,#2a2a4e,#1a1a3e);transform:rotate(8deg);border-radius:5px}
-        .vt-shirt{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);width:25px;height:105px;background:linear-gradient(180deg,#3a3a5e,#2a2a4e);border-radius:3px}
-        .vt-shoulder-l{position:absolute;bottom:105px;left:-5px;width:40px;height:55px;background:linear-gradient(180deg,#252540,#151528);border-radius:8px 0 0 5px}
-        .vt-shoulder-r{position:absolute;bottom:105px;right:-5px;width:40px;height:55px;background:linear-gradient(180deg,#252540,#151528);border-radius:0 8px 5px 0}
-        .vt-jacket-trim-l{position:absolute;bottom:0;left:calc(50% - 78px);width:3px;height:155px;background:linear-gradient(180deg,#f59e0b,transparent);border-radius:2px;opacity:0.6}
-        .vt-jacket-trim-r{position:absolute;bottom:0;right:calc(50% - 78px);width:3px;height:155px;background:linear-gradient(180deg,#f59e0b,transparent);border-radius:2px;opacity:0.6}
-        .vt-neck{position:absolute;bottom:152px;left:50%;transform:translateX(-50%);width:30px;height:25px;background:linear-gradient(180deg,#ffe0b8,#ffd0a0);border-radius:4px}
-        .vt-arm-l{position:absolute;bottom:80px;left:calc(50% - 105px);width:35px;height:110px;background:linear-gradient(180deg,#1e1e3e,#0a0a1e);border-radius:5px 5px 12px 12px;transform-origin:top center;animation:armSwayL 3s ease-in-out infinite}
-        .vt-arm-r{position:absolute;bottom:80px;right:calc(50% - 105px);width:35px;height:110px;background:linear-gradient(180deg,#1e1e3e,#0a0a1e);border-radius:5px 5px 12px 12px;transform-origin:top center;animation:armSwayR 3s ease-in-out infinite}
-        @keyframes armSwayL{0%,100%{transform:rotate(6deg)}50%{transform:rotate(12deg)}}
-        @keyframes armSwayR{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(-12deg)}}
-        .vt-arm-l.wave{animation:waveAnim 0.45s ease-in-out infinite alternate !important}
-        @keyframes waveAnim{0%{transform:rotate(-40deg)}100%{transform:rotate(40deg)}}
-        .vt-hand-l{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);width:28px;height:28px;background:linear-gradient(135deg,#ffe0b8,#ffd0a0);border-radius:50% 50% 45% 45%}
-        .vt-hand-r{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);width:28px;height:28px;background:linear-gradient(135deg,#ffe0b8,#ffd0a0);border-radius:50% 50% 45% 45%}
-        .vt-head{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:125px;height:118px;background:linear-gradient(160deg,#fff2e0,#ffe0b8,#ffd0a0);border-radius:42% 42% 40% 40%;box-shadow:inset -6px -4px 12px rgba(180,110,40,0.2);animation:headBob 2.5s ease-in-out infinite;z-index:5}
-        @keyframes headBob{0%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-5px) rotate(-0.5deg)}70%{transform:translateX(-50%) translateY(-3px) rotate(0.5deg)}}
-        .vt-jaw{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80px;height:35px;background:linear-gradient(180deg,transparent,rgba(180,110,40,0.15));border-radius:0 0 40% 40%;z-index:6}
-        .vt-hair-base{position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:145px;height:75px;background:linear-gradient(180deg,#f8f8f8,#eeeeee,#e0e0e8);border-radius:50% 50% 15% 15%;z-index:6}
-        .vt-hair-mid{position:absolute;top:-5px;left:50%;transform:translateX(-52%);width:30px;height:48px;background:linear-gradient(180deg,#f8f8f8,#ececf4);border-radius:45% 55% 40% 60%;z-index:8}
-        .vt-hair-spike-l1{position:absolute;top:-12px;left:calc(50% - 58px);width:20px;height:42px;background:linear-gradient(150deg,#f8f8f8,#e8e8f0);border-radius:60% 40% 50% 50%;z-index:7;transform:rotate(-20deg)}
-        .vt-hair-spike-r1{position:absolute;top:-12px;right:calc(50% - 58px);width:20px;height:42px;background:linear-gradient(210deg,#f8f8f8,#e8e8f0);border-radius:40% 60% 50% 50%;z-index:7;transform:rotate(20deg)}
-        .vt-hair-spike-l2{position:absolute;top:-8px;left:calc(50% - 72px);width:16px;height:35px;background:linear-gradient(160deg,#f0f0f8,#e0e0ec);border-radius:50% 50% 40% 60%;z-index:6;transform:rotate(-35deg)}
-        .vt-hair-spike-r2{position:absolute;top:-8px;right:calc(50% - 72px);width:16px;height:35px;background:linear-gradient(200deg,#f0f0f8,#e0e0ec);border-radius:50% 50% 60% 40%;z-index:6;transform:rotate(35deg)}
-        .vt-hair-side-l{position:absolute;top:30px;left:calc(50% - 78px);width:18px;height:65px;background:linear-gradient(180deg,#eeeeee,#d8d8e8,transparent);border-radius:15px;z-index:5;transform:rotate(-8deg)}
-        .vt-hair-side-r{position:absolute;top:30px;right:calc(50% - 78px);width:18px;height:65px;background:linear-gradient(180deg,#eeeeee,#d8d8e8,transparent);border-radius:15px;z-index:5;transform:rotate(8deg)}
-        .vt-hair-shine1{position:absolute;top:-8px;left:50%;transform:translateX(-20%) rotate(-8deg);width:40px;height:12px;background:rgba(255,255,255,0.8);border-radius:50%;z-index:9}
-        .vt-ear-l{position:absolute;top:40px;left:-9px;width:16px;height:22px;background:linear-gradient(135deg,#ffe0b8,#ffd0a0);border-radius:50%;z-index:4}
-        .vt-ear-r{position:absolute;top:40px;right:-9px;width:16px;height:22px;background:linear-gradient(135deg,#ffe0b8,#ffd0a0);border-radius:50%;z-index:4}
-        .vt-earring-l{position:absolute;top:52px;left:-7px;width:7px;height:7px;background:#f59e0b;border-radius:50%;z-index:5;box-shadow:0 0 6px #f59e0b}
-        .vt-earring-r{position:absolute;top:52px;right:-7px;width:7px;height:7px;background:#f59e0b;border-radius:50%;z-index:5;box-shadow:0 0 6px #f59e0b}
-        .vt-brow-l{position:absolute;top:25px;left:12px;width:36px;height:6px;background:linear-gradient(90deg,#888890,#707080);border-radius:2px;z-index:8;transform:rotate(-4deg)}
-        .vt-brow-r{position:absolute;top:25px;right:12px;width:36px;height:6px;background:linear-gradient(90deg,#707080,#888890);border-radius:2px;z-index:8;transform:rotate(4deg)}
-        .vt-eye-l{position:absolute;top:38px;left:10px;width:42px;height:34px;background:white;border-radius:40% 40% 45% 45%;z-index:8;overflow:hidden;transition:height 0.15s;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
-        .vt-iris-l{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;background:radial-gradient(circle at 33% 28%,#93c5fd,#3b82f6,#1d4ed8,#1e3a8a);border-radius:50%;animation:eyeMove 5s ease-in-out infinite}
-        .vt-pupil-l{position:absolute;top:50%;left:50%;transform:translate(-45%,-45%);width:13px;height:13px;background:#020215;border-radius:50%}
-        .vt-shine-l{position:absolute;top:18%;left:55%;width:8px;height:8px;background:white;border-radius:50%;opacity:0.95}
-        .vt-shine-l2{position:absolute;top:58%;left:20%;width:4px;height:4px;background:white;border-radius:50%;opacity:0.6}
-        .vt-eye-r{position:absolute;top:38px;right:10px;width:42px;height:34px;background:white;border-radius:40% 40% 45% 45%;z-index:8;overflow:hidden;transition:height 0.15s;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
-        .vt-iris-r{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;background:radial-gradient(circle at 33% 28%,#86efac,#22c55e,#16a34a,#14532d);border-radius:50%;animation:eyeMove 5s ease-in-out infinite}
-        .vt-pupil-r{position:absolute;top:50%;left:50%;transform:translate(-45%,-45%);width:13px;height:13px;background:#011501;border-radius:50%}
-        .vt-shine-r{position:absolute;top:18%;left:55%;width:8px;height:8px;background:white;border-radius:50%;opacity:0.95}
-        .vt-shine-r2{position:absolute;top:58%;left:20%;width:4px;height:4px;background:white;border-radius:50%;opacity:0.6}
-        @keyframes eyeMove{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(-42%,-50%)}75%{transform:translate(-58%,-50%)}}
-        .vt-blink-l{position:absolute;top:0;left:0;width:100%;height:0;background:#ffd0a0;z-index:10;transition:height 0.08s}
-        .vt-blink-r{position:absolute;top:0;left:0;width:100%;height:0;background:#ffd0a0;z-index:10;transition:height 0.08s}
-        .vt-nose{position:absolute;top:76px;left:50%;transform:translateX(-50%);z-index:8;width:16px;height:10px}
-        .vt-nose::before{content:'';position:absolute;right:0;bottom:0;width:7px;height:7px;border-right:2.5px solid rgba(180,110,40,0.6);border-bottom:2.5px solid rgba(180,110,40,0.4);border-radius:0 0 4px 0}
-        .vt-nose::after{content:'';position:absolute;left:0;bottom:0;width:7px;height:7px;border-left:2.5px solid rgba(180,110,40,0.6);border-bottom:2.5px solid rgba(180,110,40,0.4);border-radius:0 0 0 4px}
-        .vt-blush-l{position:absolute;top:68px;left:6px;width:24px;height:11px;background:radial-gradient(ellipse,rgba(255,140,140,0.35),transparent);border-radius:50%;z-index:7}
-        .vt-blush-r{position:absolute;top:68px;right:6px;width:24px;height:11px;background:radial-gradient(ellipse,rgba(255,140,140,0.35),transparent);border-radius:50%;z-index:7}
-        .vt-mouth{position:absolute;top:90px;left:50%;transform:translateX(-50%);z-index:8;transition:all 0.15s}
-        .mouth-smile{width:30px;height:12px;border-bottom:3px solid #b05868;border-radius:0 0 12px 12px}
-        .mouth-talk{width:24px;height:16px;background:radial-gradient(ellipse,#7b1a2a,#5a1020);border-radius:50%;animation:talkAnim 0.22s ease-in-out infinite alternate}
-        .mouth-sleepy{width:18px;height:7px;border-bottom:2px solid #b05868;border-radius:0 0 9px 9px;opacity:0.5}
-        .mouth-excited{width:34px;height:14px;border-bottom:3px solid #b05868;border-radius:0 0 14px 14px}
-        .mouth-serious{width:28px;height:3px;background:#b05868;border-radius:2px}
-        @keyframes talkAnim{0%{height:8px;width:20px}100%{height:19px;width:26px}}
-        .vt-aura{position:absolute;top:0;left:50%;transform:translateX(-50%);width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.12),transparent 70%);z-index:0;animation:auraAnim 3s ease-in-out infinite alternate}
-        @keyframes auraAnim{0%{opacity:0.5;transform:translateX(-50%) scale(0.95)}100%{opacity:1;transform:translateX(-50%) scale(1.08)}}
-        .vt-zzz{position:absolute;top:-28px;right:5px;font-size:18px;display:none;animation:floatEff 2s ease-in-out infinite}
-        .vt-sparkle{position:absolute;top:-22px;left:5px;font-size:16px;display:none;animation:sparkleEff 1s ease-in-out infinite alternate}
-        .vt-stars{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:15px;display:none;animation:starsEff 1.5s ease-in-out infinite}
-        @keyframes floatEff{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-22px)}}
-        @keyframes sparkleEff{0%{opacity:0.5;transform:scale(0.8) rotate(-10deg)}100%{opacity:1;transform:scale(1.3) rotate(10deg)}}
-        @keyframes starsEff{0%,100%{opacity:1}50%{opacity:0.3}}
-        #videoCallBubble{background:rgba(8,5,25,0.95);border:1px solid rgba(124,58,237,0.5);border-radius:20px;padding:12px 20px;width:92%;max-width:320px;font-size:14px;text-align:center;color:white;min-height:45px}
-        #videoCallBtns{display:flex;gap:20px;margin-bottom:10px}
-        #videoMicBtn{background:#222;color:white;border:2px solid #444;width:62px;height:62px;border-radius:50%;font-size:24px;cursor:pointer}
-        #videoMicBtn.active{background:#22c55e;border-color:#22c55e;box-shadow:0 0 20px rgba(34,197,94,0.5)}
-        #videoEndBtn{background:#e11d48;color:white;border:none;width:62px;height:62px;border-radius:50%;font-size:24px;cursor:pointer}
+        @keyframes charFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .vt-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 155px; height: 155px; background: linear-gradient(180deg, #1a1a2e, #0d0d1e); border-radius: 8px 8px 15px 15px; }
+        .vt-jacket { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 155px; height: 155px; background: linear-gradient(180deg, #1e1e3e, #0a0a1e); border-radius: 8px 8px 15px 15px; }
+        .vt-jacket-left { position: absolute; bottom: 60px; left: calc(50% - 30px); width: 35px; height: 95px; background: linear-gradient(135deg, #2a2a4e, #1a1a3e); transform: rotate(-8deg); border-radius: 5px; }
+        .vt-jacket-right { position: absolute; bottom: 60px; right: calc(50% - 30px); width: 35px; height: 95px; background: linear-gradient(225deg, #2a2a4e, #1a1a3e); transform: rotate(8deg); border-radius: 5px; }
+        .vt-shirt { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); width: 25px; height: 105px; background: linear-gradient(180deg, #3a3a5e, #2a2a4e); border-radius: 3px; }
+        .vt-shoulder-l { position: absolute; bottom: 105px; left: -5px; width: 40px; height: 55px; background: linear-gradient(180deg, #252540, #151528); border-radius: 8px 0 0 5px; }
+        .vt-shoulder-r { position: absolute; bottom: 105px; right: -5px; width: 40px; height: 55px; background: linear-gradient(180deg, #252540, #151528); border-radius: 0 8px 5px 0; }
+        .vt-jacket-trim-l { position: absolute; bottom: 0; left: calc(50% - 78px); width: 3px; height: 155px; background: linear-gradient(180deg, #f59e0b, transparent); border-radius: 2px; opacity: 0.6; }
+        .vt-jacket-trim-r { position: absolute; bottom: 0; right: calc(50% - 78px); width: 3px; height: 155px; background: linear-gradient(180deg, #f59e0b, transparent); border-radius: 2px; opacity: 0.6; }
+        .vt-neck { position: absolute; bottom: 152px; left: 50%; transform: translateX(-50%); width: 30px; height: 25px; background: linear-gradient(180deg, #ffe0b8, #ffd0a0); border-radius: 4px; }
+        .vt-arm-l { position: absolute; bottom: 80px; left: calc(50% - 105px); width: 35px; height: 110px; background: linear-gradient(180deg, #1e1e3e, #0a0a1e); border-radius: 5px 5px 12px 12px; transform-origin: top center; animation: armSwayL 3s ease-in-out infinite; }
+        .vt-arm-r { position: absolute; bottom: 80px; right: calc(50% - 105px); width: 35px; height: 110px; background: linear-gradient(180deg, #1e1e3e, #0a0a1e); border-radius: 5px 5px 12px 12px; transform-origin: top center; animation: armSwayR 3s ease-in-out infinite; }
+        @keyframes armSwayL { 0%,100%{transform:rotate(6deg)} 50%{transform:rotate(12deg)} }
+        @keyframes armSwayR { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(-12deg)} }
+        .vt-arm-l.wave { animation: waveAnim 0.45s ease-in-out infinite alternate !important; }
+        @keyframes waveAnim { 0%{transform:rotate(-40deg)} 100%{transform:rotate(40deg)} }
+        .vt-hand-l { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; background: linear-gradient(135deg, #ffe0b8, #ffd0a0); border-radius: 50% 50% 45% 45%; }
+        .vt-hand-r { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); width: 28px; height: 28px; background: linear-gradient(135deg, #ffe0b8, #ffd0a0); border-radius: 50% 50% 45% 45%; }
+        .vt-head { position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 125px; height: 118px; background: linear-gradient(160deg, #fff2e0, #ffe0b8, #ffd0a0); border-radius: 42% 42% 40% 40%; box-shadow: inset -6px -4px 12px rgba(180,110,40,0.2), inset 4px 3px 8px rgba(255,255,255,0.3); animation: headBob 2.5s ease-in-out infinite; z-index: 5; }
+        @keyframes headBob { 0%,100%{transform:translateX(-50%) translateY(0)} 40%{transform:translateX(-50%) translateY(-5px) rotate(-0.5deg)} 70%{transform:translateX(-50%) translateY(-3px) rotate(0.5deg)} }
+        .vt-jaw { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 35px; background: linear-gradient(180deg, transparent, rgba(180,110,40,0.15)); border-radius: 0 0 40% 40%; z-index: 6; }
+        .vt-hair-base { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 145px; height: 75px; background: linear-gradient(180deg, #f8f8f8, #eeeeee, #e0e0e8); border-radius: 50% 50% 15% 15%; z-index: 6; }
+        .vt-hair-mid { position: absolute; top: -5px; left: 50%; transform: translateX(-52%); width: 30px; height: 48px; background: linear-gradient(180deg, #f8f8f8, #ececf4); border-radius: 45% 55% 40% 60%; z-index: 8; }
+        .vt-hair-spike-l1 { position: absolute; top: -12px; left: calc(50% - 58px); width: 20px; height: 42px; background: linear-gradient(150deg, #f8f8f8, #e8e8f0); border-radius: 60% 40% 50% 50%; z-index: 7; transform: rotate(-20deg); }
+        .vt-hair-spike-r1 { position: absolute; top: -12px; right: calc(50% - 58px); width: 20px; height: 42px; background: linear-gradient(210deg, #f8f8f8, #e8e8f0); border-radius: 40% 60% 50% 50%; z-index: 7; transform: rotate(20deg); }
+        .vt-hair-spike-l2 { position: absolute; top: -8px; left: calc(50% - 72px); width: 16px; height: 35px; background: linear-gradient(160deg, #f0f0f8, #e0e0ec); border-radius: 50% 50% 40% 60%; z-index: 6; transform: rotate(-35deg); }
+        .vt-hair-spike-r2 { position: absolute; top: -8px; right: calc(50% - 72px); width: 16px; height: 35px; background: linear-gradient(200deg, #f0f0f8, #e0e0ec); border-radius: 50% 50% 60% 40%; z-index: 6; transform: rotate(35deg); }
+        .vt-hair-side-l { position: absolute; top: 30px; left: calc(50% - 78px); width: 18px; height: 65px; background: linear-gradient(180deg, #eeeeee, #d8d8e8, transparent); border-radius: 15px; z-index: 5; transform: rotate(-8deg); }
+        .vt-hair-side-r { position: absolute; top: 30px; right: calc(50% - 78px); width: 18px; height: 65px; background: linear-gradient(180deg, #eeeeee, #d8d8e8, transparent); border-radius: 15px; z-index: 5; transform: rotate(8deg); }
+        .vt-hair-shine1 { position: absolute; top: -8px; left: 50%; transform: translateX(-20%) rotate(-8deg); width: 40px; height: 12px; background: rgba(255,255,255,0.8); border-radius: 50%; z-index: 9; }
+        .vt-ear-l { position: absolute; top: 40px; left: -9px; width: 16px; height: 22px; background: linear-gradient(135deg, #ffe0b8, #ffd0a0); border-radius: 50%; z-index: 4; }
+        .vt-ear-r { position: absolute; top: 40px; right: -9px; width: 16px; height: 22px; background: linear-gradient(135deg, #ffe0b8, #ffd0a0); border-radius: 50%; z-index: 4; }
+        .vt-earring-l { position: absolute; top: 52px; left: -7px; width: 7px; height: 7px; background: #f59e0b; border-radius: 50%; z-index: 5; box-shadow: 0 0 6px #f59e0b; }
+        .vt-earring-r { position: absolute; top: 52px; right: -7px; width: 7px; height: 7px; background: #f59e0b; border-radius: 50%; z-index: 5; box-shadow: 0 0 6px #f59e0b; }
+        .vt-brow-l { position: absolute; top: 25px; left: 12px; width: 36px; height: 6px; background: linear-gradient(90deg, #888890, #707080); border-radius: 2px; z-index: 8; transform: rotate(-4deg); }
+        .vt-brow-r { position: absolute; top: 25px; right: 12px; width: 36px; height: 6px; background: linear-gradient(90deg, #707080, #888890); border-radius: 2px; z-index: 8; transform: rotate(4deg); }
+        .vt-eye-l { position: absolute; top: 38px; left: 10px; width: 42px; height: 34px; background: white; border-radius: 40% 40% 45% 45%; z-index: 8; overflow: hidden; transition: height 0.15s; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+        .vt-iris-l { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 26px; height: 26px; background: radial-gradient(circle at 33% 28%, #93c5fd, #3b82f6, #1d4ed8, #1e3a8a); border-radius: 50%; animation: eyeMove 5s ease-in-out infinite; box-shadow: 0 0 8px rgba(59,130,246,0.6); }
+        .vt-pupil-l { position: absolute; top: 50%; left: 50%; transform: translate(-45%,-45%); width: 13px; height: 13px; background: #020215; border-radius: 50%; }
+        .vt-shine-l { position: absolute; top: 18%; left: 55%; width: 8px; height: 8px; background: white; border-radius: 50%; opacity: 0.95; }
+        .vt-shine-l2 { position: absolute; top: 58%; left: 20%; width: 4px; height: 4px; background: white; border-radius: 50%; opacity: 0.6; }
+        .vt-eye-r { position: absolute; top: 38px; right: 10px; width: 42px; height: 34px; background: white; border-radius: 40% 40% 45% 45%; z-index: 8; overflow: hidden; transition: height 0.15s; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+        .vt-iris-r { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 26px; height: 26px; background: radial-gradient(circle at 33% 28%, #86efac, #22c55e, #16a34a, #14532d); border-radius: 50%; animation: eyeMove 5s ease-in-out infinite; box-shadow: 0 0 8px rgba(34,197,94,0.6); }
+        .vt-pupil-r { position: absolute; top: 50%; left: 50%; transform: translate(-45%,-45%); width: 13px; height: 13px; background: #011501; border-radius: 50%; }
+        .vt-shine-r { position: absolute; top: 18%; left: 55%; width: 8px; height: 8px; background: white; border-radius: 50%; opacity: 0.95; }
+        .vt-shine-r2 { position: absolute; top: 58%; left: 20%; width: 4px; height: 4px; background: white; border-radius: 50%; opacity: 0.6; }
+        @keyframes eyeMove { 0%,100%{transform:translate(-50%,-50%)} 25%{transform:translate(-42%,-50%)} 75%{transform:translate(-58%,-50%)} }
+        .vt-blink-l { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: #ffd0a0; z-index: 10; transition: height 0.08s; }
+        .vt-blink-r { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: #ffd0a0; z-index: 10; transition: height 0.08s; }
+        .vt-nose { position: absolute; top: 76px; left: 50%; transform: translateX(-50%); z-index: 8; width: 16px; height: 10px; }
+        .vt-nose::before { content: ''; position: absolute; right: 0; bottom: 0; width: 7px; height: 7px; border-right: 2.5px solid rgba(180,110,40,0.6); border-bottom: 2.5px solid rgba(180,110,40,0.4); border-radius: 0 0 4px 0; }
+        .vt-nose::after { content: ''; position: absolute; left: 0; bottom: 0; width: 7px; height: 7px; border-left: 2.5px solid rgba(180,110,40,0.6); border-bottom: 2.5px solid rgba(180,110,40,0.4); border-radius: 0 0 0 4px; }
+        .vt-blush-l { position: absolute; top: 68px; left: 6px; width: 24px; height: 11px; background: radial-gradient(ellipse, rgba(255,140,140,0.35), transparent); border-radius: 50%; z-index: 7; }
+        .vt-blush-r { position: absolute; top: 68px; right: 6px; width: 24px; height: 11px; background: radial-gradient(ellipse, rgba(255,140,140,0.35), transparent); border-radius: 50%; z-index: 7; }
+        .vt-mouth { position: absolute; top: 90px; left: 50%; transform: translateX(-50%); z-index: 8; transition: all 0.15s; }
+        .mouth-smile { width: 30px; height: 12px; border-bottom: 3px solid #b05868; border-radius: 0 0 12px 12px; }
+        .mouth-talk { width: 24px; height: 16px; background: radial-gradient(ellipse, #7b1a2a, #5a1020); border-radius: 50%; animation: talkAnim 0.22s ease-in-out infinite alternate; }
+        .mouth-sleepy { width: 18px; height: 7px; border-bottom: 2px solid #b05868; border-radius: 0 0 9px 9px; opacity: 0.5; }
+        .mouth-excited { width: 34px; height: 14px; border-bottom: 3px solid #b05868; border-radius: 0 0 14px 14px; }
+        .mouth-serious { width: 28px; height: 3px; background: #b05868; border-radius: 2px; }
+        @keyframes talkAnim { 0%{height:8px;width:20px} 100%{height:19px;width:26px} }
+        .vt-aura { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.12), transparent 70%); z-index: 0; animation: auraAnim 3s ease-in-out infinite alternate; }
+        @keyframes auraAnim { 0%{opacity:0.5;transform:translateX(-50%) scale(0.95)} 100%{opacity:1;transform:translateX(-50%) scale(1.08)} }
+        .vt-zzz { position: absolute; top: -28px; right: 5px; font-size: 18px; display: none; animation: floatEff 2s ease-in-out infinite; }
+        .vt-sparkle { position: absolute; top: -22px; left: 5px; font-size: 16px; display: none; animation: sparkleEff 1s ease-in-out infinite alternate; }
+        .vt-stars { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 15px; display: none; animation: starsEff 1.5s ease-in-out infinite; }
+        @keyframes floatEff { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-22px)} }
+        @keyframes sparkleEff { 0%{opacity:0.5;transform:scale(0.8) rotate(-10deg)} 100%{opacity:1;transform:scale(1.3) rotate(10deg)} }
+        @keyframes starsEff { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        #videoCallBubble { background: rgba(8,5,25,0.95); border: 1px solid rgba(124,58,237,0.5); border-radius: 20px; padding: 12px 20px; width: 92%; max-width: 320px; font-size: 14px; text-align: center; color: white; min-height: 45px; }
+        #videoCallBtns { display: flex; gap: 20px; margin-bottom: 10px; }
+        #videoMicBtn { background: #222; color: white; border: 2px solid #444; width: 62px; height: 62px; border-radius: 50%; font-size: 24px; cursor: pointer; }
+        #videoMicBtn.active { background: #22c55e; border-color: #22c55e; box-shadow: 0 0 20px rgba(34,197,94,0.5); }
+        #videoEndBtn { background: #e11d48; color: white; border: none; width: 62px; height: 62px; border-radius: 50%; font-size: 24px; cursor: pointer; }
     </style>
 </head>
 <body>
+
 <div id="mangaBg"></div>
 
 <div id="login">
     <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
     <h2>YUUTO-BOT</h2>
     <p>Ton ami IA anime 🎌</p>
-    <input id="nom" type="text" placeholder="Ton prenom..." onkeydown="if(event.key==='Enter')seConnecter()"/>
+    <input id="nom" type="text" placeholder="Ton prenom..."/>
     <button onclick="seConnecter()">Entrer ✨</button>
-    <span id="erreur">Accès refusé 🚫</span>
-</div>
-
-<div id="loginAntoine">
-    <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
-    <h2>🔐 Espace Créateur</h2>
-    <p>Entre ton mot de passe 👇</p>
-    <input id="mdpInput" type="password" placeholder="Mot de passe..." onkeydown="if(event.key==='Enter')verifierMdp()"/>
-    <button id="mdpBtn" onclick="verifierMdp()">🔓 Entrer</button>
-    <span id="mdpErreur">Incorrect ❌</span>
-    <span id="mdpTentatives"></span>
-</div>
-
-<!-- ANIME PLAYER — STYLE VIDEO -->
-<div id="animePlayer">
-    <div id="animeTop">
-        <img id="animeImg" src="" alt=""/>
-        <img id="animeImgNext" src="" alt=""/>
-        <div id="animeTypeIndicator">🎬 ANIME</div>
-        <button id="animeCloseBtn" onclick="fermerAnime()">✕</button>
-        <div id="animeLoading">
-            <div class="anime-spinner"></div>
-            <p id="animeLoadingText">Génération de l'épisode...</p>
-        </div>
-        <div id="animeOverlay">
-            <div id="animeNarrateur"></div>
-            <div id="animeDialogue">
-                <div id="animePersonnage"></div>
-                <div id="animeTexte"></div>
-            </div>
-        </div>
-    </div>
-    <div id="animeControls">
-        <div style="flex:1">
-            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-                <span id="animeTitle" style="font-size:12px;color:#aaa"></span>
-                <span id="animeSceneInfo" style="font-size:11px;color:#555"></span>
-            </div>
-            <div id="animeProgress" onclick="animeSeek(event)">
-                <div id="animeProgressBar"></div>
-            </div>
-        </div>
-    </div>
-    <div style="background:rgba(0,0,0,0.9);padding:10px 15px;display:flex;justify-content:center;gap:15px;border-top:1px solid #222">
-        <button class="anime-btn" onclick="animePrev()">⏮</button>
-        <button class="anime-btn primary" id="animePlayBtn" onclick="toggleAnimePlay()">⏸</button>
-        <button class="anime-btn" onclick="animeNext()">⏭</button>
-        <button class="anime-btn" onclick="toggleAnimeSon()" id="animeSonBtn">🔊</button>
-        <button class="anime-btn" onclick="animeReplay()">🔁</button>
-    </div>
-</div>
-
-<!-- LOGS -->
-<div id="logsScreen">
-    <div id="logsHeader">
-        <h2>📊 Logs Admin</h2>
-        <div style="display:flex;gap:8px">
-            <button id="clearLogsBtn" onclick="effacerLogs()">🗑️</button>
-            <button id="logsClose" onclick="fermerLogs()">✕</button>
-        </div>
-    </div>
-    <div id="logsStats">
-        <div class="stat-item"><span class="stat-num" id="statTotal">0</span><span class="stat-label">Messages</span></div>
-        <div class="stat-item"><span class="stat-num" id="statUsers">0</span><span class="stat-label">Utilisateurs</span></div>
-        <div class="stat-item"><span class="stat-num" id="statConnexions">0</span><span class="stat-label">Connexions</span></div>
-        <div class="stat-item"><span class="stat-num" id="statMangas">0</span><span class="stat-label">Animes</span></div>
-        <div class="stat-item"><span class="stat-num" id="statRecettes">0</span><span class="stat-label">Recettes</span></div>
-    </div>
-    <div id="logsFiltre">
-        <button class="filtre-btn active" onclick="filtrerLogs('tous',this)">👥 Tous</button>
-        <button class="filtre-btn" onclick="filtrerLogs('users',this)">🃏 Fiches</button>
-        <button class="filtre-btn" onclick="filtrerLogs('connexion',this)">🟢 Connexions</button>
-        <button class="filtre-btn" onclick="filtrerLogs('message',this)">💬 Messages</button>
-        <button class="filtre-btn" onclick="filtrerLogs('manga',this)">🎬 Animes</button>
-        <button class="filtre-btn" onclick="filtrerLogs('recette',this)">🍜 Recettes</button>
-        <button class="filtre-btn" onclick="filtrerLogs('image',this)">🎨 Images</button>
-    </div>
-    <div id="logsList"></div>
-</div>
-
-<!-- RECETTES -->
-<div id="recetteScreen">
-    <div id="recetteBox">
-        <h2>🍜 Recettes Anime</h2>
-        <div class="recette-section">🔥 Food Wars — Plats</div>
-        <div class="recette-btn" onclick="faireRecette('Boeuf Bourguignon Soma Food Wars','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Boeuf Bourguignon Soma</div><div class="recette-anime">Food Wars 🔥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Curry automne Megumi Food Wars','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry d'Automne Megumi</div><div class="recette-anime">Food Wars 🍂</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Oeuf sauce soyu Soma Food Wars','🍳')"><span class="recette-emoji">🍳</span><div><div class="recette-name">Œuf Sauce Soyu</div><div class="recette-anime">Food Wars 🥚</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Yakisoba festival Food Wars','🍝')"><span class="recette-emoji">🍝</span><div><div class="recette-name">Yakisoba Festival</div><div class="recette-anime">Food Wars ⭐</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Terrine canard Erina Food Wars','🦆')"><span class="recette-emoji">🦆</span><div><div class="recette-name">Terrine Canard Erina</div><div class="recette-anime">Food Wars 👑</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Risotto truffes Aldini Food Wars','🍚')"><span class="recette-emoji">🍚</span><div><div class="recette-name">Risotto Truffes Aldini</div><div class="recette-anime">Food Wars 🇮🇹</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Homard bisque Shinomiya Food Wars','🦞')"><span class="recette-emoji">🦞</span><div><div class="recette-name">Homard Bisque Shinomiya</div><div class="recette-anime">Food Wars 🇫🇷</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Gyoza maison Soma Food Wars','🥟')"><span class="recette-emoji">🥟</span><div><div class="recette-name">Gyoza Soma</div><div class="recette-anime">Food Wars 🥟</div></div></div>
-        <div class="recette-section">🍰 Food Wars — Desserts</div>
-        <div class="recette-btn" onclick="faireRecette('Creme brulee Ryo Food Wars','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Crème Brûlée Ryo</div><div class="recette-anime">Food Wars 🌊</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Charlotte fraises Megumi Food Wars','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Charlotte Fraises Megumi</div><div class="recette-anime">Food Wars 🌸</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Mousse chocolat Ryo Food Wars','🍫')"><span class="recette-emoji">🍫</span><div><div class="recette-name">Mousse Chocolat Ryo</div><div class="recette-anime">Food Wars 🌊</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Tarte citron Alice Food Wars','🍋')"><span class="recette-emoji">🍋</span><div><div class="recette-name">Tarte Citron Alice</div><div class="recette-anime">Food Wars 🔬</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Panna cotta Erina Food Wars','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Panna Cotta Erina</div><div class="recette-anime">Food Wars 👑</div></div></div>
-        <div class="recette-section">🎌 Classiques Anime</div>
-        <div class="recette-btn" onclick="faireRecette('Ramen tonkotsu Naruto','🍜')"><span class="recette-emoji">🍜</span><div><div class="recette-name">Ramen Naruto</div><div class="recette-anime">Naruto 🍥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Onigiri Demon Slayer','🍙')"><span class="recette-emoji">🍙</span><div><div class="recette-name">Onigiri Tanjiro</div><div class="recette-anime">Demon Slayer 🗡️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Katsudon Yuri on Ice','🍱')"><span class="recette-emoji">🍱</span><div><div class="recette-name">Katsudon Yuri</div><div class="recette-anime">Yuri on Ice ⛸️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Takoyaki One Piece Sanji','🐙')"><span class="recette-emoji">🐙</span><div><div class="recette-name">Takoyaki Sanji</div><div class="recette-anime">One Piece ☠️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Curry Dragon Ball Goku','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Goku</div><div class="recette-anime">Dragon Ball 🔥</div></div></div>
-        <div class="recette-section">🏠 Studio Ghibli</div>
-        <div class="recette-btn" onclick="faireRecette('Petit dejeuner Howl Chateau Ambulant','🥓')"><span class="recette-emoji">🥓</span><div><div class="recette-name">Petit-Déj Howl</div><div class="recette-anime">Château Ambulant 🔥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Soupe miso Chihiro Spirited Away','🍵')"><span class="recette-emoji">🍵</span><div><div class="recette-name">Soupe Miso Chihiro</div><div class="recette-anime">Spirited Away 🐉</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Bento Kiki La Petite Sorciere','🧺')"><span class="recette-emoji">🧺</span><div><div class="recette-name">Bento de Kiki</div><div class="recette-anime">Kiki la Sorcière 🧹</div></div></div>
-        <div class="recette-section">🍰 Desserts Anime</div>
-        <div class="recette-btn" onclick="faireRecette('Dango Clannad Nagisa','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Dango Nagisa</div><div class="recette-anime">Clannad 💙</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Dorayaki Doraemon','🥞')"><span class="recette-emoji">🥞</span><div><div class="recette-name">Dorayaki Doraemon</div><div class="recette-anime">Doraemon 🔵</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Mochi glace matcha Sword Art Online','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Mochi Glacé Matcha</div><div class="recette-anime">SAO ⚔️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Melon pan Shakugan no Shana','🍞')"><span class="recette-emoji">🍞</span><div><div class="recette-name">Melon Pan Shana</div><div class="recette-anime">Shana 🔥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Kakigori glace rasee Fullmetal Alchemist','🍧')"><span class="recette-emoji">🍧</span><div><div class="recette-name">Kakigori Edward</div><div class="recette-anime">FMA ⚙️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Pudding caramel Taiga Toradora','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Pudding Taiga</div><div class="recette-anime">Toradora 🐯</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Daifuku fraise Sailor Moon','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Daifuku Sailor Moon</div><div class="recette-anime">Sailor Moon 🌙</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Castella japonais Angel Beats','🍰')"><span class="recette-emoji">🍰</span><div><div class="recette-name">Castella Angel Beats</div><div class="recette-anime">Angel Beats 👼</div></div></div>
-        <button class="modalBtn secondary" onclick="fermerModal('recetteScreen')" style="margin-top:8px">Fermer</button>
-    </div>
-</div>
-
-<!-- ANIME CREATOR -->
-<div id="animeCreatorScreen">
-    <div id="animeCreatorBox">
-        <h2>🎬 Créer un Anime</h2>
-        <p style="color:#aaa;text-align:center;font-size:13px">Images + musique + dialogues 🎵</p>
-        <div class="anime-theme-btn" onclick="lancerAnime('action')"><span class="theme-emoji">⚔️</span><div><div class="theme-name">Action</div><div class="theme-desc">Combats épiques style Demon Slayer</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('romance')"><span class="theme-emoji">💕</span><div><div class="theme-name">Romance</div><div class="theme-desc">Histoire d'amour style Clannad</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('isekai')"><span class="theme-emoji">🌀</span><div><div class="theme-name">Isekai</div><div class="theme-desc">Transporté dans un autre monde</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('fantasy')"><span class="theme-emoji">🧙</span><div><div class="theme-name">Fantasy</div><div class="theme-desc">Magie et créatures épiques</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('shonen')"><span class="theme-emoji">🔥</span><div><div class="theme-name">Shonen</div><div class="theme-desc">Style Naruto / Dragon Ball</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('horreur')"><span class="theme-emoji">👻</span><div><div class="theme-name">Horreur</div><div class="theme-desc">Suspense et frissons</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('comedie')"><span class="theme-emoji">😂</span><div><div class="theme-name">Comédie</div><div class="theme-desc">Chibi et gags drôles</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('aventure')"><span class="theme-emoji">🗺️</span><div><div class="theme-name">Aventure</div><div class="theme-desc">Exploration et quêtes</div></div></div>
-        <button class="modalBtn secondary" onclick="fermerModal('animeCreatorScreen')">Fermer</button>
-    </div>
+    <span id="erreur">Acces refuse 😤</span>
 </div>
 
 <div id="japonaisScreen">
     <div id="japonaisBox">
         <h2>🎌 Apprendre le Japonais</h2>
-        <div class="jap-level-btn" onclick="lancerLecon('debutant')"><div class="level-title">🌱 Débutant</div><div class="level-desc">Hiragana, salutations</div></div>
-        <div class="jap-level-btn" onclick="lancerLecon('intermediaire')"><div class="level-title">⚡ Intermédiaire</div><div class="level-desc">Katakana, phrases</div></div>
-        <div class="jap-level-btn" onclick="lancerLecon('anime')"><div class="level-title">🎭 Vocabulaire Anime</div><div class="level-desc">Expressions populaires</div></div>
-        <div class="jap-level-btn" onclick="lancerLecon('kanji')"><div class="level-title">📖 Kanji de base</div><div class="level-desc">50 kanji essentiels</div></div>
-        <button class="modalBtn secondary" onclick="fermerModal('japonaisScreen')">Fermer</button>
-    </div>
-</div>
-
-<div id="memoireScreen">
-    <div id="memoireBox">
-        <h2>🧠 Mémoire</h2>
-        <div id="memoireContenu"></div>
-        <button class="modalBtn danger" onclick="effacerMemoire()">🗑️ Effacer</button>
-        <button class="modalBtn secondary" onclick="fermerModal('memoireScreen')">Fermer</button>
+        <p style="color:#aaa;text-align:center;font-size:13px">Choisis ton niveau 👇</p>
+        <div class="jap-level-btn" onclick="lancerLecon('debutant')"><div class="level-title">🌱 Débutant</div><div class="level-desc">Hiragana, salutations, chiffres</div></div>
+        <div class="jap-level-btn" onclick="lancerLecon('intermediaire')"><div class="level-title">⚡ Intermédiaire</div><div class="level-desc">Katakana, phrases du quotidien</div></div>
+        <div class="jap-level-btn" onclick="lancerLecon('anime')"><div class="level-title">🎭 Vocabulaire Anime</div><div class="level-desc">Mots d'anime, expressions populaires</div></div>
+        <div class="jap-level-btn" onclick="lancerLecon('kanji')"><div class="level-title">📖 Kanji de base</div><div class="level-desc">Les 50 kanji les plus utilisés</div></div>
+        <button class="modalBtn secondary" onclick="fermerModal('japonaisScreen')" style="margin-top:5px">Fermer</button>
     </div>
 </div>
 
@@ -455,12 +229,11 @@
         <div class="menu-option"><label>👤 Changer ton nom</label><input type="text" id="nouveauNom" placeholder="Nouveau nom..."/><button onclick="changerNom()">Changer</button></div>
         <div class="menu-option" style="border-color:#00d4ff">
             <div class="toggle-row">
-                <div><label style="color:#00d4ff">🧠 Mode Codex</label><div class="codex-desc">Expert sérieux</div></div>
+                <div><label style="color:#00d4ff">🧠 Mode Codex</label><div class="codex-desc">YUUTO-BOT devient expert sérieux</div></div>
                 <label class="toggle"><input type="checkbox" id="codexToggle" onchange="toggleCodex()"/><span class="toggle-slider"></span></label>
             </div>
-            <div id="codexInfo" style="display:none;margin-top:10px;padding:10px;background:#0a1a2e;border-radius:8px;font-size:12px;color:#00d4ff;border:1px solid #00d4ff">✅ Mode Codex activé !</div>
+            <div id="codexInfo" style="display:none;margin-top:10px;padding:10px;background:#0a1a2e;border-radius:8px;font-size:12px;color:#00d4ff;border:1px solid #00d4ff">✅ Mode Codex activé !<br/>📚 Devoirs, sciences, maths...</div>
         </div>
-        <button class="modalBtn secondary" onclick="ouvrirModal('memoireScreen');fermerModal('menuScreen')">🧠 Mémoire</button>
         <button class="modalBtn secondary" onclick="fermerModal('menuScreen')">Fermer</button>
     </div>
 </div>
@@ -469,13 +242,13 @@
     <div class="modalBox">
         <h2>⭐ YUUTO-BOT Premium</h2>
         <div class="prix">2 000 FCFA</div>
-        <div class="feature">🎭 5 transformations</div>
-        <div class="feature">⚡ Battle illimité</div>
-        <div class="feature">🌟 Badge exclusif</div>
-        <div class="wave-info"><strong style="color:#22c55e">💚 Wave</strong><br/><strong style="color:white;font-size:17px">+225 07 67 07 9692</strong><br/><strong style="color:#f59e0b">📸 WhatsApp</strong><br/><strong style="color:white;font-size:17px">+225 07 67 07 9692</strong><br/><strong style="color:#aaa">✅ Code sous 24h</strong></div>
-        <input class="modalInput" id="codeInput" type="text" placeholder="Entre ton code..."/>
+        <div class="feature">🎭 5 transformations de personnage</div>
+        <div class="feature">⚡ Accès illimité au mode Battle</div>
+        <div class="feature">🌟 Badge Premium exclusif</div>
+        <div class="wave-info"><strong style="color:#22c55e">💚 Étape 1 — Paye via Wave</strong><br/>Envoie <strong style="color:white">2000 FCFA</strong> au<br/><strong style="color:white;font-size:17px">+225 07 67 07 9692</strong><br/><br/><strong style="color:#f59e0b">📸 Étape 2 — Envoie la preuve</strong><br/>sur <strong style="color:#25D366">WhatsApp</strong> au<br/><strong style="color:white;font-size:17px">+225 07 67 07 9692</strong><br/><br/><strong style="color:#aaa">✅ Code sous 24h</strong></div>
+        <input class="modalInput" id="codeInput" type="text" placeholder="Entre ton code secret..."/>
         <span id="codeErreur" style="color:red;font-size:13px;display:none">Code incorrect 😤</span>
-        <button class="modalBtn primary" onclick="verifierCode()">✅ Activer</button>
+        <button class="modalBtn primary" onclick="verifierCode()">✅ Activer Premium</button>
         <button class="modalBtn secondary" onclick="fermerModal('premiumScreen')">Fermer</button>
     </div>
 </div>
@@ -483,6 +256,8 @@
 <div class="modal" id="persoScreen">
     <div class="modalBox">
         <h2>🎭 Mode Personnage</h2>
+        <p id="persoCompteur" style="color:#aaa;text-align:center;font-size:13px"></p>
+        <p style="color:#555;text-align:center;font-size:12px">⚠️ Personnages dangereux interdits</p>
         <input class="modalInput" id="persoInput" type="text" placeholder="Ex: Naruto, Levi, Goku..."/>
         <button class="modalBtn primary" onclick="activerPersonnage()">✨ Transformer !</button>
         <button class="modalBtn secondary" onclick="resetPersonnage()">Redevenir YUUTO-BOT</button>
@@ -492,7 +267,7 @@
 
 <div class="modal" id="battleScreen">
     <div class="modalBox">
-        <h2>⚔️ Battle !</h2>
+        <h2>⚔️ Mode Battle !</h2>
         <input class="battle-input" id="perso1Input" type="text" placeholder="Personnage 1"/>
         <input class="battle-input" id="perso2Input" type="text" placeholder="Personnage 2"/>
         <button class="modalBtn danger" onclick="lancerBattle()">⚔️ BATTLE !</button>
@@ -519,15 +294,6 @@
     </div>
 </div>
 
-<div id="musicBar">
-    <div id="musicTitle">🎵 Musique relaxante</div>
-    <div id="musicControls">
-        <button onclick="toggleMusique()">⏸️</button>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.3" oninput="changerVolume()"/>
-        <button onclick="fermerMusique()">✕</button>
-    </div>
-</div>
-
 <div id="videoCallScreen">
     <div id="videoCallTop">
         <div id="videoCallName">YUUTO-BOT</div>
@@ -538,16 +304,22 @@
         <div class="vt-zzz" id="vtZzz">💤</div>
         <div class="vt-sparkle" id="vtSparkle">✨</div>
         <div class="vt-stars" id="vtStars">⭐</div>
-        <div class="vt-hair-side-l"></div><div class="vt-hair-side-r"></div>
+        <div class="vt-hair-side-l"></div>
+        <div class="vt-hair-side-r"></div>
         <div class="vt-hair-base"><div class="vt-hair-shine1"></div></div>
-        <div class="vt-hair-spike-l2"></div><div class="vt-hair-spike-r2"></div>
-        <div class="vt-hair-spike-l1"></div><div class="vt-hair-spike-r1"></div>
+        <div class="vt-hair-spike-l2"></div>
+        <div class="vt-hair-spike-r2"></div>
+        <div class="vt-hair-spike-l1"></div>
+        <div class="vt-hair-spike-r1"></div>
         <div class="vt-hair-mid"></div>
         <div class="vt-head" id="vtHead">
             <div class="vt-jaw"></div>
-            <div class="vt-ear-l"></div><div class="vt-ear-r"></div>
-            <div class="vt-earring-l"></div><div class="vt-earring-r"></div>
-            <div class="vt-brow-l"></div><div class="vt-brow-r"></div>
+            <div class="vt-ear-l"></div>
+            <div class="vt-ear-r"></div>
+            <div class="vt-earring-l"></div>
+            <div class="vt-earring-r"></div>
+            <div class="vt-brow-l"></div>
+            <div class="vt-brow-r"></div>
             <div class="vt-eye-l" id="vtEyeL">
                 <div class="vt-iris-l"><div class="vt-pupil-l"></div><div class="vt-shine-l"></div><div class="vt-shine-l2"></div></div>
                 <div class="vt-blink-l" id="vtBlinkL"></div>
@@ -557,20 +329,24 @@
                 <div class="vt-blink-r" id="vtBlinkR"></div>
             </div>
             <div class="vt-nose"></div>
-            <div class="vt-blush-l"></div><div class="vt-blush-r"></div>
+            <div class="vt-blush-l"></div>
+            <div class="vt-blush-r"></div>
             <div class="vt-mouth" id="vtMouth"><div class="mouth-smile" id="vtMouthShape"></div></div>
         </div>
         <div class="vt-neck"></div>
         <div class="vt-arm-l" id="vtArmL"><div class="vt-hand-l"></div></div>
         <div class="vt-arm-r" id="vtArmR"><div class="vt-hand-r"></div></div>
         <div class="vt-jacket">
-            <div class="vt-shoulder-l"></div><div class="vt-shoulder-r"></div>
-            <div class="vt-jacket-left"></div><div class="vt-jacket-right"></div>
+            <div class="vt-shoulder-l"></div>
+            <div class="vt-shoulder-r"></div>
+            <div class="vt-jacket-left"></div>
+            <div class="vt-jacket-right"></div>
             <div class="vt-shirt"></div>
-            <div class="vt-jacket-trim-l"></div><div class="vt-jacket-trim-r"></div>
+            <div class="vt-jacket-trim-l"></div>
+            <div class="vt-jacket-trim-r"></div>
         </div>
     </div>
-    <div id="videoCallBubble">Salut ! 😊</div>
+    <div id="videoCallBubble">Salut ! Appuie sur le micro 😊</div>
     <div id="videoCallBtns">
         <button id="videoMicBtn" onclick="toggleVideoMic()">🎤</button>
         <button id="videoEndBtn" onclick="terminerVideoAppel()">📵</button>
@@ -588,8 +364,6 @@
         <div id="historyLabel">Conversations</div>
         <div id="historyList"></div>
         <div id="sidebarFooter">
-            <button class="sidebarBtn" id="logsBtn" onclick="ouvrirLogs()" style="display:none;color:#f59e0b;font-weight:bold">📊 Logs Admin</button>
-            <button class="sidebarBtn" onclick="ouvrirModal('memoireScreen')">🧠 Mémoire</button>
             <button class="sidebarBtn" onclick="ouvrirModal('premiumScreen')">⭐ Pass Premium</button>
             <button class="sidebarBtn" onclick="ouvrirModal('menuScreen')">⚙️ Paramètres</button>
             <div id="userInfo">
@@ -611,9 +385,8 @@
                 </div>
             </div>
             <div id="headerBtns">
-                <button onclick="ouvrirModal('japonaisScreen')" style="width:36px;height:36px;background:linear-gradient(135deg,#7c3aed,#f59e0b);border:none;border-radius:50%;font-size:15px;cursor:pointer;box-shadow:0 0 10px rgba(124,58,237,0.5);">🎌</button>
-                <button onclick="ouvrirModal('animeCreatorScreen')" title="Créer un anime" style="width:36px;height:36px;background:linear-gradient(135deg,#7c3aed,#e11d48);border:none;border-radius:50%;font-size:15px;cursor:pointer;box-shadow:0 0 10px rgba(124,58,237,0.5);">🎬</button>
-                <button onclick="ouvrirModal('recetteScreen')" style="width:36px;height:36px;background:linear-gradient(135deg,#f97316,#f59e0b);border:none;border-radius:50%;font-size:15px;cursor:pointer;box-shadow:0 0 10px rgba(249,115,22,0.5);">🍜</button>
+                <!-- BOUTON JAPONAIS ROND ✅ -->
+                <button onclick="ouvrirModal('japonaisScreen')" style="width:38px;height:38px;background:linear-gradient(135deg,#7c3aed,#f59e0b);border:none;border-radius:50%;font-size:16px;cursor:pointer;box-shadow:0 0 10px rgba(124,58,237,0.5);">🎌</button>
                 <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
             </div>
         </div>
@@ -640,24 +413,11 @@
     const AVATAR="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png";
     const NOM_BOT="YUUTO-BOT";
     const CODE_PREMIUM="2013";
-    const CODE_NICK="tamaire2024";
-    const MDP_ANTOINE="yuuto2013";
     const MAX_TRANSFO_GRATUIT=2;
     const MAX_TRANSFO_PREMIUM=5;
-    const PERSONNAGES_BANNIS=['hitler','staline','mussolini','bin laden','pol pot','mao','saddam'];
+    const PERSONNAGES_BANNIS=['hitler','staline','mussolini','bin laden','pol pot','mao zedong','saddam'];
     const MOTS_SENSIBLES=['suicide','me tuer','me suicider','comment mourir','me pendre','me noyer','finir ma vie','mettre fin'];
     const SYMBOLES_MANGA=['⛩️','🎌','忍','侍','武','道','龍','神','夢','愛','力','心','剣','炎','風','雷'];
-
-    const ANIME_THEMES={
-        action:{style:'epic anime battle scene intense sword fight dynamic action dramatic lighting cinematic',musique:'intense',couleur:'#ff4444',sfx:['BOOM','SLASH','CRASH','KIAI']},
-        romance:{style:'romantic anime couple cherry blossoms sunset soft lighting beautiful shoujo art style',musique:'douce',couleur:'#ff6b9d',sfx:['DOKI','KYUN','BLUSHU']},
-        isekai:{style:'fantasy isekai anime world magical portal glowing dramatic sky epic landscape',musique:'mystique',couleur:'#7c3aed',sfx:['WHOOSH','TENSEI','GLOW']},
-        fantasy:{style:'epic fantasy anime magic spells glowing runes dramatic lighting wizard battle',musique:'epique',couleur:'#a78bfa',sfx:['MAGIC','SPELL','POWER']},
-        shonen:{style:'shonen anime protagonist training power up energy aura dramatic sky intense',musique:'intense',couleur:'#f59e0b',sfx:['YOSH','NANI','SUGOI']},
-        horreur:{style:'dark horror anime mysterious shadows creepy atmosphere gothic style eerie',musique:'sombre',couleur:'#333',sfx:['CREAK','SHRIEK','GASP']},
-        comedie:{style:'cute funny anime chibi characters comedy school life colorful cheerful',musique:'joyeuse',couleur:'#22c55e',sfx:['BAKA','NANI','DOUF']},
-        aventure:{style:'adventure anime hero journey epic landscape mountains quest dramatic sky',musique:'epique',couleur:'#00d4ff',sfx:['DASH','QUEST','YOSH']}
-    };
 
     const historique=[];
     const animesDejaRecommandes=[];
@@ -671,430 +431,355 @@
     let yuutoParle=false;
     let personnageActuel=null;
     let estPremium=false;
-    let estNick=false;
     let nbTransfo=0;
     let sidebarVisible=false;
     let blinkInterval=null;
     let humeurVideo='normal';
     let modeCodex=false;
-    let audioCtx=null;
-    let musicGain=null;
-    let musicPlaying=false;
-    let nickUtilisations=0;
-    let mdpTentatives=0;
-    let filtreActuel='tous';
 
-    // ===== ANIME PLAYER =====
-    let animeScenes=[];
-    let animeIndex=0;
-    let animeTimer=null;
-    let animeIsPlaying=false;
-    let animeMusique=null;
-    let animeMusiqueGain=null;
-    let animeSonActif=true;
-    let animeDureeScene=5000;
-    let animeProgressInterval=null;
-    let animeStartTime=0;
-
-    const ANIME_STYLES={
-        intense:{notes:[130.81,146.83,164.81,174.61,196.00],vitesse:200,type:'sawtooth'},
-        douce:{notes:[261.63,293.66,329.63,392.00,440.00,523.25],vitesse:600,type:'sine'},
-        mystique:{notes:[220.00,246.94,261.63,293.66,329.63],vitesse:500,type:'triangle'},
-        epique:{notes:[174.61,196.00,220.00,261.63,293.66],vitesse:300,type:'square'},
-        sombre:{notes:[110.00,123.47,130.81,146.83],vitesse:800,type:'sawtooth'},
-        joyeuse:{notes:[329.63,369.99,392.00,440.00,493.88,523.25],vitesse:250,type:'sine'}
-    };
-
-    function jouerMusiqueAnime(style){
-        try{
-            if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-            if(animeMusiqueGain){animeMusiqueGain.gain.setValueAtTime(0,audioCtx.currentTime);animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.5);}
-            animeMusiqueGain=audioCtx.createGain();
-            animeMusiqueGain.gain.value=animeSonActif?0.08:0;
-            animeMusiqueGain.connect(audioCtx.destination);
-            const s=ANIME_STYLES[style]||ANIME_STYLES.douce;
-            let noteIdx=0;
-            function jouerProchaine(){
-                if(!animeIsPlaying)return;
-                const osc=audioCtx.createOscillator();
-                const env=audioCtx.createGain();
-                osc.connect(env);env.connect(animeMusiqueGain);
-                osc.type=s.type;
-                const note=s.notes[noteIdx%s.notes.length];
-                osc.frequency.setValueAtTime(note,audioCtx.currentTime);
-                env.gain.setValueAtTime(0,audioCtx.currentTime);
-                env.gain.linearRampToValueAtTime(0.4,audioCtx.currentTime+0.05);
-                env.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+(s.vitesse/1000)*0.9);
-                osc.start(audioCtx.currentTime);
-                osc.stop(audioCtx.currentTime+(s.vitesse/1000));
-                noteIdx++;
-                animeMusique=setTimeout(jouerProchaine,s.vitesse);
-            }
-            jouerProchaine();
-        }catch(e){}
-    }
-
-    function stopMusiqueAnime(){
-        if(animeMusique)clearTimeout(animeMusique);
-        if(animeMusiqueGain&&audioCtx){try{animeMusiqueGain.gain.setValueAtTime(animeMusiqueGain.gain.value,audioCtx.currentTime);animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.8);}catch(e){}}
-    }
-
-    function toggleAnimeSon(){
-        animeSonActif=!animeSonActif;
-        document.getElementById('animeSonBtn').textContent=animeSonActif?'🔊':'🔇';
-        if(animeMusiqueGain&&audioCtx){try{animeMusiqueGain.gain.setValueAtTime(animeSonActif?0.08:0,audioCtx.currentTime);}catch(e){}}
-    }
-
-    async function lancerAnime(theme){
-        fermerModal('animeCreatorScreen');
-        const info=ANIME_THEMES[theme]||ANIME_THEMES.action;
-        document.getElementById('chat').innerHTML+=`<div class="moi">🎬 Crée un anime ${theme} !</div>`;
-        loadingId++;const chatId='loading'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${chatId}">🎬 Génération de l'épisode... ⏳<br><small style="color:#aaa">Images + musique + dialogues en cours...</small></div></div>`;
-        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-
-        let scenario=null;
-        try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Crée un épisode anime ${theme} original. JSON uniquement:
-{"titre":"TITRE EN MAJUSCULES","perso1":"NomHeros","perso2":"NomSecond","scenes":[
-{"type":"intro","narrateur":"texte narrateur court","dialogue":"","personnage":"","image":"description scène en anglais pour image IA, style anime cinematic"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso","image":"description scène anglais"},
-{"type":"action","narrateur":"texte court","dialogue":"","personnage":"","image":"description action anglais"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso2","image":"description anglais"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso","image":"description anglais"},
-{"type":"action","narrateur":"texte","dialogue":"","personnage":"","image":"description anglais"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso2","image":"description anglais"},
-{"type":"climax","narrateur":"texte dramatique","dialogue":"","personnage":"","image":"description climax anglais cinematic dramatic"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso","image":"description anglais"},
-{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"description fin anglais sunset emotional"}
-]}`}]})});
-            const d=await r.json();
-            scenario=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());
-        }catch(e){
-            scenario={titre:`ANIME ${theme.toUpperCase()}`,perso1:"Kaito",perso2:"Ryuu",scenes:[
-                {type:"intro",narrateur:"Dans un monde lointain...",dialogue:"",personnage:"",image:`${info.style} opening scene cinematic`},
-                {type:"scene",narrateur:"",dialogue:"Je vais devenir le plus fort !",personnage:"Kaito",image:`${info.style} hero determination`},
-                {type:"action",narrateur:"Un ennemi apparaît !",dialogue:"",personnage:"",image:`${info.style} enemy appears dramatic`},
-                {type:"scene",narrateur:"",dialogue:"Tu ne peux pas me vaincre !",personnage:"Ryuu",image:`${info.style} rival confrontation`},
-                {type:"climax",narrateur:"Le combat final commence !",dialogue:"",personnage:"",image:`${info.style} epic battle climax cinematic`},
-                {type:"fin",narrateur:"À suivre...",dialogue:"",personnage:"",image:`${info.style} peaceful ending sunset`}
-            ]};
-        }
-
-        // Préparer les scenes avec images
-        animeScenes=scenario.scenes.map((s,i)=>({
-            ...s,
-            imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent(s.image+' anime style high quality cinematic 4k beautiful detailed')}?width=768&height=432&nologo=true&seed=${Date.now()+i*100}`,
-            index:i
-        }));
-
-        sauvegarderLog(memoire.prenom||'Utilisateur',`🎬 Anime ${theme}: ${scenario.titre}`,'[ANIME GENERE]','manga');
-
-        document.getElementById(chatId).innerHTML=`🎬 Épisode prêt ! <button onclick="ouvrirAnimePlayer('${scenario.titre}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-top:8px;display:block">▶️ Regarder l'épisode</button>`;
-        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-
-        window.animeThemeCourant=theme;
-        window.animeTitreCourant=scenario.titre;
-    }
-
-    function ouvrirAnimePlayer(titre,theme){
-        const info=ANIME_THEMES[theme]||ANIME_THEMES.action;
-        document.getElementById('animePlayer').style.display='flex';
-        document.getElementById('animeTitle').textContent=titre||'Anime YUUTO-BOT';
-        document.getElementById('animeTypeIndicator').textContent=`🎬 ${theme.toUpperCase()}`;
-        document.getElementById('animeLoading').style.display='none';
-        document.getElementById('animeOverlay').style.display='block';
-        animeIndex=0;
-        animeIsPlaying=true;
-        document.getElementById('animePlayBtn').textContent='⏸';
-        jouerMusiqueAnime(info.musique||'douce');
-        afficherSceneAnime(0);
-        demarrerTimerAnime();
-    }
-
-    function afficherSceneAnime(idx){
-        if(!animeScenes||!animeScenes[idx])return;
-        const scene=animeScenes[idx];
-        const img=document.getElementById('animeImg');
-        const imgNext=document.getElementById('animeImgNext');
-        const total=animeScenes.length;
-
-        // Transition
-        imgNext.src=scene.imgUrl;
-        imgNext.style.opacity='0';
-        img.style.opacity='1';
-        setTimeout(()=>{imgNext.style.opacity='1';img.style.opacity='0';setTimeout(()=>{img.src=scene.imgUrl;img.style.opacity='1';imgNext.style.opacity='0';},800);},50);
-
-        // Texte
-        document.getElementById('animeNarrateur').textContent=scene.narrateur||'';
-        document.getElementById('animePersonnage').textContent=scene.personnage?`— ${scene.personnage} :`:'';
-        document.getElementById('animeTexte').textContent=scene.dialogue||'';
-        document.getElementById('animeDialogue').style.display=(scene.dialogue||scene.narrateur)?'block':'none';
-        document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${total}`;
-        document.getElementById('animeProgressBar').style.width=`${((idx+1)/total)*100}%`;
-
-        // Parler le dialogue
-        if(scene.dialogue&&animeSonActif){
-            setTimeout(()=>{parlerFR(scene.dialogue);},500);
+    function activerFondManga(){
+        const bg=document.getElementById('mangaBg');
+        bg.style.display='block';bg.innerHTML='';
+        for(let i=0;i<25;i++){
+            const s=document.createElement('span');
+            s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];
+            s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${18+Math.random()*22}px;color:${Math.random()>0.5?'#7c3aed':'#f59e0b'};animation:floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;
+            bg.appendChild(s);
         }
     }
 
-    function demarrerTimerAnime(){
-        if(animeTimer)clearInterval(animeTimer);
-        animeTimer=setInterval(()=>{
-            if(!animeIsPlaying)return;
-            if(animeIndex<animeScenes.length-1){
-                animeIndex++;
-                afficherSceneAnime(animeIndex);
-            }else{
-                animeIsPlaying=false;
-                document.getElementById('animePlayBtn').textContent='▶';
-                clearInterval(animeTimer);
-                // Message fin d'épisode
-                setTimeout(()=>{
-                    document.getElementById('animeNarrateur').textContent='FIN DE L\'ÉPISODE';
-                    document.getElementById('animeTexte').textContent='Merci d\'avoir regardé ! 🎬';
-                    document.getElementById('animePersonnage').textContent='';
-                },500);
-            }
-        },animeDureeScene);
-    }
-
-    function toggleAnimePlay(){
-        animeIsPlaying=!animeIsPlaying;
-        document.getElementById('animePlayBtn').textContent=animeIsPlaying?'⏸':'▶';
-        if(animeIsPlaying){
-            demarrerTimerAnime();
-            if(window.animeThemeCourant){const info=ANIME_THEMES[window.animeThemeCourant];jouerMusiqueAnime(info?.musique||'douce');}
-        }else{
-            if(animeTimer)clearInterval(animeTimer);
-            stopMusiqueAnime();
-        }
-    }
-
-    function animeNext(){
-        if(animeIndex<animeScenes.length-1){animeIndex++;afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}
-    }
-
-    function animePrev(){
-        if(animeIndex>0){animeIndex--;afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}
-    }
-
-    function animeReplay(){
-        animeIndex=0;animeIsPlaying=true;document.getElementById('animePlayBtn').textContent='⏸';afficherSceneAnime(0);demarrerTimerAnime();if(window.animeThemeCourant){const info=ANIME_THEMES[window.animeThemeCourant];jouerMusiqueAnime(info?.musique||'douce');}
-    }
-
-    function animeSeek(e){
-        const bar=document.getElementById('animeProgress');const rect=bar.getBoundingClientRect();const pct=(e.clientX-rect.left)/rect.width;
-        animeIndex=Math.min(Math.floor(pct*animeScenes.length),animeScenes.length-1);
-        afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();
-    }
-
-    function fermerAnime(){
-        animeIsPlaying=false;if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();window.speechSynthesis?.cancel();
-        document.getElementById('animePlayer').style.display='none';
-    }
-
-    // ===== LOGS =====
-    function sauvegarderLog(user,message,reponse,type){const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');logs.push({date:new Date().toLocaleString('fr-FR'),user:user||'Inconnu',message:(message||'').substring(0,300),reponse:(reponse||'').substring(0,300),type:type||'message'});if(logs.length>1000)logs.splice(0,logs.length-1000);localStorage.setItem('yuuto_logs',JSON.stringify(logs));}
-    function ouvrirLogs(){document.getElementById('logsScreen').style.display='flex';afficherLogs('tous');}
-    function afficherLogs(filtre){
-        filtreActuel=filtre;
-        const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');
-        const users=[...new Set(logs.map(l=>l.user))];
-        document.getElementById('statTotal').textContent=logs.filter(l=>l.type==='message').length;
-        document.getElementById('statUsers').textContent=users.length;
-        document.getElementById('statConnexions').textContent=logs.filter(l=>l.type==='connexion').length;
-        document.getElementById('statMangas').textContent=logs.filter(l=>l.type==='manga').length;
-        document.getElementById('statRecettes').textContent=logs.filter(l=>l.type==='recette').length;
-        const couleurs={connexion:'#22c55e',message:'#7c3aed',manga:'#e11d48',recette:'#f97316',image:'#00d4ff'};
-        const icones={connexion:'🟢',message:'💬',manga:'🎬',recette:'🍜',image:'🎨'};
-        const list=document.getElementById('logsList');
-        if(filtre==='users'){
-            if(users.length===0){list.innerHTML='<div style="color:#555;text-align:center;padding:30px">Aucun utilisateur 😅</div>';return;}
-            list.innerHTML=users.map(u=>{
-                const ul=logs.filter(l=>l.user===u);
-                const msgs=ul.filter(l=>l.type==='message');
-                const cnx=ul.filter(l=>l.type==='connexion');
-                const mng=ul.filter(l=>l.type==='manga');
-                const rec=ul.filter(l=>l.type==='recette');
-                const img=ul.filter(l=>l.type==='image');
-                const derniere=ul[ul.length-1]?.date||'?';
-                const premiere=ul[0]?.date||'?';
-                const derMsg=msgs[msgs.length-1]?.message||'Aucun message';
-                const derRep=msgs[msgs.length-1]?.reponse||'';
-                return `<div class="user-card">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-                        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px;flex-shrink:0">${u[0].toUpperCase()}</div>
-                        <div>
-                            <div style="font-weight:bold;font-size:15px;color:${u==='Antoine'?'#f59e0b':'#ddd'}">${u} ${u==='Antoine'?'👑 Créateur':''}</div>
-                            <div style="font-size:10px;color:#555">Inscrit le ${premiere}</div>
-                        </div>
-                    </div>
-                    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-                        <span style="background:#1a1a2e;padding:4px 8px;border-radius:10px;font-size:11px;color:#7c3aed">💬 ${msgs.length} messages</span>
-                        <span style="background:#0a2a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#22c55e">🟢 ${cnx.length} connexions</span>
-                        <span style="background:#1a0a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#e11d48">🎬 ${mng.length} animes</span>
-                        <span style="background:#1a0a00;padding:4px 8px;border-radius:10px;font-size:11px;color:#f97316">🍜 ${rec.length} recettes</span>
-                        <span style="background:#0a1a1a;padding:4px 8px;border-radius:10px;font-size:11px;color:#00d4ff">🎨 ${img.length} images</span>
-                    </div>
-                    <div style="background:#0a0a0a;padding:8px;border-radius:8px;font-size:11px;border-left:2px solid #333">
-                        <div style="color:#555;font-size:10px;margin-bottom:3px">💬 Dernier message :</div>
-                        <div style="color:#ddd">${derMsg.substring(0,100)}${derMsg.length>100?'...':''}</div>
-                        ${derRep?`<div style="color:#22c55e;margin-top:4px;font-size:10px">🤖 ${derRep.substring(0,80)}...</div>`:''}
-                    </div>
-                    <div style="font-size:10px;color:#555;margin-top:6px">🕐 Dernière activité : ${derniere}</div>
-                </div>`;
-            }).join('');
-            return;
-        }
-        const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);
-        if(filtres.length===0){list.innerHTML=`<div style="color:#555;text-align:center;padding:30px">Aucun log 😅</div>`;return;}
-        let resumeHtml='';
-        if(filtre==='tous'){
-            resumeHtml=`<div style="font-size:11px;color:#f59e0b;font-weight:bold;margin-bottom:8px">👥 ${users.length} utilisateur(s)</div>`;
-            resumeHtml+=users.map(u=>{const ul=logs.filter(l=>l.user===u);return `<div style="background:#111;border:1px solid #333;border-radius:8px;padding:8px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;flex-shrink:0">${u[0].toUpperCase()}</div><div style="flex:1"><div style="font-weight:bold;color:${u==='Antoine'?'#f59e0b':'#ddd'};font-size:13px">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#555">${ul.length} activités — ${ul[ul.length-1]?.date||'?'}</div></div><div style="display:flex;gap:4px;font-size:10px"><span style="background:#1a1a2e;padding:2px 5px;border-radius:6px;color:#7c3aed">${ul.filter(l=>l.type==='message').length}💬</span><span style="background:#1a0a0a;padding:2px 5px;border-radius:6px;color:#e11d48">${ul.filter(l=>l.type==='manga').length}🎬</span><span style="background:#1a0a00;padding:2px 5px;border-radius:6px;color:#f97316">${ul.filter(l=>l.type==='recette').length}🍜</span></div></div>`;}).join('');
-            resumeHtml+=`<div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px">📋 Activité</div>`;
-        }
-        const logsHtml=[...filtres].reverse().map(l=>`
-            <div class="log-item" style="border-color:${couleurs[l.type]||'#333'}">
-                <div style="font-size:10px;color:#555;margin-bottom:5px">${icones[l.type]||'📝'} ${l.date}</div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-                    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;flex-shrink:0">${(l.user||'?')[0].toUpperCase()}</div>
-                    <strong style="color:${l.user==='Antoine'?'#f59e0b':'#a78bfa'};font-size:13px">${l.user}</strong>
-                    <span style="background:${couleurs[l.type]||'#333'};color:white;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:bold">${l.type==='connexion'?'🟢 CONNEXION':l.type==='message'?'💬 MESSAGE':l.type==='manga'?'🎬 ANIME':l.type==='recette'?'🍜 RECETTE':l.type==='image'?'🎨 IMAGE':'📝'}</span>
-                </div>
-                <div style="padding:7px 10px;background:#1a1a1a;border-radius:8px;font-size:12px;line-height:1.6;color:#ddd">
-                    ${l.type==='connexion'?`🚪 <strong style="color:#22c55e">${l.user}</strong> s'est connecté ${l.message.replace('[CONNEXION]','')}`:
-                      l.type==='manga'?`🎬 <strong style="color:#e11d48">${l.user}</strong> a créé l'anime : <strong>${l.message.replace('🎬 Anime ','')}</strong>`:
-                      l.type==='recette'?`🍜 <strong style="color:#f97316">${l.user}</strong> a cuisiné : <strong>${l.message.replace('Recette: ','')}</strong>`:
-                      l.type==='image'?`🎨 <strong style="color:#00d4ff">${l.user}</strong> a généré : <em>${l.message}</em>`:
-                      `💬 <strong style="color:#a78bfa">${l.user}</strong> : ${l.message}`}
-                </div>
-                ${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME GENERE]'?`<div style="padding:6px 10px;background:#0a1a0a;border-radius:8px;font-size:11px;margin-top:5px;color:#22c55e;line-height:1.5;border-left:2px solid #22c55e">🤖 ${l.reponse.substring(0,180)}${l.reponse.length>180?'...':''}</div>`:''}
-            </div>`).join('');
-        list.innerHTML=resumeHtml+logsHtml;
-    }
-    function filtrerLogs(f,b){document.querySelectorAll('.filtre-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');afficherLogs(f);}
-    function fermerLogs(){document.getElementById('logsScreen').style.display='none';}
-    function effacerLogs(){if(confirm('Effacer TOUS les logs ?')){localStorage.removeItem('yuuto_logs');afficherLogs(filtreActuel);}}
-
-    // ===== PROTECTION ANTOINE =====
-    function seConnecter(){const n=document.getElementById('nom').value.trim();const nl=n.toLowerCase();if(nl.includes('antoine')||nl.includes('gatore')){document.getElementById('login').style.display='none';document.getElementById('loginAntoine').style.display='flex';return;}if(n.length===0){document.getElementById('erreur').style.display='block';return;}memoire.prenom=n;estAntoine=false;localStorage.setItem('yuuto_nom',n);chargerMemoire();demarrer();}
-    function verifierMdp(){const mdp=document.getElementById('mdpInput').value.trim();mdpTentatives++;if(mdp===MDP_ANTOINE){estAntoine=true;memoire.prenom="Antoine";localStorage.setItem('yuuto_nom','Antoine Gatore');document.getElementById('loginAntoine').style.display='none';chargerMemoire();demarrer();}else{document.getElementById('mdpErreur').style.display='block';document.getElementById('mdpTentatives').style.display='block';document.getElementById('mdpTentatives').textContent=`Tentative ${mdpTentatives}/5`;document.getElementById('mdpInput').value='';if(mdpTentatives>=5){document.getElementById('mdpBtn').disabled=true;document.getElementById('mdpTentatives').textContent='🔒 Bloqué';document.getElementById('mdpTentatives').style.color='#e11d48';}}}
-
-    // ===== MUSIQUE =====
-    function demarrerMusique(){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();musicGain=audioCtx.createGain();musicGain.gain.value=0.12;musicGain.connect(audioCtx.destination);jouerNote();musicPlaying=true;document.getElementById('musicBar').classList.add('visible');}catch(e){}}
-    function jouerNote(){if(!audioCtx||!musicPlaying)return;const p=[261.63,293.66,329.63,392.00,440.00,523.25];const note=p[Math.floor(Math.random()*p.length)];const osc=audioCtx.createOscillator();const env=audioCtx.createGain();osc.connect(env);env.connect(musicGain);osc.type='sine';osc.frequency.setValueAtTime(note,audioCtx.currentTime);env.gain.setValueAtTime(0,audioCtx.currentTime);env.gain.linearRampToValueAtTime(0.3,audioCtx.currentTime+0.1);env.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+1.5);osc.start(audioCtx.currentTime);osc.stop(audioCtx.currentTime+1.5);if(musicPlaying)setTimeout(jouerNote,800+Math.random()*1200);}
-    function toggleMusique(){if(musicPlaying){musicPlaying=false;document.querySelector('#musicControls button').textContent='▶️';}else{musicPlaying=true;document.querySelector('#musicControls button').textContent='⏸️';jouerNote();}}
-    function changerVolume(){if(musicGain)musicGain.gain.value=parseFloat(document.getElementById('volumeSlider').value)*0.5;}
-    function fermerMusique(){musicPlaying=false;document.getElementById('musicBar').classList.remove('visible');}
-
-    // ===== MEMOIRE =====
-    function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d)memoire=JSON.parse(d);}
-    function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
-    function mettreAJourMemoire(msg){const ml=msg.toLowerCase();memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');if(ml.includes("j'aime")||ml.includes('mon anime'))memoire.animes=msg;if(ml.includes('mon jeu'))memoire.jeux=msg;const age=msg.match(/j'ai (\d+) ans/i);if(age)memoire.age=age[1]+' ans';if(!memoire.sujets)memoire.sujets=[];['naruto','one piece','dragon ball','demon slayer','goku','luffy','food wars'].forEach(s=>{if(ml.includes(s)&&!memoire.sujets.includes(s))memoire.sujets.push(s);});if(memoire.sujets.length>10)memoire.sujets=memoire.sujets.slice(-10);sauvegarderMemoire();}
-    function getMemoireTexte(){let t="";if(memoire.prenom)t+=`Prenom:${memoire.prenom}. `;if(memoire.age)t+=`Age:${memoire.age}. `;if(memoire.animes)t+=`Animes:${memoire.animes}. `;if(memoire.sujets&&memoire.sujets.length)t+=`Sujets:${memoire.sujets.join(',')}. `;return t?"[MEMOIRE]:"+t:"";}
-    function afficherMemoire(){const box=document.getElementById('memoireContenu');const items=[{label:'👤 Prénom',val:memoire.prenom},{label:'🎂 Age',val:memoire.age},{label:'🎌 Animes',val:memoire.animes},{label:'🎮 Jeux',val:memoire.jeux},{label:'💬 Sujets',val:memoire.sujets?.join(', ')},{label:'📅 Dernière visite',val:memoire.derniere_visite},{label:'🔢 Visites',val:memoire.visites?.toString()}];box.innerHTML=items.filter(i=>i.val).map(i=>`<div class="mem-item"><div class="mem-label">${i.label}</div><div class="mem-value">${i.val}</div></div>`).join('')||'<div style="color:#aaa;text-align:center">Aucune info 😅</div>';}
-    function effacerMemoire(){const p=memoire.prenom;memoire={prenom:p,visites:memoire.visites};sauvegarderMemoire();afficherMemoire();ajouterMessageBot("Mémoire effacée ! 😊");fermerModal('memoireScreen');}
-
-    // ===== RECETTES =====
-    async function faireRecette(recette,emoji){
-        fermerModal('recetteScreen');
-        document.getElementById('chat').innerHTML+=`<div class="moi">${emoji||'🍜'} ${recette} !</div>`;
+    async function lancerLecon(niveau){
+        fermerModal('japonaisScreen');
+        const prompts={
+            debutant:`Tu es un professeur de japonais sympa. Enseigne les hiragana de base (あいうえお), les salutations et les chiffres 1-5. Explique en français avec des emojis.`,
+            intermediaire:`Tu es un professeur de japonais. Enseigne les katakana et 5 phrases utiles du quotidien. Japonais + romanisation + traduction. Emojis.`,
+            anime:`Tu es un prof fan d'anime. Enseigne 10 expressions populaires : Nani, Senpai, Nakama, Kawaii, Sugoi, Yatta, Itadakimasu, Ganbatte. Emojis.`,
+            kanji:`Enseigne 5 kanji essentiels : 日 (jour), 本 (livre), 人 (personne), 水 (eau), 火 (feu). Symbole + lecture + signification + exemple.`
+        };
+        document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Lance la leçon !</div>`;
         loadingId++;const id='loading'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🍳 Préparation... ⏳</div></div>`;
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">Préparation... 🎌</div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}" anime. JSON:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantité ingr 1","emoji quantité ingr 2","emoji quantité ingr 3","emoji quantité ingr 4","emoji quantité ingr 5"],"etapes":["Etape 1 détaillée","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun"}`}]})});
-        const d=await r.json();let data=null;try{data=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());}catch(e){}
-        const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful appetizing colorful')}?width=420&height=280&nologo=true&seed=${Date.now()}`;
-        if(data){document.getElementById(id).innerHTML=`🍜 Voilà !<div class="recette-card"><h3>${data.titre||recette}</h3><img src="${imgUrl}" loading="lazy" onerror="this.style.display='none'"/><div class="anecdote">🎌 ${data.anime||''}</div><div class="section-titre">📦 Ingrédients</div>${(data.ingredients||[]).map(i=>`<div class="ingredient">${i}</div>`).join('')}<div class="section-titre">👨‍🍳 Préparation</div>${(data.etapes||[]).map((e,i)=>`<div class="etape"><span class="etape-num">${i+1}.</span>${e}</div>`).join('')}${data.conseil?`<div class="conseil-box">💡 ${data.conseil}</div>`:''}</div>`;}
-        else{document.getElementById(id).innerHTML=`🍜 ${d.choices[0].message.content}<br><img src="${imgUrl}" style="max-width:100%;border-radius:10px;margin-top:8px;" loading="lazy"/>`;}
-        sauvegarderLog(memoire.prenom||'Utilisateur',`Recette: ${recette}`,'[RECETTE]','recette');
+        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});
+        const d=await r.json();const rep=d.choices[0].message.content;
+        const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");
+        document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerJaponais('${t}')">🔊 Ecouter en japonais</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite de la leçon</button>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
-    // ===== RESTE =====
-    function activerFondManga(){const bg=document.getElementById('mangaBg');bg.style.display='block';bg.innerHTML='';for(let i=0;i<25;i++){const s=document.createElement('span');s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${18+Math.random()*22}px;color:${Math.random()>0.5?'#7c3aed':'#f59e0b'};animation:floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;bg.appendChild(s);}}
-    async function lancerLecon(niveau){fermerModal('japonaisScreen');const prompts={debutant:`Prof japonais. Hiragana, salutations. Français emojis.`,intermediaire:`Katakana + 5 phrases.`,anime:`10 expressions anime.`,kanji:`5 kanji.`};document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Lance !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    async function continuerLecon(niveau){document.getElementById('chat').innerHTML+=`<div class="moi">➡️ Suite !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue leçon ${niveau}.`}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    function parlerFR(t,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';u.rate=1;u.pitch=1.3;u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};s.speak(u);}
-    function parler(t,cb){parlerFR(t,cb);}
-    function toggleCodex(){modeCodex=document.getElementById('codexToggle').checked;localStorage.setItem('yuuto_codex',modeCodex.toString());document.getElementById('codexInfo').style.display=modeCodex?'block':'none';document.getElementById('codexBadge').style.display=modeCodex?'inline':'none';document.getElementById('msg').className=modeCodex?'codex-active':'';document.getElementById('msg').placeholder=modeCodex?'🧠 Pose ta question...':`Message ${NOM_BOT}...`;if(modeCodex){fermerModal('menuScreen');ajouterMessageBot("Mode Codex activé 🧠",null,true);}else ajouterMessageBot(`Mode Codex désactivé 😊`);}
-    function getSystemPrompt(){const mem=getMemoireTexte();if(modeCodex)return`Tu es ${NOM_BOT} mode Codex. Expert. Français. ${mem}`;if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. ${mem}`;return window.humeurInfo.personnalite+' '+mem;}
-    function toggleSidebar(){sidebarVisible=!sidebarVisible;const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}else{sb.classList.remove('open');ov.style.display='none';}}
-    function nouvelleConversation(){if(historique.length>0){conversations.unshift({titre:historique[0]?.content?.substring(0,30)+'...',messages:[...historique]});historique.length=0;majHistorique();}document.getElementById('chat').innerHTML='';ajouterMessageBot(estAntoine?`YOOO 🔥 nouvelle conv !`:`Salut ${memoire.prenom} ! 😊`);toggleSidebar();}
-    function majHistorique(){const list=document.getElementById('historyList');list.innerHTML=conversations.length===0?'<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>':'';conversations.forEach(conv=>{const item=document.createElement('div');item.className='historyItem';item.innerHTML=`💬 ${conv.titre}`;item.onclick=()=>{historique.length=0;conv.messages.forEach(m=>historique.push(m));document.getElementById('chat').innerHTML='';conv.messages.forEach(m=>{if(m.role==='user')document.getElementById('chat').innerHTML+=`<div class="moi">${m.content}</div>`;else ajouterMessageBot(m.content);});toggleSidebar();};list.appendChild(item);});}
-    function ouvrirModal(id){document.getElementById(id).style.display='flex';if(id==='memoireScreen')afficherMemoire();}
+    async function continuerLecon(niveau){
+        document.getElementById('chat').innerHTML+=`<div class="moi">➡️ Suite !</div>`;
+        loadingId++;const id='loading'+loadingId;
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">Je continue... 🎌</div></div>`;
+        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue la leçon de japonais niveau ${niveau}. Donne un exercice ou la suite. Sois fun.`}]})});
+        const d=await r.json();const rep=d.choices[0].message.content;
+        const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");
+        document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerJaponais('${t}')">🔊 Ecouter</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+
+    function parlerJaponais(t){const s=window.speechSynthesis;if(!s)return;s.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=0.9;u.pitch=1.1;s.speak(u);}
+
+    function toggleCodex(){
+        modeCodex=document.getElementById('codexToggle').checked;
+        localStorage.setItem('yuuto_codex',modeCodex.toString());
+        document.getElementById('codexInfo').style.display=modeCodex?'block':'none';
+        document.getElementById('codexBadge').style.display=modeCodex?'inline':'none';
+        document.getElementById('msg').className=modeCodex?'codex-active':'';
+        document.getElementById('msg').placeholder=modeCodex?'🧠 Pose ta question...':`Message ${NOM_BOT}...`;
+        if(modeCodex){fermerModal('menuScreen');ajouterMessageBot("Mode Codex activé 🧠",null,true);}
+        else{ajouterMessageBot(`Mode Codex désactivé 😊`);}
+    }
+
+    function getSystemPrompt(){
+        if(modeCodex)return`Tu es ${NOM_BOT} en mode Codex. Expert sérieux. Réponds de façon détaillée. Français.`;
+        if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. Francais.`;
+        return window.humeurInfo.personnalite;
+    }
+
+    function toggleSidebar(){
+        sidebarVisible=!sidebarVisible;
+        const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');
+        if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}
+        else{sb.classList.remove('open');ov.style.display='none';}
+    }
+
+    function nouvelleConversation(){
+        if(historique.length>0){conversations.unshift({titre:historique[0]?.content?.substring(0,30)+'...',messages:[...historique]});historique.length=0;majHistorique();}
+        document.getElementById('chat').innerHTML='';
+        ajouterMessageBot(estAntoine?`YOOO 🔥 nouvelle conv !`:`Salut ${memoire.prenom} ! 😊`);
+        toggleSidebar();
+    }
+
+    function majHistorique(){
+        const list=document.getElementById('historyList');
+        list.innerHTML=conversations.length===0?'<div style="color:#555;font-size:12px;padding:10px 15px">Aucune conversation</div>':'';
+        conversations.forEach(conv=>{
+            const item=document.createElement('div');item.className='historyItem';item.innerHTML=`💬 ${conv.titre}`;
+            item.onclick=()=>{historique.length=0;conv.messages.forEach(m=>historique.push(m));document.getElementById('chat').innerHTML='';conv.messages.forEach(m=>{if(m.role==='user')document.getElementById('chat').innerHTML+=`<div class="moi">${m.content}</div>`;else ajouterMessageBot(m.content);});toggleSidebar();};
+            list.appendChild(item);
+        });
+    }
+
+    function ouvrirModal(id){document.getElementById(id).style.display='flex';}
     function fermerModal(id){document.getElementById(id).style.display='none';}
-    function setHumeur(humeur){humeurVideo=humeur;const eL=document.getElementById('vtEyeL'),eR=document.getElementById('vtEyeR'),mouth=document.getElementById('vtMouthShape');const zzz=document.getElementById('vtZzz'),sparkle=document.getElementById('vtSparkle'),stars=document.getElementById('vtStars');zzz.style.display='none';sparkle.style.display='none';stars.style.display='none';eL.style.height='34px';eR.style.height='34px';if(humeur==='sleepy'){eL.style.height='10px';eR.style.height='10px';mouth.className='mouth-sleepy';zzz.style.display='block';}else if(humeur==='excited'){eL.style.height='36px';eR.style.height='36px';mouth.className='mouth-excited';sparkle.style.display='block';}else if(humeur==='mysterious'){eL.style.height='22px';eR.style.height='22px';mouth.className='mouth-serious';stars.style.display='block';}else mouth.className='mouth-smile';}
+
+    function setHumeur(humeur){
+        humeurVideo=humeur;
+        const eL=document.getElementById('vtEyeL'),eR=document.getElementById('vtEyeR');
+        const mouth=document.getElementById('vtMouthShape');
+        const zzz=document.getElementById('vtZzz'),sparkle=document.getElementById('vtSparkle'),stars=document.getElementById('vtStars');
+        zzz.style.display='none';sparkle.style.display='none';stars.style.display='none';
+        eL.style.height='34px';eR.style.height='34px';
+        if(humeur==='sleepy'){eL.style.height='10px';eR.style.height='10px';mouth.className='mouth-sleepy';zzz.style.display='block';}
+        else if(humeur==='excited'){eL.style.height='36px';eR.style.height='36px';mouth.className='mouth-excited';sparkle.style.display='block';}
+        else if(humeur==='mysterious'){eL.style.height='22px';eR.style.height='22px';mouth.className='mouth-serious';stars.style.display='block';}
+        else{mouth.className='mouth-smile';}
+    }
+
     function startTalking(){document.getElementById('vtMouthShape').className='mouth-talk';document.getElementById('vtArmL').classList.add('wave');}
-    function stopTalking(){const m=document.getElementById('vtMouthShape');if(humeurVideo==='sleepy')m.className='mouth-sleepy';else if(humeurVideo==='excited')m.className='mouth-excited';else if(humeurVideo==='mysterious')m.className='mouth-serious';else m.className='mouth-smile';document.getElementById('vtArmL').classList.remove('wave');}
-    function startBlink(){blinkInterval=setInterval(()=>{const bL=document.getElementById('vtBlinkL'),bR=document.getElementById('vtBlinkR');if(!bL||!bR)return;bL.style.height='100%';bR.style.height='100%';setTimeout(()=>{bL.style.height='0';bR.style.height='0';},100);},3200+Math.random()*2000);}
-    async function demarrerVideoAppel(){enVideoAppel=true;document.getElementById('videoCallScreen').style.display='flex';document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;const h=new Date().getHours();if(h>=6&&h<12)setHumeur('sleepy');else if(h>=12&&h<18)setHumeur('excited');else if(h>=18&&h<22)setHumeur('normal');else setHumeur('mysterious');startBlink();const intro=estAntoine?"Wsh Antoine tu mappelles !":`Salut ${memoire.prenom} !`;document.getElementById('videoCallBubble').textContent=intro;startTalking();parlerVideo(intro,()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro';});}
-    function terminerVideoAppel(){enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();window.speechSynthesis.cancel();if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}document.getElementById('videoCallScreen').style.display='none';}
-    function parlerVideo(texte,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;startTalking();const u=new SpeechSynthesisUtterance(texte);u.lang='fr-FR';u.rate=1;u.pitch=1.3;u.onend=()=>{yuutoParle=false;stopTalking();if(cb)setTimeout(cb,500);};s.speak(u);}
-    function toggleVideoMic(){if(!yuutoParle&&recognition){if(isListening)stopMic();else try{recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};recognition.start();isListening=true;document.getElementById('videoMicBtn').classList.add('active');document.getElementById('videoMicBtn').textContent='🔴';document.getElementById('videoCallStatus').textContent='Tu parles...';}catch(e){}}}
-    async function envoyerVideoAppel(msg){document.getElementById('videoCallStatus').textContent='Reflechit...';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';historique.push({"role":"user","content":msg});const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]})});const d=await r.json();const rep=d.choices[0].message.content;historique.push({"role":"assistant","content":rep});document.getElementById('videoCallBubble').textContent=rep;parlerVideo(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''),()=>{if(enVideoAppel)document.getElementById('videoCallStatus').textContent='Appuie sur le micro';});}
-    window.onload=function(){const couleur=localStorage.getItem('yuuto_couleur');if(couleur){document.body.style.background=couleur;document.getElementById('couleurFond').value=couleur;}estPremium=localStorage.getItem('yuuto_premium')==='true';nbTransfo=parseInt(localStorage.getItem('yuuto_transfo')||'0');if(estPremium)document.getElementById('premiumBadgeSide').style.display='inline';modeCodex=localStorage.getItem('yuuto_codex')==='true';if(modeCodex){document.getElementById('codexToggle').checked=true;document.getElementById('codexInfo').style.display='block';document.getElementById('codexBadge').style.display='inline';document.getElementById('msg').className='codex-active';}const nom=localStorage.getItem('yuuto_nom');if(nom){document.getElementById('nom').value=nom;seConnecter();}}
+    function stopTalking(){
+        const m=document.getElementById('vtMouthShape');
+        if(humeurVideo==='sleepy')m.className='mouth-sleepy';
+        else if(humeurVideo==='excited')m.className='mouth-excited';
+        else if(humeurVideo==='mysterious')m.className='mouth-serious';
+        else m.className='mouth-smile';
+        document.getElementById('vtArmL').classList.remove('wave');
+    }
+
+    function startBlink(){
+        blinkInterval=setInterval(()=>{
+            const bL=document.getElementById('vtBlinkL'),bR=document.getElementById('vtBlinkR');
+            if(!bL||!bR)return;
+            bL.style.height='100%';bR.style.height='100%';
+            setTimeout(()=>{bL.style.height='0';bR.style.height='0';},100);
+        },3200+Math.random()*2000);
+    }
+
+    async function demarrerVideoAppel(){
+        enVideoAppel=true;
+        document.getElementById('videoCallScreen').style.display='flex';
+        document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;
+        const h=new Date().getHours();
+        if(h>=6&&h<12)setHumeur('sleepy');
+        else if(h>=12&&h<18)setHumeur('excited');
+        else if(h>=18&&h<22)setHumeur('normal');
+        else setHumeur('mysterious');
+        startBlink();
+        const intro=estAntoine?"Wsh Antoine tu mappelles en video !":`Salut ${memoire.prenom} tu mappelles en video !`;
+        document.getElementById('videoCallBubble').textContent=intro;
+        document.getElementById('videoCallStatus').textContent='Parle...';
+        startTalking();
+        parlerVideo(intro,()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro pour parler';});
+    }
+
+    function terminerVideoAppel(){
+        enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();
+        window.speechSynthesis.cancel();
+        if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}
+        document.getElementById('videoCallScreen').style.display='none';
+    }
+
+    function parlerVideo(texte,callback){
+        const s=window.speechSynthesis;if(!s){if(callback)callback();return;}
+        s.cancel();yuutoParle=true;startTalking();
+        const u=new SpeechSynthesisUtterance(texte);
+        u.lang='ja-JP';u.rate=1;u.pitch=1.1;
+        u.onend=()=>{yuutoParle=false;stopTalking();if(callback)setTimeout(callback,500);};
+        s.speak(u);
+    }
+
+    function toggleVideoMic(){
+        if(!yuutoParle&&recognition){
+            if(isListening)stopMic();
+            else try{
+                recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};
+                recognition.start();isListening=true;
+                document.getElementById('videoMicBtn').classList.add('active');
+                document.getElementById('videoMicBtn').textContent='🔴';
+                document.getElementById('videoCallStatus').textContent='Tu parles...';
+            }catch(e){}
+        }
+    }
+
+    async function envoyerVideoAppel(msg){
+        document.getElementById('videoCallStatus').textContent='Reflechit...';
+        document.getElementById('videoMicBtn').classList.remove('active');
+        document.getElementById('videoMicBtn').textContent='🎤';
+        historique.push({"role":"user","content":msg});
+        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]})});
+        const d=await r.json();const rep=d.choices[0].message.content;
+        historique.push({"role":"assistant","content":rep});
+        document.getElementById('videoCallBubble').textContent=rep;
+        document.getElementById('videoCallStatus').textContent='Parle...';
+        parlerVideo(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''),()=>{if(enVideoAppel)document.getElementById('videoCallStatus').textContent='Appuie sur le micro pour parler';});
+    }
+
+    window.onload=function(){
+        const couleur=localStorage.getItem('yuuto_couleur');
+        if(couleur){document.body.style.background=couleur;document.getElementById('couleurFond').value=couleur;}
+        estPremium=localStorage.getItem('yuuto_premium')==='true';
+        nbTransfo=parseInt(localStorage.getItem('yuuto_transfo')||'0');
+        if(estPremium)document.getElementById('premiumBadgeSide').style.display='inline';
+        modeCodex=localStorage.getItem('yuuto_codex')==='true';
+        if(modeCodex){document.getElementById('codexToggle').checked=true;document.getElementById('codexInfo').style.display='block';document.getElementById('codexBadge').style.display='inline';document.getElementById('msg').className='codex-active';document.getElementById('msg').placeholder='🧠 Pose ta question...';}
+        const nom=localStorage.getItem('yuuto_nom');
+        if(nom){document.getElementById('nom').value=nom;seConnecter();}
+    }
+
     function changerCouleur(){const c=document.getElementById('couleurFond').value;document.body.style.background=c;localStorage.setItem('yuuto_couleur',c);}
-    function changerNom(){const n=document.getElementById('nouveauNom').value.trim();if(!n)return;if(n.toLowerCase().includes('antoine')||n.toLowerCase().includes('gatore')){alert("Protégé 🔒");return;}localStorage.setItem('yuuto_nom',n);memoire.prenom=n;document.getElementById('userName').textContent=n;document.getElementById('userAvatar').textContent=n[0].toUpperCase();sauvegarderMemoire();fermerModal('menuScreen');ajouterMessageBot(`Nom changé ! 😊`);}
-    function verifierCode(){const c=document.getElementById('codeInput').value.trim();if(c===CODE_PREMIUM){estPremium=true;localStorage.setItem('yuuto_premium','true');document.getElementById('premiumBadgeSide').style.display='inline';fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Premium ! 🌟");}else if(c===CODE_NICK){estNick=true;nickUtilisations=10;document.getElementById('premiumBadgeSide').style.display='inline';document.getElementById('premiumBadgeSide').textContent='🎮';fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Nick ! 🎮 10 utilisations !");}else document.getElementById('codeErreur').style.display='block';}
-    function activerPersonnage(){const p=document.getElementById('persoInput').value.trim();if(!p)return;if(PERSONNAGES_BANNIS.some(b=>p.toLowerCase().includes(b))){alert("Banni 🚫");return;}const max=estPremium?MAX_TRANSFO_PREMIUM:MAX_TRANSFO_GRATUIT;if(!estAntoine&&!estNick&&nbTransfo>=max){fermerModal('persoScreen');ouvrirModal('premiumScreen');return;}personnageActuel=p;if(!estAntoine){nbTransfo++;localStorage.setItem('yuuto_transfo',nbTransfo.toString());}document.getElementById('modePerso').textContent=`🎭 ${p}`;fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis ${p} ! 🎭`,p);}
+    function changerNom(){
+        const n=document.getElementById('nouveauNom').value.trim();if(!n)return;
+        localStorage.setItem('yuuto_nom',n);memoire.prenom=n;estAntoine=n.toLowerCase()==="antoine gatore";
+        document.getElementById('userName').textContent=n;document.getElementById('userAvatar').textContent=n[0].toUpperCase();
+        if(estAntoine)activerFondManga();else document.getElementById('mangaBg').style.display='none';
+        sauvegarderMemoire();fermerModal('menuScreen');ajouterMessageBot(estAntoine?`wsh nom change !`:`Nom change en ${n} ! 😊`);
+    }
+    function verifierCode(){
+        if(document.getElementById('codeInput').value.trim()===CODE_PREMIUM){
+            estPremium=true;localStorage.setItem('yuuto_premium','true');
+            document.getElementById('premiumBadgeSide').style.display='inline';
+            fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Premium ! 🌟");
+        }else document.getElementById('codeErreur').style.display='block';
+    }
+    function activerPersonnage(){
+        const p=document.getElementById('persoInput').value.trim();if(!p)return;
+        if(PERSONNAGES_BANNIS.some(b=>p.toLowerCase().includes(b))){alert("Ce personnage est banni 🚫");return;}
+        const max=estPremium?MAX_TRANSFO_PREMIUM:MAX_TRANSFO_GRATUIT;
+        if(!estAntoine&&nbTransfo>=max){fermerModal('persoScreen');ouvrirModal('premiumScreen');return;}
+        personnageActuel=p;
+        if(!estAntoine){nbTransfo++;localStorage.setItem('yuuto_transfo',nbTransfo.toString());}
+        document.getElementById('modePerso').textContent=`🎭 ${p}`;
+        fermerModal('persoScreen');historique.length=0;
+        ajouterMessageBot(`Je suis ${p} ! 🎭`,p);
+    }
     function resetPersonnage(){personnageActuel=null;document.getElementById('modePerso').textContent='';fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis de retour ! 😄`);}
-    async function chercherAnime(genre,genreId){fermerModal('searchScreen');document.getElementById('chat').innerHTML+=`<div class="moi">🔍 ${genre} !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 🔍</div></div>`;try{const r=await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);const d=await r.json();let l=`Meilleurs ${genre} 🎌<br><br>`;d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>${a.synopsis?a.synopsis.substring(0,80)+'...<br><br>':''}`;});document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;}catch(e){document.getElementById(id).innerHTML="Desole 😅";}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    async function lancerBattle(){const p1=document.getElementById('perso1Input').value.trim(),p2=document.getElementById('perso2Input').value.trim();if(!p1||!p2)return;fermerModal('battleScreen');document.getElementById('chat').innerHTML+=`<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;const hist=[];for(let i=0;i<4;i++){const pa=i%2===0?p1:p2,pb=i%2===0?p2:p1;const prompt=hist.length===0?`Tu es ${pa}. Pique a ${pb}. 2 phrases.`:`Tu es ${pa}. Reponds:"${hist[hist.length-1]}". 2 phrases.`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});const d=await r.json();const rep=d.choices[0].message.content;hist.push(rep);document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;await new Promise(r=>setTimeout(r,500));}ajouterMessageBot("ptdr trop chauds 😂🔥");}
-    async function getActu(){document.getElementById('chat').innerHTML+=`<div class="moi">📺 Actu !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">📺...</div></div>`;try{const r=await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');const d=await r.json();let l="Animes du moment 📺<br><br>";d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`;});document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;}catch(e){document.getElementById(id).innerHTML="Desole 😅";}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    async function recommander(){const h=new Date().getHours();const hum=h>=6&&h<12?"fatigue":h>=12&&h<18?"energique":h>=18&&h<22?"calme":"mysterieux";const d=animesDejaRecommandes.length>0?`Ne recommande PAS:${animesDejaRecommandes.join(',')}.`:"";document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Recommande !</div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:window.humeurInfo.personnalite},{role:'user',content:`Recommande UN anime. ${d} Humeur:${hum}. ${Math.random()}`}]})});const data=await r.json();const rep=data.choices[0].message.content;animesDejaRecommandes.push(rep.split('\n')[0]);ajouterMessageBot(rep);}
-    function initMic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;recognition=new SR();recognition.lang='fr-FR';recognition.continuous=false;recognition.onresult=(e)=>{const t=e.results[0][0].transcript;stopMic();document.getElementById('msg').value=t;envoyer();};recognition.onend=()=>{isListening=false;document.getElementById('micBtn').classList.remove('active');document.getElementById('micBtn').textContent='🎤';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';};}
+
+    async function chercherAnime(genre,genreId){
+        fermerModal('searchScreen');
+        document.getElementById('chat').innerHTML+=`<div class="moi">🔍 ${genre} !</div>`;
+        loadingId++;const id='loading'+loadingId;
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 🔍</div></div>`;
+        try{const r=await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);const d=await r.json();let l=`Meilleurs ${genre} 🎌<br><br>`;d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>${a.synopsis?a.synopsis.substring(0,80)+'...<br><br>':''}`;});document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;}
+        catch(e){document.getElementById(id).innerHTML="Desole 😅";}
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+
+    async function lancerBattle(){
+        const p1=document.getElementById('perso1Input').value.trim(),p2=document.getElementById('perso2Input').value.trim();
+        if(!p1||!p2)return;fermerModal('battleScreen');
+        document.getElementById('chat').innerHTML+=`<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;
+        const hist=[];
+        for(let i=0;i<4;i++){
+            const pa=i%2===0?p1:p2,pb=i%2===0?p2:p1;
+            const prompt=hist.length===0?`Tu es ${pa}. Pique a ${pb}. 2 phrases. Francais.`:`Tu es ${pa}. Reponds:"${hist[hist.length-1]}". 2 phrases. Francais.`;
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});
+            const d=await r.json();const rep=d.choices[0].message.content;hist.push(rep);
+            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;
+            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+            await new Promise(r=>setTimeout(r,500));
+        }
+        ajouterMessageBot("ptdr trop chauds 😂🔥");
+    }
+
+    async function getActu(){
+        document.getElementById('chat').innerHTML+=`<div class="moi">📺 Actu !</div>`;
+        loadingId++;const id='loading'+loadingId;
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 📺</div></div>`;
+        try{const r=await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');const d=await r.json();let l="Animes du moment 📺<br><br>";d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`;});document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;}
+        catch(e){document.getElementById(id).innerHTML="Desole 😅";}
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+
+    async function recommander(){
+        const h=new Date().getHours();const hum=h>=6&&h<12?"fatigue":h>=12&&h<18?"energique":h>=18&&h<22?"calme":"mysterieux";
+        const d=animesDejaRecommandes.length>0?`Ne recommande PAS:${animesDejaRecommandes.join(',')}.`:"";
+        document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Recommande !</div>`;
+        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:window.humeurInfo.personnalite},{role:'user',content:`Recommande UN anime. ${d} Humeur:${hum}. ${Math.random()}`}]})});
+        const data=await r.json();const rep=data.choices[0].message.content;
+        animesDejaRecommandes.push(rep.split('\n')[0]);ajouterMessageBot(rep);
+    }
+
+    function initMic(){
+        const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;
+        recognition=new SR();recognition.lang='fr-FR';recognition.continuous=false;
+        recognition.onresult=(e)=>{const t=e.results[0][0].transcript;stopMic();document.getElementById('msg').value=t;envoyer();};
+        recognition.onend=()=>{isListening=false;document.getElementById('micBtn').classList.remove('active');document.getElementById('micBtn').textContent='🎤';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';};
+    }
+
     function toggleMic(){if(isListening)stopMic();else{if(!recognition)return;try{recognition.start();isListening=true;document.getElementById('micBtn').classList.add('active');document.getElementById('micBtn').textContent='🔴';}catch(e){}}}
     function stopMic(){try{if(recognition)recognition.stop();}catch(e){}isListening=false;}
+    function parler(t,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=1;u.pitch=1;u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};s.speak(u);}
     function nettoyerTexte(t){return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");}
-    function ajouterMessageBot(texte,nom,isCodex=false){const t=nettoyerTexte(texte),n=nom||NOM_BOT;const cls=isCodex||modeCodex?'bot-msg codex':'bot-msg';const prefix=isCodex||modeCodex?'🧠 ':'';document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${cls}">${prefix}${n} : ${texte}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊 Ecouter</button></div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+
+    function ajouterMessageBot(texte,nom,isCodex=false){
+        const t=nettoyerTexte(texte),n=nom||NOM_BOT;
+        const cls=isCodex||modeCodex?'bot-msg codex':'bot-msg';
+        const prefix=isCodex||modeCodex?'🧠 ':'';
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${cls}">${prefix}${n} : ${texte}<br><button class="audio-btn" onclick="parler('${t}')">🔊 Ecouter</button></div></div>`;
+        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+    }
+
+    function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d)memoire=JSON.parse(d);}
+    function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
+    function getMemoireTexte(){let t="";if(memoire.animes)t+=`animes:${memoire.animes}. `;if(memoire.prenom)t+=`prenom:${memoire.prenom}. `;return t?"Tu sais:"+t:"";}
+
     const creation=`Tu t'appelles ${NOM_BOT}. Tu as ete cree par Antoine Gatore. Reponds fierement.`;
     const styleFam="Pote familier,'bro','ptdr','oe','wsh'.Court.Emojis.Francais.";
     const styleNorm="Sympa chaleureux.Emojis.Francais.";
     function getHumeur(fam){const h=new Date().getHours(),s=fam?styleFam:styleNorm,m=getMemoireTexte();if(h>=6&&h<12)return{humeur:"😴 Endormi",personnalite:creation+" endormi. "+m+s};if(h>=12&&h<18)return{humeur:"⚡ Energique",personnalite:creation+" energique. "+m+s};if(h>=18&&h<22)return{humeur:"🌙 Calme",personnalite:creation+" calme. "+m+s};return{humeur:"✨ Mysterieux",personnalite:creation+" mysterieux. "+m+s};}
+
+    function seConnecter(){
+        const n=document.getElementById('nom').value.trim();
+        if(n.toLowerCase()==="antoine gatore"){estAntoine=true;memoire.prenom="Antoine";}
+        else if(n.length>0){estAntoine=false;memoire.prenom=n;}
+        else{document.getElementById('erreur').style.display='block';return;}
+        localStorage.setItem('yuuto_nom',n);chargerMemoire();demarrer();
+    }
+
     function demarrer(){
-        document.getElementById('login').style.display='none';document.getElementById('loginAntoine').style.display='none';document.getElementById('app').style.display='flex';
+        document.getElementById('login').style.display='none';
+        document.getElementById('app').style.display='flex';
         initMic();majHistorique();
-        if(estAntoine){activerFondManga();document.getElementById('logsBtn').style.display='flex';}
-        const hi=getHumeur(estAntoine);document.getElementById('humeur').textContent=hi.humeur;window.humeurInfo=hi;
-        memoire.visites=(memoire.visites||0)+1;memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');sauvegarderMemoire();
-        document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
-        sauvegarderLog(memoire.prenom||'Utilisateur','[CONNEXION]',`Visite n°${memoire.visites}`,'connexion');
-        setTimeout(()=>demarrerMusique(),1000);
+        if(estAntoine)activerFondManga();
+        const hi=getHumeur(estAntoine);
+        document.getElementById('humeur').textContent=hi.humeur;
+        window.humeurInfo=hi;
+        memoire.visites=(memoire.visites||0)+1;sauvegarderMemoire();
+        document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';
+        document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
         const im={f:{"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
         let intro=estAntoine?im.f[hi.humeur]:im.n[hi.humeur];
-        if(memoire.visites>1)intro+=` Visite n°${memoire.visites} 🎉`;
-        if(estAntoine)intro+=`<br><small style="color:#f59e0b">🎬 Bouton anime dans le header !</small>`;
-        if(!estAntoine&&!estPremium&&!estNick)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
-        document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parlerFR('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
+        if(!estAntoine&&!estPremium)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo gratuite(s) — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
+        document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parler('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
     }
+
     async function envoyer(){
         const msg=document.getElementById('msg').value;if(!msg)return;
-        if(estNick&&!estPremium&&!estAntoine){if(nickUtilisations<=0){ajouterMessageBot("Nick, tes 10 utilisations sont épuisées ! 🌟");return;}nickUtilisations--;}
         document.getElementById('msg').value='';
         document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
-        mettreAJourMemoire(msg);
         const ml=msg.toLowerCase();
-        if(MOTS_SENSIBLES.some(m=>ml.includes(m))){document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Parle a quelqu'un de confiance. Tu n'es pas seul 💙</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;}
+        if(ml.includes("j'aime")||ml.includes('mon anime')){memoire.animes=msg;sauvegarderMemoire();}
+        if(MOTS_SENSIBLES.some(m=>ml.includes(m))){
+            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Je suis pas qualifie pour repondre a ca. Si tu traverses quelque chose de difficile parle a quelqu'un de confiance. Tu n'es pas seul 💙</div></div>`;
+            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;
+        }
         if(ml.includes('genere')||ml.includes('génère')||ml.includes('image de')){
-            const prompt=encodeURIComponent(msg.replace(/genere|génère|une image de|image de|image/gi,'').trim()+' anime manga style 4k');
-            loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Generation... 🎨</div></div>`;
+            const prompt=encodeURIComponent(msg.replace(/genere|génère|une image de|image de|image/gi,'').trim()+' anime manga style high quality 4k detailed');
+            loadingId++;const id='loading'+loadingId;
+            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Generation en cours... 🎨</div></div>`;
+            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
             const imgUrl=`https://image.pollinations.ai/prompt/${prompt}?width=512&height=512&nologo=true&seed=${Math.floor(Math.random()*9999)}`;
-            document.getElementById(id).innerHTML=`Voila 🎨<br><img src="${imgUrl}" style="max-width:220px;border-radius:12px;margin-top:5px;display:block;" onerror="this.parentElement.innerHTML='Desole 😅'"/>`;
-            sauvegarderLog(memoire.prenom||'Utilisateur',msg,'[IMAGE]','image');
+            document.getElementById(id).innerHTML=`Voila 🎨<br><img src="${imgUrl}" style="max-width:220px;border-radius:12px;margin-top:5px;display:block;" onload="document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight" onerror="this.parentElement.innerHTML='Desole 😅'"/>`;
         }else{
             historique.push({"role":"user","content":msg});
             const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
             const d=await r.json();const rep=d.choices[0].message.content;
             historique.push({"role":"assistant","content":rep});
             ajouterMessageBot(rep,personnageActuel,modeCodex);
-            sauvegarderLog(memoire.prenom||'Utilisateur',msg,rep,'message');
         }
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 </script>
 </body>
-    </html>
+</html>
