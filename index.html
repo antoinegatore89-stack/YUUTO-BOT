@@ -28,34 +28,6 @@
         #mdpBtn { background: linear-gradient(90deg,#f59e0b,#d97706); color: black; border: none; padding: 12px 30px; border-radius: 20px; font-size: 16px; cursor: pointer; font-weight: bold; }
         #mdpErreur { color: #e11d48; display: none; font-size: 14px; }
         #mdpTentatives { color: #aaa; font-size: 12px; display: none; }
-
-        /* ANIME PLAYER */
-        #animePlayer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9998; flex-direction: column; }
-        #animeTop { position: relative; flex: 1; overflow: hidden; }
-        #animeImg { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease; }
-        #animeImgNext { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; }
-        #animeOverlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 20px 15px 15px; }
-        #animeNarrateur { color: #f59e0b; font-size: 12px; font-style: italic; margin-bottom: 6px; min-height: 16px; }
-        #animeDialogue { background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px 14px; font-size: 14px; line-height: 1.6; min-height: 50px; }
-        #animePersonnage { color: #7c3aed; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
-        #animeTexte { color: white; }
-        #animeControls { background: rgba(0,0,0,0.9); padding: 10px 15px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; border-top: 1px solid #222; }
-        #animeTitle { flex: 1; font-size: 13px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        #animeEpisode { font-size: 11px; color: #555; }
-        #animeBtns { display: flex; gap: 8px; }
-        .anime-btn { background: #222; border: none; color: white; width: 38px; height: 38px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .anime-btn.primary { background: #7c3aed; }
-        #animeProgress { width: 100%; height: 3px; background: #333; border-radius: 2px; margin: 6px 0; cursor: pointer; }
-        #animeProgressBar { height: 100%; background: linear-gradient(90deg, #7c3aed, #f59e0b); border-radius: 2px; transition: width 0.1s linear; width: 0%; }
-        #animeSceneInfo { font-size: 10px; color: #555; text-align: center; }
-        #animeLoading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
-        #animeLoading p { color: #aaa; font-size: 13px; margin-top: 10px; }
-        .anime-spinner { width: 40px; height: 40px; border: 3px solid #333; border-top-color: #7c3aed; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        #animeTypeIndicator { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.7); padding: 4px 10px; border-radius: 20px; font-size: 11px; color: #f59e0b; border: 1px solid #f59e0b; }
-        #animeCloseBtn { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.7); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; z-index: 10; }
-
-        /* LOGS */
         #logsScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 9999; flex-direction: column; }
         #logsHeader { background: #111; padding: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; flex-shrink: 0; }
         #logsHeader h2 { font-size: 16px; color: #f59e0b; }
@@ -71,7 +43,24 @@
         .filtre-btn.active { background: #7c3aed; color: white; border-color: #7c3aed; }
         #clearLogsBtn { background: #e11d48; border: none; color: white; padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; }
         .user-card { background: #111; border: 1px solid #f59e0b; border-radius: 12px; padding: 14px; margin-bottom: 8px; }
-
+        #animePlayer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9998; flex-direction: column; }
+        #animeTop { position: relative; flex: 1; overflow: hidden; }
+        #animeImg { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease; }
+        #animeImgNext { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; }
+        #animeOverlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent,rgba(0,0,0,0.95)); padding: 20px 15px 15px; }
+        #animeNarrateur { color: #f59e0b; font-size: 12px; font-style: italic; margin-bottom: 6px; min-height: 16px; }
+        #animeDialogue { background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 10px 14px; font-size: 14px; line-height: 1.6; min-height: 50px; }
+        #animePersonnage { color: #7c3aed; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+        #animeTexte { color: white; }
+        #animeProgress { width: 100%; height: 3px; background: #333; border-radius: 2px; margin: 6px 0; cursor: pointer; }
+        #animeProgressBar { height: 100%; background: linear-gradient(90deg,#7c3aed,#f59e0b); border-radius: 2px; width: 0%; }
+        #animeSceneInfo { font-size: 10px; color: #555; }
+        .anime-btn { background: #222; border: none; color: white; width: 38px; height: 38px; border-radius: 50%; font-size: 16px; cursor: pointer; }
+        .anime-btn.primary { background: #7c3aed; }
+        #animeTypeIndicator { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.7); padding: 4px 10px; border-radius: 20px; font-size: 11px; color: #f59e0b; border: 1px solid #f59e0b; }
+        #animeCloseBtn { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.7); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; z-index: 10; }
+        .anime-spinner { width: 40px; height: 40px; border: 3px solid #333; border-top-color: #7c3aed; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
         #app { display: none; flex-direction: row; height: 100vh; width: 100%; overflow: hidden; position: relative; z-index: 1; }
         #sidebar { display: none; position: fixed; top: 0; left: 0; width: 270px; height: 100vh; background: #111; flex-direction: column; z-index: 100; border-right: 1px solid #222; }
         #sidebar.open { display: flex; }
@@ -116,10 +105,10 @@
         .recette-card img { width: 100%; border-radius: 10px; margin-bottom: 12px; display: block; }
         .anecdote { background: #1a1000; padding: 12px; border-radius: 10px; color: #fcd34d; font-size: 13px; margin-bottom: 15px; border-left: 3px solid #f59e0b; line-height: 1.7; }
         .section-titre { color: #f97316; font-weight: bold; font-size: 13px; margin: 15px 0 8px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .ingredient { background: #1a1000; padding: 8px 12px; border-radius: 8px; margin: 5px 0; font-size: 13px; line-height: 1.5; border-left: 2px solid #f97316; }
+        .ingredient { background: #1a1000; padding: 8px 12px; border-radius: 8px; margin: 5px 0; font-size: 13px; border-left: 2px solid #f97316; }
         .etape { background: #0a1a0a; padding: 10px 14px; border-radius: 10px; margin: 8px 0; font-size: 13px; border-left: 3px solid #22c55e; line-height: 1.7; }
-        .etape-num { color: #22c55e; font-weight: bold; margin-right: 6px; font-size: 15px; }
-        .conseil-box { background: #0a0a1a; padding: 10px 14px; border-radius: 10px; margin-top: 12px; font-size: 13px; border-left: 3px solid #7c3aed; color: #a78bfa; line-height: 1.6; }
+        .etape-num { color: #22c55e; font-weight: bold; margin-right: 6px; }
+        .conseil-box { background: #0a0a1a; padding: 10px 14px; border-radius: 10px; margin-top: 12px; font-size: 13px; border-left: 3px solid #7c3aed; color: #a78bfa; }
         .perso1-msg { background: #1e3a5f; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .perso2-msg { background: #3a1e1e; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .audio-btn { background: none; border: none; color: #555; font-size: 12px; cursor: pointer; margin-top: 5px; display: block; padding: 0; }
@@ -155,7 +144,6 @@
         .toggle-slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
         input:checked + .toggle-slider { background: linear-gradient(90deg,#00d4ff,#0077ff); }
         input:checked + .toggle-slider:before { transform: translateX(24px); }
-        .codex-desc { font-size: 12px; color: #aaa; margin-top: 5px; }
         .prix { font-size: 32px; font-weight: bold; color: #f59e0b; text-align: center; }
         .feature { background: #222; padding: 10px; border-radius: 10px; font-size: 14px; border: 1px solid #333; text-align: center; }
         .wave-info { background: #0a2a0a; padding: 15px; border-radius: 12px; font-size: 13px; color: #aaa; border: 1px solid #22c55e; text-align: center; line-height: 1.8; }
@@ -182,13 +170,11 @@
         .recette-anime { font-size: 10px; color: #aaa; }
         #japonaisScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
         #japonaisBox { background: #1a1a0a; border: 2px solid #f59e0b; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; max-height: 90vh; overflow-y: auto; }
-        #japonaisBox h2 { text-align: center; font-size: 20px; }
         .jap-level-btn { padding: 15px; border-radius: 12px; border: 1px solid #f59e0b; background: #2a2a0a; color: white; font-size: 14px; cursor: pointer; text-align: left; }
         .jap-level-btn .level-title { font-size: 16px; font-weight: bold; color: #f59e0b; }
         .jap-level-btn .level-desc { font-size: 12px; color: #aaa; margin-top: 3px; }
         #memoireScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
         #memoireBox { background: #0a1a0a; border: 2px solid #22c55e; border-radius: 16px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 10px; max-height: 90vh; overflow-y: auto; }
-        #memoireBox h2 { text-align: center; font-size: 20px; }
         .mem-item { background: #0f2a0f; padding: 12px; border-radius: 10px; border: 1px solid #22c55e; font-size: 13px; }
         .mem-label { color: #22c55e; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
         .mem-value { color: #ddd; }
@@ -222,7 +208,7 @@
         @keyframes waveAnim{0%{transform:rotate(-40deg)}100%{transform:rotate(40deg)}}
         .vt-hand-l{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);width:28px;height:28px;background:linear-gradient(135deg,#ffe0b8,#ffd0a0);border-radius:50% 50% 45% 45%}
         .vt-hand-r{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);width:28px;height:28px;background:linear-gradient(135deg,#ffe0b8,#ffd0a0);border-radius:50% 50% 45% 45%}
-        .vt-head{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:125px;height:118px;background:linear-gradient(160deg,#fff2e0,#ffe0b8,#ffd0a0);border-radius:42% 42% 40% 40%;box-shadow:inset -6px -4px 12px rgba(180,110,40,0.2);animation:headBob 2.5s ease-in-out infinite;z-index:5}
+        .vt-head{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:125px;height:118px;background:linear-gradient(160deg,#fff2e0,#ffe0b8,#ffd0a0);border-radius:42% 42% 40% 40%;animation:headBob 2.5s ease-in-out infinite;z-index:5}
         @keyframes headBob{0%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-5px) rotate(-0.5deg)}70%{transform:translateX(-50%) translateY(-3px) rotate(0.5deg)}}
         .vt-jaw{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80px;height:35px;background:linear-gradient(180deg,transparent,rgba(180,110,40,0.15));border-radius:0 0 40% 40%;z-index:6}
         .vt-hair-base{position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:145px;height:75px;background:linear-gradient(180deg,#f8f8f8,#eeeeee,#e0e0e8);border-radius:50% 50% 15% 15%;z-index:6}
@@ -240,12 +226,12 @@
         .vt-earring-r{position:absolute;top:52px;right:-7px;width:7px;height:7px;background:#f59e0b;border-radius:50%;z-index:5;box-shadow:0 0 6px #f59e0b}
         .vt-brow-l{position:absolute;top:25px;left:12px;width:36px;height:6px;background:linear-gradient(90deg,#888890,#707080);border-radius:2px;z-index:8;transform:rotate(-4deg)}
         .vt-brow-r{position:absolute;top:25px;right:12px;width:36px;height:6px;background:linear-gradient(90deg,#707080,#888890);border-radius:2px;z-index:8;transform:rotate(4deg)}
-        .vt-eye-l{position:absolute;top:38px;left:10px;width:42px;height:34px;background:white;border-radius:40% 40% 45% 45%;z-index:8;overflow:hidden;transition:height 0.15s;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
+        .vt-eye-l{position:absolute;top:38px;left:10px;width:42px;height:34px;background:white;border-radius:40% 40% 45% 45%;z-index:8;overflow:hidden;transition:height 0.15s}
         .vt-iris-l{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;background:radial-gradient(circle at 33% 28%,#93c5fd,#3b82f6,#1d4ed8,#1e3a8a);border-radius:50%;animation:eyeMove 5s ease-in-out infinite}
         .vt-pupil-l{position:absolute;top:50%;left:50%;transform:translate(-45%,-45%);width:13px;height:13px;background:#020215;border-radius:50%}
         .vt-shine-l{position:absolute;top:18%;left:55%;width:8px;height:8px;background:white;border-radius:50%;opacity:0.95}
         .vt-shine-l2{position:absolute;top:58%;left:20%;width:4px;height:4px;background:white;border-radius:50%;opacity:0.6}
-        .vt-eye-r{position:absolute;top:38px;right:10px;width:42px;height:34px;background:white;border-radius:40% 40% 45% 45%;z-index:8;overflow:hidden;transition:height 0.15s;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
+        .vt-eye-r{position:absolute;top:38px;right:10px;width:42px;height:34px;background:white;border-radius:40% 40% 45% 45%;z-index:8;overflow:hidden;transition:height 0.15s}
         .vt-iris-r{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;background:radial-gradient(circle at 33% 28%,#86efac,#22c55e,#16a34a,#14532d);border-radius:50%;animation:eyeMove 5s ease-in-out infinite}
         .vt-pupil-r{position:absolute;top:50%;left:50%;transform:translate(-45%,-45%);width:13px;height:13px;background:#011501;border-radius:50%}
         .vt-shine-r{position:absolute;top:18%;left:55%;width:8px;height:8px;background:white;border-radius:50%;opacity:0.95}
@@ -276,7 +262,7 @@
         #videoCallBubble{background:rgba(8,5,25,0.95);border:1px solid rgba(124,58,237,0.5);border-radius:20px;padding:12px 20px;width:92%;max-width:320px;font-size:14px;text-align:center;color:white;min-height:45px}
         #videoCallBtns{display:flex;gap:20px;margin-bottom:10px}
         #videoMicBtn{background:#222;color:white;border:2px solid #444;width:62px;height:62px;border-radius:50%;font-size:24px;cursor:pointer}
-        #videoMicBtn.active{background:#22c55e;border-color:#22c55e;box-shadow:0 0 20px rgba(34,197,94,0.5)}
+        #videoMicBtn.active{background:#22c55e;border-color:#22c55e}
         #videoEndBtn{background:#e11d48;color:white;border:none;width:62px;height:62px;border-radius:50%;font-size:24px;cursor:pointer}
     </style>
 </head>
@@ -302,17 +288,13 @@
     <span id="mdpTentatives"></span>
 </div>
 
-<!-- ANIME PLAYER — STYLE VIDEO -->
+<!-- ANIME PLAYER -->
 <div id="animePlayer">
     <div id="animeTop">
         <img id="animeImg" src="" alt=""/>
         <img id="animeImgNext" src="" alt=""/>
         <div id="animeTypeIndicator">🎬 ANIME</div>
         <button id="animeCloseBtn" onclick="fermerAnime()">✕</button>
-        <div id="animeLoading">
-            <div class="anime-spinner"></div>
-            <p id="animeLoadingText">Génération de l'épisode...</p>
-        </div>
         <div id="animeOverlay">
             <div id="animeNarrateur"></div>
             <div id="animeDialogue">
@@ -321,15 +303,13 @@
             </div>
         </div>
     </div>
-    <div id="animeControls">
-        <div style="flex:1">
-            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-                <span id="animeTitle" style="font-size:12px;color:#aaa"></span>
-                <span id="animeSceneInfo" style="font-size:11px;color:#555"></span>
-            </div>
-            <div id="animeProgress" onclick="animeSeek(event)">
-                <div id="animeProgressBar"></div>
-            </div>
+    <div style="background:rgba(0,0,0,0.9);padding:8px 15px;border-top:1px solid #222">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span id="animeTitle" style="font-size:12px;color:#aaa"></span>
+            <span id="animeSceneInfo" style="font-size:11px;color:#555"></span>
+        </div>
+        <div id="animeProgress" onclick="animeSeek(event)" style="width:100%;height:3px;background:#333;border-radius:2px;cursor:pointer">
+            <div id="animeProgressBar"></div>
         </div>
     </div>
     <div style="background:rgba(0,0,0,0.9);padding:10px 15px;display:flex;justify-content:center;gap:15px;border-top:1px solid #222">
@@ -377,36 +357,28 @@
         <div class="recette-btn" onclick="faireRecette('Boeuf Bourguignon Soma Food Wars','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Boeuf Bourguignon Soma</div><div class="recette-anime">Food Wars 🔥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Curry automne Megumi Food Wars','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry d'Automne Megumi</div><div class="recette-anime">Food Wars 🍂</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Oeuf sauce soyu Soma Food Wars','🍳')"><span class="recette-emoji">🍳</span><div><div class="recette-name">Œuf Sauce Soyu</div><div class="recette-anime">Food Wars 🥚</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Yakisoba festival Food Wars','🍝')"><span class="recette-emoji">🍝</span><div><div class="recette-name">Yakisoba Festival</div><div class="recette-anime">Food Wars ⭐</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Terrine canard Erina Food Wars','🦆')"><span class="recette-emoji">🦆</span><div><div class="recette-name">Terrine Canard Erina</div><div class="recette-anime">Food Wars 👑</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Risotto truffes Aldini Food Wars','🍚')"><span class="recette-emoji">🍚</span><div><div class="recette-name">Risotto Truffes Aldini</div><div class="recette-anime">Food Wars 🇮🇹</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Homard bisque Shinomiya Food Wars','🦞')"><span class="recette-emoji">🦞</span><div><div class="recette-name">Homard Bisque Shinomiya</div><div class="recette-anime">Food Wars 🇫🇷</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Gyoza maison Soma Food Wars','🥟')"><span class="recette-emoji">🥟</span><div><div class="recette-name">Gyoza Soma</div><div class="recette-anime">Food Wars 🥟</div></div></div>
         <div class="recette-section">🍰 Food Wars — Desserts</div>
         <div class="recette-btn" onclick="faireRecette('Creme brulee Ryo Food Wars','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Crème Brûlée Ryo</div><div class="recette-anime">Food Wars 🌊</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Charlotte fraises Megumi Food Wars','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Charlotte Fraises Megumi</div><div class="recette-anime">Food Wars 🌸</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Mousse chocolat Ryo Food Wars','🍫')"><span class="recette-emoji">🍫</span><div><div class="recette-name">Mousse Chocolat Ryo</div><div class="recette-anime">Food Wars 🌊</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Tarte citron Alice Food Wars','🍋')"><span class="recette-emoji">🍋</span><div><div class="recette-name">Tarte Citron Alice</div><div class="recette-anime">Food Wars 🔬</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Panna cotta Erina Food Wars','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Panna Cotta Erina</div><div class="recette-anime">Food Wars 👑</div></div></div>
         <div class="recette-section">🎌 Classiques Anime</div>
         <div class="recette-btn" onclick="faireRecette('Ramen tonkotsu Naruto','🍜')"><span class="recette-emoji">🍜</span><div><div class="recette-name">Ramen Naruto</div><div class="recette-anime">Naruto 🍥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Onigiri Demon Slayer','🍙')"><span class="recette-emoji">🍙</span><div><div class="recette-name">Onigiri Tanjiro</div><div class="recette-anime">Demon Slayer 🗡️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Katsudon Yuri on Ice','🍱')"><span class="recette-emoji">🍱</span><div><div class="recette-name">Katsudon Yuri</div><div class="recette-anime">Yuri on Ice ⛸️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Takoyaki One Piece Sanji','🐙')"><span class="recette-emoji">🐙</span><div><div class="recette-name">Takoyaki Sanji</div><div class="recette-anime">One Piece ☠️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Curry Dragon Ball Goku','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Goku</div><div class="recette-anime">Dragon Ball 🔥</div></div></div>
-        <div class="recette-section">🏠 Studio Ghibli</div>
+        <div class="recette-section">🏠 Ghibli</div>
         <div class="recette-btn" onclick="faireRecette('Petit dejeuner Howl Chateau Ambulant','🥓')"><span class="recette-emoji">🥓</span><div><div class="recette-name">Petit-Déj Howl</div><div class="recette-anime">Château Ambulant 🔥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Soupe miso Chihiro Spirited Away','🍵')"><span class="recette-emoji">🍵</span><div><div class="recette-name">Soupe Miso Chihiro</div><div class="recette-anime">Spirited Away 🐉</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Bento Kiki La Petite Sorciere','🧺')"><span class="recette-emoji">🧺</span><div><div class="recette-name">Bento de Kiki</div><div class="recette-anime">Kiki la Sorcière 🧹</div></div></div>
         <div class="recette-section">🍰 Desserts Anime</div>
         <div class="recette-btn" onclick="faireRecette('Dango Clannad Nagisa','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Dango Nagisa</div><div class="recette-anime">Clannad 💙</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Dorayaki Doraemon','🥞')"><span class="recette-emoji">🥞</span><div><div class="recette-name">Dorayaki Doraemon</div><div class="recette-anime">Doraemon 🔵</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Mochi glace matcha Sword Art Online','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Mochi Glacé Matcha</div><div class="recette-anime">SAO ⚔️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Melon pan Shakugan no Shana','🍞')"><span class="recette-emoji">🍞</span><div><div class="recette-name">Melon Pan Shana</div><div class="recette-anime">Shana 🔥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Kakigori glace rasee Fullmetal Alchemist','🍧')"><span class="recette-emoji">🍧</span><div><div class="recette-name">Kakigori Edward</div><div class="recette-anime">FMA ⚙️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Pudding caramel Taiga Toradora','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Pudding Taiga</div><div class="recette-anime">Toradora 🐯</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Daifuku fraise Sailor Moon','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Daifuku Sailor Moon</div><div class="recette-anime">Sailor Moon 🌙</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Castella japonais Angel Beats','🍰')"><span class="recette-emoji">🍰</span><div><div class="recette-name">Castella Angel Beats</div><div class="recette-anime">Angel Beats 👼</div></div></div>
         <button class="modalBtn secondary" onclick="fermerModal('recetteScreen')" style="margin-top:8px">Fermer</button>
     </div>
 </div>
@@ -415,15 +387,15 @@
 <div id="animeCreatorScreen">
     <div id="animeCreatorBox">
         <h2>🎬 Créer un Anime</h2>
-        <p style="color:#aaa;text-align:center;font-size:13px">Images + musique + dialogues 🎵</p>
-        <div class="anime-theme-btn" onclick="lancerAnime('action')"><span class="theme-emoji">⚔️</span><div><div class="theme-name">Action</div><div class="theme-desc">Combats épiques style Demon Slayer</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('romance')"><span class="theme-emoji">💕</span><div><div class="theme-name">Romance</div><div class="theme-desc">Histoire d'amour style Clannad</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('isekai')"><span class="theme-emoji">🌀</span><div><div class="theme-name">Isekai</div><div class="theme-desc">Transporté dans un autre monde</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('fantasy')"><span class="theme-emoji">🧙</span><div><div class="theme-name">Fantasy</div><div class="theme-desc">Magie et créatures épiques</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('shonen')"><span class="theme-emoji">🔥</span><div><div class="theme-name">Shonen</div><div class="theme-desc">Style Naruto / Dragon Ball</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('horreur')"><span class="theme-emoji">👻</span><div><div class="theme-name">Horreur</div><div class="theme-desc">Suspense et frissons</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('comedie')"><span class="theme-emoji">😂</span><div><div class="theme-name">Comédie</div><div class="theme-desc">Chibi et gags drôles</div></div></div>
-        <div class="anime-theme-btn" onclick="lancerAnime('aventure')"><span class="theme-emoji">🗺️</span><div><div class="theme-name">Aventure</div><div class="theme-desc">Exploration et quêtes</div></div></div>
+        <p style="color:#aaa;text-align:center;font-size:13px">Images + voix ElevenLabs + musique 🎵</p>
+        <div class="anime-theme-btn" onclick="lancerAnime('action')"><span class="theme-emoji">⚔️</span><div><div class="theme-name">Action</div><div class="theme-desc">Style Demon Slayer</div></div></div>
+        <div class="anime-theme-btn" onclick="lancerAnime('romance')"><span class="theme-emoji">💕</span><div><div class="theme-name">Romance</div><div class="theme-desc">Style Clannad</div></div></div>
+        <div class="anime-theme-btn" onclick="lancerAnime('isekai')"><span class="theme-emoji">🌀</span><div><div class="theme-name">Isekai</div><div class="theme-desc">Autre monde</div></div></div>
+        <div class="anime-theme-btn" onclick="lancerAnime('fantasy')"><span class="theme-emoji">🧙</span><div><div class="theme-name">Fantasy</div><div class="theme-desc">Magie épique</div></div></div>
+        <div class="anime-theme-btn" onclick="lancerAnime('shonen')"><span class="theme-emoji">🔥</span><div><div class="theme-name">Shonen</div><div class="theme-desc">Style Naruto</div></div></div>
+        <div class="anime-theme-btn" onclick="lancerAnime('horreur')"><span class="theme-emoji">👻</span><div><div class="theme-name">Horreur</div><div class="theme-desc">Suspense</div></div></div>
+        <div class="anime-theme-btn" onclick="lancerAnime('comedie')"><span class="theme-emoji">😂</span><div><div class="theme-name">Comédie</div><div class="theme-desc">Chibi fun</div></div></div>
+        <div class="anime-theme-btn" onclick="lancerAnime('aventure')"><span class="theme-emoji">🗺️</span><div><div class="theme-name">Aventure</div><div class="theme-desc">Exploration</div></div></div>
         <button class="modalBtn secondary" onclick="fermerModal('animeCreatorScreen')">Fermer</button>
     </div>
 </div>
@@ -455,10 +427,10 @@
         <div class="menu-option"><label>👤 Changer ton nom</label><input type="text" id="nouveauNom" placeholder="Nouveau nom..."/><button onclick="changerNom()">Changer</button></div>
         <div class="menu-option" style="border-color:#00d4ff">
             <div class="toggle-row">
-                <div><label style="color:#00d4ff">🧠 Mode Codex</label><div class="codex-desc">Expert sérieux</div></div>
+                <div><label style="color:#00d4ff">🧠 Mode Codex</label></div>
                 <label class="toggle"><input type="checkbox" id="codexToggle" onchange="toggleCodex()"/><span class="toggle-slider"></span></label>
             </div>
-            <div id="codexInfo" style="display:none;margin-top:10px;padding:10px;background:#0a1a2e;border-radius:8px;font-size:12px;color:#00d4ff;border:1px solid #00d4ff">✅ Mode Codex activé !</div>
+            <div id="codexInfo" style="display:none;margin-top:10px;padding:10px;background:#0a1a2e;border-radius:8px;font-size:12px;color:#00d4ff">✅ Mode Codex activé !</div>
         </div>
         <button class="modalBtn secondary" onclick="ouvrirModal('memoireScreen');fermerModal('menuScreen')">🧠 Mémoire</button>
         <button class="modalBtn secondary" onclick="fermerModal('menuScreen')">Fermer</button>
@@ -611,9 +583,9 @@
                 </div>
             </div>
             <div id="headerBtns">
-                <button onclick="ouvrirModal('japonaisScreen')" style="width:36px;height:36px;background:linear-gradient(135deg,#7c3aed,#f59e0b);border:none;border-radius:50%;font-size:15px;cursor:pointer;box-shadow:0 0 10px rgba(124,58,237,0.5);">🎌</button>
-                <button onclick="ouvrirModal('animeCreatorScreen')" title="Créer un anime" style="width:36px;height:36px;background:linear-gradient(135deg,#7c3aed,#e11d48);border:none;border-radius:50%;font-size:15px;cursor:pointer;box-shadow:0 0 10px rgba(124,58,237,0.5);">🎬</button>
-                <button onclick="ouvrirModal('recetteScreen')" style="width:36px;height:36px;background:linear-gradient(135deg,#f97316,#f59e0b);border:none;border-radius:50%;font-size:15px;cursor:pointer;box-shadow:0 0 10px rgba(249,115,22,0.5);">🍜</button>
+                <button onclick="ouvrirModal('japonaisScreen')" style="width:36px;height:36px;background:linear-gradient(135deg,#7c3aed,#f59e0b);border:none;border-radius:50%;font-size:15px;cursor:pointer;">🎌</button>
+                <button onclick="ouvrirModal('animeCreatorScreen')" style="width:36px;height:36px;background:linear-gradient(135deg,#7c3aed,#e11d48);border:none;border-radius:50%;font-size:15px;cursor:pointer;">🎬</button>
+                <button onclick="ouvrirModal('recetteScreen')" style="width:36px;height:36px;background:linear-gradient(135deg,#f97316,#f59e0b);border:none;border-radius:50%;font-size:15px;cursor:pointer;">🍜</button>
                 <button id="callBtn" onclick="demarrerVideoAppel()">📹</button>
             </div>
         </div>
@@ -642,6 +614,10 @@
     const CODE_PREMIUM="2013";
     const CODE_NICK="tamaire2024";
     const MDP_ANTOINE="yuuto2013";
+    // ⬇️ REMPLACE ICI PAR TA CLÉ ELEVENLABS
+    const ELEVENLABS_KEY=sk_c6b0bb06e0f1f321c626c30ff67ae4c4e7460dab80934a6e;
+    // ID de la voix ElevenLabs — "Rachel" voix douce par défaut
+    const ELEVENLABS_VOICE="21m00Tcm4TlvDq8ikWAM";
     const MAX_TRANSFO_GRATUIT=2;
     const MAX_TRANSFO_PREMIUM=5;
     const PERSONNAGES_BANNIS=['hitler','staline','mussolini','bin laden','pol pot','mao','saddam'];
@@ -649,14 +625,14 @@
     const SYMBOLES_MANGA=['⛩️','🎌','忍','侍','武','道','龍','神','夢','愛','力','心','剣','炎','風','雷'];
 
     const ANIME_THEMES={
-        action:{style:'epic anime battle scene intense sword fight dynamic action dramatic lighting cinematic',musique:'intense',couleur:'#ff4444',sfx:['BOOM','SLASH','CRASH','KIAI']},
-        romance:{style:'romantic anime couple cherry blossoms sunset soft lighting beautiful shoujo art style',musique:'douce',couleur:'#ff6b9d',sfx:['DOKI','KYUN','BLUSHU']},
-        isekai:{style:'fantasy isekai anime world magical portal glowing dramatic sky epic landscape',musique:'mystique',couleur:'#7c3aed',sfx:['WHOOSH','TENSEI','GLOW']},
-        fantasy:{style:'epic fantasy anime magic spells glowing runes dramatic lighting wizard battle',musique:'epique',couleur:'#a78bfa',sfx:['MAGIC','SPELL','POWER']},
-        shonen:{style:'shonen anime protagonist training power up energy aura dramatic sky intense',musique:'intense',couleur:'#f59e0b',sfx:['YOSH','NANI','SUGOI']},
-        horreur:{style:'dark horror anime mysterious shadows creepy atmosphere gothic style eerie',musique:'sombre',couleur:'#333',sfx:['CREAK','SHRIEK','GASP']},
-        comedie:{style:'cute funny anime chibi characters comedy school life colorful cheerful',musique:'joyeuse',couleur:'#22c55e',sfx:['BAKA','NANI','DOUF']},
-        aventure:{style:'adventure anime hero journey epic landscape mountains quest dramatic sky',musique:'epique',couleur:'#00d4ff',sfx:['DASH','QUEST','YOSH']}
+        action:{style:'epic anime battle scene intense sword fight dynamic cinematic',musique:'intense',couleur:'#ff4444',sfx:['BOOM','SLASH','CRASH']},
+        romance:{style:'romantic anime couple cherry blossoms sunset soft lighting shoujo',musique:'douce',couleur:'#ff6b9d',sfx:['DOKI','KYUN']},
+        isekai:{style:'fantasy isekai anime world magical portal glowing dramatic sky',musique:'mystique',couleur:'#7c3aed',sfx:['WHOOSH','TENSEI']},
+        fantasy:{style:'epic fantasy anime magic spells glowing runes dramatic lighting',musique:'epique',couleur:'#a78bfa',sfx:['MAGIC','SPELL']},
+        shonen:{style:'shonen anime protagonist power up energy aura dramatic sky intense',musique:'intense',couleur:'#f59e0b',sfx:['YOSH','SUGOI']},
+        horreur:{style:'dark horror anime mysterious shadows creepy atmosphere gothic',musique:'sombre',couleur:'#333',sfx:['CREAK','GASP']},
+        comedie:{style:'cute funny anime chibi characters comedy colorful cheerful',musique:'joyeuse',couleur:'#22c55e',sfx:['BAKA','NANI']},
+        aventure:{style:'adventure anime hero journey epic landscape mountains quest',musique:'epique',couleur:'#00d4ff',sfx:['DASH','YOSH']}
     };
 
     const historique=[];
@@ -683,8 +659,6 @@
     let nickUtilisations=0;
     let mdpTentatives=0;
     let filtreActuel='tous';
-
-    // ===== ANIME PLAYER =====
     let animeScenes=[];
     let animeIndex=0;
     let animeTimer=null;
@@ -692,10 +666,43 @@
     let animeMusique=null;
     let animeMusiqueGain=null;
     let animeSonActif=true;
-    let animeDureeScene=5000;
-    let animeProgressInterval=null;
-    let animeStartTime=0;
 
+    // ===== ELEVENLABS VOIX ANIME =====
+    async function parlerElevenLabs(texte, cb){
+        if(!ELEVENLABS_KEY||ELEVENLABS_KEY===sk_c6b0bb06e0f1f321c626c30ff67ae4c4e7460dab80934a6e){
+            parlerFallback(texte,cb);return;
+        }
+        try{
+            window.speechSynthesis?.cancel();
+            yuutoParle=true;
+            const r=await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${ELEVENLABS_VOICE}/stream`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json','xi-api-key':ELEVENLABS_KEY},
+                body:JSON.stringify({text:texte,model_id:'eleven_multilingual_v2',voice_settings:{stability:0.5,similarity_boost:0.8,style:0.3,use_speaker_boost:true}})
+            });
+            if(!r.ok){parlerFallback(texte,cb);return;}
+            const blob=await r.blob();
+            const url=URL.createObjectURL(blob);
+            const audio=new Audio(url);
+            audio.onended=()=>{yuutoParle=false;URL.revokeObjectURL(url);if(cb)setTimeout(cb,300);};
+            audio.onerror=()=>{yuutoParle=false;parlerFallback(texte,cb);};
+            await audio.play();
+        }catch(e){parlerFallback(texte,cb);}
+    }
+
+    function parlerFallback(texte,cb){
+        const s=window.speechSynthesis;if(!s){yuutoParle=false;if(cb)cb();return;}
+        s.cancel();yuutoParle=true;
+        const u=new SpeechSynthesisUtterance(texte);
+        u.lang='fr-FR';u.rate=1;u.pitch=1.3;
+        u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};
+        s.speak(u);
+    }
+
+    function parlerFR(texte,cb){parlerElevenLabs(texte,cb);}
+    function parler(texte,cb){parlerElevenLabs(texte,cb);}
+
+    // ===== ANIME PLAYER =====
     const ANIME_STYLES={
         intense:{notes:[130.81,146.83,164.81,174.61,196.00],vitesse:200,type:'sawtooth'},
         douce:{notes:[261.63,293.66,329.63,392.00,440.00,523.25],vitesse:600,type:'sine'},
@@ -708,108 +715,79 @@
     function jouerMusiqueAnime(style){
         try{
             if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-            if(animeMusiqueGain){animeMusiqueGain.gain.setValueAtTime(0,audioCtx.currentTime);animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.5);}
+            if(animeMusiqueGain){try{animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.5);}catch(e){}}
             animeMusiqueGain=audioCtx.createGain();
-            animeMusiqueGain.gain.value=animeSonActif?0.08:0;
+            animeMusiqueGain.gain.value=animeSonActif?0.06:0;
             animeMusiqueGain.connect(audioCtx.destination);
             const s=ANIME_STYLES[style]||ANIME_STYLES.douce;
-            let noteIdx=0;
-            function jouerProchaine(){
+            let idx=0;
+            function next(){
                 if(!animeIsPlaying)return;
-                const osc=audioCtx.createOscillator();
-                const env=audioCtx.createGain();
+                const osc=audioCtx.createOscillator();const env=audioCtx.createGain();
                 osc.connect(env);env.connect(animeMusiqueGain);
-                osc.type=s.type;
-                const note=s.notes[noteIdx%s.notes.length];
-                osc.frequency.setValueAtTime(note,audioCtx.currentTime);
+                osc.type=s.type;osc.frequency.setValueAtTime(s.notes[idx%s.notes.length],audioCtx.currentTime);
                 env.gain.setValueAtTime(0,audioCtx.currentTime);
-                env.gain.linearRampToValueAtTime(0.4,audioCtx.currentTime+0.05);
+                env.gain.linearRampToValueAtTime(0.3,audioCtx.currentTime+0.05);
                 env.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+(s.vitesse/1000)*0.9);
-                osc.start(audioCtx.currentTime);
-                osc.stop(audioCtx.currentTime+(s.vitesse/1000));
-                noteIdx++;
-                animeMusique=setTimeout(jouerProchaine,s.vitesse);
+                osc.start(audioCtx.currentTime);osc.stop(audioCtx.currentTime+(s.vitesse/1000));
+                idx++;animeMusique=setTimeout(next,s.vitesse);
             }
-            jouerProchaine();
+            next();
         }catch(e){}
     }
 
-    function stopMusiqueAnime(){
-        if(animeMusique)clearTimeout(animeMusique);
-        if(animeMusiqueGain&&audioCtx){try{animeMusiqueGain.gain.setValueAtTime(animeMusiqueGain.gain.value,audioCtx.currentTime);animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.8);}catch(e){}}
-    }
-
-    function toggleAnimeSon(){
-        animeSonActif=!animeSonActif;
-        document.getElementById('animeSonBtn').textContent=animeSonActif?'🔊':'🔇';
-        if(animeMusiqueGain&&audioCtx){try{animeMusiqueGain.gain.setValueAtTime(animeSonActif?0.08:0,audioCtx.currentTime);}catch(e){}}
-    }
+    function stopMusiqueAnime(){if(animeMusique)clearTimeout(animeMusique);}
+    function toggleAnimeSon(){animeSonActif=!animeSonActif;document.getElementById('animeSonBtn').textContent=animeSonActif?'🔊':'🔇';if(animeMusiqueGain&&audioCtx){try{animeMusiqueGain.gain.setValueAtTime(animeSonActif?0.06:0,audioCtx.currentTime);}catch(e){}}}
 
     async function lancerAnime(theme){
         fermerModal('animeCreatorScreen');
         const info=ANIME_THEMES[theme]||ANIME_THEMES.action;
         document.getElementById('chat').innerHTML+=`<div class="moi">🎬 Crée un anime ${theme} !</div>`;
         loadingId++;const chatId='loading'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${chatId}">🎬 Génération de l'épisode... ⏳<br><small style="color:#aaa">Images + musique + dialogues en cours...</small></div></div>`;
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${chatId}">🎬 Génération... ⏳<br><small style="color:#aaa">Images + voix ElevenLabs en cours...</small></div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-
         let scenario=null;
         try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Crée un épisode anime ${theme} original. JSON uniquement:
-{"titre":"TITRE EN MAJUSCULES","perso1":"NomHeros","perso2":"NomSecond","scenes":[
-{"type":"intro","narrateur":"texte narrateur court","dialogue":"","personnage":"","image":"description scène en anglais pour image IA, style anime cinematic"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso","image":"description scène anglais"},
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Épisode anime ${theme} original. JSON uniquement:
+{"titre":"TITRE","perso1":"Nom","perso2":"Nom2","scenes":[
+{"type":"intro","narrateur":"texte court","dialogue":"","personnage":"","image":"description scène anglais anime cinematic style"},
+{"type":"scene","narrateur":"","dialogue":"dialogue court","personnage":"Nom","image":"description anglais"},
 {"type":"action","narrateur":"texte court","dialogue":"","personnage":"","image":"description action anglais"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso2","image":"description anglais"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso","image":"description anglais"},
-{"type":"action","narrateur":"texte","dialogue":"","personnage":"","image":"description anglais"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso2","image":"description anglais"},
+{"type":"scene","narrateur":"","dialogue":"dialogue court","personnage":"Nom2","image":"description anglais"},
 {"type":"climax","narrateur":"texte dramatique","dialogue":"","personnage":"","image":"description climax anglais cinematic dramatic"},
-{"type":"scene","narrateur":"","dialogue":"texte dialogue","personnage":"NomPerso","image":"description anglais"},
-{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"description fin anglais sunset emotional"}
+{"type":"scene","narrateur":"","dialogue":"dialogue court","personnage":"Nom","image":"description anglais"},
+{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"description fin anglais emotional sunset"}
 ]}`}]})});
-            const d=await r.json();
-            scenario=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());
+            const d=await r.json();scenario=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());
         }catch(e){
             scenario={titre:`ANIME ${theme.toUpperCase()}`,perso1:"Kaito",perso2:"Ryuu",scenes:[
-                {type:"intro",narrateur:"Dans un monde lointain...",dialogue:"",personnage:"",image:`${info.style} opening scene cinematic`},
-                {type:"scene",narrateur:"",dialogue:"Je vais devenir le plus fort !",personnage:"Kaito",image:`${info.style} hero determination`},
-                {type:"action",narrateur:"Un ennemi apparaît !",dialogue:"",personnage:"",image:`${info.style} enemy appears dramatic`},
-                {type:"scene",narrateur:"",dialogue:"Tu ne peux pas me vaincre !",personnage:"Ryuu",image:`${info.style} rival confrontation`},
-                {type:"climax",narrateur:"Le combat final commence !",dialogue:"",personnage:"",image:`${info.style} epic battle climax cinematic`},
-                {type:"fin",narrateur:"À suivre...",dialogue:"",personnage:"",image:`${info.style} peaceful ending sunset`}
+                {type:"intro",narrateur:"Dans un monde lointain...",dialogue:"",personnage:"",image:`${info.style} opening cinematic`},
+                {type:"scene",narrateur:"",dialogue:"Je vais devenir le plus fort !",personnage:"Kaito",image:`${info.style} hero`},
+                {type:"action",narrateur:"Un ennemi apparaît !",dialogue:"",personnage:"",image:`${info.style} enemy dramatic`},
+                {type:"scene",narrateur:"",dialogue:"Tu ne peux pas me vaincre !",personnage:"Ryuu",image:`${info.style} rival`},
+                {type:"climax",narrateur:"Le combat final !",dialogue:"",personnage:"",image:`${info.style} epic battle`},
+                {type:"fin",narrateur:"À suivre...",dialogue:"",personnage:"",image:`${info.style} peaceful ending`}
             ]};
         }
-
-        // Préparer les scenes avec images
         animeScenes=scenario.scenes.map((s,i)=>({
             ...s,
-            imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent(s.image+' anime style high quality cinematic 4k beautiful detailed')}?width=768&height=432&nologo=true&seed=${Date.now()+i*100}`,
-            index:i
+            imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent(s.image+' anime style high quality cinematic 4k')}?width=768&height=432&nologo=true&seed=${Date.now()+i*100}`
         }));
-
-        sauvegarderLog(memoire.prenom||'Utilisateur',`🎬 Anime ${theme}: ${scenario.titre}`,'[ANIME GENERE]','manga');
-
-        document.getElementById(chatId).innerHTML=`🎬 Épisode prêt ! <button onclick="ouvrirAnimePlayer('${scenario.titre}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-top:8px;display:block">▶️ Regarder l'épisode</button>`;
+        sauvegarderLog(memoire.prenom||'Utilisateur',`🎬 Anime ${theme}: ${scenario.titre}`,'[ANIME]','manga');
+        document.getElementById(chatId).innerHTML=`🎬 Épisode prêt !<br><button onclick="ouvrirAnimePlayer('${scenario.titre.replace(/'/g,"\\'")}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-top:8px;display:inline-block">▶️ Regarder</button>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-
         window.animeThemeCourant=theme;
-        window.animeTitreCourant=scenario.titre;
     }
 
     function ouvrirAnimePlayer(titre,theme){
         const info=ANIME_THEMES[theme]||ANIME_THEMES.action;
         document.getElementById('animePlayer').style.display='flex';
-        document.getElementById('animeTitle').textContent=titre||'Anime YUUTO-BOT';
+        document.getElementById('animeTitle').textContent=titre;
         document.getElementById('animeTypeIndicator').textContent=`🎬 ${theme.toUpperCase()}`;
-        document.getElementById('animeLoading').style.display='none';
-        document.getElementById('animeOverlay').style.display='block';
-        animeIndex=0;
-        animeIsPlaying=true;
+        animeIndex=0;animeIsPlaying=true;
         document.getElementById('animePlayBtn').textContent='⏸';
         jouerMusiqueAnime(info.musique||'douce');
-        afficherSceneAnime(0);
-        demarrerTimerAnime();
+        afficherSceneAnime(0);demarrerTimerAnime();
     }
 
     function afficherSceneAnime(idx){
@@ -817,25 +795,18 @@
         const scene=animeScenes[idx];
         const img=document.getElementById('animeImg');
         const imgNext=document.getElementById('animeImgNext');
-        const total=animeScenes.length;
-
-        // Transition
-        imgNext.src=scene.imgUrl;
-        imgNext.style.opacity='0';
-        img.style.opacity='1';
+        imgNext.src=scene.imgUrl;imgNext.style.opacity='0';img.style.opacity='1';
         setTimeout(()=>{imgNext.style.opacity='1';img.style.opacity='0';setTimeout(()=>{img.src=scene.imgUrl;img.style.opacity='1';imgNext.style.opacity='0';},800);},50);
-
-        // Texte
         document.getElementById('animeNarrateur').textContent=scene.narrateur||'';
         document.getElementById('animePersonnage').textContent=scene.personnage?`— ${scene.personnage} :`:'';
         document.getElementById('animeTexte').textContent=scene.dialogue||'';
         document.getElementById('animeDialogue').style.display=(scene.dialogue||scene.narrateur)?'block':'none';
-        document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${total}`;
-        document.getElementById('animeProgressBar').style.width=`${((idx+1)/total)*100}%`;
-
-        // Parler le dialogue
-        if(scene.dialogue&&animeSonActif){
-            setTimeout(()=>{parlerFR(scene.dialogue);},500);
+        document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${animeScenes.length}`;
+        document.getElementById('animeProgressBar').style.width=`${((idx+1)/animeScenes.length)*100}%`;
+        // VOIX ELEVENLABS sur les dialogues
+        const texteVoix=scene.dialogue||scene.narrateur||'';
+        if(texteVoix&&animeSonActif){
+            setTimeout(()=>{parlerElevenLabs(texteVoix);},600);
         }
     }
 
@@ -843,57 +814,17 @@
         if(animeTimer)clearInterval(animeTimer);
         animeTimer=setInterval(()=>{
             if(!animeIsPlaying)return;
-            if(animeIndex<animeScenes.length-1){
-                animeIndex++;
-                afficherSceneAnime(animeIndex);
-            }else{
-                animeIsPlaying=false;
-                document.getElementById('animePlayBtn').textContent='▶';
-                clearInterval(animeTimer);
-                // Message fin d'épisode
-                setTimeout(()=>{
-                    document.getElementById('animeNarrateur').textContent='FIN DE L\'ÉPISODE';
-                    document.getElementById('animeTexte').textContent='Merci d\'avoir regardé ! 🎬';
-                    document.getElementById('animePersonnage').textContent='';
-                },500);
-            }
-        },animeDureeScene);
+            if(animeIndex<animeScenes.length-1){animeIndex++;afficherSceneAnime(animeIndex);}
+            else{animeIsPlaying=false;document.getElementById('animePlayBtn').textContent='▶';clearInterval(animeTimer);document.getElementById('animeNarrateur').textContent='FIN DE L\'ÉPISODE ✨';document.getElementById('animeTexte').textContent='Merci d\'avoir regardé ! 🎬';document.getElementById('animePersonnage').textContent='';}
+        },6000);
     }
 
-    function toggleAnimePlay(){
-        animeIsPlaying=!animeIsPlaying;
-        document.getElementById('animePlayBtn').textContent=animeIsPlaying?'⏸':'▶';
-        if(animeIsPlaying){
-            demarrerTimerAnime();
-            if(window.animeThemeCourant){const info=ANIME_THEMES[window.animeThemeCourant];jouerMusiqueAnime(info?.musique||'douce');}
-        }else{
-            if(animeTimer)clearInterval(animeTimer);
-            stopMusiqueAnime();
-        }
-    }
-
-    function animeNext(){
-        if(animeIndex<animeScenes.length-1){animeIndex++;afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}
-    }
-
-    function animePrev(){
-        if(animeIndex>0){animeIndex--;afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}
-    }
-
-    function animeReplay(){
-        animeIndex=0;animeIsPlaying=true;document.getElementById('animePlayBtn').textContent='⏸';afficherSceneAnime(0);demarrerTimerAnime();if(window.animeThemeCourant){const info=ANIME_THEMES[window.animeThemeCourant];jouerMusiqueAnime(info?.musique||'douce');}
-    }
-
-    function animeSeek(e){
-        const bar=document.getElementById('animeProgress');const rect=bar.getBoundingClientRect();const pct=(e.clientX-rect.left)/rect.width;
-        animeIndex=Math.min(Math.floor(pct*animeScenes.length),animeScenes.length-1);
-        afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();
-    }
-
-    function fermerAnime(){
-        animeIsPlaying=false;if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();window.speechSynthesis?.cancel();
-        document.getElementById('animePlayer').style.display='none';
-    }
+    function toggleAnimePlay(){animeIsPlaying=!animeIsPlaying;document.getElementById('animePlayBtn').textContent=animeIsPlaying?'⏸':'▶';if(animeIsPlaying){demarrerTimerAnime();if(window.animeThemeCourant)jouerMusiqueAnime(ANIME_THEMES[window.animeThemeCourant]?.musique||'douce');}else{if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();}}
+    function animeNext(){if(animeIndex<animeScenes.length-1){animeIndex++;afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}}
+    function animePrev(){if(animeIndex>0){animeIndex--;afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}}
+    function animeReplay(){animeIndex=0;animeIsPlaying=true;document.getElementById('animePlayBtn').textContent='⏸';afficherSceneAnime(0);demarrerTimerAnime();if(window.animeThemeCourant)jouerMusiqueAnime(ANIME_THEMES[window.animeThemeCourant]?.musique||'douce');}
+    function animeSeek(e){const bar=document.getElementById('animeProgress');const rect=bar.getBoundingClientRect();animeIndex=Math.min(Math.floor(((e.clientX-rect.left)/rect.width)*animeScenes.length),animeScenes.length-1);afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}
+    function fermerAnime(){animeIsPlaying=false;if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();window.speechSynthesis?.cancel();document.getElementById('animePlayer').style.display='none';}
 
     // ===== LOGS =====
     function sauvegarderLog(user,message,reponse,type){const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');logs.push({date:new Date().toLocaleString('fr-FR'),user:user||'Inconnu',message:(message||'').substring(0,300),reponse:(reponse||'').substring(0,300),type:type||'message'});if(logs.length>1000)logs.splice(0,logs.length-1000);localStorage.setItem('yuuto_logs',JSON.stringify(logs));}
@@ -925,15 +856,15 @@
                 const derRep=msgs[msgs.length-1]?.reponse||'';
                 return `<div class="user-card">
                     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-                        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px;flex-shrink:0">${u[0].toUpperCase()}</div>
+                        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px">${u[0].toUpperCase()}</div>
                         <div>
                             <div style="font-weight:bold;font-size:15px;color:${u==='Antoine'?'#f59e0b':'#ddd'}">${u} ${u==='Antoine'?'👑 Créateur':''}</div>
                             <div style="font-size:10px;color:#555">Inscrit le ${premiere}</div>
                         </div>
                     </div>
                     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-                        <span style="background:#1a1a2e;padding:4px 8px;border-radius:10px;font-size:11px;color:#7c3aed">💬 ${msgs.length} messages</span>
-                        <span style="background:#0a2a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#22c55e">🟢 ${cnx.length} connexions</span>
+                        <span style="background:#1a1a2e;padding:4px 8px;border-radius:10px;font-size:11px;color:#7c3aed">💬 ${msgs.length} msgs</span>
+                        <span style="background:#0a2a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#22c55e">🟢 ${cnx.length} cnx</span>
                         <span style="background:#1a0a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#e11d48">🎬 ${mng.length} animes</span>
                         <span style="background:#1a0a00;padding:4px 8px;border-radius:10px;font-size:11px;color:#f97316">🍜 ${rec.length} recettes</span>
                         <span style="background:#0a1a1a;padding:4px 8px;border-radius:10px;font-size:11px;color:#00d4ff">🎨 ${img.length} images</span>
@@ -943,37 +874,34 @@
                         <div style="color:#ddd">${derMsg.substring(0,100)}${derMsg.length>100?'...':''}</div>
                         ${derRep?`<div style="color:#22c55e;margin-top:4px;font-size:10px">🤖 ${derRep.substring(0,80)}...</div>`:''}
                     </div>
-                    <div style="font-size:10px;color:#555;margin-top:6px">🕐 Dernière activité : ${derniere}</div>
+                    <div style="font-size:10px;color:#555;margin-top:6px">🕐 ${derniere}</div>
                 </div>`;
-            }).join('');
-            return;
+            }).join('');return;
         }
         const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);
         if(filtres.length===0){list.innerHTML=`<div style="color:#555;text-align:center;padding:30px">Aucun log 😅</div>`;return;}
         let resumeHtml='';
         if(filtre==='tous'){
             resumeHtml=`<div style="font-size:11px;color:#f59e0b;font-weight:bold;margin-bottom:8px">👥 ${users.length} utilisateur(s)</div>`;
-            resumeHtml+=users.map(u=>{const ul=logs.filter(l=>l.user===u);return `<div style="background:#111;border:1px solid #333;border-radius:8px;padding:8px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;flex-shrink:0">${u[0].toUpperCase()}</div><div style="flex:1"><div style="font-weight:bold;color:${u==='Antoine'?'#f59e0b':'#ddd'};font-size:13px">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#555">${ul.length} activités — ${ul[ul.length-1]?.date||'?'}</div></div><div style="display:flex;gap:4px;font-size:10px"><span style="background:#1a1a2e;padding:2px 5px;border-radius:6px;color:#7c3aed">${ul.filter(l=>l.type==='message').length}💬</span><span style="background:#1a0a0a;padding:2px 5px;border-radius:6px;color:#e11d48">${ul.filter(l=>l.type==='manga').length}🎬</span><span style="background:#1a0a00;padding:2px 5px;border-radius:6px;color:#f97316">${ul.filter(l=>l.type==='recette').length}🍜</span></div></div>`;}).join('');
-            resumeHtml+=`<div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px">📋 Activité</div>`;
+            resumeHtml+=users.map(u=>{const ul=logs.filter(l=>l.user===u);return `<div style="background:#111;border:1px solid #333;border-radius:8px;padding:8px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px">${u[0].toUpperCase()}</div><div style="flex:1"><div style="font-weight:bold;color:${u==='Antoine'?'#f59e0b':'#ddd'};font-size:13px">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#555">${ul.length} activités</div></div><div style="display:flex;gap:4px;font-size:10px"><span style="background:#1a1a2e;padding:2px 5px;border-radius:6px;color:#7c3aed">${ul.filter(l=>l.type==='message').length}💬</span><span style="background:#1a0a0a;padding:2px 5px;border-radius:6px;color:#e11d48">${ul.filter(l=>l.type==='manga').length}🎬</span></div></div>`;}).join('');
+            resumeHtml+=`<div style="font-size:11px;color:#555;text-transform:uppercase;margin:12px 0 8px">📋 Activité</div>`;
         }
-        const logsHtml=[...filtres].reverse().map(l=>`
+        list.innerHTML=resumeHtml+[...filtres].reverse().map(l=>`
             <div class="log-item" style="border-color:${couleurs[l.type]||'#333'}">
                 <div style="font-size:10px;color:#555;margin-bottom:5px">${icones[l.type]||'📝'} ${l.date}</div>
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-                    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;flex-shrink:0">${(l.user||'?')[0].toUpperCase()}</div>
+                    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold">${(l.user||'?')[0].toUpperCase()}</div>
                     <strong style="color:${l.user==='Antoine'?'#f59e0b':'#a78bfa'};font-size:13px">${l.user}</strong>
-                    <span style="background:${couleurs[l.type]||'#333'};color:white;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:bold">${l.type==='connexion'?'🟢 CONNEXION':l.type==='message'?'💬 MESSAGE':l.type==='manga'?'🎬 ANIME':l.type==='recette'?'🍜 RECETTE':l.type==='image'?'🎨 IMAGE':'📝'}</span>
+                    <span style="background:${couleurs[l.type]||'#333'};color:white;font-size:9px;padding:2px 7px;border-radius:10px">${l.type==='connexion'?'🟢 CONNEXION':l.type==='message'?'💬 MESSAGE':l.type==='manga'?'🎬 ANIME':l.type==='recette'?'🍜 RECETTE':l.type==='image'?'🎨 IMAGE':'📝'}</span>
                 </div>
-                <div style="padding:7px 10px;background:#1a1a1a;border-radius:8px;font-size:12px;line-height:1.6;color:#ddd">
-                    ${l.type==='connexion'?`🚪 <strong style="color:#22c55e">${l.user}</strong> s'est connecté ${l.message.replace('[CONNEXION]','')}`:
-                      l.type==='manga'?`🎬 <strong style="color:#e11d48">${l.user}</strong> a créé l'anime : <strong>${l.message.replace('🎬 Anime ','')}</strong>`:
+                <div style="padding:7px 10px;background:#1a1a1a;border-radius:8px;font-size:12px;color:#ddd">
+                    ${l.type==='connexion'?`🚪 <strong style="color:#22c55e">${l.user}</strong> s'est connecté`:
+                      l.type==='manga'?`🎬 <strong style="color:#e11d48">${l.user}</strong> a créé : <strong>${l.message.replace('🎬 Anime ','')}</strong>`:
                       l.type==='recette'?`🍜 <strong style="color:#f97316">${l.user}</strong> a cuisiné : <strong>${l.message.replace('Recette: ','')}</strong>`:
-                      l.type==='image'?`🎨 <strong style="color:#00d4ff">${l.user}</strong> a généré : <em>${l.message}</em>`:
+                      l.type==='image'?`🎨 <strong style="color:#00d4ff">${l.user}</strong> a généré : ${l.message}`:
                       `💬 <strong style="color:#a78bfa">${l.user}</strong> : ${l.message}`}
                 </div>
-                ${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME GENERE]'?`<div style="padding:6px 10px;background:#0a1a0a;border-radius:8px;font-size:11px;margin-top:5px;color:#22c55e;line-height:1.5;border-left:2px solid #22c55e">🤖 ${l.reponse.substring(0,180)}${l.reponse.length>180?'...':''}</div>`:''}
-            </div>`).join('');
-        list.innerHTML=resumeHtml+logsHtml;
+                ${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME]'?`<div style="padding:6px 10px;background:#0a1a0a;border-radius:8px;font-size:11px;margin-top:5px;color:#22c55e;border-left:2px solid #22c55e">🤖 ${l.reponse.substring(0,180)}${l.reponse.length>180?'...':''}</div>`:''}`).join('');
     }
     function filtrerLogs(f,b){document.querySelectorAll('.filtre-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');afficherLogs(f);}
     function fermerLogs(){document.getElementById('logsScreen').style.display='none';}
@@ -993,7 +921,7 @@
     // ===== MEMOIRE =====
     function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d)memoire=JSON.parse(d);}
     function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
-    function mettreAJourMemoire(msg){const ml=msg.toLowerCase();memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');if(ml.includes("j'aime")||ml.includes('mon anime'))memoire.animes=msg;if(ml.includes('mon jeu'))memoire.jeux=msg;const age=msg.match(/j'ai (\d+) ans/i);if(age)memoire.age=age[1]+' ans';if(!memoire.sujets)memoire.sujets=[];['naruto','one piece','dragon ball','demon slayer','goku','luffy','food wars'].forEach(s=>{if(ml.includes(s)&&!memoire.sujets.includes(s))memoire.sujets.push(s);});if(memoire.sujets.length>10)memoire.sujets=memoire.sujets.slice(-10);sauvegarderMemoire();}
+    function mettreAJourMemoire(msg){const ml=msg.toLowerCase();memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');if(ml.includes("j'aime"))memoire.animes=msg;if(ml.includes('mon jeu'))memoire.jeux=msg;const age=msg.match(/j'ai (\d+) ans/i);if(age)memoire.age=age[1]+' ans';if(!memoire.sujets)memoire.sujets=[];['naruto','one piece','dragon ball','demon slayer','food wars'].forEach(s=>{if(ml.includes(s)&&!memoire.sujets.includes(s))memoire.sujets.push(s);});if(memoire.sujets.length>10)memoire.sujets=memoire.sujets.slice(-10);sauvegarderMemoire();}
     function getMemoireTexte(){let t="";if(memoire.prenom)t+=`Prenom:${memoire.prenom}. `;if(memoire.age)t+=`Age:${memoire.age}. `;if(memoire.animes)t+=`Animes:${memoire.animes}. `;if(memoire.sujets&&memoire.sujets.length)t+=`Sujets:${memoire.sujets.join(',')}. `;return t?"[MEMOIRE]:"+t:"";}
     function afficherMemoire(){const box=document.getElementById('memoireContenu');const items=[{label:'👤 Prénom',val:memoire.prenom},{label:'🎂 Age',val:memoire.age},{label:'🎌 Animes',val:memoire.animes},{label:'🎮 Jeux',val:memoire.jeux},{label:'💬 Sujets',val:memoire.sujets?.join(', ')},{label:'📅 Dernière visite',val:memoire.derniere_visite},{label:'🔢 Visites',val:memoire.visites?.toString()}];box.innerHTML=items.filter(i=>i.val).map(i=>`<div class="mem-item"><div class="mem-label">${i.label}</div><div class="mem-value">${i.val}</div></div>`).join('')||'<div style="color:#aaa;text-align:center">Aucune info 😅</div>';}
     function effacerMemoire(){const p=memoire.prenom;memoire={prenom:p,visites:memoire.visites};sauvegarderMemoire();afficherMemoire();ajouterMessageBot("Mémoire effacée ! 😊");fermerModal('memoireScreen');}
@@ -1005,7 +933,7 @@
         loadingId++;const id='loading'+loadingId;
         document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🍳 Préparation... ⏳</div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}" anime. JSON:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantité ingr 1","emoji quantité ingr 2","emoji quantité ingr 3","emoji quantité ingr 4","emoji quantité ingr 5"],"etapes":["Etape 1 détaillée","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun"}`}]})});
+        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}" anime. JSON:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantité ingr","emoji quantité ingr","emoji quantité ingr","emoji quantité ingr","emoji quantité ingr"],"etapes":["Etape 1","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun"}`}]})});
         const d=await r.json();let data=null;try{data=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());}catch(e){}
         const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful appetizing colorful')}?width=420&height=280&nologo=true&seed=${Date.now()}`;
         if(data){document.getElementById(id).innerHTML=`🍜 Voilà !<div class="recette-card"><h3>${data.titre||recette}</h3><img src="${imgUrl}" loading="lazy" onerror="this.style.display='none'"/><div class="anecdote">🎌 ${data.anime||''}</div><div class="section-titre">📦 Ingrédients</div>${(data.ingredients||[]).map(i=>`<div class="ingredient">${i}</div>`).join('')}<div class="section-titre">👨‍🍳 Préparation</div>${(data.etapes||[]).map((e,i)=>`<div class="etape"><span class="etape-num">${i+1}.</span>${e}</div>`).join('')}${data.conseil?`<div class="conseil-box">💡 ${data.conseil}</div>`:''}</div>`;}
@@ -1016,10 +944,8 @@
 
     // ===== RESTE =====
     function activerFondManga(){const bg=document.getElementById('mangaBg');bg.style.display='block';bg.innerHTML='';for(let i=0;i<25;i++){const s=document.createElement('span');s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${18+Math.random()*22}px;color:${Math.random()>0.5?'#7c3aed':'#f59e0b'};animation:floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;bg.appendChild(s);}}
-    async function lancerLecon(niveau){fermerModal('japonaisScreen');const prompts={debutant:`Prof japonais. Hiragana, salutations. Français emojis.`,intermediaire:`Katakana + 5 phrases.`,anime:`10 expressions anime.`,kanji:`5 kanji.`};document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Lance !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+    async function lancerLecon(niveau){fermerModal('japonaisScreen');const prompts={debutant:`Prof japonais. Hiragana, salutations. Français.`,intermediaire:`Katakana + phrases.`,anime:`10 expressions anime.`,kanji:`5 kanji.`};document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Lance !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
     async function continuerLecon(niveau){document.getElementById('chat').innerHTML+=`<div class="moi">➡️ Suite !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue leçon ${niveau}.`}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    function parlerFR(t,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';u.rate=1;u.pitch=1.3;u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};s.speak(u);}
-    function parler(t,cb){parlerFR(t,cb);}
     function toggleCodex(){modeCodex=document.getElementById('codexToggle').checked;localStorage.setItem('yuuto_codex',modeCodex.toString());document.getElementById('codexInfo').style.display=modeCodex?'block':'none';document.getElementById('codexBadge').style.display=modeCodex?'inline':'none';document.getElementById('msg').className=modeCodex?'codex-active':'';document.getElementById('msg').placeholder=modeCodex?'🧠 Pose ta question...':`Message ${NOM_BOT}...`;if(modeCodex){fermerModal('menuScreen');ajouterMessageBot("Mode Codex activé 🧠",null,true);}else ajouterMessageBot(`Mode Codex désactivé 😊`);}
     function getSystemPrompt(){const mem=getMemoireTexte();if(modeCodex)return`Tu es ${NOM_BOT} mode Codex. Expert. Français. ${mem}`;if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. ${mem}`;return window.humeurInfo.personnalite+' '+mem;}
     function toggleSidebar(){sidebarVisible=!sidebarVisible;const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}else{sb.classList.remove('open');ov.style.display='none';}}
@@ -1031,11 +957,11 @@
     function startTalking(){document.getElementById('vtMouthShape').className='mouth-talk';document.getElementById('vtArmL').classList.add('wave');}
     function stopTalking(){const m=document.getElementById('vtMouthShape');if(humeurVideo==='sleepy')m.className='mouth-sleepy';else if(humeurVideo==='excited')m.className='mouth-excited';else if(humeurVideo==='mysterious')m.className='mouth-serious';else m.className='mouth-smile';document.getElementById('vtArmL').classList.remove('wave');}
     function startBlink(){blinkInterval=setInterval(()=>{const bL=document.getElementById('vtBlinkL'),bR=document.getElementById('vtBlinkR');if(!bL||!bR)return;bL.style.height='100%';bR.style.height='100%';setTimeout(()=>{bL.style.height='0';bR.style.height='0';},100);},3200+Math.random()*2000);}
-    async function demarrerVideoAppel(){enVideoAppel=true;document.getElementById('videoCallScreen').style.display='flex';document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;const h=new Date().getHours();if(h>=6&&h<12)setHumeur('sleepy');else if(h>=12&&h<18)setHumeur('excited');else if(h>=18&&h<22)setHumeur('normal');else setHumeur('mysterious');startBlink();const intro=estAntoine?"Wsh Antoine tu mappelles !":`Salut ${memoire.prenom} !`;document.getElementById('videoCallBubble').textContent=intro;startTalking();parlerVideo(intro,()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro';});}
-    function terminerVideoAppel(){enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();window.speechSynthesis.cancel();if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}document.getElementById('videoCallScreen').style.display='none';}
-    function parlerVideo(texte,cb){const s=window.speechSynthesis;if(!s){if(cb)cb();return;}s.cancel();yuutoParle=true;startTalking();const u=new SpeechSynthesisUtterance(texte);u.lang='fr-FR';u.rate=1;u.pitch=1.3;u.onend=()=>{yuutoParle=false;stopTalking();if(cb)setTimeout(cb,500);};s.speak(u);}
+    async function demarrerVideoAppel(){enVideoAppel=true;document.getElementById('videoCallScreen').style.display='flex';document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;const h=new Date().getHours();if(h>=6&&h<12)setHumeur('sleepy');else if(h>=12&&h<18)setHumeur('excited');else if(h>=18&&h<22)setHumeur('normal');else setHumeur('mysterious');startBlink();const intro=estAntoine?"Wsh Antoine !":`Salut ${memoire.prenom} !`;document.getElementById('videoCallBubble').textContent=intro;startTalking();parlerElevenLabs(intro,()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro';});}
+    function terminerVideoAppel(){enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();window.speechSynthesis?.cancel();if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}document.getElementById('videoCallScreen').style.display='none';}
+    function parlerVideo(texte,cb){parlerElevenLabs(texte,cb);}
     function toggleVideoMic(){if(!yuutoParle&&recognition){if(isListening)stopMic();else try{recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};recognition.start();isListening=true;document.getElementById('videoMicBtn').classList.add('active');document.getElementById('videoMicBtn').textContent='🔴';document.getElementById('videoCallStatus').textContent='Tu parles...';}catch(e){}}}
-    async function envoyerVideoAppel(msg){document.getElementById('videoCallStatus').textContent='Reflechit...';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';historique.push({"role":"user","content":msg});const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]})});const d=await r.json();const rep=d.choices[0].message.content;historique.push({"role":"assistant","content":rep});document.getElementById('videoCallBubble').textContent=rep;parlerVideo(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''),()=>{if(enVideoAppel)document.getElementById('videoCallStatus').textContent='Appuie sur le micro';});}
+    async function envoyerVideoAppel(msg){document.getElementById('videoCallStatus').textContent='Reflechit...';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';historique.push({"role":"user","content":msg});const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]})});const d=await r.json();const rep=d.choices[0].message.content;historique.push({"role":"assistant","content":rep});document.getElementById('videoCallBubble').textContent=rep;parlerElevenLabs(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''),()=>{if(enVideoAppel)document.getElementById('videoCallStatus').textContent='Appuie sur le micro';});}
     window.onload=function(){const couleur=localStorage.getItem('yuuto_couleur');if(couleur){document.body.style.background=couleur;document.getElementById('couleurFond').value=couleur;}estPremium=localStorage.getItem('yuuto_premium')==='true';nbTransfo=parseInt(localStorage.getItem('yuuto_transfo')||'0');if(estPremium)document.getElementById('premiumBadgeSide').style.display='inline';modeCodex=localStorage.getItem('yuuto_codex')==='true';if(modeCodex){document.getElementById('codexToggle').checked=true;document.getElementById('codexInfo').style.display='block';document.getElementById('codexBadge').style.display='inline';document.getElementById('msg').className='codex-active';}const nom=localStorage.getItem('yuuto_nom');if(nom){document.getElementById('nom').value=nom;seConnecter();}}
     function changerCouleur(){const c=document.getElementById('couleurFond').value;document.body.style.background=c;localStorage.setItem('yuuto_couleur',c);}
     function changerNom(){const n=document.getElementById('nouveauNom').value.trim();if(!n)return;if(n.toLowerCase().includes('antoine')||n.toLowerCase().includes('gatore')){alert("Protégé 🔒");return;}localStorage.setItem('yuuto_nom',n);memoire.prenom=n;document.getElementById('userName').textContent=n;document.getElementById('userAvatar').textContent=n[0].toUpperCase();sauvegarderMemoire();fermerModal('menuScreen');ajouterMessageBot(`Nom changé ! 😊`);}
@@ -1067,13 +993,13 @@
         const im={f:{"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
         let intro=estAntoine?im.f[hi.humeur]:im.n[hi.humeur];
         if(memoire.visites>1)intro+=` Visite n°${memoire.visites} 🎉`;
-        if(estAntoine)intro+=`<br><small style="color:#f59e0b">🎬 Bouton anime dans le header !</small>`;
+        if(estAntoine)intro+=`<br><small style="color:#f59e0b">🎬 Anime + voix ElevenLabs activée !</small>`;
         if(!estAntoine&&!estPremium&&!estNick)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
-        document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parlerFR('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
+        document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parlerFR('${nettoyerTexte(intro)}')">🔊 Ecouter ElevenLabs</button></div></div>`;
     }
     async function envoyer(){
         const msg=document.getElementById('msg').value;if(!msg)return;
-        if(estNick&&!estPremium&&!estAntoine){if(nickUtilisations<=0){ajouterMessageBot("Nick, tes 10 utilisations sont épuisées ! 🌟");return;}nickUtilisations--;}
+        if(estNick&&!estPremium&&!estAntoine){if(nickUtilisations<=0){ajouterMessageBot("Nick tes utilisations sont épuisées ! 🌟");return;}nickUtilisations--;}
         document.getElementById('msg').value='';
         document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
         mettreAJourMemoire(msg);
