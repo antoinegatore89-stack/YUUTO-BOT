@@ -615,7 +615,7 @@
     const CODE_NICK="tamaire2024";
     const MDP_ANTOINE="yuuto2013";
     // ⬇️ REMPLACE ICI PAR TA CLÉ ELEVENLABS
-    const ELEVENLABS_KEY="sk_c6b0bb06e0f1f321c626c30ff67ae4c4e7460dab80934a6e";
+    const ELEVENLABS_KEY=sk_c6b0bb06e0f1f321c626c30ff67ae4c4e7460dab80934a6e;
     // ID de la voix ElevenLabs — "Rachel" voix douce par défaut
     const ELEVENLABS_VOICE="21m00Tcm4TlvDq8ikWAM";
     const MAX_TRANSFO_GRATUIT=2;
@@ -669,7 +669,7 @@
 
     // ===== ELEVENLABS VOIX ANIME =====
     async function parlerElevenLabs(texte, cb){
-        if(!ELEVENLABS_KEY||ELEVENLABS_KEY==='sk_c6b0bb06e0f1f321c626c30ff67ae4c4e7460dab80934a6e'){
+        if(!ELEVENLABS_KEY||ELEVENLABS_KEY===sk_c6b0bb06e0f1f321c626c30ff67ae4c4e7460dab80934a6e){
             parlerFallback(texte,cb);return;
         }
         try{
