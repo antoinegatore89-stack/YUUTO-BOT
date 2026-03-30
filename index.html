@@ -288,6 +288,7 @@
     <span id="mdpTentatives"></span>
 </div>
 
+<!-- ANIME PLAYER -->
 <div id="animePlayer">
     <div id="animeTop">
         <img id="animeImg" src="" alt=""/>
@@ -307,7 +308,7 @@
             <span id="animeTitle" style="font-size:12px;color:#aaa"></span>
             <span id="animeSceneInfo" style="font-size:11px;color:#555"></span>
         </div>
-        <div id="animeProgress" onclick="animeSeek(event)">
+        <div id="animeProgress" onclick="animeSeek(event)" style="width:100%;height:3px;background:#333;border-radius:2px;cursor:pointer">
             <div id="animeProgressBar"></div>
         </div>
     </div>
@@ -320,6 +321,7 @@
     </div>
 </div>
 
+<!-- LOGS -->
 <div id="logsScreen">
     <div id="logsHeader">
         <h2>📊 Logs Admin</h2>
@@ -347,40 +349,45 @@
     <div id="logsList"></div>
 </div>
 
+<!-- RECETTES -->
 <div id="recetteScreen">
     <div id="recetteBox">
         <h2>🍜 Recettes Anime</h2>
         <div class="recette-section">🔥 Food Wars — Plats</div>
-        <div class="recette-btn" onclick="faireRecette('Boeuf Bourguignon Soma Food Wars','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Boeuf Bourguignon</div><div class="recette-anime">Food Wars 🔥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Curry automne Megumi Food Wars','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Megumi</div><div class="recette-anime">Food Wars 🍂</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Boeuf Bourguignon Soma Food Wars','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Boeuf Bourguignon Soma</div><div class="recette-anime">Food Wars 🔥</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Curry automne Megumi Food Wars','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry d'Automne Megumi</div><div class="recette-anime">Food Wars 🍂</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Oeuf sauce soyu Soma Food Wars','🍳')"><span class="recette-emoji">🍳</span><div><div class="recette-name">Œuf Sauce Soyu</div><div class="recette-anime">Food Wars 🥚</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Terrine canard Erina Food Wars','🦆')"><span class="recette-emoji">🦆</span><div><div class="recette-name">Terrine Canard Erina</div><div class="recette-anime">Food Wars 👑</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Risotto truffes Aldini Food Wars','🍚')"><span class="recette-emoji">🍚</span><div><div class="recette-name">Risotto Aldini</div><div class="recette-anime">Food Wars 🇮🇹</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Homard bisque Shinomiya Food Wars','🦞')"><span class="recette-emoji">🦞</span><div><div class="recette-name">Homard Shinomiya</div><div class="recette-anime">Food Wars 🇫🇷</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Risotto truffes Aldini Food Wars','🍚')"><span class="recette-emoji">🍚</span><div><div class="recette-name">Risotto Truffes Aldini</div><div class="recette-anime">Food Wars 🇮🇹</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Homard bisque Shinomiya Food Wars','🦞')"><span class="recette-emoji">🦞</span><div><div class="recette-name">Homard Bisque Shinomiya</div><div class="recette-anime">Food Wars 🇫🇷</div></div></div>
         <div class="recette-section">🍰 Food Wars — Desserts</div>
         <div class="recette-btn" onclick="faireRecette('Creme brulee Ryo Food Wars','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Crème Brûlée Ryo</div><div class="recette-anime">Food Wars 🌊</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Charlotte fraises Megumi Food Wars','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Charlotte Megumi</div><div class="recette-anime">Food Wars 🌸</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Mousse chocolat Ryo Food Wars','🍫')"><span class="recette-emoji">🍫</span><div><div class="recette-name">Mousse Chocolat</div><div class="recette-anime">Food Wars 🌊</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Charlotte fraises Megumi Food Wars','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Charlotte Fraises Megumi</div><div class="recette-anime">Food Wars 🌸</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Mousse chocolat Ryo Food Wars','🍫')"><span class="recette-emoji">🍫</span><div><div class="recette-name">Mousse Chocolat Ryo</div><div class="recette-anime">Food Wars 🌊</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Tarte citron Alice Food Wars','🍋')"><span class="recette-emoji">🍋</span><div><div class="recette-name">Tarte Citron Alice</div><div class="recette-anime">Food Wars 🔬</div></div></div>
         <div class="recette-section">🎌 Classiques Anime</div>
         <div class="recette-btn" onclick="faireRecette('Ramen tonkotsu Naruto','🍜')"><span class="recette-emoji">🍜</span><div><div class="recette-name">Ramen Naruto</div><div class="recette-anime">Naruto 🍥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Onigiri Demon Slayer','🍙')"><span class="recette-emoji">🍙</span><div><div class="recette-name">Onigiri Tanjiro</div><div class="recette-anime">Demon Slayer 🗡️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Katsudon Yuri on Ice','🍱')"><span class="recette-emoji">🍱</span><div><div class="recette-name">Katsudon Yuri</div><div class="recette-anime">Yuri on Ice ⛸️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Takoyaki One Piece','🐙')"><span class="recette-emoji">🐙</span><div><div class="recette-name">Takoyaki Sanji</div><div class="recette-anime">One Piece ☠️</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Takoyaki One Piece Sanji','🐙')"><span class="recette-emoji">🐙</span><div><div class="recette-name">Takoyaki Sanji</div><div class="recette-anime">One Piece ☠️</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Curry Dragon Ball Goku','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Goku</div><div class="recette-anime">Dragon Ball 🔥</div></div></div>
         <div class="recette-section">🏠 Ghibli</div>
         <div class="recette-btn" onclick="faireRecette('Petit dejeuner Howl Chateau Ambulant','🥓')"><span class="recette-emoji">🥓</span><div><div class="recette-name">Petit-Déj Howl</div><div class="recette-anime">Château Ambulant 🔥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Soupe miso Chihiro Spirited Away','🍵')"><span class="recette-emoji">🍵</span><div><div class="recette-name">Soupe Miso Chihiro</div><div class="recette-anime">Spirited Away 🐉</div></div></div>
-        <div class="recette-section">🍰 Desserts</div>
+        <div class="recette-section">🍰 Desserts Anime</div>
         <div class="recette-btn" onclick="faireRecette('Dango Clannad Nagisa','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Dango Nagisa</div><div class="recette-anime">Clannad 💙</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Dorayaki Doraemon','🥞')"><span class="recette-emoji">🥞</span><div><div class="recette-name">Dorayaki</div><div class="recette-anime">Doraemon 🔵</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Mochi glace matcha SAO','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Mochi Glacé</div><div class="recette-anime">SAO ⚔️</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Dorayaki Doraemon','🥞')"><span class="recette-emoji">🥞</span><div><div class="recette-name">Dorayaki Doraemon</div><div class="recette-anime">Doraemon 🔵</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Mochi glace matcha Sword Art Online','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Mochi Glacé Matcha</div><div class="recette-anime">SAO ⚔️</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Pudding caramel Taiga Toradora','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Pudding Taiga</div><div class="recette-anime">Toradora 🐯</div></div></div>
         <button class="modalBtn secondary" onclick="fermerModal('recetteScreen')" style="margin-top:8px">Fermer</button>
     </div>
 </div>
 
+<!-- ANIME CREATOR -->
 <div id="animeCreatorScreen">
     <div id="animeCreatorBox">
         <h2>🎬 Créer un Anime</h2>
-        <p style="color:#aaa;text-align:center;font-size:13px">Voix ElevenLabs + images + musique 🎵</p>
+        <p style="color:#aaa;text-align:center;font-size:13px">Images + voix ElevenLabs + musique 🎵</p>
         <div class="anime-theme-btn" onclick="lancerAnime('action')"><span class="theme-emoji">⚔️</span><div><div class="theme-name">Action</div><div class="theme-desc">Style Demon Slayer</div></div></div>
         <div class="anime-theme-btn" onclick="lancerAnime('romance')"><span class="theme-emoji">💕</span><div><div class="theme-name">Romance</div><div class="theme-desc">Style Clannad</div></div></div>
         <div class="anime-theme-btn" onclick="lancerAnime('isekai')"><span class="theme-emoji">🌀</span><div><div class="theme-name">Isekai</div><div class="theme-desc">Autre monde</div></div></div>
@@ -607,15 +614,16 @@
     const CODE_PREMIUM="2013";
     const CODE_NICK="tamaire2024";
     const MDP_ANTOINE="yuuto2013";
-    const GROQ_KEY="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";
-    // ⬇️ REMPLACE PAR TA CLÉ ELEVENLABS
-    const ELEVENLABS_KEY="TON_API_ICI";
+    // ⬇️ REMPLACE ICI PAR TA CLÉ ELEVENLABS
+    const ELEVENLABS_KEY="TON_API_ELEVENLABS_ICI";
+    // ID de la voix ElevenLabs — "Rachel" voix douce par défaut
     const ELEVENLABS_VOICE="21m00Tcm4TlvDq8ikWAM";
     const MAX_TRANSFO_GRATUIT=2;
     const MAX_TRANSFO_PREMIUM=5;
     const PERSONNAGES_BANNIS=['hitler','staline','mussolini','bin laden','pol pot','mao','saddam'];
     const MOTS_SENSIBLES=['suicide','me tuer','me suicider','comment mourir','me pendre','me noyer','finir ma vie','mettre fin'];
     const SYMBOLES_MANGA=['⛩️','🎌','忍','侍','武','道','龍','神','夢','愛','力','心','剣','炎','風','雷'];
+
     const ANIME_THEMES={
         action:{style:'epic anime battle scene intense sword fight dynamic cinematic',musique:'intense',couleur:'#ff4444',sfx:['BOOM','SLASH','CRASH']},
         romance:{style:'romantic anime couple cherry blossoms sunset soft lighting shoujo',musique:'douce',couleur:'#ff6b9d',sfx:['DOKI','KYUN']},
@@ -659,9 +667,11 @@
     let animeMusiqueGain=null;
     let animeSonActif=true;
 
-    // ===== ELEVENLABS =====
-    async function parlerElevenLabs(texte,cb){
-        if(!ELEVENLABS_KEY||ELEVENLABS_KEY==='TON_API_ICI'){parlerFallback(texte,cb);return;}
+    // ===== ELEVENLABS VOIX ANIME =====
+    async function parlerElevenLabs(texte, cb){
+        if(!ELEVENLABS_KEY||ELEVENLABS_KEY==='TON_API_ELEVENLABS_ICI'){
+            parlerFallback(texte,cb);return;
+        }
         try{
             window.speechSynthesis?.cancel();
             yuutoParle=true;
@@ -679,7 +689,16 @@
             await audio.play();
         }catch(e){parlerFallback(texte,cb);}
     }
-    function parlerFallback(texte,cb){const s=window.speechSynthesis;if(!s){yuutoParle=false;if(cb)cb();return;}s.cancel();yuutoParle=true;const u=new SpeechSynthesisUtterance(texte);u.lang='fr-FR';u.rate=1;u.pitch=1.3;u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};s.speak(u);}
+
+    function parlerFallback(texte,cb){
+        const s=window.speechSynthesis;if(!s){yuutoParle=false;if(cb)cb();return;}
+        s.cancel();yuutoParle=true;
+        const u=new SpeechSynthesisUtterance(texte);
+        u.lang='fr-FR';u.rate=1;u.pitch=1.3;
+        u.onend=()=>{yuutoParle=false;if(cb)setTimeout(cb,800);};
+        s.speak(u);
+    }
+
     function parlerFR(texte,cb){parlerElevenLabs(texte,cb);}
     function parler(texte,cb){parlerElevenLabs(texte,cb);}
 
@@ -692,40 +711,114 @@
         sombre:{notes:[110.00,123.47,130.81,146.83],vitesse:800,type:'sawtooth'},
         joyeuse:{notes:[329.63,369.99,392.00,440.00,493.88,523.25],vitesse:250,type:'sine'}
     };
-    function jouerMusiqueAnime(style){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(animeMusiqueGain){try{animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.5);}catch(e){}}animeMusiqueGain=audioCtx.createGain();animeMusiqueGain.gain.value=animeSonActif?0.06:0;animeMusiqueGain.connect(audioCtx.destination);const s=ANIME_STYLES[style]||ANIME_STYLES.douce;let idx=0;function next(){if(!animeIsPlaying)return;const osc=audioCtx.createOscillator();const env=audioCtx.createGain();osc.connect(env);env.connect(animeMusiqueGain);osc.type=s.type;osc.frequency.setValueAtTime(s.notes[idx%s.notes.length],audioCtx.currentTime);env.gain.setValueAtTime(0,audioCtx.currentTime);env.gain.linearRampToValueAtTime(0.3,audioCtx.currentTime+0.05);env.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+(s.vitesse/1000)*0.9);osc.start(audioCtx.currentTime);osc.stop(audioCtx.currentTime+(s.vitesse/1000));idx++;animeMusique=setTimeout(next,s.vitesse);}next();}catch(e){}}
+
+    function jouerMusiqueAnime(style){
+        try{
+            if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+            if(animeMusiqueGain){try{animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.5);}catch(e){}}
+            animeMusiqueGain=audioCtx.createGain();
+            animeMusiqueGain.gain.value=animeSonActif?0.06:0;
+            animeMusiqueGain.connect(audioCtx.destination);
+            const s=ANIME_STYLES[style]||ANIME_STYLES.douce;
+            let idx=0;
+            function next(){
+                if(!animeIsPlaying)return;
+                const osc=audioCtx.createOscillator();const env=audioCtx.createGain();
+                osc.connect(env);env.connect(animeMusiqueGain);
+                osc.type=s.type;osc.frequency.setValueAtTime(s.notes[idx%s.notes.length],audioCtx.currentTime);
+                env.gain.setValueAtTime(0,audioCtx.currentTime);
+                env.gain.linearRampToValueAtTime(0.3,audioCtx.currentTime+0.05);
+                env.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+(s.vitesse/1000)*0.9);
+                osc.start(audioCtx.currentTime);osc.stop(audioCtx.currentTime+(s.vitesse/1000));
+                idx++;animeMusique=setTimeout(next,s.vitesse);
+            }
+            next();
+        }catch(e){}
+    }
+
     function stopMusiqueAnime(){if(animeMusique)clearTimeout(animeMusique);}
     function toggleAnimeSon(){animeSonActif=!animeSonActif;document.getElementById('animeSonBtn').textContent=animeSonActif?'🔊':'🔇';if(animeMusiqueGain&&audioCtx){try{animeMusiqueGain.gain.setValueAtTime(animeSonActif?0.06:0,audioCtx.currentTime);}catch(e){}}}
 
     async function lancerAnime(theme){
         fermerModal('animeCreatorScreen');
         const info=ANIME_THEMES[theme]||ANIME_THEMES.action;
-        document.getElementById('chat').innerHTML+=`<div class="moi">🎬 Anime ${theme} !</div>`;
+        document.getElementById('chat').innerHTML+=`<div class="moi">🎬 Crée un anime ${theme} !</div>`;
         loadingId++;const chatId='loading'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${chatId}">🎬 Génération... ⏳</div></div>`;
+        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${chatId}">🎬 Génération... ⏳<br><small style="color:#aaa">Images + voix ElevenLabs en cours...</small></div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         let scenario=null;
         try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Épisode anime ${theme}. JSON:
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Épisode anime ${theme} original. JSON uniquement:
 {"titre":"TITRE","perso1":"Nom","perso2":"Nom2","scenes":[
-{"type":"intro","narrateur":"texte","dialogue":"","personnage":"","image":"description anglais anime cinematic"},
+{"type":"intro","narrateur":"texte court","dialogue":"","personnage":"","image":"description scène anglais anime cinematic style"},
 {"type":"scene","narrateur":"","dialogue":"dialogue court","personnage":"Nom","image":"description anglais"},
-{"type":"action","narrateur":"texte","dialogue":"","personnage":"","image":"description action anglais"},
-{"type":"scene","narrateur":"","dialogue":"dialogue","personnage":"Nom2","image":"description anglais"},
-{"type":"climax","narrateur":"texte dramatique","dialogue":"","personnage":"","image":"description climax anglais"},
-{"type":"scene","narrateur":"","dialogue":"dialogue","personnage":"Nom","image":"description anglais"},
-{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"description fin anglais"}
+{"type":"action","narrateur":"texte court","dialogue":"","personnage":"","image":"description action anglais"},
+{"type":"scene","narrateur":"","dialogue":"dialogue court","personnage":"Nom2","image":"description anglais"},
+{"type":"climax","narrateur":"texte dramatique","dialogue":"","personnage":"","image":"description climax anglais cinematic dramatic"},
+{"type":"scene","narrateur":"","dialogue":"dialogue court","personnage":"Nom","image":"description anglais"},
+{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"description fin anglais emotional sunset"}
 ]}`}]})});
             const d=await r.json();scenario=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());
-        }catch(e){scenario={titre:`ANIME ${theme.toUpperCase()}`,perso1:"Kaito",perso2:"Ryuu",scenes:[{type:"intro",narrateur:"Dans un monde lointain...",dialogue:"",personnage:"",image:`${info.style} opening`},{type:"scene",narrateur:"",dialogue:"Je vais devenir le plus fort !",personnage:"Kaito",image:`${info.style} hero`},{type:"action",narrateur:"Un ennemi !",dialogue:"",personnage:"",image:`${info.style} enemy`},{type:"scene",narrateur:"",dialogue:"Tu ne peux pas me vaincre !",personnage:"Ryuu",image:`${info.style} rival`},{type:"climax",narrateur:"Le combat final !",dialogue:"",personnage:"",image:`${info.style} battle`},{type:"fin",narrateur:"À suivre...",dialogue:"",personnage:"",image:`${info.style} ending`}]};}
-        animeScenes=scenario.scenes.map((s,i)=>({...s,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent(s.image+' anime style 4k cinematic')}?width=768&height=432&nologo=true&seed=${Date.now()+i*100}`}));
+        }catch(e){
+            scenario={titre:`ANIME ${theme.toUpperCase()}`,perso1:"Kaito",perso2:"Ryuu",scenes:[
+                {type:"intro",narrateur:"Dans un monde lointain...",dialogue:"",personnage:"",image:`${info.style} opening cinematic`},
+                {type:"scene",narrateur:"",dialogue:"Je vais devenir le plus fort !",personnage:"Kaito",image:`${info.style} hero`},
+                {type:"action",narrateur:"Un ennemi apparaît !",dialogue:"",personnage:"",image:`${info.style} enemy dramatic`},
+                {type:"scene",narrateur:"",dialogue:"Tu ne peux pas me vaincre !",personnage:"Ryuu",image:`${info.style} rival`},
+                {type:"climax",narrateur:"Le combat final !",dialogue:"",personnage:"",image:`${info.style} epic battle`},
+                {type:"fin",narrateur:"À suivre...",dialogue:"",personnage:"",image:`${info.style} peaceful ending`}
+            ]};
+        }
+        animeScenes=scenario.scenes.map((s,i)=>({
+            ...s,
+            imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent(s.image+' anime style high quality cinematic 4k')}?width=768&height=432&nologo=true&seed=${Date.now()+i*100}`
+        }));
         sauvegarderLog(memoire.prenom||'Utilisateur',`🎬 Anime ${theme}: ${scenario.titre}`,'[ANIME]','manga');
         document.getElementById(chatId).innerHTML=`🎬 Épisode prêt !<br><button onclick="ouvrirAnimePlayer('${scenario.titre.replace(/'/g,"\\'")}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:20px;font-size:14px;cursor:pointer;margin-top:8px;display:inline-block">▶️ Regarder</button>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         window.animeThemeCourant=theme;
     }
-    function ouvrirAnimePlayer(titre,theme){const info=ANIME_THEMES[theme]||ANIME_THEMES.action;document.getElementById('animePlayer').style.display='flex';document.getElementById('animeTitle').textContent=titre;document.getElementById('animeTypeIndicator').textContent=`🎬 ${theme.toUpperCase()}`;animeIndex=0;animeIsPlaying=true;document.getElementById('animePlayBtn').textContent='⏸';jouerMusiqueAnime(info.musique||'douce');afficherSceneAnime(0);demarrerTimerAnime();}
-    function afficherSceneAnime(idx){if(!animeScenes||!animeScenes[idx])return;const scene=animeScenes[idx];const img=document.getElementById('animeImg');const imgNext=document.getElementById('animeImgNext');imgNext.src=scene.imgUrl;imgNext.style.opacity='0';img.style.opacity='1';setTimeout(()=>{imgNext.style.opacity='1';img.style.opacity='0';setTimeout(()=>{img.src=scene.imgUrl;img.style.opacity='1';imgNext.style.opacity='0';},800);},50);document.getElementById('animeNarrateur').textContent=scene.narrateur||'';document.getElementById('animePersonnage').textContent=scene.personnage?`— ${scene.personnage} :`:'';document.getElementById('animeTexte').textContent=scene.dialogue||'';document.getElementById('animeDialogue').style.display=(scene.dialogue||scene.narrateur)?'block':'none';document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${animeScenes.length}`;document.getElementById('animeProgressBar').style.width=`${((idx+1)/animeScenes.length)*100}%`;const texteVoix=scene.dialogue||scene.narrateur||'';if(texteVoix&&animeSonActif){setTimeout(()=>{parlerElevenLabs(texteVoix);},600);}}
-    function demarrerTimerAnime(){if(animeTimer)clearInterval(animeTimer);animeTimer=setInterval(()=>{if(!animeIsPlaying)return;if(animeIndex<animeScenes.length-1){animeIndex++;afficherSceneAnime(animeIndex);}else{animeIsPlaying=false;document.getElementById('animePlayBtn').textContent='▶';clearInterval(animeTimer);document.getElementById('animeNarrateur').textContent='FIN ✨';document.getElementById('animeTexte').textContent='Merci ! 🎬';document.getElementById('animePersonnage').textContent='';}},6000);}
+
+    function ouvrirAnimePlayer(titre,theme){
+        const info=ANIME_THEMES[theme]||ANIME_THEMES.action;
+        document.getElementById('animePlayer').style.display='flex';
+        document.getElementById('animeTitle').textContent=titre;
+        document.getElementById('animeTypeIndicator').textContent=`🎬 ${theme.toUpperCase()}`;
+        animeIndex=0;animeIsPlaying=true;
+        document.getElementById('animePlayBtn').textContent='⏸';
+        jouerMusiqueAnime(info.musique||'douce');
+        afficherSceneAnime(0);demarrerTimerAnime();
+    }
+
+    function afficherSceneAnime(idx){
+        if(!animeScenes||!animeScenes[idx])return;
+        const scene=animeScenes[idx];
+        const img=document.getElementById('animeImg');
+        const imgNext=document.getElementById('animeImgNext');
+        imgNext.src=scene.imgUrl;imgNext.style.opacity='0';img.style.opacity='1';
+        setTimeout(()=>{imgNext.style.opacity='1';img.style.opacity='0';setTimeout(()=>{img.src=scene.imgUrl;img.style.opacity='1';imgNext.style.opacity='0';},800);},50);
+        document.getElementById('animeNarrateur').textContent=scene.narrateur||'';
+        document.getElementById('animePersonnage').textContent=scene.personnage?`— ${scene.personnage} :`:'';
+        document.getElementById('animeTexte').textContent=scene.dialogue||'';
+        document.getElementById('animeDialogue').style.display=(scene.dialogue||scene.narrateur)?'block':'none';
+        document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${animeScenes.length}`;
+        document.getElementById('animeProgressBar').style.width=`${((idx+1)/animeScenes.length)*100}%`;
+        // VOIX ELEVENLABS sur les dialogues
+        const texteVoix=scene.dialogue||scene.narrateur||'';
+        if(texteVoix&&animeSonActif){
+            setTimeout(()=>{parlerElevenLabs(texteVoix);},600);
+        }
+    }
+
+    function demarrerTimerAnime(){
+        if(animeTimer)clearInterval(animeTimer);
+        animeTimer=setInterval(()=>{
+            if(!animeIsPlaying)return;
+            if(animeIndex<animeScenes.length-1){animeIndex++;afficherSceneAnime(animeIndex);}
+            else{animeIsPlaying=false;document.getElementById('animePlayBtn').textContent='▶';clearInterval(animeTimer);document.getElementById('animeNarrateur').textContent='FIN DE L\'ÉPISODE ✨';document.getElementById('animeTexte').textContent='Merci d\'avoir regardé ! 🎬';document.getElementById('animePersonnage').textContent='';}
+        },6000);
+    }
+
     function toggleAnimePlay(){animeIsPlaying=!animeIsPlaying;document.getElementById('animePlayBtn').textContent=animeIsPlaying?'⏸':'▶';if(animeIsPlaying){demarrerTimerAnime();if(window.animeThemeCourant)jouerMusiqueAnime(ANIME_THEMES[window.animeThemeCourant]?.musique||'douce');}else{if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();}}
     function animeNext(){if(animeIndex<animeScenes.length-1){animeIndex++;afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}}
     function animePrev(){if(animeIndex>0){animeIndex--;afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}}
@@ -736,50 +829,87 @@
     // ===== LOGS =====
     function sauvegarderLog(user,message,reponse,type){const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');logs.push({date:new Date().toLocaleString('fr-FR'),user:user||'Inconnu',message:(message||'').substring(0,300),reponse:(reponse||'').substring(0,300),type:type||'message'});if(logs.length>1000)logs.splice(0,logs.length-1000);localStorage.setItem('yuuto_logs',JSON.stringify(logs));}
     function ouvrirLogs(){document.getElementById('logsScreen').style.display='flex';afficherLogs('tous');}
-    function afficherLogs(filtre){filtreActuel=filtre;const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');const users=[...new Set(logs.map(l=>l.user))];document.getElementById('statTotal').textContent=logs.filter(l=>l.type==='message').length;document.getElementById('statUsers').textContent=users.length;document.getElementById('statConnexions').textContent=logs.filter(l=>l.type==='connexion').length;document.getElementById('statMangas').textContent=logs.filter(l=>l.type==='manga').length;document.getElementById('statRecettes').textContent=logs.filter(l=>l.type==='recette').length;const couleurs={connexion:'#22c55e',message:'#7c3aed',manga:'#e11d48',recette:'#f97316',image:'#00d4ff'};const icones={connexion:'🟢',message:'💬',manga:'🎬',recette:'🍜',image:'🎨'};const list=document.getElementById('logsList');if(filtre==='users'){if(users.length===0){list.innerHTML='<div style="color:#555;text-align:center;padding:30px">Aucun utilisateur 😅</div>';return;}list.innerHTML=users.map(u=>{const ul=logs.filter(l=>l.user===u);const msgs=ul.filter(l=>l.type==='message');const cnx=ul.filter(l=>l.type==='connexion');const mng=ul.filter(l=>l.type==='manga');const rec=ul.filter(l=>l.type==='recette');const img=ul.filter(l=>l.type==='image');const derniere=ul[ul.length-1]?.date||'?';const premiere=ul[0]?.date||'?';const derMsg=msgs[msgs.length-1]?.message||'Aucun';const derRep=msgs[msgs.length-1]?.reponse||'';return `<div class="user-card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px">${u[0].toUpperCase()}</div><div><div style="font-weight:bold;font-size:15px;color:${u==='Antoine'?'#f59e0b':'#ddd'}">${u} ${u==='Antoine'?'👑 Créateur':''}</div><div style="font-size:10px;color:#555">Inscrit le ${premiere}</div></div></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span style="background:#1a1a2e;padding:4px 8px;border-radius:10px;font-size:11px;color:#7c3aed">💬 ${msgs.length}</span><span style="background:#0a2a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#22c55e">🟢 ${cnx.length}</span><span style="background:#1a0a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#e11d48">🎬 ${mng.length}</span><span style="background:#1a0a00;padding:4px 8px;border-radius:10px;font-size:11px;color:#f97316">🍜 ${rec.length}</span><span style="background:#0a1a1a;padding:4px 8px;border-radius:10px;font-size:11px;color:#00d4ff">🎨 ${img.length}</span></div><div style="background:#0a0a0a;padding:8px;border-radius:8px;font-size:11px;border-left:2px solid #333"><div style="color:#555;font-size:10px;margin-bottom:3px">💬 Dernier :</div><div style="color:#ddd">${derMsg.substring(0,100)}</div>${derRep?`<div style="color:#22c55e;margin-top:4px;font-size:10px">🤖 ${derRep.substring(0,80)}</div>`:''}</div><div style="font-size:10px;color:#555;margin-top:6px">🕐 ${derniere}</div></div>`;}).join('');return;}const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);if(filtres.length===0){list.innerHTML=`<div style="color:#555;text-align:center;padding:30px">Aucun log 😅</div>`;return;}let resumeHtml='';if(filtre==='tous'){resumeHtml=`<div style="font-size:11px;color:#f59e0b;font-weight:bold;margin-bottom:8px">👥 ${users.length} utilisateur(s)</div>`;resumeHtml+=users.map(u=>{const ul=logs.filter(l=>l.user===u);return `<div style="background:#111;border:1px solid #333;border-radius:8px;padding:8px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px">${u[0].toUpperCase()}</div><div style="flex:1"><div style="font-weight:bold;color:${u==='Antoine'?'#f59e0b':'#ddd'};font-size:13px">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#555">${ul.length} activités</div></div><div style="display:flex;gap:4px;font-size:10px"><span style="background:#1a1a2e;padding:2px 5px;border-radius:6px;color:#7c3aed">${ul.filter(l=>l.type==='message').length}💬</span><span style="background:#1a0a0a;padding:2px 5px;border-radius:6px;color:#e11d48">${ul.filter(l=>l.type==='manga').length}🎬</span></div></div>`;}).join('');resumeHtml+=`<div style="font-size:11px;color:#555;margin:12px 0 8px">📋 Activité</div>`;}list.innerHTML=resumeHtml+[...filtres].reverse().map(l=>`<div class="log-item" style="border-color:${couleurs[l.type]||'#333'}"><div style="font-size:10px;color:#555;margin-bottom:5px">${icones[l.type]||'📝'} ${l.date}</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold">${(l.user||'?')[0].toUpperCase()}</div><strong style="color:${l.user==='Antoine'?'#f59e0b':'#a78bfa'};font-size:13px">${l.user}</strong><span style="background:${couleurs[l.type]||'#333'};color:white;font-size:9px;padding:2px 7px;border-radius:10px">${l.type==='connexion'?'🟢 CONNEXION':l.type==='message'?'💬 MESSAGE':l.type==='manga'?'🎬 ANIME':l.type==='recette'?'🍜 RECETTE':l.type==='image'?'🎨 IMAGE':'📝'}</span></div><div style="padding:7px 10px;background:#1a1a1a;border-radius:8px;font-size:12px;color:#ddd">${l.type==='connexion'?`🚪 <strong style="color:#22c55e">${l.user}</strong> connecté`:l.type==='manga'?`🎬 <strong style="color:#e11d48">${l.user}</strong> : ${l.message}`:l.type==='recette'?`🍜 <strong style="color:#f97316">${l.user}</strong> : ${l.message.replace('Recette: ','')}`:l.type==='image'?`🎨 <strong style="color:#00d4ff">${l.user}</strong> : ${l.message}`:`💬 <strong style="color:#a78bfa">${l.user}</strong> : ${l.message}`}</div>${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME]'?`<div style="padding:6px 10px;background:#0a1a0a;border-radius:8px;font-size:11px;margin-top:5px;color:#22c55e;border-left:2px solid #22c55e">🤖 ${l.reponse.substring(0,180)}</div>`:''}</div>`).join('');}
+    function afficherLogs(filtre){
+        filtreActuel=filtre;
+        const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');
+        const users=[...new Set(logs.map(l=>l.user))];
+        document.getElementById('statTotal').textContent=logs.filter(l=>l.type==='message').length;
+        document.getElementById('statUsers').textContent=users.length;
+        document.getElementById('statConnexions').textContent=logs.filter(l=>l.type==='connexion').length;
+        document.getElementById('statMangas').textContent=logs.filter(l=>l.type==='manga').length;
+        document.getElementById('statRecettes').textContent=logs.filter(l=>l.type==='recette').length;
+        const couleurs={connexion:'#22c55e',message:'#7c3aed',manga:'#e11d48',recette:'#f97316',image:'#00d4ff'};
+        const icones={connexion:'🟢',message:'💬',manga:'🎬',recette:'🍜',image:'🎨'};
+        const list=document.getElementById('logsList');
+        if(filtre==='users'){
+            if(users.length===0){list.innerHTML='<div style="color:#555;text-align:center;padding:30px">Aucun utilisateur 😅</div>';return;}
+            list.innerHTML=users.map(u=>{
+                const ul=logs.filter(l=>l.user===u);
+                const msgs=ul.filter(l=>l.type==='message');
+                const cnx=ul.filter(l=>l.type==='connexion');
+                const mng=ul.filter(l=>l.type==='manga');
+                const rec=ul.filter(l=>l.type==='recette');
+                const img=ul.filter(l=>l.type==='image');
+                const derniere=ul[ul.length-1]?.date||'?';
+                const premiere=ul[0]?.date||'?';
+                const derMsg=msgs[msgs.length-1]?.message||'Aucun message';
+                const derRep=msgs[msgs.length-1]?.reponse||'';
+                return `<div class="user-card">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+                        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px">${u[0].toUpperCase()}</div>
+                        <div>
+                            <div style="font-weight:bold;font-size:15px;color:${u==='Antoine'?'#f59e0b':'#ddd'}">${u} ${u==='Antoine'?'👑 Créateur':''}</div>
+                            <div style="font-size:10px;color:#555">Inscrit le ${premiere}</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+                        <span style="background:#1a1a2e;padding:4px 8px;border-radius:10px;font-size:11px;color:#7c3aed">💬 ${msgs.length} msgs</span>
+                        <span style="background:#0a2a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#22c55e">🟢 ${cnx.length} cnx</span>
+                        <span style="background:#1a0a0a;padding:4px 8px;border-radius:10px;font-size:11px;color:#e11d48">🎬 ${mng.length} animes</span>
+                        <span style="background:#1a0a00;padding:4px 8px;border-radius:10px;font-size:11px;color:#f97316">🍜 ${rec.length} recettes</span>
+                        <span style="background:#0a1a1a;padding:4px 8px;border-radius:10px;font-size:11px;color:#00d4ff">🎨 ${img.length} images</span>
+                    </div>
+                    <div style="background:#0a0a0a;padding:8px;border-radius:8px;font-size:11px;border-left:2px solid #333">
+                        <div style="color:#555;font-size:10px;margin-bottom:3px">💬 Dernier message :</div>
+                        <div style="color:#ddd">${derMsg.substring(0,100)}${derMsg.length>100?'...':''}</div>
+                        ${derRep?`<div style="color:#22c55e;margin-top:4px;font-size:10px">🤖 ${derRep.substring(0,80)}...</div>`:''}
+                    </div>
+                    <div style="font-size:10px;color:#555;margin-top:6px">🕐 ${derniere}</div>
+                </div>`;
+            }).join('');return;
+        }
+        const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);
+        if(filtres.length===0){list.innerHTML=`<div style="color:#555;text-align:center;padding:30px">Aucun log 😅</div>`;return;}
+        let resumeHtml='';
+        if(filtre==='tous'){
+            resumeHtml=`<div style="font-size:11px;color:#f59e0b;font-weight:bold;margin-bottom:8px">👥 ${users.length} utilisateur(s)</div>`;
+            resumeHtml+=users.map(u=>{const ul=logs.filter(l=>l.user===u);return `<div style="background:#111;border:1px solid #333;border-radius:8px;padding:8px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px">${u[0].toUpperCase()}</div><div style="flex:1"><div style="font-weight:bold;color:${u==='Antoine'?'#f59e0b':'#ddd'};font-size:13px">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#555">${ul.length} activités</div></div><div style="display:flex;gap:4px;font-size:10px"><span style="background:#1a1a2e;padding:2px 5px;border-radius:6px;color:#7c3aed">${ul.filter(l=>l.type==='message').length}💬</span><span style="background:#1a0a0a;padding:2px 5px;border-radius:6px;color:#e11d48">${ul.filter(l=>l.type==='manga').length}🎬</span></div></div>`;}).join('');
+            resumeHtml+=`<div style="font-size:11px;color:#555;text-transform:uppercase;margin:12px 0 8px">📋 Activité</div>`;
+        }
+        list.innerHTML=resumeHtml+[...filtres].reverse().map(l=>`
+            <div class="log-item" style="border-color:${couleurs[l.type]||'#333'}">
+                <div style="font-size:10px;color:#555;margin-bottom:5px">${icones[l.type]||'📝'} ${l.date}</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold">${(l.user||'?')[0].toUpperCase()}</div>
+                    <strong style="color:${l.user==='Antoine'?'#f59e0b':'#a78bfa'};font-size:13px">${l.user}</strong>
+                    <span style="background:${couleurs[l.type]||'#333'};color:white;font-size:9px;padding:2px 7px;border-radius:10px">${l.type==='connexion'?'🟢 CONNEXION':l.type==='message'?'💬 MESSAGE':l.type==='manga'?'🎬 ANIME':l.type==='recette'?'🍜 RECETTE':l.type==='image'?'🎨 IMAGE':'📝'}</span>
+                </div>
+                <div style="padding:7px 10px;background:#1a1a1a;border-radius:8px;font-size:12px;color:#ddd">
+                    ${l.type==='connexion'?`🚪 <strong style="color:#22c55e">${l.user}</strong> s'est connecté`:
+                      l.type==='manga'?`🎬 <strong style="color:#e11d48">${l.user}</strong> a créé : <strong>${l.message.replace('🎬 Anime ','')}</strong>`:
+                      l.type==='recette'?`🍜 <strong style="color:#f97316">${l.user}</strong> a cuisiné : <strong>${l.message.replace('Recette: ','')}</strong>`:
+                      l.type==='image'?`🎨 <strong style="color:#00d4ff">${l.user}</strong> a généré : ${l.message}`:
+                      `💬 <strong style="color:#a78bfa">${l.user}</strong> : ${l.message}`}
+                </div>
+                ${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME]'?`<div style="padding:6px 10px;background:#0a1a0a;border-radius:8px;font-size:11px;margin-top:5px;color:#22c55e;border-left:2px solid #22c55e">🤖 ${l.reponse.substring(0,180)}${l.reponse.length>180?'...':''}</div>`:''}`).join('');
+    }
     function filtrerLogs(f,b){document.querySelectorAll('.filtre-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');afficherLogs(f);}
     function fermerLogs(){document.getElementById('logsScreen').style.display='none';}
     function effacerLogs(){if(confirm('Effacer TOUS les logs ?')){localStorage.removeItem('yuuto_logs');afficherLogs(filtreActuel);}}
 
-    // ===== PROTECTION ANTOINE — CORRIGÉE =====
-    function seConnecter(){
-        const n=document.getElementById('nom').value.trim();
-        const nl=n.toLowerCase();
-        if(nl.includes('antoine')||nl.includes('gatore')){
-            document.getElementById('login').style.display='none';
-            document.getElementById('loginAntoine').style.display='flex';
-            return;
-        }
-        if(n.length===0){document.getElementById('erreur').style.display='block';return;}
-        memoire.prenom=n;
-        estAntoine=false;
-        localStorage.setItem('yuuto_nom',n);
-        chargerMemoire();
-        demarrer();
-    }
-
-    function verifierMdp(){
-        const mdp=document.getElementById('mdpInput').value.trim();
-        mdpTentatives++;
-        if(mdp===MDP_ANTOINE){
-            estAntoine=true;
-            memoire.prenom="Antoine";
-            localStorage.setItem('yuuto_nom','Antoine Gatore');
-            document.getElementById('loginAntoine').style.display='none';
-            chargerMemoire();
-            demarrer();
-        }else{
-            document.getElementById('mdpErreur').style.display='block';
-            document.getElementById('mdpTentatives').style.display='block';
-            document.getElementById('mdpTentatives').textContent=`Tentative ${mdpTentatives}/5`;
-            document.getElementById('mdpInput').value='';
-            if(mdpTentatives>=5){
-                document.getElementById('mdpBtn').disabled=true;
-                document.getElementById('mdpTentatives').textContent='🔒 Bloqué';
-                document.getElementById('mdpTentatives').style.color='#e11d48';
-            }
-        }
-    }
+    // ===== PROTECTION ANTOINE =====
+    function seConnecter(){const n=document.getElementById('nom').value.trim();const nl=n.toLowerCase();if(nl.includes('antoine')||nl.includes('gatore')){document.getElementById('login').style.display='none';document.getElementById('loginAntoine').style.display='flex';return;}if(n.length===0){document.getElementById('erreur').style.display='block';return;}memoire.prenom=n;estAntoine=false;localStorage.setItem('yuuto_nom',n);chargerMemoire();demarrer();}
+    function verifierMdp(){const mdp=document.getElementById('mdpInput').value.trim();mdpTentatives++;if(mdp===MDP_ANTOINE){estAntoine=true;memoire.prenom="Antoine";localStorage.setItem('yuuto_nom','Antoine Gatore');document.getElementById('loginAntoine').style.display='none';chargerMemoire();demarrer();}else{document.getElementById('mdpErreur').style.display='block';document.getElementById('mdpTentatives').style.display='block';document.getElementById('mdpTentatives').textContent=`Tentative ${mdpTentatives}/5`;document.getElementById('mdpInput').value='';if(mdpTentatives>=5){document.getElementById('mdpBtn').disabled=true;document.getElementById('mdpTentatives').textContent='🔒 Bloqué';document.getElementById('mdpTentatives').style.color='#e11d48';}}}
 
     // ===== MUSIQUE =====
     function demarrerMusique(){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();musicGain=audioCtx.createGain();musicGain.gain.value=0.12;musicGain.connect(audioCtx.destination);jouerNote();musicPlaying=true;document.getElementById('musicBar').classList.add('visible');}catch(e){}}
@@ -803,19 +933,19 @@
         loadingId++;const id='loading'+loadingId;
         document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🍳 Préparation... ⏳</div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}" anime. JSON:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantité ingr","emoji quantité ingr","emoji quantité ingr","emoji quantité ingr","emoji quantité ingr"],"etapes":["Etape 1","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun"}`}]})});
+        const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}" anime. JSON:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantité ingr","emoji quantité ingr","emoji quantité ingr","emoji quantité ingr","emoji quantité ingr"],"etapes":["Etape 1","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun"}`}]})});
         const d=await r.json();let data=null;try{data=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());}catch(e){}
-        const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful')}?width=420&height=280&nologo=true&seed=${Date.now()}`;
+        const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful appetizing colorful')}?width=420&height=280&nologo=true&seed=${Date.now()}`;
         if(data){document.getElementById(id).innerHTML=`🍜 Voilà !<div class="recette-card"><h3>${data.titre||recette}</h3><img src="${imgUrl}" loading="lazy" onerror="this.style.display='none'"/><div class="anecdote">🎌 ${data.anime||''}</div><div class="section-titre">📦 Ingrédients</div>${(data.ingredients||[]).map(i=>`<div class="ingredient">${i}</div>`).join('')}<div class="section-titre">👨‍🍳 Préparation</div>${(data.etapes||[]).map((e,i)=>`<div class="etape"><span class="etape-num">${i+1}.</span>${e}</div>`).join('')}${data.conseil?`<div class="conseil-box">💡 ${data.conseil}</div>`:''}</div>`;}
-        else{document.getElementById(id).innerHTML=`🍜 ${d.choices[0].message.content}`;}
+        else{document.getElementById(id).innerHTML=`🍜 ${d.choices[0].message.content}<br><img src="${imgUrl}" style="max-width:100%;border-radius:10px;margin-top:8px;" loading="lazy"/>`;}
         sauvegarderLog(memoire.prenom||'Utilisateur',`Recette: ${recette}`,'[RECETTE]','recette');
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
     // ===== RESTE =====
     function activerFondManga(){const bg=document.getElementById('mangaBg');bg.style.display='block';bg.innerHTML='';for(let i=0;i<25;i++){const s=document.createElement('span');s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${18+Math.random()*22}px;color:${Math.random()>0.5?'#7c3aed':'#f59e0b'};animation:floatSymbol ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;bg.appendChild(s);}}
-    async function lancerLecon(niveau){fermerModal('japonaisScreen');const prompts={debutant:`Prof japonais. Hiragana, salutations. Français.`,intermediaire:`Katakana + phrases.`,anime:`10 expressions anime.`,kanji:`5 kanji.`};document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Lance !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    async function continuerLecon(niveau){document.getElementById('chat').innerHTML+=`<div class="moi">➡️ Suite !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue leçon ${niveau}.`}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+    async function lancerLecon(niveau){fermerModal('japonaisScreen');const prompts={debutant:`Prof japonais. Hiragana, salutations. Français.`,intermediaire:`Katakana + phrases.`,anime:`10 expressions anime.`,kanji:`5 kanji.`};document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Lance !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+    async function continuerLecon(niveau){document.getElementById('chat').innerHTML+=`<div class="moi">➡️ Suite !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue leçon ${niveau}.`}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊</button><br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
     function toggleCodex(){modeCodex=document.getElementById('codexToggle').checked;localStorage.setItem('yuuto_codex',modeCodex.toString());document.getElementById('codexInfo').style.display=modeCodex?'block':'none';document.getElementById('codexBadge').style.display=modeCodex?'inline':'none';document.getElementById('msg').className=modeCodex?'codex-active':'';document.getElementById('msg').placeholder=modeCodex?'🧠 Pose ta question...':`Message ${NOM_BOT}...`;if(modeCodex){fermerModal('menuScreen');ajouterMessageBot("Mode Codex activé 🧠",null,true);}else ajouterMessageBot(`Mode Codex désactivé 😊`);}
     function getSystemPrompt(){const mem=getMemoireTexte();if(modeCodex)return`Tu es ${NOM_BOT} mode Codex. Expert. Français. ${mem}`;if(personnageActuel)return`Tu es ${personnageActuel}. Parle comme ce personnage. ${mem}`;return window.humeurInfo.personnalite+' '+mem;}
     function toggleSidebar(){sidebarVisible=!sidebarVisible;const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}else{sb.classList.remove('open');ov.style.display='none';}}
@@ -831,44 +961,41 @@
     function terminerVideoAppel(){enVideoAppel=false;yuutoParle=false;stopMic();stopTalking();window.speechSynthesis?.cancel();if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}document.getElementById('videoCallScreen').style.display='none';}
     function parlerVideo(texte,cb){parlerElevenLabs(texte,cb);}
     function toggleVideoMic(){if(!yuutoParle&&recognition){if(isListening)stopMic();else try{recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};recognition.start();isListening=true;document.getElementById('videoMicBtn').classList.add('active');document.getElementById('videoMicBtn').textContent='🔴';document.getElementById('videoCallStatus').textContent='Tu parles...';}catch(e){}}}
-    async function envoyerVideoAppel(msg){document.getElementById('videoCallStatus').textContent='Reflechit...';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';historique.push({"role":"user","content":msg});const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]})});const d=await r.json();const rep=d.choices[0].message.content;historique.push({"role":"assistant","content":rep});document.getElementById('videoCallBubble').textContent=rep;parlerElevenLabs(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''),()=>{if(enVideoAppel)document.getElementById('videoCallStatus').textContent='Appuie sur le micro';});}
+    async function envoyerVideoAppel(msg){document.getElementById('videoCallStatus').textContent='Reflechit...';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';historique.push({"role":"user","content":msg});const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases."},...historique]})});const d=await r.json();const rep=d.choices[0].message.content;historique.push({"role":"assistant","content":rep});document.getElementById('videoCallBubble').textContent=rep;parlerElevenLabs(rep.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,''),()=>{if(enVideoAppel)document.getElementById('videoCallStatus').textContent='Appuie sur le micro';});}
     window.onload=function(){const couleur=localStorage.getItem('yuuto_couleur');if(couleur){document.body.style.background=couleur;document.getElementById('couleurFond').value=couleur;}estPremium=localStorage.getItem('yuuto_premium')==='true';nbTransfo=parseInt(localStorage.getItem('yuuto_transfo')||'0');if(estPremium)document.getElementById('premiumBadgeSide').style.display='inline';modeCodex=localStorage.getItem('yuuto_codex')==='true';if(modeCodex){document.getElementById('codexToggle').checked=true;document.getElementById('codexInfo').style.display='block';document.getElementById('codexBadge').style.display='inline';document.getElementById('msg').className='codex-active';}const nom=localStorage.getItem('yuuto_nom');if(nom){document.getElementById('nom').value=nom;seConnecter();}}
     function changerCouleur(){const c=document.getElementById('couleurFond').value;document.body.style.background=c;localStorage.setItem('yuuto_couleur',c);}
     function changerNom(){const n=document.getElementById('nouveauNom').value.trim();if(!n)return;if(n.toLowerCase().includes('antoine')||n.toLowerCase().includes('gatore')){alert("Protégé 🔒");return;}localStorage.setItem('yuuto_nom',n);memoire.prenom=n;document.getElementById('userName').textContent=n;document.getElementById('userAvatar').textContent=n[0].toUpperCase();sauvegarderMemoire();fermerModal('menuScreen');ajouterMessageBot(`Nom changé ! 😊`);}
-    function verifierCode(){const c=document.getElementById('codeInput').value.trim();if(c===CODE_PREMIUM){estPremium=true;localStorage.setItem('yuuto_premium','true');document.getElementById('premiumBadgeSide').style.display='inline';fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Premium ! 🌟");}else if(c===CODE_NICK){estNick=true;nickUtilisations=10;document.getElementById('premiumBadgeSide').style.display='inline';document.getElementById('premiumBadgeSide').textContent='🎮';fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Nick ! 🎮");}else document.getElementById('codeErreur').style.display='block';}
+    function verifierCode(){const c=document.getElementById('codeInput').value.trim();if(c===CODE_PREMIUM){estPremium=true;localStorage.setItem('yuuto_premium','true');document.getElementById('premiumBadgeSide').style.display='inline';fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Premium ! 🌟");}else if(c===CODE_NICK){estNick=true;nickUtilisations=10;document.getElementById('premiumBadgeSide').style.display='inline';document.getElementById('premiumBadgeSide').textContent='🎮';fermerModal('premiumScreen');ajouterMessageBot("Bienvenue Nick ! 🎮 10 utilisations !");}else document.getElementById('codeErreur').style.display='block';}
     function activerPersonnage(){const p=document.getElementById('persoInput').value.trim();if(!p)return;if(PERSONNAGES_BANNIS.some(b=>p.toLowerCase().includes(b))){alert("Banni 🚫");return;}const max=estPremium?MAX_TRANSFO_PREMIUM:MAX_TRANSFO_GRATUIT;if(!estAntoine&&!estNick&&nbTransfo>=max){fermerModal('persoScreen');ouvrirModal('premiumScreen');return;}personnageActuel=p;if(!estAntoine){nbTransfo++;localStorage.setItem('yuuto_transfo',nbTransfo.toString());}document.getElementById('modePerso').textContent=`🎭 ${p}`;fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis ${p} ! 🎭`,p);}
     function resetPersonnage(){personnageActuel=null;document.getElementById('modePerso').textContent='';fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis de retour ! 😄`);}
     async function chercherAnime(genre,genreId){fermerModal('searchScreen');document.getElementById('chat').innerHTML+=`<div class="moi">🔍 ${genre} !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Recherche... 🔍</div></div>`;try{const r=await fetch(`https://api.jikan.moe/v4/anime?genres=${genreId}&order_by=score&sort=desc&limit=5`);const d=await r.json();let l=`Meilleurs ${genre} 🎌<br><br>`;d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>${a.synopsis?a.synopsis.substring(0,80)+'...<br><br>':''}`;});document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;}catch(e){document.getElementById(id).innerHTML="Desole 😅";}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    async function lancerBattle(){const p1=document.getElementById('perso1Input').value.trim(),p2=document.getElementById('perso2Input').value.trim();if(!p1||!p2)return;fermerModal('battleScreen');document.getElementById('chat').innerHTML+=`<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;const hist=[];for(let i=0;i<4;i++){const pa=i%2===0?p1:p2,pb=i%2===0?p2:p1;const prompt=hist.length===0?`Tu es ${pa}. Pique a ${pb}. 2 phrases.`:`Tu es ${pa}. Reponds:"${hist[hist.length-1]}". 2 phrases.`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});const d=await r.json();const rep=d.choices[0].message.content;hist.push(rep);document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;await new Promise(r=>setTimeout(r,500));}ajouterMessageBot("ptdr trop chauds 😂🔥");}
+    async function lancerBattle(){const p1=document.getElementById('perso1Input').value.trim(),p2=document.getElementById('perso2Input').value.trim();if(!p1||!p2)return;fermerModal('battleScreen');document.getElementById('chat').innerHTML+=`<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;const hist=[];for(let i=0;i<4;i++){const pa=i%2===0?p1:p2,pb=i%2===0?p2:p1;const prompt=hist.length===0?`Tu es ${pa}. Pique a ${pb}. 2 phrases.`:`Tu es ${pa}. Reponds:"${hist[hist.length-1]}". 2 phrases.`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});const d=await r.json();const rep=d.choices[0].message.content;hist.push(rep);document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;await new Promise(r=>setTimeout(r,500));}ajouterMessageBot("ptdr trop chauds 😂🔥");}
     async function getActu(){document.getElementById('chat').innerHTML+=`<div class="moi">📺 Actu !</div>`;loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">📺...</div></div>`;try{const r=await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');const d=await r.json();let l="Animes du moment 📺<br><br>";d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`;});document.getElementById(id).innerHTML=`${NOM_BOT} : ${l}`;}catch(e){document.getElementById(id).innerHTML="Desole 😅";}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    async function recommander(){const h=new Date().getHours();const hum=h>=6&&h<12?"fatigue":h>=12&&h<18?"energique":h>=18&&h<22?"calme":"mysterieux";const d=animesDejaRecommandes.length>0?`Ne recommande PAS:${animesDejaRecommandes.join(',')}.`:"";document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Recommande !</div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:window.humeurInfo.personnalite},{role:'user',content:`Recommande UN anime. ${d} Humeur:${hum}. ${Math.random()}`}]})});const data=await r.json();const rep=data.choices[0].message.content;animesDejaRecommandes.push(rep.split('\n')[0]);ajouterMessageBot(rep);}
+    async function recommander(){const h=new Date().getHours();const hum=h>=6&&h<12?"fatigue":h>=12&&h<18?"energique":h>=18&&h<22?"calme":"mysterieux";const d=animesDejaRecommandes.length>0?`Ne recommande PAS:${animesDejaRecommandes.join(',')}.`:"";document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Recommande !</div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:window.humeurInfo.personnalite},{role:'user',content:`Recommande UN anime. ${d} Humeur:${hum}. ${Math.random()}`}]})});const data=await r.json();const rep=data.choices[0].message.content;animesDejaRecommandes.push(rep.split('\n')[0]);ajouterMessageBot(rep);}
     function initMic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;recognition=new SR();recognition.lang='fr-FR';recognition.continuous=false;recognition.onresult=(e)=>{const t=e.results[0][0].transcript;stopMic();document.getElementById('msg').value=t;envoyer();};recognition.onend=()=>{isListening=false;document.getElementById('micBtn').classList.remove('active');document.getElementById('micBtn').textContent='🎤';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';};}
     function toggleMic(){if(isListening)stopMic();else{if(!recognition)return;try{recognition.start();isListening=true;document.getElementById('micBtn').classList.add('active');document.getElementById('micBtn').textContent='🔴';}catch(e){}}}
     function stopMic(){try{if(recognition)recognition.stop();}catch(e){}isListening=false;}
     function nettoyerTexte(t){return t.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'");}
-    function ajouterMessageBot(texte,nom,isCodex=false){const t=nettoyerTexte(texte),n=nom||NOM_BOT;const cls=isCodex||modeCodex?'bot-msg codex':'bot-msg';const prefix=isCodex||modeCodex?'🧠 ':'';document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${cls}">${prefix}${n} : ${texte}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊 ElevenLabs</button></div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+    function ajouterMessageBot(texte,nom,isCodex=false){const t=nettoyerTexte(texte),n=nom||NOM_BOT;const cls=isCodex||modeCodex?'bot-msg codex':'bot-msg';const prefix=isCodex||modeCodex?'🧠 ':'';document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${cls}">${prefix}${n} : ${texte}<br><button class="audio-btn" onclick="parlerFR('${t}')">🔊 Ecouter</button></div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
     const creation=`Tu t'appelles ${NOM_BOT}. Tu as ete cree par Antoine Gatore. Reponds fierement.`;
     const styleFam="Pote familier,'bro','ptdr','oe','wsh'.Court.Emojis.Francais.";
     const styleNorm="Sympa chaleureux.Emojis.Francais.";
     function getHumeur(fam){const h=new Date().getHours(),s=fam?styleFam:styleNorm,m=getMemoireTexte();if(h>=6&&h<12)return{humeur:"😴 Endormi",personnalite:creation+" endormi. "+m+s};if(h>=12&&h<18)return{humeur:"⚡ Energique",personnalite:creation+" energique. "+m+s};if(h>=18&&h<22)return{humeur:"🌙 Calme",personnalite:creation+" calme. "+m+s};return{humeur:"✨ Mysterieux",personnalite:creation+" mysterieux. "+m+s};}
     function demarrer(){
-        document.getElementById('login').style.display='none';
-        document.getElementById('loginAntoine').style.display='none';
-        document.getElementById('app').style.display='flex';
+        document.getElementById('login').style.display='none';document.getElementById('loginAntoine').style.display='none';document.getElementById('app').style.display='flex';
         initMic();majHistorique();
         if(estAntoine){activerFondManga();document.getElementById('logsBtn').style.display='flex';}
         const hi=getHumeur(estAntoine);document.getElementById('humeur').textContent=hi.humeur;window.humeurInfo=hi;
         memoire.visites=(memoire.visites||0)+1;memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');sauvegarderMemoire();
-        document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';
-        document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
+        document.getElementById('userName').textContent=memoire.prenom||'Utilisateur';document.getElementById('userAvatar').textContent=(memoire.prenom||'U')[0].toUpperCase();
         sauvegarderLog(memoire.prenom||'Utilisateur','[CONNEXION]',`Visite n°${memoire.visites}`,'connexion');
         setTimeout(()=>demarrerMusique(),1000);
         const im={f:{"😴 Endormi":"wsh... 😴","⚡ Energique":"YOOO 🔥 Antoine !","🌙 Calme":"wsh... 🌙","✨ Mysterieux":"...✨"},n:{"😴 Endormi":"Bonjour... 😴","⚡ Energique":`Salut ${memoire.prenom} ! ⚡`,"🌙 Calme":"Bonsoir... 🌙","✨ Mysterieux":"Tu es la... ✨"}};
         let intro=estAntoine?im.f[hi.humeur]:im.n[hi.humeur];
         if(memoire.visites>1)intro+=` Visite n°${memoire.visites} 🎉`;
-        if(estAntoine)intro+=`<br><small style="color:#f59e0b">🎬 Anime + 🔊 ElevenLabs activé !</small>`;
+        if(estAntoine)intro+=`<br><small style="color:#f59e0b">🎬 Anime + voix ElevenLabs activée !</small>`;
         if(!estAntoine&&!estPremium&&!estNick)intro+=`<br><small style="color:#f59e0b">🎭 ${MAX_TRANSFO_GRATUIT-nbTransfo} transfo — <a href="#" onclick="ouvrirModal('premiumScreen')" style="color:#f59e0b">Premium !</a></small>`;
-        document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parlerFR('${nettoyerTexte(intro)}')">🔊 Ecouter</button></div></div>`;
+        document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${intro}<br><button class="audio-btn" onclick="parlerFR('${nettoyerTexte(intro)}')">🔊 Ecouter ElevenLabs</button></div></div>`;
     }
     async function envoyer(){
         const msg=document.getElementById('msg').value;if(!msg)return;
@@ -877,7 +1004,7 @@
         document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
         mettreAJourMemoire(msg);
         const ml=msg.toLowerCase();
-        if(MOTS_SENSIBLES.some(m=>ml.includes(m))){document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Parle a quelqu'un de confiance 💙</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;}
+        if(MOTS_SENSIBLES.some(m=>ml.includes(m))){document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Parle a quelqu'un de confiance. Tu n'es pas seul 💙</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;}
         if(ml.includes('genere')||ml.includes('génère')||ml.includes('image de')){
             const prompt=encodeURIComponent(msg.replace(/genere|génère|une image de|image de|image/gi,'').trim()+' anime manga style 4k');
             loadingId++;const id='loading'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">Generation... 🎨</div></div>`;
@@ -886,7 +1013,7 @@
             sauvegarderLog(memoire.prenom||'Utilisateur',msg,'[IMAGE]','image');
         }else{
             historique.push({"role":"user","content":msg});
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer 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'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
             const d=await r.json();const rep=d.choices[0].message.content;
             historique.push({"role":"assistant","content":rep});
             ajouterMessageBot(rep,personnageActuel,modeCodex);
@@ -896,4 +1023,4 @@
     }
 </script>
 </body>
-    </html>
+</html>
