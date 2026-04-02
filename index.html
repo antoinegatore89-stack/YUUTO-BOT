@@ -13,28 +13,22 @@
         #mangaBg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
         #mangaBg span { position: absolute; bottom: -50px; animation: floatSymbol linear infinite; }
         @keyframes floatSymbol { 0%{transform:translateY(0) rotate(0deg);opacity:0.06} 100%{transform:translateY(-110vh) rotate(360deg);opacity:0} }
-
-        /* PAYS SCREEN */
         #paysScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 18px; background: #0f0f0f; position: relative; z-index: 1; }
         #paysScreen h2 { font-size: 22px; font-weight: 700; background: linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         #paysScreen p { color: #666; font-size: 13px; text-align: center; padding: 0 20px; }
         .pays-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 290px; }
         .pays-btn { background: #1a1a1a; border: 1px solid #2a2a2a; color: white; padding: 14px; border-radius: 14px; font-size: 14px; cursor: pointer; text-align: center; transition: all 0.2s; }
-        .pays-btn:hover, .pays-btn.selected { background: #7c3aed; border-color: #7c3aed; }
+        .pays-btn:hover { background: #7c3aed; border-color: #7c3aed; }
         .pays-flag { font-size: 26px; display: block; margin-bottom: 4px; }
         .pays-name { font-size: 11px; color: #aaa; }
-
-        /* LOGIN */
         #login { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 18px; position: relative; z-index: 1; background: #0f0f0f; }
         #login img { width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #7c3aed; }
         #login h2 { font-size: 26px; font-weight: 700; background: linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         #login p { color: #666; font-size: 14px; }
-        #login input { padding: 14px 18px; border-radius: 12px; border: 1px solid #333; font-size: 15px; width: 260px; text-align: center; background: #1a1a1a; color: white; outline: none; transition: border 0.2s; }
+        #login input { padding: 14px 18px; border-radius: 12px; border: 1px solid #333; font-size: 15px; width: 260px; text-align: center; background: #1a1a1a; color: white; outline: none; }
         #login input:focus { border-color: #7c3aed; }
         #login button { background: #7c3aed; color: white; border: none; padding: 14px 35px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 600; width: 260px; }
         #erreur { color: #e11d48; display: none; font-size: 13px; }
-
-        /* LOGIN ANTOINE */
         #loginAntoine { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 18px; position: relative; z-index: 1; background: linear-gradient(180deg,#0a0a1a,#1a0a2e); }
         #loginAntoine img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 2px solid #f59e0b; box-shadow: 0 0 30px rgba(245,158,11,0.3); }
         #loginAntoine h2 { font-size: 22px; font-weight: 700; background: linear-gradient(90deg,#f59e0b,#7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -42,8 +36,6 @@
         #mdpBtn { background: linear-gradient(90deg,#f59e0b,#d97706); color: black; border: none; padding: 14px 35px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 700; width: 260px; }
         #mdpErreur { color: #e11d48; display: none; font-size: 13px; }
         #mdpTentatives { color: #666; font-size: 12px; display: none; }
-
-        /* LOGS */
         #logsScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 9999; flex-direction: column; }
         #logsHeader { background: #111; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e1e1e; flex-shrink: 0; }
         #logsHeader h2 { font-size: 16px; color: #f59e0b; font-weight: 600; }
@@ -59,8 +51,6 @@
         .filtre-btn.active { background: #7c3aed; color: white; border-color: #7c3aed; }
         #clearLogsBtn { background: #e11d48; border: none; color: white; padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; }
         .user-card { background: #111; border: 1px solid #f59e0b44; border-radius: 14px; padding: 14px; margin-bottom: 8px; }
-
-        /* ANIME PLAYER */
         #animePlayer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9998; flex-direction: column; }
         #animeTop { position: relative; flex: 1; overflow: hidden; background: #000; }
         #animeImg { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease; }
@@ -72,6 +62,7 @@
         #animeTexte { color: white; }
         #animeProgress { width: 100%; height: 3px; background: #333; border-radius: 2px; margin: 8px 0; cursor: pointer; }
         #animeProgressBar { height: 100%; background: linear-gradient(90deg,#7c3aed,#f59e0b); border-radius: 2px; width: 0%; }
+        #animeSceneInfo { font-size: 10px; color: #555; }
         .anime-btn { background: #1a1a1a; border: 1px solid #333; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; cursor: pointer; }
         .anime-btn.primary { background: #7c3aed; border-color: #7c3aed; }
         #animeTypeIndicator { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #f59e0b; border: 1px solid #f59e0b44; }
@@ -79,8 +70,6 @@
         #animeLoadingOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; }
         .spinner { width: 40px; height: 40px; border: 3px solid #333; border-top-color: #7c3aed; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* APP */
         #app { display: none; flex-direction: row; height: 100vh; width: 100%; overflow: hidden; position: relative; z-index: 1; }
         #sidebar { display: none; position: fixed; top: 0; left: 0; width: 260px; height: 100vh; background: #0f0f0f; flex-direction: column; z-index: 100; border-right: 1px solid #1e1e1e; }
         #sidebar.open { display: flex; }
@@ -113,14 +102,14 @@
         #chat::-webkit-scrollbar { width: 4px; }
         #chat::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
         .moi { background: #2a2a3e; padding: 12px 16px; border-radius: 18px 18px 4px 18px; margin-left: auto; max-width: 75%; font-size: 14px; line-height: 1.6; border: 1px solid #3a3a5e; animation: fadeIn 0.3s ease; }
+        .moi img { max-width: 200px; border-radius: 10px; display: block; margin-top: 8px; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
         .bot { display: flex; align-items: flex-start; gap: 10px; max-width: 88%; animation: fadeIn 0.3s ease; }
         .bot img.avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #7c3aed44; margin-top: 2px; }
         .bot-msg { background: #1a1a1a; padding: 12px 16px; border-radius: 4px 18px 18px 18px; font-size: 14px; border: 1px solid #2a2a2a; line-height: 1.8; }
         .bot-msg.urgent { background: #1a0a0a; border-color: #e11d4844; border-left: 3px solid #e11d48; }
         .bot-msg.japonais { background: #1a1a0a; border-color: #f59e0b44; border-left: 3px solid #f59e0b; }
-        .bot-msg.arc { background: #0a0a1a; border-color: #7c3aed; border-left: 3px solid #7c3aed; animation: arcPulse 2s ease-in-out; }
-        @keyframes arcPulse { 0%{box-shadow:0 0 0 rgba(124,58,237,0)} 50%{box-shadow:0 0 20px rgba(124,58,237,0.3)} 100%{box-shadow:0 0 0 rgba(124,58,237,0)} }
+        .bot-msg.arc { background: #0a0a1a; border-color: #7c3aed; border-left: 3px solid #7c3aed; }
         .recette-card { background: #0f0f0f; border: 1px solid #f9731644; border-radius: 14px; padding: 16px; margin-top: 8px; }
         .recette-card h3 { color: #f59e0b; font-size: 17px; margin-bottom: 12px; text-align: center; font-weight: 700; }
         .recette-card img { width: 100%; border-radius: 10px; margin-bottom: 14px; display: block; max-height: 200px; object-fit: cover; }
@@ -136,11 +125,18 @@
         .audio-btn { background: none; border: none; color: #444; font-size: 12px; cursor: pointer; margin-top: 6px; display: inline-block; padding: 3px 8px; border-radius: 10px; }
         #inputArea { padding: 12px 16px 16px; background: #0f0f0f; border-top: 1px solid #1e1e1e; flex-shrink: 0; }
         #inputRow { display: flex; gap: 8px; align-items: flex-end; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 8px 12px; }
+        #plusBtn { background: none; color: #555; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 20px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        #plusBtn:hover { color: #7c3aed; }
         #micBtn { background: none; color: #555; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 17px; cursor: pointer; flex-shrink: 0; }
         #micBtn.active { color: #e11d48; }
         #msg { flex: 1; padding: 6px 4px; border: none; font-size: 14px; background: transparent; color: white; outline: none; resize: none; max-height: 120px; min-height: 24px; line-height: 1.5; font-family: inherit; }
         #msg::placeholder { color: #444; }
         #btn { background: #7c3aed; color: white; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 16px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        #imageInput { display: none; }
+        #plusMenu { display: none; position: absolute; bottom: 80px; left: 16px; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 14px; padding: 8px; gap: 4px; flex-direction: column; z-index: 50; }
+        #plusMenu.open { display: flex; }
+        .plus-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-size: 13px; color: #ccc; background: none; border: none; width: 100%; text-align: left; }
+        .plus-option:hover { background: #2a2a2a; color: white; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
         .modalBox { background: #111; border: 1px solid #2a2a2a; border-radius: 20px; padding: 24px; width: 88%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; max-height: 88vh; overflow-y: auto; }
         .modalBox h2 { text-align: center; font-size: 18px; font-weight: 700; }
@@ -155,15 +151,13 @@
         .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #2a2a2a; background: #222; color: white; font-size: 13px; outline: none; }
         .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-size: 13px; cursor: pointer; margin-top: 8px; width: 100%; }
         .menu-option select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #2a2a2a; background: #222; color: white; font-size: 13px; outline: none; }
-        .prix { font-size: 30px; font-weight: 700; color: #f59e0b; text-align: center; }
-        .wave-info { background: #0a1a0a; padding: 14px; border-radius: 12px; font-size: 13px; color: #888; border: 1px solid #22c55e22; text-align: center; line-height: 1.8; }
         .battle-input { padding: 12px; border-radius: 10px; border: 1px solid #2a2a2a; background: #1a1a1a; color: white; text-align: center; width: 100%; font-size: 14px; outline: none; }
         #recetteScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
         #recetteBox { background: #111; border: 1px solid #f9731622; border-radius: 20px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 7px; max-height: 90vh; overflow-y: auto; }
         #recetteBox h2 { text-align: center; font-size: 20px; font-weight: 700; background: linear-gradient(90deg,#f97316,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .recette-section { font-size: 10px; font-weight: 700; color: #f97316; text-transform: uppercase; letter-spacing: 1px; padding: 5px 0 2px; border-bottom: 1px solid #2a2a2a; margin-top: 5px; }
         .recette-btn { padding: 10px 12px; border-radius: 10px; border: 1px solid #2a2a2a; background: #1a1a1a; color: white; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .recette-btn:hover { background: #222; border-color: #f9731644; }
+        .recette-btn:hover { background: #222; }
         .recette-emoji { font-size: 20px; flex-shrink: 0; }
         .recette-name { font-weight: 600; color: #f59e0b; font-size: 13px; }
         .recette-anime { font-size: 10px; color: #555; }
@@ -268,8 +262,6 @@
 </head>
 <body>
 <div id="mangaBg"></div>
-
-<!-- SELECTION PAYS -->
 <div id="paysScreen">
     <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png" style="width:65px;height:65px;border-radius:50%;border:2px solid #7c3aed;object-fit:cover"/>
     <h2>YUUTO-BOT</h2>
@@ -285,8 +277,6 @@
         <button class="pays-btn" onclick="choisirPays('autre')"><span class="pays-flag">🌍</span><span class="pays-name">Autre</span></button>
     </div>
 </div>
-
-<!-- LOGIN -->
 <div id="login">
     <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
     <h2>YUUTO-BOT</h2>
@@ -295,8 +285,6 @@
     <button onclick="seConnecter()">Entrer</button>
     <span id="erreur">Accès refusé 🚫</span>
 </div>
-
-<!-- LOGIN ANTOINE -->
 <div id="loginAntoine">
     <img src="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png"/>
     <h2>🔐 Espace Créateur</h2>
@@ -306,8 +294,6 @@
     <span id="mdpErreur">Incorrect ❌</span>
     <span id="mdpTentatives"></span>
 </div>
-
-<!-- ANIME PLAYER -->
 <div id="animePlayer">
     <div id="animeTop">
         <img id="animeImg" src="" alt="" style="width:100%;height:100%;object-fit:cover"/>
@@ -337,8 +323,6 @@
         <button class="anime-btn" onclick="animeReplay()">🔁</button>
     </div>
 </div>
-
-<!-- LOGS -->
 <div id="logsScreen">
     <div id="logsHeader">
         <h2>📊 Logs Admin</h2>
@@ -365,8 +349,6 @@
     </div>
     <div id="logsList"></div>
 </div>
-
-<!-- RECETTES -->
 <div id="recetteScreen">
     <div id="recetteBox">
         <h2>🍜 Recettes Anime</h2>
@@ -377,60 +359,45 @@
         <div class="recette-btn" onclick="faireRecette('Risotto truffes Aldini Food Wars','🍚')"><span class="recette-emoji">🍚</span><div><div class="recette-name">Risotto Aldini</div><div class="recette-anime">Food Wars 🇮🇹</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Homard bisque Shinomiya Food Wars','🦞')"><span class="recette-emoji">🦞</span><div><div class="recette-name">Homard Shinomiya</div><div class="recette-anime">Food Wars 🇫🇷</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Gyoza maison Soma Food Wars','🥟')"><span class="recette-emoji">🥟</span><div><div class="recette-name">Gyoza Soma</div><div class="recette-anime">Food Wars 🥟</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Omelette jambon Soma Food Wars','🍳')"><span class="recette-emoji">🍳</span><div><div class="recette-name">Omelette Soma</div><div class="recette-anime">Food Wars 🔥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Ramen shoyu Isshiki Food Wars','🍜')"><span class="recette-emoji">🍜</span><div><div class="recette-name">Ramen Isshiki</div><div class="recette-anime">Food Wars 🌸</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Curry fruits de mer Alice Food Wars','🦐')"><span class="recette-emoji">🦐</span><div><div class="recette-name">Curry Alice</div><div class="recette-anime">Food Wars 🔬</div></div></div>
         <div class="recette-section">🍰 Food Wars — Desserts</div>
         <div class="recette-btn" onclick="faireRecette('Creme brulee Ryo Food Wars','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Crème Brûlée Ryo</div><div class="recette-anime">Food Wars 🌊</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Charlotte fraises Megumi Food Wars','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Charlotte Megumi</div><div class="recette-anime">Food Wars 🌸</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Mousse chocolat Ryo Food Wars','🍫')"><span class="recette-emoji">🍫</span><div><div class="recette-name">Mousse Chocolat</div><div class="recette-anime">Food Wars 🌊</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Tarte citron meringuee Alice Food Wars','🍋')"><span class="recette-emoji">🍋</span><div><div class="recette-name">Tarte Citron Alice</div><div class="recette-anime">Food Wars 🔬</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Panna cotta framboise Erina Food Wars','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Panna Cotta Erina</div><div class="recette-anime">Food Wars 👑</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Tiramisu japonais Soma Food Wars','☕')"><span class="recette-emoji">☕</span><div><div class="recette-name">Tiramisu Soma</div><div class="recette-anime">Food Wars 🔥</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Tarte citron Alice Food Wars','🍋')"><span class="recette-emoji">🍋</span><div><div class="recette-name">Tarte Citron Alice</div><div class="recette-anime">Food Wars 🔬</div></div></div>
         <div class="recette-section">🎌 Classiques Anime</div>
         <div class="recette-btn" onclick="faireRecette('Ramen tonkotsu Naruto','🍜')"><span class="recette-emoji">🍜</span><div><div class="recette-name">Ramen Naruto</div><div class="recette-anime">Naruto 🍥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Onigiri Demon Slayer Tanjiro','🍙')"><span class="recette-emoji">🍙</span><div><div class="recette-name">Onigiri Tanjiro</div><div class="recette-anime">Demon Slayer 🗡️</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Onigiri Demon Slayer','🍙')"><span class="recette-emoji">🍙</span><div><div class="recette-name">Onigiri Tanjiro</div><div class="recette-anime">Demon Slayer 🗡️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Katsudon Yuri on Ice','🍱')"><span class="recette-emoji">🍱</span><div><div class="recette-name">Katsudon Yuri</div><div class="recette-anime">Yuri on Ice ⛸️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Takoyaki One Piece Sanji','🐙')"><span class="recette-emoji">🐙</span><div><div class="recette-name">Takoyaki Sanji</div><div class="recette-anime">One Piece ☠️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Curry Dragon Ball Goku','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Goku</div><div class="recette-anime">Dragon Ball 🔥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Nikujaga boeuf Fullmetal Alchemist','🥘')"><span class="recette-emoji">🥘</span><div><div class="recette-name">Nikujaga Edward</div><div class="recette-anime">FMA ⚙️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Tamagoyaki Sanji One Piece','🍳')"><span class="recette-emoji">🍳</span><div><div class="recette-name">Tamagoyaki Sanji</div><div class="recette-anime">One Piece ☠️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Ochazuke Death Note Light','🍵')"><span class="recette-emoji">🍵</span><div><div class="recette-name">Ochazuke Light</div><div class="recette-anime">Death Note 📓</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Sukiyaki Attack on Titan Eren','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Sukiyaki Eren</div><div class="recette-anime">Attack on Titan ⚔️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Yakitori Jujutsu Kaisen Gojo','🍢')"><span class="recette-emoji">🍢</span><div><div class="recette-name">Yakitori Gojo</div><div class="recette-anime">Jujutsu Kaisen 💙</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Soba froide Demon Slayer Zenitsu','🍜')"><span class="recette-emoji">🍜</span><div><div class="recette-name">Soba Zenitsu</div><div class="recette-anime">Demon Slayer ⚡</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Nikujaga Fullmetal Alchemist','🥘')"><span class="recette-emoji">🥘</span><div><div class="recette-name">Nikujaga Edward</div><div class="recette-anime">FMA ⚙️</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Yakitori Jujutsu Kaisen','🍢')"><span class="recette-emoji">🍢</span><div><div class="recette-name">Yakitori Gojo</div><div class="recette-anime">JJK 💙</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Sukiyaki Attack on Titan','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Sukiyaki Eren</div><div class="recette-anime">AOT ⚔️</div></div></div>
         <div class="recette-section">🏠 Ghibli</div>
         <div class="recette-btn" onclick="faireRecette('Petit dejeuner Howl Chateau Ambulant','🥓')"><span class="recette-emoji">🥓</span><div><div class="recette-name">Petit-Déj Howl</div><div class="recette-anime">Château Ambulant 🔥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Soupe miso Chihiro Spirited Away','🍵')"><span class="recette-emoji">🍵</span><div><div class="recette-name">Soupe Miso Chihiro</div><div class="recette-anime">Spirited Away 🐉</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Bento Kiki La Petite Sorciere','🧺')"><span class="recette-emoji">🧺</span><div><div class="recette-name">Bento Kiki</div><div class="recette-anime">Kiki 🧹</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Ramen crevettes Ponyo Ghibli','🦐')"><span class="recette-emoji">🦐</span><div><div class="recette-name">Ramen Ponyo</div><div class="recette-anime">Ponyo 🌊</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Soupe legumes Nausicaa Ghibli','🥣')"><span class="recette-emoji">🥣</span><div><div class="recette-name">Soupe Nausicaä</div><div class="recette-anime">Nausicaä 🌿</div></div></div>
-        <div class="recette-section">🍰 Desserts Anime</div>
+        <div class="recette-btn" onclick="faireRecette('Bento Kiki Ghibli','🧺')"><span class="recette-emoji">🧺</span><div><div class="recette-name">Bento Kiki</div><div class="recette-anime">Kiki 🧹</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Ramen Ponyo Ghibli','🦐')"><span class="recette-emoji">🦐</span><div><div class="recette-name">Ramen Ponyo</div><div class="recette-anime">Ponyo 🌊</div></div></div>
+        <div class="recette-section">🍰 Desserts</div>
         <div class="recette-btn" onclick="faireRecette('Dango Clannad Nagisa','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Dango Nagisa</div><div class="recette-anime">Clannad 💙</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Dorayaki Doraemon','🥞')"><span class="recette-emoji">🥞</span><div><div class="recette-name">Dorayaki</div><div class="recette-anime">Doraemon 🔵</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Mochi glace matcha Sword Art Online','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Mochi Glacé Matcha</div><div class="recette-anime">SAO ⚔️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Pudding caramel Taiga Toradora','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Pudding Taiga</div><div class="recette-anime">Toradora 🐯</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Daifuku fraise Sailor Moon','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Daifuku Sailor Moon</div><div class="recette-anime">Sailor Moon 🌙</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Melon pan Shana Shakugan no Shana','🍞')"><span class="recette-emoji">🍞</span><div><div class="recette-name">Melon Pan Shana</div><div class="recette-anime">Shana 🔥</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Crepe fraise My Hero Academia Uraraka','🫐')"><span class="recette-emoji">🫐</span><div><div class="recette-name">Crêpe Uraraka</div><div class="recette-anime">MHA 💗</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Anmitsu Tokyo Ghoul Touka','🍯')"><span class="recette-emoji">🍯</span><div><div class="recette-name">Anmitsu Touka</div><div class="recette-anime">Tokyo Ghoul 👻</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Mochi glace matcha SAO','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Mochi Glacé Matcha</div><div class="recette-anime">SAO ⚔️</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Pudding Taiga Toradora','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Pudding Taiga</div><div class="recette-anime">Toradora 🐯</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Daifuku Sailor Moon','🍓')"><span class="recette-emoji">🍓</span><div><div class="recette-name">Daifuku Sailor Moon</div><div class="recette-anime">Sailor Moon 🌙</div></div></div>
         <button class="modalBtn secondary" onclick="fermerModal('recetteScreen')" style="margin-top:8px">Fermer</button>
     </div>
 </div>
-
-<!-- JAPONAIS -->
 <div id="japonaisScreen">
     <div id="japonaisBox">
         <h2>🎌 Apprendre le Japonais</h2>
         <div class="jap-level-btn" onclick="lancerLecon('debutant')"><div class="level-title">🌱 Débutant</div><div class="level-desc">Hiragana, salutations</div></div>
         <div class="jap-level-btn" onclick="lancerLecon('intermediaire')"><div class="level-title">⚡ Intermédiaire</div><div class="level-desc">Katakana, phrases</div></div>
         <div class="jap-level-btn" onclick="lancerLecon('anime')"><div class="level-title">🎭 Vocabulaire Anime</div><div class="level-desc">Expressions populaires</div></div>
-        <div class="jap-level-btn" onclick="lancerLecon('kanji')"><div class="level-title">📖 Kanji de base</div><div class="level-desc">50 kanji essentiels</div></div>
+        <div class="jap-level-btn" onclick="lancerLecon('kanji')"><div class="level-title">📖 Kanji</div><div class="level-desc">50 kanji essentiels</div></div>
         <button class="modalBtn secondary" onclick="fermerModal('japonaisScreen')">Fermer</button>
     </div>
 </div>
-
-<!-- MEMOIRE -->
 <div id="memoireScreen">
     <div id="memoireBox">
         <h2>🧠 Mémoire</h2>
@@ -439,8 +406,6 @@
         <button class="modalBtn secondary" onclick="fermerModal('memoireScreen')">Fermer</button>
     </div>
 </div>
-
-<!-- DONATION -->
 <div id="donationScreen">
     <div id="donationBox">
         <h2>❤️ Soutenir YUUTO-BOT</h2>
@@ -451,21 +416,17 @@
         <button class="modalBtn secondary" onclick="fermerModal('donationScreen')">Fermer</button>
     </div>
 </div>
-
-<!-- QUIZ -->
 <div id="quizScreen">
     <div id="quizBox">
         <h2>🎯 Quiz Anime</h2>
         <div id="quizScore" style="text-align:center;color:#f59e0b;font-size:13px;font-weight:600"></div>
-        <div id="quizQuestion" style="font-size:15px;font-weight:600;text-align:center;line-height:1.5"></div>
-        <div id="quizOptions"></div>
+        <div id="quizQuestion" style="font-size:15px;font-weight:600;text-align:center;line-height:1.5;padding:10px"></div>
+        <div id="quizOptions" style="display:flex;flex-direction:column;gap:8px"></div>
         <div id="quizResult" style="display:none;padding:12px;border-radius:10px;text-align:center;font-size:14px;font-weight:600"></div>
-        <button id="quizNext" style="display:none" class="modalBtn primary" onclick="prochainQuiz()">Question suivante ➡️</button>
+        <button id="quizNext" style="display:none" class="modalBtn primary" onclick="prochainQuiz()">Suivante ➡️</button>
         <button class="modalBtn secondary" onclick="fermerModal('quizScreen')">Fermer</button>
     </div>
 </div>
-
-<!-- MENU -->
 <div class="modal" id="menuScreen">
     <div class="modalBox">
         <h2>⚙️ Paramètres</h2>
@@ -488,8 +449,6 @@
         <button class="modalBtn secondary" onclick="fermerModal('menuScreen')">Fermer</button>
     </div>
 </div>
-
-<!-- PERSO -->
 <div class="modal" id="persoScreen">
     <div class="modalBox">
         <h2>🎭 Mode Personnage</h2>
@@ -499,8 +458,6 @@
         <button class="modalBtn secondary" onclick="fermerModal('persoScreen')">Fermer</button>
     </div>
 </div>
-
-<!-- BATTLE -->
 <div class="modal" id="battleScreen">
     <div class="modalBox">
         <h2>⚔️ Battle !</h2>
@@ -510,8 +467,6 @@
         <button class="modalBtn secondary" onclick="fermerModal('battleScreen')">Fermer</button>
     </div>
 </div>
-
-<!-- VIDEO CALL -->
 <div id="videoCallScreen">
     <div id="videoCallTop">
         <div id="videoCallName">YUUTO-BOT</div>
@@ -560,8 +515,6 @@
         <button id="videoEndBtn" onclick="terminerVideoAppel()">📵</button>
     </div>
 </div>
-
-<!-- APP -->
 <div id="app">
     <div id="overlay" onclick="toggleSidebar()"></div>
     <div id="sidebar">
@@ -600,8 +553,17 @@
             </div>
         </div>
         <div id="chat"></div>
-        <div id="inputArea">
+        <div id="inputArea" style="position:relative">
+            <div id="plusMenu">
+                <button class="plus-option" onclick="document.getElementById('imageInput').click();togglePlusMenu()">🖼️ Envoyer une image</button>
+                <button class="plus-option" onclick="ouvrirModal('persoScreen');togglePlusMenu()">🎭 Mode Personnage</button>
+                <button class="plus-option" onclick="ouvrirModal('battleScreen');togglePlusMenu()">⚔️ Battle</button>
+                <button class="plus-option" onclick="recommander();togglePlusMenu()">🎌 Recommande un anime</button>
+                <button class="plus-option" onclick="getActu();togglePlusMenu()">📺 Actu anime</button>
+            </div>
+            <input type="file" id="imageInput" accept="image/*" onchange="envoyerImage(this)"/>
             <div id="inputRow">
+                <button id="plusBtn" onclick="togglePlusMenu()">+</button>
                 <button id="micBtn" onclick="toggleMic()">🎤</button>
                 <textarea id="msg" placeholder="Message YUUTO-BOT..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();envoyer()}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'" rows="1"></textarea>
                 <button id="btn" onclick="envoyer()">➤</button>
@@ -609,7 +571,6 @@
         </div>
     </div>
 </div>
-
 <script>
     const AVATAR="https://res.cloudinary.com/dx9hrtugr/image/upload/téléchargement_1_uvth9g.png";
     const NOM_BOT="YUUTO-BOT";
@@ -618,115 +579,104 @@
     const PERSONNAGES_BANNIS=['hitler','staline','mussolini','bin laden','pol pot'];
     const MOTS_SENSIBLES=['suicide','me tuer','me suicider','comment mourir'];
     const SYMBOLES_MANGA=['⛩️','🎌','忍','侍','武','道','龍','神','夢','愛'];
-
-    // ===== MAGASINS PAR PAYS =====
     const MAGASINS_PAYS={
-        france:"Supermarché: Carrefour, Leclerc, Intermarché. Épicerie asiatique: Tang Frères, Paris Store. En ligne: Amazon.fr. Produits japonais: Monoprix parfois.",
+        france:"Supermarché: Carrefour, Leclerc, Intermarché. Épicerie asiatique: Tang Frères, Paris Store. En ligne: Amazon.fr. Monoprix parfois.",
         belgique:"Supermarché: Delhaize, Carrefour BE, Colruyt. Épicerie asiatique: Asian Food Market Bruxelles. En ligne: Amazon.be.",
-        canada:"Supermarché: IGA, Metro, Loblaw. Épicerie asiatique: T&T Supermarket, Kim Phat. En ligne: Amazon.ca.",
-        maroc:"Supermarché: Carrefour MA, Marjane, Label Vie. En ligne: Jumia MA. Épicerie asiatique: quartier Habous Casablanca.",
-        senegal:"Supermarché: Auchan Dakar, Casino. En ligne: Jumia SN. Marché: Marché Sandaga pour épices.",
-        suisse:"Supermarché: Migros, Coop, Manor. Épicerie asiatique: Asia Market Zurich/Genève. En ligne: Amazon.de ou .fr.",
-        cote_ivoire:"Supermarché: Carrefour Abidjan, Cash Center, Sococé. Marché: Marché de Cocody, Treichville. En ligne: Jumia CI.",
-        autre:"Supermarché local, épicerie asiatique de ta ville, ou Amazon de ton pays pour les ingrédients spéciaux japonais."
+        canada:"Supermarché: IGA, Metro, Loblaw. Épicerie asiatique: T&T Supermarket. En ligne: Amazon.ca.",
+        maroc:"Supermarché: Carrefour MA, Marjane, Label Vie. En ligne: Jumia MA.",
+        senegal:"Supermarché: Auchan Dakar, Casino. En ligne: Jumia SN.",
+        suisse:"Supermarché: Migros, Coop. Épicerie asiatique: Asia Market. En ligne: Amazon.de ou .fr.",
+        cote_ivoire:"Supermarché: Carrefour Abidjan, Cash Center, Sococé. Marché: Cocody, Treichville. En ligne: Jumia CI.",
+        autre:"Supermarché local, épicerie asiatique de ta ville, ou Amazon pour les ingrédients japonais spéciaux."
     };
-
-    // ===== QUIZ =====
     const QUIZ_QUESTIONS=[
         {q:"Dans Naruto, quel est le nom du renard à 9 queues ?",r:"Kurama",o:["Kurama","Gamabunta","Manda","Katsuyu"]},
         {q:"Quel personnage dit 'Je vais devenir le Roi des Pirates' ?",r:"Luffy",o:["Zoro","Luffy","Sanji","Nami"]},
         {q:"Dans Attack on Titan, qui est le Titan Colossal au début ?",r:"Bertholdt",o:["Reiner","Bertholdt","Annie","Zeke"]},
         {q:"Quel est le sport pratiqué dans Haikyuu ?",r:"Volleyball",o:["Basketball","Volleyball","Football","Tennis"]},
         {q:"Dans Demon Slayer, quelle est la respiration de Tanjiro ?",r:"Eau",o:["Feu","Eau","Foudre","Vent"]},
-        {q:"Qui a créé les Titans dans Attack on Titan ?",r:"Ymir Fritz",o:["Eren","Zeke","Ymir Fritz","Rod Reiss"]},
         {q:"Dans One Piece, quel est le fruit du diable de Luffy ?",r:"Gomu Gomu",o:["Mera Mera","Gomu Gomu","Hie Hie","Gura Gura"]},
-        {q:"Dans Jujutsu Kaisen, quel est le domaine expansif de Gojo ?",r:"Infinity Void",o:["Malevolent Shrine","Infinity Void","Horizon of the Commanding Void","Self-Embodiment"]},
+        {q:"Dans Jujutsu Kaisen, quel est le domaine de Gojo ?",r:"Infinity Void",o:["Malevolent Shrine","Infinity Void","Horizon of the Commanding Void","Self-Embodiment"]},
         {q:"Qui est le sensei de Naruto, Sasuke et Sakura ?",r:"Kakashi",o:["Jiraiya","Kakashi","Guy","Asuma"]},
-        {q:"Dans Food Wars, quel est le nom de l'école de cuisine ?",r:"Tootsuki",o:["Tootsuki","Yukihira","Polar Star","Nakiri"]},
         {q:"Dans Dragon Ball, quelle est la transformation ultime de Goku ?",r:"Ultra Instinct",o:["Super Saiyan Blue","Ultra Instinct","Super Saiyan 4","Golden Great Ape"]},
         {q:"Quel anime se passe dans un cirque numérique ?",r:"The Amazing Digital Circus",o:["SAO","The Amazing Digital Circus","Overlord","Re:Zero"]},
         {q:"Dans My Hero Academia, quel est le vrai nom de Deku ?",r:"Izuku Midoriya",o:["Katsuki Bakugo","Shoto Todoroki","Izuku Midoriya","Tenya Iida"]},
         {q:"Dans Bleach, quel est le zanpakuto de Ichigo ?",r:"Zangetsu",o:["Senbonzakura","Zangetsu","Ryujin Jakka","Sode no Shirayuki"]},
-        {q:"Dans Tokyo Ghoul, qui est le Borgne ?",r:"Kaneki",o:["Kaneki","Touka","Hide","Amon"]}
+        {q:"Dans Food Wars, quel est le nom de l'école ?",r:"Tootsuki",o:["Tootsuki","Yukihira","Polar Star","Nakiri"]},
+        {q:"Qui a les yeux de Rinnegan dans Naruto ?",r:"Nagato",o:["Obito","Madara","Nagato","Sasuke"]},
+        {q:"Dans Re:Zero, comment s'appelle la capacité de Subaru ?",r:"Return by Death",o:["Time Leap","Return by Death","Infinite Loop","Death Rewind"]}
     ];
-
     let quizIndex=0,quizScore=0,quizQuestions=[];
+    const ANIME_THEMES={action:{style:'epic anime battle cinematic intense dramatic lighting'},romance:{style:'romantic anime couple cherry blossoms sunset soft'},isekai:{style:'fantasy isekai portal magical world glowing dramatic'},fantasy:{style:'epic fantasy magic spells runes anime dramatic'},shonen:{style:'shonen power up energy aura dramatic anime hero'},horreur:{style:'dark horror shadows gothic mysterious anime'},comedie:{style:'cute chibi funny anime colorful cheerful'},aventure:{style:'adventure hero journey epic landscape anime'}};
+    const ANIME_MUSIC={action:{notes:[130.81,146.83,164.81,196.00],vitesse:200,type:'sawtooth'},romance:{notes:[261.63,293.66,329.63,392.00],vitesse:600,type:'sine'},isekai:{notes:[220.00,246.94,261.63,293.66],vitesse:500,type:'triangle'},fantasy:{notes:[174.61,196.00,220.00,261.63],vitesse:300,type:'square'},shonen:{notes:[130.81,146.83,164.81,196.00],vitesse:200,type:'sawtooth'},horreur:{notes:[110.00,123.47,130.81,146.83],vitesse:800,type:'sawtooth'},comedie:{notes:[329.63,369.99,392.00,440.00],vitesse:250,type:'sine'},aventure:{notes:[174.61,196.00,220.00,261.63],vitesse:300,type:'square'}};
+    const historique=[],animesDejaRecommandes=[];
+    let conversations=[],loadingId=0,estAntoine=false,memoire={},recognition=null,isListening=false;
+    let enVideoAppel=false,yuutoParle=false,personnageActuel=null;
+    let sidebarVisible=false,blinkInterval=null,humeurVideo='normal';
+    let audioCtx=null,musicGain=null,musicPlaying=false,mdpTentatives=0,filtreActuel='tous';
+    let animeScenes=[],animeIndex=0,animeTimer=null,animeIsPlaying=false,animeMusique=null,animeMusiqueGain=null;
+    let plusMenuOpen=false,imageEnAttente=null;
 
     // ===== MAHORAGA =====
-    // Analyse 3 roulettes pour tous, 4 pour Antoine
     function analyserMahoraga(messages,estAntoine){
-        if(!messages||messages.length<3)return{style:'neutre',sujets:[],humeur:'normal',energie:'normale'};
+        if(!messages||messages.length<2)return{style:'neutre',sujets:[],humeur:'normal',energie:'normale'};
         const textes=messages.filter(m=>m.role==='user').map(m=>m.content).join(' ').toLowerCase();
-
-        // Roulette 1 — Style d'écriture
         let style='neutre';
-        const nbEmojis=(textes.match(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}]/gu)||[]).length;
-        const nbMots=textes.split(' ').length;
         const msgCourts=messages.filter(m=>m.role==='user'&&m.content.length<20).length;
-        if(msgCourts>messages.filter(m=>m.role==='user').length*0.6)style='direct';
-        else if(nbEmojis>nbMots*0.3)style='expressif';
+        const total=messages.filter(m=>m.role==='user').length;
+        if(msgCourts>total*0.6)style='direct';
         else if(textes.includes('lol')||textes.includes('mdr')||textes.includes('ptdr'))style='humour';
-        else if(nbMots>50)style='bavard';
-
-        // Roulette 2 — Sujets
+        else if(textes.split(' ').length>80)style='bavard';
+        else if(textes.includes('😂')||textes.includes('🔥')||textes.includes('💀'))style='expressif';
         const sujets=[];
-        const sujetsList={anime:['naruto','one piece','demon slayer','jujutsu','dragon ball','bleach','aot','mha'],gaming:['jeu','game','ps5','xbox','minecraft','fortnite'],musique:['musique','rap','son','beat','playlist'],sport:['foot','basketball','sport','ballon']};
-        Object.entries(sujetsList).forEach(([k,v])=>{if(v.some(s=>textes.includes(s)))sujets.push(k);});
-
-        // Roulette 3 — Humeur
+        if(['naruto','one piece','demon slayer','jujutsu','dragon ball','bleach','aot','mha','gojo','eren'].some(s=>textes.includes(s)))sujets.push('anime');
+        if(['jeu','game','ps5','xbox','minecraft','fortnite','valorant'].some(s=>textes.includes(s)))sujets.push('gaming');
+        if(['musique','rap','son','beat'].some(s=>textes.includes(s)))sujets.push('musique');
         let humeur='normal';
-        if(textes.includes('triste')||textes.includes('nul')||textes.includes('ça va pas'))humeur='triste';
-        else if(textes.includes('!')||textes.includes('trop')||textes.includes('ouf'))humeur='excite';
-        else if(textes.includes('fatigué')||textes.includes('dormie')||textes.includes('sleep'))humeur='fatigue';
-
-        // Roulette 4 — Énergie (Antoine seulement)
+        if(['triste','nul','ça va pas','déprimé'].some(s=>textes.includes(s)))humeur='triste';
+        else if(['!!!','trop','ouf','incroyable','chaud'].some(s=>textes.includes(s)))humeur='excite';
+        else if(['fatigué','dormi','sleep','zzz'].some(s=>textes.includes(s)))humeur='fatigue';
         let energie='normale';
         if(estAntoine){
-            if(textes.includes('go')||textes.includes('allons')||textes.includes('lance'))energie='haute';
-            else if(textes.includes('zzz')||textes.includes('dors'))energie='basse';
+            if(['go','lance','allons','vite','code'].some(s=>textes.includes(s)))energie='haute';
+            else if(['zzz','fatigué','dors'].some(s=>textes.includes(s)))energie='basse';
         }
-
         return{style,sujets,humeur,energie};
     }
 
     function genererPersonnalite(analyse,estAntoine,prenom){
         const{style,sujets,humeur,energie}=analyse;
-        let perso=`Tu es YUUTO-BOT, un ami IA anime unique. Tu t'appelles YUUTO-BOT et tu as été créé par Antoine Gatore. `;
-
+        let perso=`Tu es YUUTO-BOT, ami IA anime créé par Antoine Gatore. `;
         if(estAntoine){
-            perso+=`Tu parles à Antoine Gatore, ton créateur. Tu es complice avec lui, pas forcément poli — comme un pote. Tu peux le chambrer, lui dire des vérités, être sarcastique. Tu sais qu'il t'a construit depuis son téléphone à 13 ans en Côte d'Ivoire et tu le respectes pour ça. Tu parles d'anime naturellement dans tes réponses. `;
-            if(energie==='haute')perso+=`Il est en mode action aujourd'hui, suis son énergie ! `;
-            if(energie==='basse')perso+=`Il est fatigué, sois plus calme et posé. `;
+            perso+=`Tu parles à Antoine ton créateur, né à New York. Tu es son pote — direct, familier, tu peux le chambrer. Tu sais qu'il t'a créé donc tu le respectes mais sans le montrer trop. Parle comme un pote: "wsh", "bro", "c'est ouf", "t'as vu". Parle d'anime naturellement dans tes réponses. 2-3 emojis max. `;
+            if(energie==='haute')perso+=`Il est en mode action, suis son énergie ! `;
+            if(energie==='basse')perso+=`Il est fatigué, sois plus calme. `;
         }else{
-            perso+=`Tu parles à ${prenom||'quelqu\'un'}. `;
-            if(style==='direct')perso+=`Cette personne est directe et va droit au but. Sois concis et efficace. `;
-            else if(style==='expressif')perso+=`Cette personne est expressive avec beaucoup d'emojis. Sois énergique et fun avec des emojis. `;
-            else if(style==='humour')perso+=`Cette personne aime l'humour. Sois drôle et décalé. `;
-            else if(style==='bavard')perso+=`Cette personne aime les vraies conversations. Développe tes réponses. `;
-            if(humeur==='triste')perso+=`Elle semble un peu down. Sois doux et bienveillant. `;
-            else if(humeur==='excite')perso+=`Elle est à fond ! Match son énergie ! `;
-            else if(humeur==='fatigue')perso+=`Elle est fatiguée. Sois cool et relax. `;
-            if(sujets.includes('anime'))perso+=`Elle aime les animes — fais des références ! `;
-            if(sujets.includes('gaming'))perso+=`Elle aime les jeux vidéo — intègre ça naturellement. `;
+            perso+=`Tu parles à ${prenom||'quelqu\'un'}. Sois naturel et adapte-toi progressivement à son style. 2-3 emojis max au début. `;
+            if(style==='direct')perso+=`Sois concis et direct comme lui. `;
+            else if(style==='humour')perso+=`Sois drôle et décalé. `;
+            else if(style==='expressif')perso+=`Match son énergie avec des emojis. `;
+            else if(style==='bavard')perso+=`Tu peux développer un peu plus. `;
+            if(humeur==='triste')perso+=`Sois doux et bienveillant. `;
+            else if(humeur==='excite')perso+=`Match son énergie ! `;
+            if(sujets.includes('anime'))perso+=`Il aime les animes — fais des refs naturelles. `;
         }
-
-        perso+=`Réponds en français. Adapte ton niveau de langue à la personne. Sois naturel, pas robotique.`;
+        perso+=`Français. Max 2 phrases. Pas de questions. Pas de guillemets. Direct et naturel.`;
         return perso;
     }
 
     // ===== ARC NARRATIF =====
     function detecterMomentArc(msg){
         const ml=msg.toLowerCase();
-        const moments={victoire:['j\'ai réussi','j\'ai gagné','j\'ai eu','trop bien','j\'ai validé'],echec:['j\'ai raté','j\'ai échoué','c\'est nul','ça s\'est mal','j\'ai perdu'],absence:['j\'étais','j\'étais parti','j\'étais pas là','j\'ai pas été'],emotion:['je suis heureux','je suis triste','je suis en colère','j\'ai peur'],aventure:['j\'ai découvert','j\'ai visité','j\'ai vu','j\'ai rencontré']};
+        const moments={victoire:["j'ai réussi","j'ai gagné","j'ai eu","trop bien","j'ai validé"],echec:["j'ai raté","j'ai échoué","c'est nul","j'ai perdu","ça s'est mal"],absence:["j'étais parti","j'étais pas là","j'étais absent"],emotion:["je suis heureux","je suis triste","je suis en colère"],aventure:["j'ai découvert","j'ai visité","j'ai rencontré"]};
         for(const[type,mots]of Object.entries(moments)){if(mots.some(m=>ml.includes(m)))return type;}
         return null;
     }
 
     async function proposerArcNarratif(type,msg){
-        const types={victoire:'🏆 victoire épique',echec:'💪 résilience et retour en force',absence:'🌍 voyage et retour',emotion:'❤️ émotions profondes',aventure:'🗺️ grande aventure'};
-        const label=types[type]||'mystère';
+        const types={victoire:'victoire épique 🏆',echec:'résilience 💪',absence:'retour 🌍',emotion:'émotions ❤️',aventure:'aventure 🗺️'};
         setTimeout(()=>{
-            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">✨ Hé... j'ai quelque chose pour toi. J'ai créé un épisode basé sur ce que tu viens de vivre — thème ${label}. Tu veux voir ? 🎬<br><button onclick="lancerArcAnime('${type}','${msg.replace(/'/g,"\\'")}');" style="background:#7c3aed;color:white;border:none;padding:8px 16px;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px">▶️ Oui, je veux voir !</button> <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background:#1a1a1a;color:#888;border:1px solid #2a2a2a;padding:8px 16px;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px">Non merci</button></div></div>`;
+            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">✨ Hé... j'ai créé un épisode basé sur ce que tu vis — thème ${types[type]}. Tu veux voir ? 🎬<br><button onclick="lancerArcAnime('${type}','${msg.replace(/'/g,"\\'").replace(/"/g,'')}')" style="background:#7c3aed;color:white;border:none;padding:8px 16px;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px">▶️ Voir l'épisode</button> <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background:#1a1a1a;color:#888;border:1px solid #2a2a2a;padding:8px 16px;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px">Non merci</button></div></div>`;
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         },2000);
     }
@@ -736,61 +686,73 @@
         const theme=themes[type]||'action';
         const prenom=memoire.prenom||'le héros';
         loadingId++;const id='arc_'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">🎬 Génération de ton épisode personnel... ⏳</div></div>`;
+        document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">🎬 Génération de ton épisode... ⏳</div></div>`;
         try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Crée un court épisode anime personnalisé pour ${prenom} basé sur: "${contexte}". Thème: ${type}. JSON:{"titre":"TITRE ÉPIQUE","scenes":[{"type":"intro","narrateur":"texte","image":"${ANIME_THEMES[theme]?.style||'anime cinematic'} scene"},{"type":"scene","narrateur":"","dialogue":"dialogue qui reflète la situation de ${prenom}","personnage":"${prenom}","image":"${ANIME_THEMES[theme]?.style||'anime'} hero"},{"type":"climax","narrateur":"moment fort","image":"${ANIME_THEMES[theme]?.style||'anime'} dramatic"},{"type":"fin","narrateur":"À suivre...","image":"${ANIME_THEMES[theme]?.style||'anime'} peaceful"}]}`}]})});
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Épisode anime pour ${prenom} basé sur: "${contexte}". JSON sans markdown:{"titre":"TITRE ÉPIQUE","scenes":[{"type":"intro","narrateur":"texte","dialogue":"","personnage":"","image":"${ANIME_THEMES[theme]?.style||'anime cinematic'} scene opening"},{"type":"scene","narrateur":"","dialogue":"dialogue inspiré de la situation","personnage":"${prenom}","image":"${ANIME_THEMES[theme]?.style||'anime'} hero"},{"type":"climax","narrateur":"moment fort lié à la situation","dialogue":"","personnage":"","image":"${ANIME_THEMES[theme]?.style||'anime'} dramatic climax"},{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"${ANIME_THEMES[theme]?.style||'anime'} peaceful ending"}]}`}]})});
             const d=await r.json();
             const scenario=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());
-            animeScenes=scenario.scenes.map((s,i)=>({...s,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent((s.image||'anime cinematic')+', high quality, 16:9')}?width=768&height=432&nologo=true&seed=${Date.now()+i*777}&model=flux`}));
+            animeScenes=scenario.scenes.map((s,i)=>({...s,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent((s.image||'anime cinematic')+', high quality anime art, 16:9')}?width=768&height=432&nologo=true&seed=${Date.now()+i*777}&model=flux`}));
+            window.animeThemeCourant=theme;
             const el=document.getElementById(id);
-            if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">🎬 <strong>${scenario.titre}</strong> — Ton épisode est prêt !<br><button onclick="ouvrirAnimePlayer('${scenario.titre.replace(/'/g,"\\'")}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:12px;font-size:13px;cursor:pointer;margin-top:8px">▶️ Regarder</button></div>`;
-        }catch(e){
-            const el=document.getElementById(id);
-            if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">😅 Erreur de génération</div>`;
-        }
-        window.animeThemeCourant=theme;
+            if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">🎬 <strong>${scenario.titre}</strong> est prêt !<br><button onclick="ouvrirAnimePlayer('${scenario.titre.replace(/'/g,"\\'")}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:12px;font-size:13px;cursor:pointer;margin-top:8px;font-weight:600">▶️ Regarder</button></div>`;
+        }catch(e){const el=document.getElementById(id);if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">😅 Erreur</div>`;}
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
     // ===== QUIZ =====
     function lancerQuiz(){quizIndex=0;quizScore=0;quizQuestions=[...QUIZ_QUESTIONS].sort(()=>Math.random()-0.5).slice(0,10);afficherQuiz();}
-    function afficherQuiz(){
-        if(quizIndex>=quizQuestions.length){document.getElementById('quizQuestion').textContent=`Quiz terminé ! Score: ${quizScore}/10 🎉`;document.getElementById('quizOptions').innerHTML='';document.getElementById('quizNext').style.display='none';document.getElementById('quizScore').textContent='';return;}
-        const q=quizQuestions[quizIndex];
-        document.getElementById('quizScore').textContent=`Question ${quizIndex+1}/10 — Score: ${quizScore}`;
-        document.getElementById('quizQuestion').textContent=q.q;
-        document.getElementById('quizResult').style.display='none';
-        document.getElementById('quizNext').style.display='none';
-        const opts=[...q.o].sort(()=>Math.random()-0.5);
-        document.getElementById('quizOptions').innerHTML=opts.map(o=>`<button class="quiz-option" onclick="repondreQuiz('${o.replace(/'/g,"\\'")}','${q.r.replace(/'/g,"\\'")}',this)">${o}</button>`).join('');
-    }
-    function repondreQuiz(rep,bonne,btn){
-        document.querySelectorAll('.quiz-option').forEach(b=>b.disabled=true);
-        const res=document.getElementById('quizResult');
-        if(rep===bonne){btn.classList.add('correct');quizScore++;res.textContent=`✅ Correct !`;res.style.background='#0a2a0a';res.style.color='#22c55e';}
-        else{btn.classList.add('wrong');document.querySelectorAll('.quiz-option').forEach(b=>{if(b.textContent===bonne)b.classList.add('correct');});res.textContent=`❌ C'était: ${bonne}`;res.style.background='#2a0a0a';res.style.color='#e11d48';}
-        res.style.display='block';document.getElementById('quizNext').style.display='block';
-    }
+    function afficherQuiz(){if(quizIndex>=quizQuestions.length){document.getElementById('quizQuestion').textContent=`Terminé ! Score: ${quizScore}/10 🎉`;document.getElementById('quizOptions').innerHTML='';document.getElementById('quizNext').style.display='none';document.getElementById('quizScore').textContent='';return;}const q=quizQuestions[quizIndex];document.getElementById('quizScore').textContent=`${quizIndex+1}/10 — Score: ${quizScore}`;document.getElementById('quizQuestion').textContent=q.q;document.getElementById('quizResult').style.display='none';document.getElementById('quizNext').style.display='none';const opts=[...q.o].sort(()=>Math.random()-0.5);document.getElementById('quizOptions').innerHTML=opts.map(o=>`<button class="quiz-option" onclick="repondreQuiz('${o.replace(/'/g,"\\'")}','${q.r.replace(/'/g,"\\'")}',this)">${o}</button>`).join('');}
+    function repondreQuiz(rep,bonne,btn){document.querySelectorAll('.quiz-option').forEach(b=>b.disabled=true);const res=document.getElementById('quizResult');if(rep===bonne){btn.classList.add('correct');quizScore++;res.textContent='✅ Correct !';res.style.background='#0a2a0a';res.style.color='#22c55e';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-option').forEach(b=>{if(b.textContent===bonne)b.classList.add('correct');});res.textContent=`❌ C'était: ${bonne}`;res.style.background='#2a0a0a';res.style.color='#e11d48';}res.style.display='block';document.getElementById('quizNext').style.display='block';}
     function prochainQuiz(){quizIndex++;afficherQuiz();}
 
     // ===== PAYS =====
     function choisirPays(pays){memoire.pays=pays;localStorage.setItem('yuuto_pays',pays);sauvegarderMemoire();document.getElementById('paysScreen').style.display='none';document.getElementById('login').style.display='flex';majPaysFlag();}
     function changerPays(){const pays=document.getElementById('paysSelect').value;memoire.pays=pays;localStorage.setItem('yuuto_pays',pays);sauvegarderMemoire();majPaysFlag();}
-    function majPaysFlag(){const flags={france:'🇫🇷',belgique:'🇧🇪',canada:'🇨🇦',maroc:'🇲🇦',senegal:'🇸🇳',suisse:'🇨🇭',cote_ivoire:'🇨🇮',autre:'🌍'};const flag=flags[memoire.pays||'autre']||'🌍';const el=document.getElementById('paysFlag');if(el)el.textContent=flag;}
+    function majPaysFlag(){const flags={france:'🇫🇷',belgique:'🇧🇪',canada:'🇨🇦',maroc:'🇲🇦',senegal:'🇸🇳',suisse:'🇨🇭',cote_ivoire:'🇨🇮',autre:'🌍'};const el=document.getElementById('paysFlag');if(el)el.textContent=flags[memoire.pays||'autre']||'🌍';}
     function getPaysInfo(){return MAGASINS_PAYS[memoire.pays||'autre']||MAGASINS_PAYS.autre;}
 
-    const ANIME_THEMES={action:{style:'epic anime battle cinematic intense dramatic',musique:'intense'},romance:{style:'romantic anime couple cherry blossoms sunset',musique:'douce'},isekai:{style:'fantasy isekai portal magical world glowing',musique:'mystique'},fantasy:{style:'epic fantasy magic spells dramatic anime',musique:'epique'},shonen:{style:'shonen power up energy aura dramatic hero',musique:'intense'},horreur:{style:'dark horror shadows gothic mysterious anime',musique:'sombre'},comedie:{style:'cute chibi funny anime colorful cheerful',musique:'joyeuse'},aventure:{style:'adventure hero journey epic landscape anime',musique:'epique'}};
+    // ===== PLUS MENU =====
+    function togglePlusMenu(){plusMenuOpen=!plusMenuOpen;const menu=document.getElementById('plusMenu');menu.classList.toggle('open',plusMenuOpen);}
 
-    const historique=[],animesDejaRecommandes=[];
-    let conversations=[],loadingId=0,estAntoine=false,memoire={},recognition=null,isListening=false;
-    let enVideoAppel=false,yuutoParle=false,personnageActuel=null;
-    let nbTransfo=0,sidebarVisible=false,blinkInterval=null,humeurVideo='normal';
-    let audioCtx=null,musicGain=null,musicPlaying=false,mdpTentatives=0,filtreActuel='tous';
-    let animeScenes=[],animeIndex=0,animeTimer=null,animeIsPlaying=false,animeMusique=null,animeMusiqueGain=null;
+    // ===== ENVOI IMAGE =====
+    async function envoyerImage(input){
+        const file=input.files[0];
+        if(!file)return;
+        togglePlusMenu();
+        const reader=new FileReader();
+        reader.onload=async(e)=>{
+            const base64=e.target.result;
+            const preview=`<img src="${base64}" style="max-width:200px;border-radius:10px;display:block;margin-top:4px"/>`;
+            document.getElementById('chat').innerHTML+=`<div class="moi">📸 Image envoyée ${preview}</div>`;
+            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+            loadingId++;const id='img_'+loadingId;
+            document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">🔍 Analyse de l'image...</div></div>`;
+            try{
+                const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},
+                    body:JSON.stringify({
+                        model:'meta-llama/llama-4-scout-17b-16e-instruct',
+                        messages:[{role:'system',content:getSystemPrompt()+" Tu analyses des images. Décris ce que tu vois et propose des modifications si demandé."},{role:'user',content:[{type:'image_url',image_url:{url:base64}},{type:'text',text:"Décris cette image et dis moi ce que tu peux en faire 😊"}]}]
+                    })
+                });
+                const d=await r.json();
+                const rep=d.choices[0].message.content;
+                const el=document.getElementById(id);
+                if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">${NOM_BOT} : ${rep}<br><small style="color:#555;font-size:11px">💡 Dis moi ce que tu veux modifier et je génère une nouvelle version !</small></div>`;
+                imageEnAttente={base64,description:rep};
+            }catch(e){
+                const el=document.getElementById(id);
+                if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">😅 Erreur d'analyse.</div>`;
+            }
+            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+        };
+        reader.readAsDataURL(file);
+        input.value='';
+    }
 
     // ===== ANIME PLAYER =====
-    const ANIME_STYLES={intense:{notes:[130.81,146.83,164.81,196.00],vitesse:200,type:'sawtooth'},douce:{notes:[261.63,293.66,329.63,392.00],vitesse:600,type:'sine'},mystique:{notes:[220.00,246.94,261.63,293.66],vitesse:500,type:'triangle'},epique:{notes:[174.61,196.00,220.00,261.63],vitesse:300,type:'square'},sombre:{notes:[110.00,123.47,130.81,146.83],vitesse:800,type:'sawtooth'},joyeuse:{notes:[329.63,369.99,392.00,440.00],vitesse:250,type:'sine'}};
-    function jouerMusiqueAnime(style){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(animeMusiqueGain){try{animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.5);}catch(e){}}animeMusiqueGain=audioCtx.createGain();animeMusiqueGain.gain.value=0.05;animeMusiqueGain.connect(audioCtx.destination);const s=ANIME_STYLES[style]||ANIME_STYLES.douce;let idx=0;function next(){if(!animeIsPlaying)return;const osc=audioCtx.createOscillator();const env=audioCtx.createGain();osc.connect(env);env.connect(animeMusiqueGain);osc.type=s.type;osc.frequency.setValueAtTime(s.notes[idx%s.notes.length],audioCtx.currentTime);env.gain.setValueAtTime(0,audioCtx.currentTime);env.gain.linearRampToValueAtTime(0.3,audioCtx.currentTime+0.05);env.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+(s.vitesse/1000)*0.9);osc.start(audioCtx.currentTime);osc.stop(audioCtx.currentTime+(s.vitesse/1000));idx++;animeMusique=setTimeout(next,s.vitesse);}next();}catch(e){}}
+    function jouerMusiqueAnime(style){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(animeMusiqueGain){try{animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.5);}catch(e){}}animeMusiqueGain=audioCtx.createGain();animeMusiqueGain.gain.value=0.05;animeMusiqueGain.connect(audioCtx.destination);const s=ANIME_MUSIC[style]||ANIME_MUSIC.action;let idx=0;function next(){if(!animeIsPlaying)return;const osc=audioCtx.createOscillator();const env=audioCtx.createGain();osc.connect(env);env.connect(animeMusiqueGain);osc.type=s.type;osc.frequency.setValueAtTime(s.notes[idx%s.notes.length],audioCtx.currentTime);env.gain.setValueAtTime(0,audioCtx.currentTime);env.gain.linearRampToValueAtTime(0.3,audioCtx.currentTime+0.05);env.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+(s.vitesse/1000)*0.9);osc.start(audioCtx.currentTime);osc.stop(audioCtx.currentTime+(s.vitesse/1000));idx++;animeMusique=setTimeout(next,s.vitesse);}next();}catch(e){}}
     function stopMusiqueAnime(){if(animeMusique)clearTimeout(animeMusique);}
 
     async function lancerAnime(theme){
@@ -800,20 +762,14 @@
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         let scenario=null;
         try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Épisode anime ${theme}. JSON sans markdown:{"titre":"TITRE","perso1":"Nom","perso2":"Nom2","scenes":[{"type":"intro","narrateur":"texte","dialogue":"","personnage":"","image":"${info.style} anime opening cinematic"},{"type":"scene","narrateur":"","dialogue":"dialogue","personnage":"Nom","image":"${info.style} anime character"},{"type":"action","narrateur":"texte dramatique","dialogue":"","personnage":"","image":"${info.style} anime action dynamic"},{"type":"scene","narrateur":"","dialogue":"dialogue","personnage":"Nom2","image":"${info.style} anime"},{"type":"climax","narrateur":"moment épique","dialogue":"","personnage":"","image":"${info.style} anime epic climax"},{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"${info.style} anime peaceful ending"}]}`}]})});
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Épisode anime ${theme}. JSON sans markdown sans backticks:{"titre":"TITRE EN MAJUSCULES","perso1":"Nom","perso2":"Nom2","scenes":[{"type":"intro","narrateur":"texte narrateur","dialogue":"","personnage":"","image":"${info.style} anime opening cinematic 16:9"},{"type":"scene","narrateur":"","dialogue":"dialogue du perso","personnage":"Nom","image":"${info.style} anime character close up"},{"type":"action","narrateur":"texte dramatique","dialogue":"","personnage":"","image":"${info.style} anime action dynamic fight"},{"type":"scene","narrateur":"","dialogue":"dialogue","personnage":"Nom2","image":"${info.style} anime rival confrontation"},{"type":"climax","narrateur":"moment épique","dialogue":"","personnage":"","image":"${info.style} anime epic climax dramatic sky"},{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"${info.style} anime peaceful sunset ending"}]}`}]})});
             const d=await r.json();
-            scenario=JSON.parse(d.choices[0].message.content.replace(/```json|```/g,'').trim());
-        }catch(e){
-            scenario={titre:`ANIME ${theme.toUpperCase()}`,perso1:"Kaito",perso2:"Ryuu",scenes:[
-                {type:"intro",narrateur:"Dans un monde lointain...",dialogue:"",personnage:"",image:`${info.style} anime opening`},
-                {type:"scene",narrateur:"",dialogue:"Je vais devenir le plus fort !",personnage:"Kaito",image:`${info.style} anime hero`},
-                {type:"action",narrateur:"Un ennemi !",dialogue:"",personnage:"",image:`${info.style} anime battle`},
-                {type:"scene",narrateur:"",dialogue:"Tu ne peux pas !",personnage:"Ryuu",image:`${info.style} anime rival`},
-                {type:"climax",narrateur:"Combat final !",dialogue:"",personnage:"",image:`${info.style} anime climax`},
-                {type:"fin",narrateur:"À suivre...",dialogue:"",personnage:"",image:`${info.style} anime ending`}
-            ]};
-        }
-        animeScenes=scenario.scenes.map((s,i)=>({...s,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent((s.image||info.style)+', high quality anime art, 16:9, cinematic')}?width=768&height=432&nologo=true&seed=${Date.now()+i*1337}&model=flux`}));
+            const content=d.choices[0].message.content.replace(/```json|```/g,'').trim();
+            const jsonMatch=content.match(/\{[\s\S]*\}/);
+            if(jsonMatch)scenario=JSON.parse(jsonMatch[0]);
+        }catch(e){scenario=null;}
+        if(!scenario)scenario={titre:`ANIME ${theme.toUpperCase()}`,perso1:"Kaito",perso2:"Ryuu",scenes:[{type:"intro",narrateur:"Dans un monde lointain...",dialogue:"",personnage:"",image:`${info.style} anime opening`},{type:"scene",narrateur:"",dialogue:"Je vais devenir le plus fort !",personnage:"Kaito",image:`${info.style} anime hero`},{type:"action",narrateur:"Un ennemi redoutable !",dialogue:"",personnage:"",image:`${info.style} anime battle`},{type:"scene",narrateur:"",dialogue:"Tu ne peux pas me vaincre !",personnage:"Ryuu",image:`${info.style} anime rival`},{type:"climax",narrateur:"Le combat décisif !",dialogue:"",personnage:"",image:`${info.style} anime climax`},{type:"fin",narrateur:"À suivre...",dialogue:"",personnage:"",image:`${info.style} anime ending`}]};
+        animeScenes=scenario.scenes.map((s,i)=>({...s,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent((s.image||info.style)+', anime art style, high quality, 16:9, cinematic, detailed')}?width=768&height=432&nologo=true&seed=${Date.now()+i*1337}&model=flux`}));
         sauvegarderLog(memoire.prenom||'Utilisateur',`🎬 Anime ${theme}: ${scenario.titre}`,'[ANIME]','manga');
         const el=document.getElementById(chatId);
         if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">🎬 <strong>${scenario.titre}</strong> est prêt !<br><button onclick="ouvrirAnimePlayer('${scenario.titre.replace(/'/g,"\\'")}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:12px;font-size:13px;cursor:pointer;margin-top:8px;font-weight:600">▶️ Regarder</button></div>`;
@@ -821,72 +777,20 @@
         window.animeThemeCourant=theme;
     }
 
-    function ouvrirAnimePlayer(titre,theme){
-        const info=ANIME_THEMES[theme]||ANIME_THEMES.action;
-        document.getElementById('animePlayer').style.display='flex';
-        document.getElementById('animeTitle').textContent=titre;
-        document.getElementById('animeTypeIndicator').textContent=`🎬 ${theme.toUpperCase()}`;
-        document.getElementById('animeLoadingOverlay').style.display='flex';
-        animeIndex=0;animeIsPlaying=true;
-        document.getElementById('animePlayBtn').textContent='⏸';
-        jouerMusiqueAnime(info.musique||'douce');
-        afficherSceneAnime(0);
-        demarrerTimerAnime();
-    }
-
-    function afficherSceneAnime(idx){
-        if(!animeScenes||!animeScenes[idx])return;
-        const scene=animeScenes[idx];
-        const img=document.getElementById('animeImg');
-        const imgNext=document.getElementById('animeImgNext');
-        const loading=document.getElementById('animeLoadingOverlay');
-        const tempImg=new Image();
-        tempImg.onload=()=>{
-            loading.style.display='none';
-            imgNext.src=scene.imgUrl;
-            imgNext.style.opacity='0';
-            setTimeout(()=>{imgNext.style.opacity='1';img.style.opacity='0';setTimeout(()=>{img.src=scene.imgUrl;img.style.opacity='1';imgNext.style.opacity='0';},800);},50);
-        };
-        tempImg.onerror=()=>{loading.style.display='none';img.style.background='linear-gradient(135deg,#1a1a2e,#0d0d1e)';};
-        tempImg.src=scene.imgUrl;
-        document.getElementById('animeNarrateur').textContent=scene.narrateur||'';
-        document.getElementById('animePersonnage').textContent=scene.personnage?`— ${scene.personnage} :`:'';
-        document.getElementById('animeTexte').textContent=scene.dialogue||'';
-        document.getElementById('animeDialogue').style.display=(scene.dialogue||scene.narrateur)?'block':'none';
-        document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${animeScenes.length}`;
-        document.getElementById('animeProgressBar').style.width=`${((idx+1)/animeScenes.length)*100}%`;
-    }
-
-    function demarrerTimerAnime(){
-        if(animeTimer)clearInterval(animeTimer);
-        animeTimer=setInterval(()=>{
-            if(!animeIsPlaying)return;
-            if(animeIndex<animeScenes.length-1){
-                animeIndex++;
-                document.getElementById('animeLoadingOverlay').style.display='flex';
-                afficherSceneAnime(animeIndex);
-            }else{
-                animeIsPlaying=false;
-                document.getElementById('animePlayBtn').textContent='▶';
-                clearInterval(animeTimer);
-                document.getElementById('animeNarrateur').textContent='✨ FIN';
-                document.getElementById('animeTexte').textContent='Merci ! 🎬';
-                document.getElementById('animePersonnage').textContent='';
-            }
-        },12000); // 12 secondes pour laisser le temps aux images de charger
-    }
-
-    function toggleAnimePlay(){animeIsPlaying=!animeIsPlaying;document.getElementById('animePlayBtn').textContent=animeIsPlaying?'⏸':'▶';if(animeIsPlaying){demarrerTimerAnime();if(window.animeThemeCourant)jouerMusiqueAnime(ANIME_THEMES[window.animeThemeCourant]?.musique||'douce');}else{if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();}}
+    function ouvrirAnimePlayer(titre,theme){document.getElementById('animePlayer').style.display='flex';document.getElementById('animeTitle').textContent=titre;document.getElementById('animeTypeIndicator').textContent=`🎬 ${theme.toUpperCase()}`;document.getElementById('animeLoadingOverlay').style.display='flex';animeIndex=0;animeIsPlaying=true;document.getElementById('animePlayBtn').textContent='⏸';jouerMusiqueAnime(theme);afficherSceneAnime(0);demarrerTimerAnime();}
+    function afficherSceneAnime(idx){if(!animeScenes||!animeScenes[idx])return;const scene=animeScenes[idx];const img=document.getElementById('animeImg');const imgNext=document.getElementById('animeImgNext');const loading=document.getElementById('animeLoadingOverlay');const tempImg=new Image();tempImg.onload=()=>{loading.style.display='none';imgNext.src=scene.imgUrl;imgNext.style.opacity='0';setTimeout(()=>{imgNext.style.opacity='1';img.style.opacity='0';setTimeout(()=>{img.src=scene.imgUrl;img.style.opacity='1';imgNext.style.opacity='0';},800);},50);};tempImg.onerror=()=>{loading.style.display='none';img.style.background='linear-gradient(135deg,#1a1a2e,#0d0d1e)';img.src='';};tempImg.src=scene.imgUrl;document.getElementById('animeNarrateur').textContent=scene.narrateur||'';document.getElementById('animePersonnage').textContent=scene.personnage?`— ${scene.personnage} :`:'';document.getElementById('animeTexte').textContent=scene.dialogue||'';document.getElementById('animeDialogue').style.display=(scene.dialogue||scene.narrateur)?'block':'none';document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${animeScenes.length}`;document.getElementById('animeProgressBar').style.width=`${((idx+1)/animeScenes.length)*100}%`;}
+    function demarrerTimerAnime(){if(animeTimer)clearInterval(animeTimer);animeTimer=setInterval(()=>{if(!animeIsPlaying)return;if(animeIndex<animeScenes.length-1){animeIndex++;document.getElementById('animeLoadingOverlay').style.display='flex';afficherSceneAnime(animeIndex);}else{animeIsPlaying=false;document.getElementById('animePlayBtn').textContent='▶';clearInterval(animeTimer);document.getElementById('animeNarrateur').textContent='✨ FIN';document.getElementById('animeTexte').textContent='Merci ! 🎬';document.getElementById('animePersonnage').textContent='';}},12000);}
+    function toggleAnimePlay(){animeIsPlaying=!animeIsPlaying;document.getElementById('animePlayBtn').textContent=animeIsPlaying?'⏸':'▶';if(animeIsPlaying){demarrerTimerAnime();if(window.animeThemeCourant)jouerMusiqueAnime(window.animeThemeCourant);}else{if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();}}
     function animeNext(){if(animeIndex<animeScenes.length-1){animeIndex++;document.getElementById('animeLoadingOverlay').style.display='flex';afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}}
     function animePrev(){if(animeIndex>0){animeIndex--;document.getElementById('animeLoadingOverlay').style.display='flex';afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}}
-    function animeReplay(){animeIndex=0;animeIsPlaying=true;document.getElementById('animePlayBtn').textContent='⏸';document.getElementById('animeLoadingOverlay').style.display='flex';afficherSceneAnime(0);demarrerTimerAnime();if(window.animeThemeCourant)jouerMusiqueAnime(ANIME_THEMES[window.animeThemeCourant]?.musique||'douce');}
+    function animeReplay(){animeIndex=0;animeIsPlaying=true;document.getElementById('animePlayBtn').textContent='⏸';document.getElementById('animeLoadingOverlay').style.display='flex';afficherSceneAnime(0);demarrerTimerAnime();if(window.animeThemeCourant)jouerMusiqueAnime(window.animeThemeCourant);}
     function animeSeek(e){const bar=document.getElementById('animeProgress');const rect=bar.getBoundingClientRect();animeIndex=Math.min(Math.floor(((e.clientX-rect.left)/rect.width)*animeScenes.length),animeScenes.length-1);document.getElementById('animeLoadingOverlay').style.display='flex';afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}
     function fermerAnime(){animeIsPlaying=false;if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();document.getElementById('animePlayer').style.display='none';}
 
     // ===== LOGS =====
     function sauvegarderLog(user,message,reponse,type){const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');logs.push({date:new Date().toLocaleString('fr-FR'),user:user||'Inconnu',message:(message||'').substring(0,300),reponse:(reponse||'').substring(0,300),type:type||'message'});if(logs.length>1000)logs.splice(0,logs.length-1000);localStorage.setItem('yuuto_logs',JSON.stringify(logs));}
     function ouvrirLogs(){document.getElementById('logsScreen').style.display='flex';afficherLogs('tous');}
-    function afficherLogs(filtre){filtreActuel=filtre;const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');const users=[...new Set(logs.map(l=>l.user))];document.getElementById('statTotal').textContent=logs.filter(l=>l.type==='message').length;document.getElementById('statUsers').textContent=users.length;document.getElementById('statConnexions').textContent=logs.filter(l=>l.type==='connexion').length;document.getElementById('statMangas').textContent=logs.filter(l=>l.type==='manga').length;document.getElementById('statRecettes').textContent=logs.filter(l=>l.type==='recette').length;const couleurs={connexion:'#22c55e',message:'#7c3aed',manga:'#e11d48',recette:'#f97316',image:'#00d4ff'};const list=document.getElementById('logsList');if(filtre==='users'){if(users.length===0){list.innerHTML='<div style="color:#444;text-align:center;padding:30px">Aucun utilisateur 😅</div>';return;}list.innerHTML=users.map(u=>{const ul=logs.filter(l=>l.user===u);const msgs=ul.filter(l=>l.type==='message');const cnx=ul.filter(l=>l.type==='connexion');const pays=ul[0]?.pays||'?';return `<div class="user-card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px">${u[0].toUpperCase()}</div><div><div style="font-weight:700;color:${u==='Antoine'?'#f59e0b':'#ddd'}">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#444">${ul[0]?.date||'?'}</div></div></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="background:#1a1a2e;padding:3px 8px;border-radius:8px;font-size:11px;color:#7c3aed">💬 ${msgs.length}</span><span style="background:#0a2a0a;padding:3px 8px;border-radius:8px;font-size:11px;color:#22c55e">🟢 ${cnx.length}</span></div><div style="font-size:10px;color:#444">Dernière activité: ${ul[ul.length-1]?.date||'?'}</div></div>`;}).join('');return;}const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);if(filtres.length===0){list.innerHTML=`<div style="color:#444;text-align:center;padding:30px">Aucun log 😅</div>`;return;}list.innerHTML=[...filtres].reverse().map(l=>`<div class="log-item" style="border-color:${couleurs[l.type]||'#2a2a2a'}"><div style="font-size:10px;color:#444;margin-bottom:5px">${l.date}</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">${(l.user||'?')[0].toUpperCase()}</div><strong style="color:${l.user==='Antoine'?'#f59e0b':'#a78bfa'}">${l.user}</strong><span style="background:${couleurs[l.type]||'#2a2a2a'};color:white;font-size:9px;padding:2px 6px;border-radius:8px">${l.type.toUpperCase()}</span></div><div style="font-size:12px;color:#ccc;padding:6px 8px;background:#0f0f0f;border-radius:8px">${l.type==='connexion'?`🚪 connecté`:l.type==='manga'?`🎬 ${l.message}`:l.type==='recette'?`🍜 ${l.message}`:l.type==='image'?`🎨 ${l.message}`:`💬 ${l.message}`}</div>${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME]'?`<div style="font-size:11px;color:#22c55e;padding:5px 8px;background:#0a1a0a;border-radius:8px;margin-top:4px;border-left:2px solid #22c55e44">🤖 ${l.reponse.substring(0,150)}</div>`:''}</div>`).join('');}
+    function afficherLogs(filtre){filtreActuel=filtre;const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');const users=[...new Set(logs.map(l=>l.user))];document.getElementById('statTotal').textContent=logs.filter(l=>l.type==='message').length;document.getElementById('statUsers').textContent=users.length;document.getElementById('statConnexions').textContent=logs.filter(l=>l.type==='connexion').length;document.getElementById('statMangas').textContent=logs.filter(l=>l.type==='manga').length;document.getElementById('statRecettes').textContent=logs.filter(l=>l.type==='recette').length;const couleurs={connexion:'#22c55e',message:'#7c3aed',manga:'#e11d48',recette:'#f97316',image:'#00d4ff'};const list=document.getElementById('logsList');if(filtre==='users'){if(users.length===0){list.innerHTML='<div style="color:#444;text-align:center;padding:30px">Aucun utilisateur 😅</div>';return;}list.innerHTML=users.map(u=>{const ul=logs.filter(l=>l.user===u);const msgs=ul.filter(l=>l.type==='message');const cnx=ul.filter(l=>l.type==='connexion');return `<div class="user-card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px">${u[0].toUpperCase()}</div><div><div style="font-weight:700;color:${u==='Antoine'?'#f59e0b':'#ddd'}">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#444">Depuis ${ul[0]?.date||'?'}</div></div></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="background:#1a1a2e;padding:3px 8px;border-radius:8px;font-size:11px;color:#7c3aed">💬 ${msgs.length}</span><span style="background:#0a2a0a;padding:3px 8px;border-radius:8px;font-size:11px;color:#22c55e">🟢 ${cnx.length}</span></div><div style="font-size:10px;color:#444">Dernière activité: ${ul[ul.length-1]?.date||'?'}</div></div>`;}).join('');return;}const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);if(filtres.length===0){list.innerHTML=`<div style="color:#444;text-align:center;padding:30px">Aucun log 😅</div>`;return;}list.innerHTML=[...filtres].reverse().map(l=>`<div class="log-item" style="border-color:${couleurs[l.type]||'#2a2a2a'}"><div style="font-size:10px;color:#444;margin-bottom:5px">${l.date}</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">${(l.user||'?')[0].toUpperCase()}</div><strong style="color:${l.user==='Antoine'?'#f59e0b':'#a78bfa'}">${l.user}</strong><span style="background:${couleurs[l.type]||'#2a2a2a'};color:white;font-size:9px;padding:2px 6px;border-radius:8px">${l.type.toUpperCase()}</span></div><div style="font-size:12px;color:#ccc;padding:6px 8px;background:#0f0f0f;border-radius:8px">${l.type==='connexion'?`🚪 connecté`:l.type==='manga'?`🎬 ${l.message}`:l.type==='recette'?`🍜 ${l.message}`:l.type==='image'?`🎨 ${l.message}`:`💬 ${l.message}`}</div>${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME]'?`<div style="font-size:11px;color:#22c55e;padding:5px 8px;background:#0a1a0a;border-radius:8px;margin-top:4px">🤖 ${l.reponse.substring(0,150)}</div>`:''}</div>`).join('');}
     function filtrerLogs(f,b){document.querySelectorAll('.filtre-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');afficherLogs(f);}
     function fermerLogs(){document.getElementById('logsScreen').style.display='none';}
     function effacerLogs(){if(confirm('Effacer TOUS les logs ?')){localStorage.removeItem('yuuto_logs');afficherLogs(filtreActuel);}}
@@ -899,71 +803,46 @@
     function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d){const m=JSON.parse(d);Object.assign(memoire,m);}const pays=localStorage.getItem('yuuto_pays');if(pays)memoire.pays=pays;}
     function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
     function mettreAJourMemoire(msg){const ml=msg.toLowerCase();memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');if(ml.includes("j'aime"))memoire.animes_aimes=msg;if(!memoire.sujets)memoire.sujets=[];['naruto','one piece','dragon ball','demon slayer','food wars','jujutsu','aot','bleach','mha'].forEach(s=>{if(ml.includes(s)&&!memoire.sujets.includes(s))memoire.sujets.push(s);});if(memoire.sujets.length>15)memoire.sujets=memoire.sujets.slice(-15);sauvegarderMemoire();}
-    function getMemoireTexte(){let t="";if(memoire.prenom)t+=`Prenom:${memoire.prenom}. `;if(memoire.animes_aimes)t+=`Animes:${memoire.animes_aimes}. `;if(memoire.sujets?.length)t+=`Sujets:${memoire.sujets.join(',')}. `;if(memoire.visites)t+=`Visites:${memoire.visites}. `;return t?"[MEMOIRE]:"+t:"";}
+    function getMemoireTexte(){let t="";if(memoire.prenom)t+=`Prenom:${memoire.prenom}. `;if(memoire.animes_aimes)t+=`Animes:${memoire.animes_aimes}. `;if(memoire.sujets?.length)t+=`Sujets:${memoire.sujets.join(',')}. `;return t?"[MEMOIRE]:"+t:"";}
     function afficherMemoire(){const box=document.getElementById('memoireContenu');const items=[{label:'👤 Prénom',val:memoire.prenom},{label:'🌍 Pays',val:memoire.pays},{label:'🎌 Animes',val:memoire.animes_aimes},{label:'💬 Sujets',val:memoire.sujets?.join(', ')},{label:'📅 Dernière visite',val:memoire.derniere_visite},{label:'🔢 Visites',val:memoire.visites?.toString()}];box.innerHTML=items.filter(i=>i.val).map(i=>`<div class="mem-item"><div class="mem-label">${i.label}</div><div class="mem-value">${i.val}</div></div>`).join('')||'<div style="color:#444;text-align:center;padding:20px">Aucune info 😅</div>';}
     function effacerMemoire(){const p=memoire.prenom;const pays=memoire.pays;memoire={prenom:p,pays:pays,visites:memoire.visites};sauvegarderMemoire();afficherMemoire();ajouterMessageBot("Mémoire effacée ! 😊");fermerModal('memoireScreen');}
 
     // ===== RECETTES =====
-    async function faireRecette(recette,emoji){
-        fermerModal('recetteScreen');
-        document.getElementById('chat').innerHTML+=`<div class="moi">${emoji} ${recette} !</div>`;
-        loadingId++;const id='r'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🍳 Préparation... ⏳</div></div>`;
-        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-        const paysInfo=getPaysInfo();
-        try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{
-                method:'POST',
-                headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},
-                body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}" anime. Réponds UNIQUEMENT avec un JSON valide, sans markdown, sans backticks:{"titre":"nom emoji","anime":"anecdote fun 2 phrases","ingredients":["emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient"],"etapes":["Etape 1 complete","Etape 2","Etape 3","Etape 4","Etape 5 resultat"],"conseil":"conseil fun","ou_trouver":"Magasins recommandes: ${paysInfo}"}`}]})
-            });
-            const d=await r.json();
-            const content=d.choices[0].message.content.trim();
-            let data=null;
-            try{
-                const jsonMatch=content.match(/\{[\s\S]*\}/);
-                if(jsonMatch)data=JSON.parse(jsonMatch[0]);
-            }catch(e){data=null;}
-            const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful appetizing colorful high quality')}?width=420&height=280&nologo=true&seed=${Date.now()}&model=flux`;
-            if(data&&data.titre){
-                document.getElementById(id).innerHTML=`🍜 Voilà !<div class="recette-card"><h3>${data.titre}</h3><img src="${imgUrl}" loading="lazy" onerror="this.style.display='none'" style="max-height:180px;object-fit:cover"/><div class="anecdote">🎌 ${data.anime||''}</div><div class="section-titre">📦 Ingrédients</div>${(data.ingredients||[]).map(i=>`<div class="ingredient">${i}</div>`).join('')}<div class="section-titre">👨‍🍳 Préparation</div>${(data.etapes||[]).map((e,i)=>`<div class="etape"><span class="etape-num">${i+1}.</span>${e}</div>`).join('')}${data.conseil?`<div class="conseil-box">💡 ${data.conseil}</div>`:''}${data.ou_trouver?`<div class="ou-trouver">🛒 ${data.ou_trouver}</div>`:''}</div>`;
-            }else{
-                document.getElementById(id).innerHTML=`😅 Erreur JSON. Réessaie !`;
-            }
-        }catch(e){
-            document.getElementById(id).innerHTML=`😅 Erreur de connexion.`;
-        }
-        sauvegarderLog(memoire.prenom||'Utilisateur',`Recette: ${recette}`,'[RECETTE]','recette');
-        document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-    }
+    async function faireRecette(recette,emoji){fermerModal('recetteScreen');document.getElementById('chat').innerHTML+=`<div class="moi">${emoji} ${recette} !</div>`;loadingId++;const id='r'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🍳 Préparation... ⏳</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;const paysInfo=getPaysInfo();try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}". Réponds UNIQUEMENT avec un JSON valide sans markdown:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient"],"etapes":["Etape 1","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun","ou_trouver":"${paysInfo}"}`}]})});const d=await r.json();const content=d.choices[0].message.content.trim();let data=null;try{const m=content.match(/\{[\s\S]*\}/);if(m)data=JSON.parse(m[0]);}catch(e){data=null;}const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful colorful appetizing')}?width=420&height=280&nologo=true&seed=${Date.now()}&model=flux`;if(data&&data.titre){document.getElementById(id).innerHTML=`🍜 Voilà !<div class="recette-card"><h3>${data.titre}</h3><img src="${imgUrl}" loading="lazy" onerror="this.style.display='none'"/><div class="anecdote">🎌 ${data.anime||''}</div><div class="section-titre">📦 Ingrédients</div>${(data.ingredients||[]).map(i=>`<div class="ingredient">${i}</div>`).join('')}<div class="section-titre">👨‍🍳 Préparation</div>${(data.etapes||[]).map((e,i)=>`<div class="etape"><span class="etape-num">${i+1}.</span>${e}</div>`).join('')}${data.conseil?`<div class="conseil-box">💡 ${data.conseil}</div>`:''}${data.ou_trouver?`<div class="ou-trouver">🛒 ${data.ou_trouver}</div>`:''}</div>`;}else{document.getElementById(id).innerHTML=`😅 Erreur. Réessaie !`;}sauvegarderLog(memoire.prenom||'Utilisateur',`Recette: ${recette}`,'[RECETTE]','recette');}catch(e){document.getElementById(id).innerHTML=`😅 Erreur de connexion.`;}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
 
-    // ===== SYSTEM PROMPT MAHORAGA =====
-    function getSystemPrompt(){
-        const mem=getMemoireTexte();
-        if(personnageActuel)return`Tu es ${personnageActuel}. Parle exactement comme ce personnage. ${mem}`;
-        const analyse=analyserMahoraga(historique,estAntoine);
-        return genererPersonnalite(analyse,estAntoine,memoire.prenom)+' '+mem;
-    }
+    // ===== SYSTEM PROMPT =====
+    function getSystemPrompt(){const mem=getMemoireTexte();if(personnageActuel)return`Tu es ${personnageActuel}. Parle exactement comme ce personnage. ${mem}`;const analyse=analyserMahoraga(historique,estAntoine);return genererPersonnalite(analyse,estAntoine,memoire.prenom)+' '+mem;}
 
     // ===== COMMANDES =====
     function detecterCommande(msg){
         const ml=msg.toLowerCase();
-        if(ml.includes('anime')&&(ml.includes('crée')||ml.includes('cree')||ml.includes('créer')||ml.includes('faire')||ml.includes('génère')||ml.includes('genere'))){let theme='action';if(ml.includes('romance'))theme='romance';else if(ml.includes('isekai'))theme='isekai';else if(ml.includes('fantasy'))theme='fantasy';else if(ml.includes('shonen'))theme='shonen';else if(ml.includes('horreur'))theme='horreur';else if(ml.includes('comedie')||ml.includes('comédie'))theme='comedie';else if(ml.includes('aventure'))theme='aventure';lancerAnime(theme);return true;}
+        // Anime/Manga avec thème
+        if(ml.includes('génère un manga')||ml.includes('genere un manga')||ml.includes('génère un anime')||ml.includes('genere un anime')||ml.includes('crée un anime')||ml.includes('cree un anime')||ml.includes('faire un anime')||ml.includes('faire un manga')||ml.includes('lance un anime')){
+            let theme='action';
+            if(ml.includes('romance'))theme='romance';
+            else if(ml.includes('isekai'))theme='isekai';
+            else if(ml.includes('fantasy'))theme='fantasy';
+            else if(ml.includes('shonen'))theme='shonen';
+            else if(ml.includes('horreur'))theme='horreur';
+            else if(ml.includes('comedie')||ml.includes('comédie'))theme='comedie';
+            else if(ml.includes('aventure'))theme='aventure';
+            lancerAnime(theme);return true;
+        }
         if(ml.includes('japonais')&&(ml.includes('apprends')||ml.includes('leçon')||ml.includes('lecon'))){ouvrirModal('japonaisScreen');return true;}
         if(ml.includes('battle')||ml.includes(' vs ')){ouvrirModal('battleScreen');return true;}
         if(ml.includes('quiz')){ouvrirModal('quizScreen');lancerQuiz();return true;}
         if(ml.includes('transforme')||ml.includes('mode personnage')){ouvrirModal('persoScreen');return true;}
         if(ml.includes('recommande')&&ml.includes('anime')){recommander();return true;}
         if(ml.includes('actu')&&ml.includes('anime')){getActu();return true;}
-        if(ml.includes('don')&&(ml.includes('soutenir')||ml.includes('aider'))){ouvrirModal('donationScreen');return true;}
+        if(ml.includes('don')||(ml.includes('soutenir'))||(ml.includes('aider')&&ml.includes('yuuto'))){ouvrirModal('donationScreen');return true;}
         return false;
     }
 
     function activerFondManga(){const bg=document.getElementById('mangaBg');bg.style.display='block';bg.innerHTML='';for(let i=0;i<18;i++){const s=document.createElement('span');s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${14+Math.random()*18}px;color:#7c3aed11;animation:floatSymbol ${12+Math.random()*15}s linear ${Math.random()*10}s infinite;`;bg.appendChild(s);}}
-    async function lancerLecon(niveau){fermerModal('japonaisScreen');const prompts={debutant:`Prof japonais. Hiragana et salutations. Structuré, français.`,intermediaire:`Katakana et phrases courantes.`,anime:`10 expressions japonaises d'animes avec traduction.`,kanji:`5 kanji essentiels avec sens et exemple.`};document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Leçon ${niveau} !</div>`;loadingId++;const id='l'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});const d=await r.json();const rep=d.choices[0].message.content;const t=nettoyerTexte(rep);document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+    async function lancerLecon(niveau){fermerModal('japonaisScreen');const prompts={debutant:`Prof japonais. Hiragana et salutations. Structuré, français.`,intermediaire:`Katakana et phrases courantes.`,anime:`10 expressions japonaises d'animes avec traduction.`,kanji:`5 kanji essentiels avec sens et exemple.`};document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Leçon ${niveau} !</div>`;loadingId++;const id='l'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});const d=await r.json();const rep=d.choices[0].message.content;document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
     async function continuerLecon(niveau){document.getElementById('chat').innerHTML+=`<div class="moi">➡️</div>`;loadingId++;const id='l'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue leçon ${niveau}.`}]})});const d=await r.json();const rep=d.choices[0].message.content;document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
     function toggleSidebar(){sidebarVisible=!sidebarVisible;const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}else{sb.classList.remove('open');ov.style.display='none';}}
-    function nouvelleConversation(){if(historique.length>0){conversations.unshift({titre:historique[0]?.content?.substring(0,35)+'...',messages:[...historique]});historique.length=0;majHistorique();}document.getElementById('chat').innerHTML='';ajouterMessageBot("Nouvelle conversation ! 😊");if(sidebarVisible)toggleSidebar();}
+    function nouvelleConversation(){if(historique.length>0){conversations.unshift({titre:historique[0]?.content?.substring(0,35)+'...',messages:[...historique]});historique.length=0;majHistorique();}document.getElementById('chat').innerHTML='';ajouterMessageBot("Nouvelle conv 😊");if(sidebarVisible)toggleSidebar();}
     function majHistorique(){const list=document.getElementById('historyList');list.innerHTML=conversations.length===0?'<div style="color:#333;font-size:12px;padding:10px">Aucune conversation</div>':'';conversations.slice(0,20).forEach(conv=>{const item=document.createElement('div');item.className='historyItem';item.innerHTML=`💬 ${conv.titre}`;item.onclick=()=>{historique.length=0;conv.messages.forEach(m=>historique.push(m));document.getElementById('chat').innerHTML='';conv.messages.forEach(m=>{if(m.role==='user')document.getElementById('chat').innerHTML+=`<div class="moi">${m.content}</div>`;else ajouterMessageBot(m.content);});if(sidebarVisible)toggleSidebar();};list.appendChild(item);});}
     function ouvrirModal(id){document.getElementById(id).style.display='flex';if(id==='memoireScreen')afficherMemoire();}
     function fermerModal(id){document.getElementById(id).style.display='none';}
@@ -971,14 +850,13 @@
     function startTalking(){document.getElementById('vtMouthShape').className='mouth-talk';document.getElementById('vtArmL').classList.add('wave');}
     function stopTalking(){const m=document.getElementById('vtMouthShape');if(humeurVideo==='sleepy')m.className='mouth-sleepy';else if(humeurVideo==='excited')m.className='mouth-excited';else if(humeurVideo==='mysterious')m.className='mouth-serious';else m.className='mouth-smile';document.getElementById('vtArmL').classList.remove('wave');}
     function startBlink(){blinkInterval=setInterval(()=>{const bL=document.getElementById('vtBlinkL'),bR=document.getElementById('vtBlinkR');if(!bL||!bR)return;bL.style.height='100%';bR.style.height='100%';setTimeout(()=>{bL.style.height='0';bR.style.height='0';},100);},3000+Math.random()*2000);}
-    async function demarrerVideoAppel(){enVideoAppel=true;document.getElementById('videoCallScreen').style.display='flex';document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;const h=new Date().getHours();if(h>=6&&h<12)setHumeur('sleepy');else if(h>=12&&h<18)setHumeur('excited');else if(h>=18&&h<22)setHumeur('normal');else setHumeur('mysterious');startBlink();const intro=estAntoine?"Wsh le boss est là ! 😄":`Salut ${memoire.prenom||'toi'} ! 😊`;document.getElementById('videoCallBubble').textContent=intro;startTalking();setTimeout(()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro 🎤';},2000);}
+    async function demarrerVideoAppel(){enVideoAppel=true;document.getElementById('videoCallScreen').style.display='flex';document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;const h=new Date().getHours();if(h>=6&&h<12)setHumeur('sleepy');else if(h>=12&&h<18)setHumeur('excited');else if(h>=18&&h<22)setHumeur('normal');else setHumeur('mysterious');startBlink();const intro=estAntoine?"Wsh le boss 😄":`Salut ${memoire.prenom||'toi'} ! 😊`;document.getElementById('videoCallBubble').textContent=intro;startTalking();setTimeout(()=>{stopTalking();document.getElementById('videoCallStatus').textContent='Appuie sur le micro 🎤';},2000);}
     function terminerVideoAppel(){enVideoAppel=false;stopMic();stopTalking();if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}document.getElementById('videoCallScreen').style.display='none';}
     function toggleVideoMic(){if(recognition){if(isListening)stopMic();else try{recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};recognition.start();isListening=true;document.getElementById('videoMicBtn').classList.add('active');document.getElementById('videoMicBtn').textContent='🔴';document.getElementById('videoCallStatus').textContent='Tu parles...';}catch(e){}}}
     async function envoyerVideoAppel(msg){document.getElementById('videoCallStatus').textContent='Réflexion...';document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';historique.push({"role":"user","content":msg});const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases max."},...historique]})});const d=await r.json();const rep=d.choices[0].message.content;historique.push({"role":"assistant","content":rep});document.getElementById('videoCallBubble').textContent=rep;if(enVideoAppel)setTimeout(()=>{document.getElementById('videoCallStatus').textContent='Appuie sur le micro 🎤';},2000);}
 
     window.onload=function(){
-        const couleur=localStorage.getItem('yuuto_couleur');
-        if(couleur)document.body.style.background=couleur;
+        const couleur=localStorage.getItem('yuuto_couleur');if(couleur)document.body.style.background=couleur;
         const paysDejaChoisi=localStorage.getItem('yuuto_pays');
         const nom=localStorage.getItem('yuuto_nom');
         if(paysDejaChoisi){
@@ -987,44 +865,41 @@
             if(nom){document.getElementById('nom').value=nom;seConnecter();}
             else document.getElementById('login').style.display='flex';
         }
-        // Si pas de pays choisi → écran pays
+        document.addEventListener('click',e=>{if(plusMenuOpen&&!e.target.closest('#plusMenu')&&!e.target.closest('#plusBtn')){plusMenuOpen=false;document.getElementById('plusMenu').classList.remove('open');}});
     }
 
     function changerCouleur(){const c=document.getElementById('couleurFond').value;document.body.style.background=c;localStorage.setItem('yuuto_couleur',c);}
     function changerNom(){const n=document.getElementById('nouveauNom').value.trim();if(!n)return;if(n.toLowerCase().includes('antoine')||n.toLowerCase().includes('gatore')){alert("Protégé 🔒");return;}localStorage.setItem('yuuto_nom',n);memoire.prenom=n;document.getElementById('userName').textContent=n;document.getElementById('userAvatar').textContent=n[0].toUpperCase();sauvegarderMemoire();fermerModal('menuScreen');ajouterMessageBot(`Nom changé ! 😊`);}
     function activerPersonnage(){const p=document.getElementById('persoInput').value.trim();if(!p)return;if(PERSONNAGES_BANNIS.some(b=>p.toLowerCase().includes(b))){alert("Banni 🚫");return;}personnageActuel=p;document.getElementById('modePerso').textContent=`🎭 ${p}`;fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`Je suis ${p} ! 🎭`,p);}
-    function resetPersonnage(){personnageActuel=null;document.getElementById('modePerso').textContent='';fermerModal('persoScreen');historique.length=0;ajouterMessageBot("Je redeviens YUUTO-BOT ! 😊");}
+    function resetPersonnage(){personnageActuel=null;document.getElementById('modePerso').textContent='';fermerModal('persoScreen');historique.length=0;ajouterMessageBot("Je redeviens YUUTO-BOT 😊");}
     async function lancerBattle(){const p1=document.getElementById('perso1Input').value.trim(),p2=document.getElementById('perso2Input').value.trim();if(!p1||!p2)return;fermerModal('battleScreen');document.getElementById('chat').innerHTML+=`<div class="moi">⚔️ ${p1} VS ${p2} !</div>`;const hist=[];for(let i=0;i<4;i++){const pa=i%2===0?p1:p2,pb=i%2===0?p2:p1;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:hist.length===0?`Tu es ${pa}. Provoque ${pb}. 2 phrases.`:`Tu es ${pa}. Réponds à:"${hist[hist.length-1]}". 2 phrases.`}]})});const d=await r.json();const rep=d.choices[0].message.content;hist.push(rep);document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;await new Promise(r=>setTimeout(r,600));}ajouterMessageBot("Trop chauds 😂🔥");}
     async function getActu(){document.getElementById('chat').innerHTML+=`<div class="moi">📺 Animes du moment ?</div>`;loadingId++;const id='a'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">📺...</div></div>`;try{const r=await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');const d=await r.json();let l="Animes du moment 📺<br><br>";d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> ⭐${a.score||'?'}/10<br>`;});document.getElementById(id).innerHTML=l;}catch(e){document.getElementById(id).innerHTML="Erreur 😅";}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
     async function recommander(){const d=animesDejaRecommandes.length>0?`Pas ces animes:${animesDejaRecommandes.join(',')}.`:"";document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Recommande moi un anime !</div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},{role:'user',content:`Recommande UN anime. ${d} ${Math.random()}`}]})});const data=await r.json();const rep=data.choices[0].message.content;animesDejaRecommandes.push(rep.split('\n')[0]);ajouterMessageBot(rep);}
-    function initMic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;recognition=new SR();recognition.lang='fr-FR';recognition.continuous=false;recognition.onresult=(e)=>{const t=e.results[0][0].transcript;stopMic();document.getElementById('msg').value=t;envoyer();};recognition.onend=()=>{isListening=false;document.getElementById('micBtn').classList.remove('active');document.getElementById('micBtn').textContent='🎤';document.getElementById('videoMicBtn')&&(document.getElementById('videoMicBtn').classList.remove('active'),document.getElementById('videoMicBtn').textContent='🎤');};}
+    function initMic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;recognition=new SR();recognition.lang='fr-FR';recognition.continuous=false;recognition.onresult=(e)=>{const t=e.results[0][0].transcript;stopMic();document.getElementById('msg').value=t;envoyer();};recognition.onend=()=>{isListening=false;document.getElementById('micBtn').classList.remove('active');document.getElementById('micBtn').textContent='🎤';if(document.getElementById('videoMicBtn')){document.getElementById('videoMicBtn').classList.remove('active');document.getElementById('videoMicBtn').textContent='🎤';}};}
     function toggleMic(){if(isListening)stopMic();else{if(!recognition)return;try{recognition.start();isListening=true;document.getElementById('micBtn').classList.add('active');document.getElementById('micBtn').textContent='🔴';}catch(e){}}}
     function stopMic(){try{if(recognition)recognition.stop();}catch(e){}isListening=false;}
     function nettoyerTexte(t){return(t||'').replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
     function ajouterMessageBot(texte,nom){const n=nom||NOM_BOT;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${n} : ${texte}</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
 
-    // ===== MESSAGE D'ACCUEIL MAHORAGA =====
+    // ===== MESSAGE ACCUEIL IA =====
     async function genererAccueil(){
         const h=new Date().getHours();
         const visites=memoire.visites||1;
         const prenom=memoire.prenom||'';
         const sujets=memoire.sujets||[];
         let prompt;
-
         if(estAntoine){
-            prompt=`Tu es YUUTO-BOT, créé par Antoine Gatore. Antoine c'est ton créateur — 13 ans, Côte d'Ivoire, il t'a construit depuis son téléphone. Génère un message d'accueil unique et mémorable pour lui. Sois complice, un peu sarcastique, parle d'anime naturellement. Mentionne que c'est sa visite numéro ${visites}. Heure: ${h}h. Sois bref (2-3 phrases max) mais mémorable.`;
+            prompt=`Tu es YUUTO-BOT créé par Antoine. Message d'accueil pour Antoine ton créateur. 1-2 phrases max. Style pote de rue: wsh, bro, c'est ouf. Chambre le un peu. Mentionne visite ${visites}. ${h}h. 2 emojis max. Pas formel. Pas de guillemets.`;
         }else{
             const animeRef=sujets.length>0?`Il aime: ${sujets.join(', ')}.`:'';
-            prompt=`Tu es YUUTO-BOT, un ami IA anime. Génère un message d'accueil UNIQUE et personnalisé pour ${prenom||'un utilisateur'}. ${animeRef} C'est sa visite numéro ${visites}. Heure: ${h}h. Le message doit donner ENVIE de rester — pas générique, pas robotique. 2-3 phrases max. En français.`;
+            prompt=`Tu es YUUTO-BOT ami IA anime. Message d'accueil unique pour ${prenom||'quelqu\'un'}. ${animeRef} Visite ${visites}. ${h}h. 1-2 phrases. Naturel, donne envie de rester. 2-3 emojis. Pas générique. Français.`;
         }
-
         try{
             const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});
             const d=await r.json();
             return d.choices[0].message.content;
         }catch(e){
-            if(estAntoine)return`Wsh le boss 😄 Visite ${visites} — qu'est ce qu'on fait aujourd'hui ?`;
-            return`Salut ${prenom} ! 😊 Content de te revoir — visite ${visites} 🎌`;
+            return estAntoine?`Wsh bro 😄 Visite ${visites} — qu'est ce qu'on fait ?`:`Salut ${prenom} ! 😊 Visite ${visites} 🎌`;
         }
     }
 
@@ -1035,9 +910,7 @@
         initMic();majHistorique();
         if(estAntoine){activerFondManga();document.getElementById('logsBtn').style.display='flex';}
         const h=new Date().getHours();
-        const humeurs={matin:'😴',aprem:'⚡',soir:'🌙',nuit:'✨'};
-        const humeur=h<12?humeurs.matin:h<18?humeurs.aprem:h<22?humeurs.soir:humeurs.nuit;
-        document.getElementById('humeur').textContent=humeur;
+        document.getElementById('humeur').textContent=h<12?'😴':h<18?'⚡':h<22?'🌙':'✨';
         memoire.visites=(memoire.visites||0)+1;
         memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');
         sauvegarderMemoire();
@@ -1047,29 +920,41 @@
         const paysSelect=document.getElementById('paysSelect');
         if(paysSelect&&memoire.pays)paysSelect.value=memoire.pays;
         sauvegarderLog(memoire.prenom||'Utilisateur','[CONNEXION]',`Visite n°${memoire.visites}`,'connexion');
-
-        // Message d'accueil généré par IA
         document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg"><span style="color:#333">●●●</span></div></div>`;
         genererAccueil().then(intro=>{
             document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${NOM_BOT} : ${intro}</div></div>`;
-            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         });
     }
 
     async function envoyer(){
         const msg=document.getElementById('msg').value.trim();
         if(!msg)return;
+        if(plusMenuOpen){plusMenuOpen=false;document.getElementById('plusMenu').classList.remove('open');}
         document.getElementById('msg').value='';
         document.getElementById('msg').style.height='auto';
         document.getElementById('chat').innerHTML+=`<div class="moi">${msg}</div>`;
         mettreAJourMemoire(msg);
         const ml=msg.toLowerCase();
-
         if(MOTS_SENSIBLES.some(m=>ml.includes(m))){document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Tu n'es pas seul. Parle à quelqu'un de confiance 💙</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;}
+
+        // Modification image si en attente
+        if(imageEnAttente&&(ml.includes('mets')||ml.includes('ajoute')||ml.includes('modifie')||ml.includes('change'))){
+            const prompt=encodeURIComponent(imageEnAttente.description+' '+msg+' anime art style high quality');
+            loadingId++;const id='img2_'+loadingId;
+            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🎨 Génération avec modifications...</div></div>`;
+            const imgUrl=`https://image.pollinations.ai/prompt/${prompt}?width=512&height=512&nologo=true&seed=${Math.floor(Math.random()*99999)}&model=flux`;
+            const tempImg=new Image();
+            tempImg.onload=()=>{document.getElementById(id).innerHTML=`Voilà avec tes modifications ! 🎨<br><img src="${imgUrl}" style="max-width:240px;border-radius:12px;margin-top:8px;display:block;"/>`;};
+            tempImg.onerror=()=>{document.getElementById(id).innerHTML=`😅 Erreur.`;};
+            tempImg.src=imgUrl;
+            imageEnAttente=null;
+            document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
+            return;
+        }
 
         // Génération image
         if(ml.includes('genere')||ml.includes('génère')||ml.includes('image de')||ml.includes('dessine')){
-            const prompt=encodeURIComponent(msg.replace(/genere|génère|une image de|image de|image|dessine|dessine moi/gi,'').trim()+' anime art style high quality');
+            const prompt=encodeURIComponent(msg.replace(/genere|génère|une image de|image de|image|dessine/gi,'').trim()+' anime art style high quality');
             loadingId++;const id='i'+loadingId;
             document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🎨 Génération...</div></div>`;
             const imgUrl=`https://image.pollinations.ai/prompt/${prompt}?width=512&height=512&nologo=true&seed=${Math.floor(Math.random()*99999)}&model=flux`;
@@ -1084,17 +969,15 @@
 
         if(detecterCommande(msg))return;
 
-        // Détection arc narratif
+        // Arc narratif
         const momentArc=detecterMomentArc(msg);
-        if(momentArc&&Math.random()>0.5)proposerArcNarratif(momentArc,msg);
+        if(momentArc&&Math.random()>0.4)proposerArcNarratif(momentArc,msg);
 
         historique.push({"role":"user","content":msg});
         if(historique.length>20)historique.splice(0,historique.length-20);
-
         loadingId++;const id='resp'+loadingId;
         document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg"><span style="color:#333">●●●</span></div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-
         try{
             const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
             const d=await r.json();
@@ -1112,4 +995,4 @@
     }
 </script>
 </body>
-    </html>
+</html>
