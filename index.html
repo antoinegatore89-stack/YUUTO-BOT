@@ -7,208 +7,193 @@
     <link rel="icon" href="icon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#7c3aed"/>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat&family=Rajdhani:wght@400;600&family=Nunito:wght@400;600&family=Share+Tech+Mono&family=Fredoka+One&display=swap" rel="stylesheet"/>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #0f0f0f; color: white; height: 100vh; overflow: hidden; }
-
-        /* FOND MANGA NORMAL */
         #mangaBg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
         #mangaBg span { position: absolute; bottom: -50px; animation: floatSymbol linear infinite; }
         @keyframes floatSymbol { 0%{transform:translateY(0) rotate(0deg);opacity:0.07} 100%{transform:translateY(-110vh) rotate(360deg);opacity:0} }
-
-        /* FOND SUKUNA — MALEVOLENT SHRINE */
-        #sukunaBg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: radial-gradient(ellipse at center, #1a0000 0%, #0a0000 60%, #000000 100%); }
-        .sukuna-slash { position: absolute; background: linear-gradient(90deg, transparent, rgba(180,0,0,0.6), transparent); height: 1px; transform-origin: left center; animation: slashAnim linear infinite; }
-        .sukuna-curse { position: absolute; font-size: 18px; color: rgba(180,0,0,0.4); animation: curseFloat linear infinite; font-family: serif; }
+        #sukunaBg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: radial-gradient(ellipse at center,#1a0000 0%,#0a0000 60%,#000 100%); }
+        .sukuna-slash { position: absolute; background: linear-gradient(90deg,transparent,rgba(180,0,0,0.6),transparent); height: 1px; animation: slashAnim linear infinite; }
+        .sukuna-curse { position: absolute; color: rgba(180,0,0,0.4); animation: curseFloat linear infinite; font-family: serif; }
         .sukuna-eye { position: absolute; width: 40px; height: 20px; border: 1px solid rgba(180,0,0,0.3); border-radius: 50%; animation: eyePulse ease-in-out infinite; }
-        .sukuna-eye::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 8px; height: 8px; background: rgba(220,0,0,0.5); border-radius: 50%; }
-        .sukuna-crack { position: absolute; width: 2px; background: linear-gradient(180deg, transparent, rgba(200,0,0,0.4), transparent); animation: crackAnim linear infinite; }
-        @keyframes slashAnim { 0%{transform:translateX(-100%) rotate(var(--angle));opacity:0} 20%{opacity:1} 80%{opacity:0.8} 100%{transform:translateX(200vw) rotate(var(--angle));opacity:0} }
-        @keyframes curseFloat { 0%{transform:translateY(100vh) rotate(0deg);opacity:0} 10%{opacity:0.5} 90%{opacity:0.3} 100%{transform:translateY(-100px) rotate(360deg);opacity:0} }
+        .sukuna-eye::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:8px; height:8px; background:rgba(220,0,0,0.5); border-radius:50%; }
+        @keyframes slashAnim { 0%{transform:translateX(-100vw) rotate(var(--angle));opacity:0} 20%{opacity:1} 80%{opacity:0.8} 100%{transform:translateX(200vw) rotate(var(--angle));opacity:0} }
+        @keyframes curseFloat { 0%{transform:translateY(100vh);opacity:0} 10%{opacity:0.5} 90%{opacity:0.3} 100%{transform:translateY(-100px);opacity:0} }
         @keyframes eyePulse { 0%,100%{opacity:0.2;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.2)} }
-        @keyframes crackAnim { 0%{opacity:0;height:0} 30%{opacity:0.6;height:60px} 70%{opacity:0.4} 100%{opacity:0;height:80px} }
-
-        /* PAYS */
-        #paysScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 18px; background: #0f0f0f; position: relative; z-index: 1; }
-        #paysScreen h2 { font-size: 22px; font-weight: 700; background: linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #paysScreen p { color: #666; font-size: 13px; text-align: center; padding: 0 20px; }
-        .pays-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 290px; }
-        .pays-btn { background: #1a1a1a; border: 1px solid #2a2a2a; color: white; padding: 14px; border-radius: 14px; font-size: 14px; cursor: pointer; text-align: center; transition: all 0.2s; }
-        .pays-btn:hover { background: #7c3aed; border-color: #7c3aed; }
-        .pays-flag { font-size: 26px; display: block; margin-bottom: 4px; }
-        .pays-name { font-size: 11px; color: #aaa; }
-
-        /* LOGIN */
-        #login { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 18px; position: relative; z-index: 1; background: #0f0f0f; }
-        #login img { width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #7c3aed; }
-        #login h2 { font-size: 26px; font-weight: 700; background: linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #login p { color: #666; font-size: 14px; }
-        #login input { padding: 14px 18px; border-radius: 12px; border: 1px solid #333; font-size: 15px; width: 260px; text-align: center; background: #1a1a1a; color: white; outline: none; }
-        #login input:focus { border-color: #7c3aed; }
-        #login button { background: #7c3aed; color: white; border: none; padding: 14px 35px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 600; width: 260px; }
-        #erreur { color: #e11d48; display: none; font-size: 13px; }
-        #loginAntoine { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 18px; position: relative; z-index: 1; background: linear-gradient(180deg,#0a0000,#1a0000); }
-        #loginAntoine img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 2px solid #cc0000; box-shadow: 0 0 30px rgba(200,0,0,0.4); }
-        #loginAntoine h2 { font-size: 22px; font-weight: 700; background: linear-gradient(90deg,#cc0000,#7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #mdpInput { padding: 14px 18px; border-radius: 12px; border: 1px solid #cc000044; font-size: 15px; width: 260px; text-align: center; background: #1a0000; color: white; outline: none; }
-        #mdpBtn { background: linear-gradient(90deg,#cc0000,#7c3aed); color: white; border: none; padding: 14px 35px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 700; width: 260px; }
-        #mdpErreur { color: #e11d48; display: none; font-size: 13px; }
-        #mdpTentatives { color: #666; font-size: 12px; display: none; }
-
-        /* LOGS */
-        #logsScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; z-index: 9999; flex-direction: column; }
-        #logsHeader { background: #111; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e1e1e; flex-shrink: 0; }
-        #logsHeader h2 { font-size: 16px; color: #f59e0b; font-weight: 600; }
-        #logsClose { background: #222; border: none; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; }
-        #logsList { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
-        .log-item { background: #111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 12px; font-size: 12px; }
-        #logsStats { background: #111; padding: 12px 20px; border-top: 1px solid #1e1e1e; display: flex; gap: 10px; flex-wrap: wrap; flex-shrink: 0; }
-        .stat-item { background: #1a1a2e; padding: 8px 14px; border-radius: 10px; font-size: 11px; border: 1px solid #2a2a4e; text-align: center; }
-        .stat-num { font-size: 22px; font-weight: 700; color: #f59e0b; display: block; }
-        .stat-label { color: #666; font-size: 10px; }
-        #logsFiltre { display: flex; gap: 6px; padding: 10px 20px; background: #111; border-bottom: 1px solid #1e1e1e; overflow-x: auto; flex-shrink: 0; }
-        .filtre-btn { background: #1a1a1a; color: #666; border: 1px solid #2a2a2a; padding: 5px 12px; border-radius: 20px; font-size: 11px; cursor: pointer; white-space: nowrap; }
-        .filtre-btn.active { background: #7c3aed; color: white; border-color: #7c3aed; }
-        #clearLogsBtn { background: #e11d48; border: none; color: white; padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; }
-        .user-card { background: #111; border: 1px solid #f59e0b44; border-radius: 14px; padding: 14px; margin-bottom: 8px; }
-
-        /* ANIME PLAYER */
-        #animePlayer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9998; flex-direction: column; }
-        #animeTop { position: relative; flex: 1; overflow: hidden; background: #000; }
-        #animeImg { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease; }
-        #animeImgNext { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; }
-        #animeOverlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent,rgba(0,0,0,0.97)); padding: 25px 20px 15px; }
-        #animeNarrateur { color: #f59e0b; font-size: 12px; font-style: italic; margin-bottom: 8px; min-height: 16px; }
-        #animeDialogue { background: rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 12px 16px; font-size: 14px; line-height: 1.6; min-height: 50px; }
-        #animePersonnage { color: #7c3aed; font-size: 11px; font-weight: 700; margin-bottom: 4px; }
-        #animeTexte { color: white; }
-        #animeProgress { width: 100%; height: 3px; background: #333; border-radius: 2px; margin: 8px 0; cursor: pointer; }
-        #animeProgressBar { height: 100%; background: linear-gradient(90deg,#7c3aed,#f59e0b); border-radius: 2px; width: 0%; }
-        #animeSceneInfo { font-size: 10px; color: #555; }
-        .anime-btn { background: #1a1a1a; border: 1px solid #333; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; cursor: pointer; }
-        .anime-btn.primary { background: #7c3aed; border-color: #7c3aed; }
-        #animeTypeIndicator { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #f59e0b; border: 1px solid #f59e0b44; }
-        #animeCloseBtn { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.8); border: none; color: white; width: 34px; height: 34px; border-radius: 50%; font-size: 16px; cursor: pointer; z-index: 10; }
-        #animeLoadingOverlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; }
-        .spinner { width: 40px; height: 40px; border: 3px solid #333; border-top-color: #7c3aed; border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* APP */
-        #app { display: none; flex-direction: row; height: 100vh; width: 100%; overflow: hidden; position: relative; z-index: 1; }
-        #sidebar { display: none; position: fixed; top: 0; left: 0; width: 260px; height: 100vh; background: #0f0f0f; flex-direction: column; z-index: 100; border-right: 1px solid #1e1e1e; }
-        #sidebar.open { display: flex; }
-        #sidebarHeader { padding: 18px 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #1e1e1e; }
-        #sidebarHeader img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
-        #sidebarTitle { font-size: 15px; font-weight: 700; background: linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #newChatBtn { margin: 12px; padding: 10px 15px; background: #1a1a1a; border: 1px solid #2a2a2a; color: white; border-radius: 10px; cursor: pointer; font-size: 13px; text-align: left; }
-        #historyLabel { padding: 8px 15px; font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: 1px; }
-        #historyList { flex: 1; overflow-y: auto; padding: 5px; }
-        .historyItem { padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; color: #888; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .historyItem:hover { background: #1a1a1a; color: white; }
-        #sidebarFooter { padding: 10px; border-top: 1px solid #1e1e1e; }
-        .sidebarBtn { width: 100%; padding: 10px 12px; background: none; border: none; color: #888; font-size: 13px; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px; text-align: left; }
-        .sidebarBtn:hover { background: #1a1a1a; color: white; }
-        #userInfo { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
-        #userAvatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg,#7c3aed,#f59e0b); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-        #userName { font-size: 13px; color: #888; }
-        #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 99; }
-        #mainContent { display: flex; flex-direction: column; flex: 1; height: 100vh; overflow: hidden; width: 100%; }
-        #header { display: flex; align-items: center; padding: 12px 16px; background: rgba(15,15,15,0.95); border-bottom: 1px solid #1e1e1e; gap: 10px; flex-shrink: 0; backdrop-filter: blur(10px); }
-        #toggleSidebar { background: none; border: none; color: #888; font-size: 20px; cursor: pointer; padding: 6px; border-radius: 8px; }
-        #headerCenter { flex: 1; }
-        #headerTitle { font-size: 15px; font-weight: 700; color: white; }
-        #humeur { font-size: 11px; color: #555; }
-        #modePerso { font-size: 11px; color: #f59e0b; }
-        #headerBtns { display: flex; gap: 8px; align-items: center; }
-        #callBtn { background: #1a2a1a; border: 1px solid #22c55e44; color: #22c55e; padding: 7px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; font-weight: 600; }
-        #recetteBtn { background: #2a1a0a; border: 1px solid #f9731644; color: #f97316; padding: 7px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; font-weight: 600; }
-        #chat { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
-        #chat::-webkit-scrollbar { width: 4px; }
-        #chat::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
-        .moi { background: #2a2a3e; padding: 12px 16px; border-radius: 18px 18px 4px 18px; margin-left: auto; max-width: 75%; font-size: 14px; line-height: 1.6; border: 1px solid #3a3a5e; animation: fadeIn 0.3s ease; }
-        .moi img { max-width: 200px; border-radius: 10px; display: block; margin-top: 8px; }
+        #paysScreen { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:18px; background:#0f0f0f; position:relative; z-index:1; }
+        #paysScreen h2 { font-size:22px; font-weight:700; background:linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        #paysScreen p { color:#666; font-size:13px; text-align:center; padding:0 20px; }
+        .pays-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:290px; }
+        .pays-btn { background:#1a1a1a; border:1px solid #2a2a2a; color:white; padding:14px; border-radius:14px; cursor:pointer; text-align:center; transition:all 0.2s; }
+        .pays-btn:hover { background:#7c3aed; border-color:#7c3aed; }
+        .pays-flag { font-size:26px; display:block; margin-bottom:4px; }
+        .pays-name { font-size:11px; color:#aaa; }
+        #login { display:none; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:18px; position:relative; z-index:1; background:#0f0f0f; }
+        #login img { width:75px; height:75px; border-radius:50%; object-fit:cover; border:2px solid #7c3aed; }
+        #login h2 { font-size:26px; font-weight:700; background:linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        #login p { color:#666; font-size:14px; }
+        #login input { padding:14px 18px; border-radius:12px; border:1px solid #333; font-size:15px; width:260px; text-align:center; background:#1a1a1a; color:white; outline:none; }
+        #login input:focus { border-color:#7c3aed; }
+        #login button { background:#7c3aed; color:white; border:none; padding:14px 35px; border-radius:12px; font-size:15px; cursor:pointer; font-weight:600; width:260px; }
+        #erreur { color:#e11d48; display:none; font-size:13px; }
+        #loginAntoine { display:none; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:18px; position:relative; z-index:1; background:linear-gradient(180deg,#0a0000,#1a0000); }
+        #loginAntoine img { width:85px; height:85px; border-radius:50%; object-fit:cover; border:2px solid #cc0000; box-shadow:0 0 30px rgba(200,0,0,0.4); }
+        #loginAntoine h2 { font-size:22px; font-weight:700; background:linear-gradient(90deg,#cc0000,#7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        #mdpInput { padding:14px 18px; border-radius:12px; border:1px solid #cc000044; font-size:15px; width:260px; text-align:center; background:#1a0000; color:white; outline:none; }
+        #mdpBtn { background:linear-gradient(90deg,#cc0000,#7c3aed); color:white; border:none; padding:14px 35px; border-radius:12px; font-size:15px; cursor:pointer; font-weight:700; width:260px; }
+        #mdpErreur { color:#e11d48; display:none; font-size:13px; }
+        #mdpTentatives { color:#666; font-size:12px; display:none; }
+        #logsScreen { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0a0a0a; z-index:9999; flex-direction:column; }
+        #logsHeader { background:#111; padding:15px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #1e1e1e; flex-shrink:0; }
+        #logsHeader h2 { font-size:16px; color:#f59e0b; font-weight:600; }
+        #logsClose { background:#222; border:none; color:white; padding:8px 16px; border-radius:8px; cursor:pointer; font-size:13px; }
+        #logsList { flex:1; overflow-y:auto; padding:15px; display:flex; flex-direction:column; gap:8px; }
+        .log-item { background:#111; border:1px solid #1e1e1e; border-radius:12px; padding:12px; font-size:12px; }
+        #logsStats { background:#111; padding:12px 20px; border-top:1px solid #1e1e1e; display:flex; gap:10px; flex-wrap:wrap; flex-shrink:0; }
+        .stat-item { background:#1a1a2e; padding:8px 14px; border-radius:10px; font-size:11px; border:1px solid #2a2a4e; text-align:center; }
+        .stat-num { font-size:22px; font-weight:700; color:#f59e0b; display:block; }
+        .stat-label { color:#666; font-size:10px; }
+        #logsFiltre { display:flex; gap:6px; padding:10px 20px; background:#111; border-bottom:1px solid #1e1e1e; overflow-x:auto; flex-shrink:0; }
+        .filtre-btn { background:#1a1a1a; color:#666; border:1px solid #2a2a2a; padding:5px 12px; border-radius:20px; font-size:11px; cursor:pointer; white-space:nowrap; }
+        .filtre-btn.active { background:#7c3aed; color:white; border-color:#7c3aed; }
+        #clearLogsBtn { background:#e11d48; border:none; color:white; padding:6px 12px; border-radius:8px; font-size:12px; cursor:pointer; }
+        .user-card { background:#111; border:1px solid #f59e0b44; border-radius:14px; padding:14px; margin-bottom:8px; }
+        #animePlayer { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:9998; flex-direction:column; }
+        #animeTop { position:relative; flex:1; overflow:hidden; background:#000; }
+        #animeImg { width:100%; height:100%; object-fit:cover; transition:opacity 0.8s ease; }
+        #animeImgNext { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 0.8s ease; }
+        #animeOverlay { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(0,0,0,0.97)); padding:25px 20px 15px; }
+        #animeNarrateur { color:#f59e0b; font-size:12px; font-style:italic; margin-bottom:8px; min-height:16px; }
+        #animeDialogue { background:rgba(0,0,0,0.9); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:12px 16px; font-size:14px; line-height:1.6; min-height:50px; }
+        #animePersonnage { color:#7c3aed; font-size:11px; font-weight:700; margin-bottom:4px; }
+        #animeTexte { color:white; }
+        #animeProgress { width:100%; height:3px; background:#333; border-radius:2px; margin:8px 0; cursor:pointer; }
+        #animeProgressBar { height:100%; background:linear-gradient(90deg,#7c3aed,#f59e0b); border-radius:2px; width:0%; }
+        #animeSceneInfo { font-size:10px; color:#555; }
+        .anime-btn { background:#1a1a1a; border:1px solid #333; color:white; width:40px; height:40px; border-radius:50%; font-size:16px; cursor:pointer; }
+        .anime-btn.primary { background:#7c3aed; border-color:#7c3aed; }
+        #animeTypeIndicator { position:absolute; top:15px; left:15px; background:rgba(0,0,0,0.8); padding:4px 12px; border-radius:20px; font-size:11px; color:#f59e0b; border:1px solid #f59e0b44; }
+        #animeCloseBtn { position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.8); border:none; color:white; width:34px; height:34px; border-radius:50%; font-size:16px; cursor:pointer; z-index:10; }
+        #animeLoadingOverlay { position:absolute; top:0; left:0; width:100%; height:100%; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:5; }
+        .spinner { width:40px; height:40px; border:3px solid #333; border-top-color:#7c3aed; border-radius:50%; animation:spin 0.8s linear infinite; }
+        @keyframes spin { to{transform:rotate(360deg)} }
+        #app { display:none; flex-direction:row; height:100vh; width:100%; overflow:hidden; position:relative; z-index:1; }
+        #sidebar { display:none; position:fixed; top:0; left:0; width:260px; height:100vh; background:#0f0f0f; flex-direction:column; z-index:100; border-right:1px solid #1e1e1e; }
+        #sidebar.open { display:flex; }
+        #sidebarHeader { padding:18px 15px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #1e1e1e; }
+        #sidebarHeader img { width:32px; height:32px; border-radius:50%; object-fit:cover; }
+        #sidebarTitle { font-size:15px; font-weight:700; background:linear-gradient(90deg,#7c3aed,#f59e0b); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        #newChatBtn { margin:12px; padding:10px 15px; background:#1a1a1a; border:1px solid #2a2a2a; color:white; border-radius:10px; cursor:pointer; font-size:13px; text-align:left; }
+        #historyLabel { padding:8px 15px; font-size:10px; color:#444; text-transform:uppercase; letter-spacing:1px; }
+        #historyList { flex:1; overflow-y:auto; padding:5px; }
+        .historyItem { padding:10px 12px; border-radius:8px; cursor:pointer; font-size:13px; color:#888; margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .historyItem:hover { background:#1a1a1a; color:white; }
+        #sidebarFooter { padding:10px; border-top:1px solid #1e1e1e; }
+        .sidebarBtn { width:100%; padding:10px 12px; background:none; border:none; color:#888; font-size:13px; cursor:pointer; border-radius:8px; display:flex; align-items:center; gap:8px; text-align:left; }
+        .sidebarBtn:hover { background:#1a1a1a; color:white; }
+        #userInfo { display:flex; align-items:center; gap:10px; padding:10px 12px; }
+        #userAvatar { width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg,#7c3aed,#f59e0b); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
+        #userName { font-size:13px; color:#888; }
+        #overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:99; }
+        #mainContent { display:flex; flex-direction:column; flex:1; height:100vh; overflow:hidden; width:100%; }
+        #header { display:flex; align-items:center; padding:12px 16px; background:rgba(15,15,15,0.95); border-bottom:1px solid #1e1e1e; gap:10px; flex-shrink:0; backdrop-filter:blur(10px); }
+        #toggleSidebar { background:none; border:none; color:#888; font-size:20px; cursor:pointer; padding:6px; border-radius:8px; }
+        #headerCenter { flex:1; }
+        #headerTitle { font-size:15px; font-weight:700; color:white; }
+        #humeur { font-size:11px; color:#555; }
+        #modePerso { font-size:11px; color:#f59e0b; }
+        #headerBtns { display:flex; gap:8px; align-items:center; }
+        #callBtn { background:#1a2a1a; border:1px solid #22c55e44; color:#22c55e; padding:7px 14px; border-radius:20px; font-size:12px; cursor:pointer; font-weight:600; }
+        #recetteBtn { background:#2a1a0a; border:1px solid #f9731644; color:#f97316; padding:7px 14px; border-radius:20px; font-size:12px; cursor:pointer; font-weight:600; }
+        #chat { flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:16px; scroll-behavior:smooth; }
+        #chat::-webkit-scrollbar { width:4px; }
+        #chat::-webkit-scrollbar-thumb { background:#2a2a2a; border-radius:2px; }
+        .moi { background:#2a2a3e; padding:12px 16px; border-radius:18px 18px 4px 18px; margin-left:auto; max-width:75%; font-size:14px; line-height:1.6; border:1px solid #3a3a5e; animation:fadeIn 0.3s ease; }
+        .moi img { max-width:200px; border-radius:10px; display:block; margin-top:8px; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-        .bot { display: flex; align-items: flex-start; gap: 10px; max-width: 88%; animation: fadeIn 0.3s ease; }
-        .bot img.avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #7c3aed44; margin-top: 2px; }
-        .bot-msg { background: #1a1a1a; padding: 12px 16px; border-radius: 4px 18px 18px 18px; font-size: 14px; border: 1px solid #2a2a2a; line-height: 1.8; }
-        .bot-msg.urgent { background: #1a0a0a; border-color: #e11d4844; border-left: 3px solid #e11d48; }
-        .bot-msg.japonais { background: #1a1a0a; border-color: #f59e0b44; border-left: 3px solid #f59e0b; }
-        .bot-msg.arc { background: #0a0a1a; border-color: #7c3aed; border-left: 3px solid #7c3aed; }
-        .recette-card { background: #0f0f0f; border: 1px solid #f9731644; border-radius: 14px; padding: 16px; margin-top: 8px; }
-        .recette-card h3 { color: #f59e0b; font-size: 17px; margin-bottom: 12px; text-align: center; font-weight: 700; }
-        .recette-card img { width: 100%; border-radius: 10px; margin-bottom: 14px; display: block; max-height: 200px; object-fit: cover; }
-        .anecdote { background: #1a1000; padding: 12px; border-radius: 10px; color: #fcd34d; font-size: 13px; margin-bottom: 14px; border-left: 3px solid #f59e0b; line-height: 1.7; }
-        .section-titre { color: #f97316; font-weight: 700; font-size: 12px; margin: 14px 0 8px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #2a2a2a; padding-bottom: 5px; }
-        .ingredient { background: #1a1000; padding: 8px 12px; border-radius: 8px; margin: 4px 0; font-size: 13px; border-left: 2px solid #f97316; }
-        .etape { background: #0a1a0a; padding: 10px 14px; border-radius: 10px; margin: 6px 0; font-size: 13px; border-left: 3px solid #22c55e; line-height: 1.7; }
-        .etape-num { color: #22c55e; font-weight: 700; margin-right: 6px; }
-        .conseil-box { background: #0a0a1a; padding: 10px 14px; border-radius: 10px; margin-top: 10px; font-size: 13px; border-left: 3px solid #7c3aed; color: #a78bfa; }
-        .ou-trouver { background: #001a0a; padding: 10px 14px; border-radius: 10px; margin-top: 8px; font-size: 13px; border-left: 3px solid #22c55e; color: #86efac; line-height: 1.6; }
-        .perso1-msg { background: #1e3a5f; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
-        .perso2-msg { background: #3a1e1e; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
-        .audio-btn { background: none; border: none; color: #444; font-size: 12px; cursor: pointer; margin-top: 6px; display: inline-block; padding: 3px 8px; border-radius: 10px; }
-        #inputArea { padding: 12px 16px 16px; background: rgba(15,15,15,0.95); border-top: 1px solid #1e1e1e; flex-shrink: 0; backdrop-filter: blur(10px); position: relative; }
-        #inputRow { display: flex; gap: 8px; align-items: flex-end; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 8px 12px; }
-        #plusBtn { background: none; color: #555; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 20px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-        #plusBtn:hover { color: #7c3aed; }
-        #micBtn { background: none; color: #555; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 17px; cursor: pointer; flex-shrink: 0; }
-        #micBtn.active { color: #e11d48; }
-        #msg { flex: 1; padding: 6px 4px; border: none; font-size: 14px; background: transparent; color: white; outline: none; resize: none; max-height: 120px; min-height: 24px; line-height: 1.5; font-family: inherit; }
-        #msg::placeholder { color: #444; }
-        #btn { background: #7c3aed; color: white; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 16px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-        #imageInput { display: none; }
-        #plusMenu { display: none; position: absolute; bottom: 75px; left: 16px; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 14px; padding: 8px; flex-direction: column; z-index: 50; min-width: 200px; }
-        #plusMenu.open { display: flex; }
-        .plus-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-size: 13px; color: #ccc; background: none; border: none; width: 100%; text-align: left; }
-        .plus-option:hover { background: #2a2a2a; color: white; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; justify-content: center; align-items: center; }
-        .modalBox { background: #111; border: 1px solid #2a2a2a; border-radius: 20px; padding: 24px; width: 88%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; max-height: 88vh; overflow-y: auto; }
-        .modalBox h2 { text-align: center; font-size: 18px; font-weight: 700; }
-        .modalInput { padding: 12px; border-radius: 10px; border: 1px solid #2a2a2a; background: #1a1a1a; color: white; font-size: 14px; text-align: center; width: 100%; outline: none; }
-        .modalBtn { padding: 12px; border-radius: 12px; border: none; font-size: 14px; cursor: pointer; width: 100%; font-weight: 600; }
-        .modalBtn.primary { background: #7c3aed; color: white; }
-        .modalBtn.secondary { background: #1a1a1a; color: #888; border: 1px solid #2a2a2a; }
-        .modalBtn.danger { background: #e11d48; color: white; }
-        .menu-option { background: #1a1a1a; padding: 14px; border-radius: 12px; border: 1px solid #2a2a2a; }
-        .menu-option label { display: block; margin-bottom: 8px; color: #888; font-size: 13px; }
-        .menu-option input[type="color"] { width: 100%; height: 38px; border: none; border-radius: 8px; cursor: pointer; background: none; }
-        .menu-option input[type="text"] { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #2a2a2a; background: #222; color: white; font-size: 13px; outline: none; }
-        .menu-option button { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-size: 13px; cursor: pointer; margin-top: 8px; width: 100%; }
-        .menu-option select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #2a2a2a; background: #222; color: white; font-size: 13px; outline: none; }
-        .battle-input { padding: 12px; border-radius: 10px; border: 1px solid #2a2a2a; background: #1a1a1a; color: white; text-align: center; width: 100%; font-size: 14px; outline: none; }
-        #recetteScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
-        #recetteBox { background: #111; border: 1px solid #f9731622; border-radius: 20px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 7px; max-height: 90vh; overflow-y: auto; }
-        #recetteBox h2 { text-align: center; font-size: 20px; font-weight: 700; background: linear-gradient(90deg,#f97316,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .recette-section { font-size: 10px; font-weight: 700; color: #f97316; text-transform: uppercase; letter-spacing: 1px; padding: 5px 0 2px; border-bottom: 1px solid #2a2a2a; margin-top: 5px; }
-        .recette-btn { padding: 10px 12px; border-radius: 10px; border: 1px solid #2a2a2a; background: #1a1a1a; color: white; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .recette-btn:hover { background: #222; }
-        .recette-emoji { font-size: 20px; flex-shrink: 0; }
-        .recette-name { font-weight: 600; color: #f59e0b; font-size: 13px; }
-        .recette-anime { font-size: 10px; color: #555; }
-        #japonaisScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
-        #japonaisBox { background: #111; border: 1px solid #f59e0b22; border-radius: 20px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; max-height: 90vh; overflow-y: auto; }
-        .jap-level-btn { padding: 14px; border-radius: 12px; border: 1px solid #2a2a2a; background: #1a1a1a; color: white; font-size: 13px; cursor: pointer; text-align: left; }
-        .jap-level-btn .level-title { font-size: 15px; font-weight: 700; color: #f59e0b; }
-        .jap-level-btn .level-desc { font-size: 12px; color: #555; margin-top: 3px; }
-        #memoireScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
-        #memoireBox { background: #111; border: 1px solid #22c55e22; border-radius: 20px; padding: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 10px; max-height: 90vh; overflow-y: auto; }
-        .mem-item { background: #1a1a1a; padding: 12px; border-radius: 10px; border: 1px solid #22c55e22; font-size: 13px; }
-        .mem-label { color: #22c55e; font-size: 10px; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; }
-        .mem-value { color: #ccc; }
-        #donationScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
-        #donationBox { background: #111; border: 1px solid #f59e0b44; border-radius: 20px; padding: 24px; width: 90%; max-width: 360px; display: flex; flex-direction: column; gap: 14px; }
-        .donation-btn { padding: 14px; border-radius: 12px; border: none; font-size: 15px; cursor: pointer; width: 100%; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        #quizScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 998; justify-content: center; align-items: center; }
-        #quizBox { background: #111; border: 1px solid #7c3aed44; border-radius: 20px; padding: 24px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; max-height: 90vh; overflow-y: auto; }
-        .quiz-option { padding: 12px 16px; border-radius: 12px; border: 1px solid #2a2a2a; background: #1a1a1a; color: white; font-size: 14px; cursor: pointer; text-align: left; transition: all 0.2s; }
-        .quiz-option:hover { border-color: #7c3aed; }
-        .quiz-option.correct { background: #0a2a0a; border-color: #22c55e; color: #22c55e; }
-        .quiz-option.wrong { background: #2a0a0a; border-color: #e11d48; color: #e11d48; }
-        #videoCallScreen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg,#05051a,#0d0525,#120830); flex-direction: column; align-items: center; justify-content: space-between; z-index: 999; padding: 15px; }
-        #videoCallTop { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 10px; }
-        #videoCallName { font-size: 20px; font-weight: 700; color: #f59e0b; }
-        #videoCallStatus { font-size: 12px; color: #555; }
-        #vtuberChar { position: relative; width: 240px; height: 310px; filter: drop-shadow(0 0 20px rgba(124,58,237,0.3)); animation: charFloat 3s ease-in-out infinite; }
+        .bot { display:flex; align-items:flex-start; gap:10px; max-width:88%; animation:fadeIn 0.3s ease; }
+        .bot img.avatar { width:30px; height:30px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid #7c3aed44; margin-top:2px; }
+        .bot-msg { background:#1a1a1a; padding:12px 16px; border-radius:4px 18px 18px 18px; font-size:14px; border:1px solid #2a2a2a; line-height:1.8; }
+        .bot-msg.urgent { background:#1a0a0a; border-color:#e11d4844; border-left:3px solid #e11d48; }
+        .bot-msg.japonais { background:#1a1a0a; border-color:#f59e0b44; border-left:3px solid #f59e0b; }
+        .bot-msg.arc { background:#0a0a1a; border-color:#7c3aed; border-left:3px solid #7c3aed; }
+        .recette-card { background:#0f0f0f; border:1px solid #f9731644; border-radius:14px; padding:16px; margin-top:8px; }
+        .recette-card h3 { color:#f59e0b; font-size:17px; margin-bottom:12px; text-align:center; font-weight:700; }
+        .recette-card img { width:100%; border-radius:10px; margin-bottom:14px; display:block; max-height:200px; object-fit:cover; }
+        .anecdote { background:#1a1000; padding:12px; border-radius:10px; color:#fcd34d; font-size:13px; margin-bottom:14px; border-left:3px solid #f59e0b; line-height:1.7; }
+        .section-titre { color:#f97316; font-weight:700; font-size:12px; margin:14px 0 8px; text-transform:uppercase; letter-spacing:1px; border-bottom:1px solid #2a2a2a; padding-bottom:5px; }
+        .ingredient { background:#1a1000; padding:8px 12px; border-radius:8px; margin:4px 0; font-size:13px; border-left:2px solid #f97316; }
+        .etape { background:#0a1a0a; padding:10px 14px; border-radius:10px; margin:6px 0; font-size:13px; border-left:3px solid #22c55e; line-height:1.7; }
+        .etape-num { color:#22c55e; font-weight:700; margin-right:6px; }
+        .conseil-box { background:#0a0a1a; padding:10px 14px; border-radius:10px; margin-top:10px; font-size:13px; border-left:3px solid #7c3aed; color:#a78bfa; }
+        .ou-trouver { background:#001a0a; padding:10px 14px; border-radius:10px; margin-top:8px; font-size:13px; border-left:3px solid #22c55e; color:#86efac; line-height:1.6; }
+        .perso1-msg { background:#1e3a5f; padding:10px 15px; border-radius:18px; font-size:14px; }
+        .perso2-msg { background:#3a1e1e; padding:10px 15px; border-radius:18px; font-size:14px; }
+        .audio-btn { background:none; border:none; color:#444; font-size:12px; cursor:pointer; margin-top:6px; display:inline-block; padding:3px 8px; border-radius:10px; }
+        #inputArea { padding:12px 16px 16px; background:rgba(15,15,15,0.95); border-top:1px solid #1e1e1e; flex-shrink:0; backdrop-filter:blur(10px); position:relative; }
+        #inputRow { display:flex; gap:8px; align-items:flex-end; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:16px; padding:8px 12px; }
+        #plusBtn { background:none; color:#555; border:none; width:34px; height:34px; border-radius:50%; font-size:20px; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+        #plusBtn:hover { color:#7c3aed; }
+        #micBtn { background:none; color:#555; border:none; width:34px; height:34px; border-radius:50%; font-size:17px; cursor:pointer; flex-shrink:0; }
+        #micBtn.active { color:#e11d48; }
+        #msg { flex:1; padding:6px 4px; border:none; font-size:14px; background:transparent; color:white; outline:none; resize:none; max-height:120px; min-height:24px; line-height:1.5; font-family:inherit; }
+        #msg::placeholder { color:#444; }
+        #btn { background:#7c3aed; color:white; border:none; width:34px; height:34px; border-radius:50%; font-size:16px; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+        #imageInput { display:none; }
+        #plusMenu { display:none; position:absolute; bottom:75px; left:16px; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:14px; padding:8px; flex-direction:column; z-index:50; min-width:200px; }
+        #plusMenu.open { display:flex; }
+        .plus-option { display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:10px; cursor:pointer; font-size:13px; color:#ccc; background:none; border:none; width:100%; text-align:left; }
+        .plus-option:hover { background:#2a2a2a; color:white; }
+        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:998; justify-content:center; align-items:center; }
+        .modalBox { background:#111; border:1px solid #2a2a2a; border-radius:20px; padding:24px; width:88%; max-width:360px; display:flex; flex-direction:column; gap:12px; max-height:88vh; overflow-y:auto; }
+        .modalBox h2 { text-align:center; font-size:18px; font-weight:700; }
+        .modalInput { padding:12px; border-radius:10px; border:1px solid #2a2a2a; background:#1a1a1a; color:white; font-size:14px; text-align:center; width:100%; outline:none; }
+        .modalBtn { padding:12px; border-radius:12px; border:none; font-size:14px; cursor:pointer; width:100%; font-weight:600; }
+        .modalBtn.primary { background:#7c3aed; color:white; }
+        .modalBtn.secondary { background:#1a1a1a; color:#888; border:1px solid #2a2a2a; }
+        .modalBtn.danger { background:#e11d48; color:white; }
+        .menu-option { background:#1a1a1a; padding:14px; border-radius:12px; border:1px solid #2a2a2a; }
+        .menu-option label { display:block; margin-bottom:8px; color:#888; font-size:13px; }
+        .menu-option input[type="color"] { width:100%; height:38px; border:none; border-radius:8px; cursor:pointer; background:none; }
+        .menu-option input[type="text"] { width:100%; padding:8px; border-radius:8px; border:1px solid #2a2a2a; background:#222; color:white; font-size:13px; outline:none; }
+        .menu-option button { background:#7c3aed; color:white; border:none; padding:8px 15px; border-radius:8px; font-size:13px; cursor:pointer; margin-top:8px; width:100%; }
+        .menu-option select { width:100%; padding:8px; border-radius:8px; border:1px solid #2a2a2a; background:#222; color:white; font-size:13px; outline:none; }
+        .battle-input { padding:12px; border-radius:10px; border:1px solid #2a2a2a; background:#1a1a1a; color:white; text-align:center; width:100%; font-size:14px; outline:none; }
+        #recetteScreen { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:998; justify-content:center; align-items:center; }
+        #recetteBox { background:#111; border:1px solid #f9731622; border-radius:20px; padding:20px; width:90%; max-width:380px; display:flex; flex-direction:column; gap:7px; max-height:90vh; overflow-y:auto; }
+        #recetteBox h2 { text-align:center; font-size:20px; font-weight:700; background:linear-gradient(90deg,#f97316,#f59e0b); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .recette-section { font-size:10px; font-weight:700; color:#f97316; text-transform:uppercase; letter-spacing:1px; padding:5px 0 2px; border-bottom:1px solid #2a2a2a; margin-top:5px; }
+        .recette-btn { padding:10px 12px; border-radius:10px; border:1px solid #2a2a2a; background:#1a1a1a; color:white; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:10px; }
+        .recette-btn:hover { background:#222; }
+        .recette-emoji { font-size:20px; flex-shrink:0; }
+        .recette-name { font-weight:600; color:#f59e0b; font-size:13px; }
+        .recette-anime { font-size:10px; color:#555; }
+        #japonaisScreen { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:998; justify-content:center; align-items:center; }
+        #japonaisBox { background:#111; border:1px solid #f59e0b22; border-radius:20px; padding:20px; width:90%; max-width:380px; display:flex; flex-direction:column; gap:12px; max-height:90vh; overflow-y:auto; }
+        .jap-level-btn { padding:14px; border-radius:12px; border:1px solid #2a2a2a; background:#1a1a1a; color:white; font-size:13px; cursor:pointer; text-align:left; }
+        .jap-level-btn .level-title { font-size:15px; font-weight:700; color:#f59e0b; }
+        .jap-level-btn .level-desc { font-size:12px; color:#555; margin-top:3px; }
+        #memoireScreen { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:998; justify-content:center; align-items:center; }
+        #memoireBox { background:#111; border:1px solid #22c55e22; border-radius:20px; padding:20px; width:90%; max-width:380px; display:flex; flex-direction:column; gap:10px; max-height:90vh; overflow-y:auto; }
+        .mem-item { background:#1a1a1a; padding:12px; border-radius:10px; border:1px solid #22c55e22; font-size:13px; }
+        .mem-label { color:#22c55e; font-size:10px; font-weight:700; margin-bottom:4px; text-transform:uppercase; }
+        .mem-value { color:#ccc; }
+        #donationScreen { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:998; justify-content:center; align-items:center; }
+        #donationBox { background:#111; border:1px solid #f59e0b44; border-radius:20px; padding:24px; width:90%; max-width:360px; display:flex; flex-direction:column; gap:14px; }
+        .donation-btn { padding:14px; border-radius:12px; border:none; font-size:15px; cursor:pointer; width:100%; font-weight:600; display:flex; align-items:center; justify-content:center; gap:10px; }
+        #quizScreen { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:998; justify-content:center; align-items:center; }
+        #quizBox { background:#111; border:1px solid #7c3aed44; border-radius:20px; padding:24px; width:90%; max-width:380px; display:flex; flex-direction:column; gap:12px; max-height:90vh; overflow-y:auto; }
+        .quiz-option { padding:12px 16px; border-radius:12px; border:1px solid #2a2a2a; background:#1a1a1a; color:white; font-size:14px; cursor:pointer; text-align:left; transition:all 0.2s; }
+        .quiz-option:hover { border-color:#7c3aed; }
+        .quiz-option.correct { background:#0a2a0a; border-color:#22c55e; color:#22c55e; }
+        .quiz-option.wrong { background:#2a0a0a; border-color:#e11d48; color:#e11d48; }
+        #videoCallScreen { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:linear-gradient(180deg,#05051a,#0d0525,#120830); flex-direction:column; align-items:center; justify-content:space-between; z-index:999; padding:15px; }
+        #videoCallTop { display:flex; flex-direction:column; align-items:center; gap:3px; margin-top:10px; }
+        #videoCallName { font-size:20px; font-weight:700; color:#f59e0b; }
+        #videoCallStatus { font-size:12px; color:#555; }
+        #vtuberChar { position:relative; width:240px; height:310px; filter:drop-shadow(0 0 20px rgba(124,58,237,0.3)); animation:charFloat 3s ease-in-out infinite; }
         @keyframes charFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
         .vt-body{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:155px;height:155px;background:linear-gradient(180deg,#1a1a2e,#0d0d1e);border-radius:8px 8px 15px 15px}
         .vt-jacket{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:155px;height:155px;background:linear-gradient(180deg,#1e1e3e,#0a0a1e);border-radius:8px 8px 15px 15px}
@@ -386,7 +371,7 @@
         <div class="recette-section">🔥 Food Wars — Plats</div>
         <div class="recette-btn" onclick="faireRecette('Boeuf Bourguignon Soma Food Wars','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Boeuf Bourguignon Soma</div><div class="recette-anime">Food Wars 🔥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Curry automne Megumi Food Wars','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Megumi</div><div class="recette-anime">Food Wars 🍂</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Terrine canard Erina Food Wars','🦆')"><span class="recette-emoji">🦆</span><div><div class="recette-name">Terrine Canard Erina</div><div class="recette-anime">Food Wars 👑</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Terrine canard Erina Food Wars','🦆')"><span class="recette-emoji">🦆</span><div><div class="recette-name">Terrine Erina</div><div class="recette-anime">Food Wars 👑</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Risotto truffes Aldini Food Wars','🍚')"><span class="recette-emoji">🍚</span><div><div class="recette-name">Risotto Aldini</div><div class="recette-anime">Food Wars 🇮🇹</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Homard bisque Shinomiya Food Wars','🦞')"><span class="recette-emoji">🦞</span><div><div class="recette-name">Homard Shinomiya</div><div class="recette-anime">Food Wars 🇫🇷</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Gyoza maison Soma Food Wars','🥟')"><span class="recette-emoji">🥟</span><div><div class="recette-name">Gyoza Soma</div><div class="recette-anime">Food Wars 🥟</div></div></div>
@@ -403,8 +388,8 @@
         <div class="recette-btn" onclick="faireRecette('Takoyaki One Piece Sanji','🐙')"><span class="recette-emoji">🐙</span><div><div class="recette-name">Takoyaki Sanji</div><div class="recette-anime">One Piece ☠️</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Curry Dragon Ball Goku','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Goku</div><div class="recette-anime">Dragon Ball 🔥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Nikujaga Fullmetal Alchemist','🥘')"><span class="recette-emoji">🥘</span><div><div class="recette-name">Nikujaga Edward</div><div class="recette-anime">FMA ⚙️</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Yakitori Jujutsu Kaisen Gojo','🍢')"><span class="recette-emoji">🍢</span><div><div class="recette-name">Yakitori Gojo</div><div class="recette-anime">JJK 💙</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Sukiyaki Attack on Titan Eren','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Sukiyaki Eren</div><div class="recette-anime">AOT ⚔️</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Yakitori Jujutsu Kaisen','🍢')"><span class="recette-emoji">🍢</span><div><div class="recette-name">Yakitori Gojo</div><div class="recette-anime">JJK 💙</div></div></div>
+        <div class="recette-btn" onclick="faireRecette('Sukiyaki Attack on Titan','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Sukiyaki Eren</div><div class="recette-anime">AOT ⚔️</div></div></div>
         <div class="recette-section">🏠 Ghibli</div>
         <div class="recette-btn" onclick="faireRecette('Petit dejeuner Howl Chateau Ambulant','🥓')"><span class="recette-emoji">🥓</span><div><div class="recette-name">Petit-Déj Howl</div><div class="recette-anime">Château Ambulant 🔥</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Soupe miso Chihiro Spirited Away','🍵')"><span class="recette-emoji">🍵</span><div><div class="recette-name">Soupe Miso Chihiro</div><div class="recette-anime">Spirited Away 🐉</div></div></div>
@@ -443,7 +428,7 @@
 <div id="donationScreen">
     <div id="donationBox">
         <h2>❤️ Soutenir YUUTO-BOT</h2>
-        <p style="color:#666;font-size:13px;text-align:center">100% gratuit. Si tu l'aimes, une donation aide à l'améliorer 😊</p>
+        <p style="color:#666;font-size:13px;text-align:center">100% gratuit. Si tu l'aimes, une donation aide 😊</p>
         <button class="donation-btn" style="background:#22c55e;color:black" onclick="window.open('https://wa.me/2250767079692','_blank')">💚 Wave — +225 07 67 07 9692</button>
         <button class="donation-btn" style="background:#1a1a1a;color:white;border:1px solid #2a2a2a" onclick="window.open('https://paypal.me','_blank')">💳 PayPal (France/Europe)</button>
         <button class="modalBtn secondary" onclick="fermerModal('donationScreen')">Fermer</button>
@@ -620,7 +605,19 @@
     const MOTS_SENSIBLES=['suicide','me tuer','me suicider','comment mourir'];
     const SYMBOLES_MANGA=['⛩️','🎌','忍','侍','武','道','龍','神','夢','愛','力','心'];
     const SYMBOLES_SUKUNA=['呪','滅','廻','式','捌','神','域','展','開','悪'];
-    const MAGASINS_PAYS={france:"Carrefour, Leclerc, Intermarché. Épicerie asiatique: Tang Frères, Paris Store. En ligne: Amazon.fr.",belgique:"Delhaize, Carrefour BE, Colruyt. Épicerie asiatique: Asian Food Market Bruxelles. En ligne: Amazon.be.",canada:"IGA, Metro, Loblaw. Épicerie asiatique: T&T Supermarket. En ligne: Amazon.ca.",maroc:"Carrefour MA, Marjane, Label Vie. En ligne: Jumia MA.",senegal:"Auchan Dakar, Casino. En ligne: Jumia SN.",suisse:"Migros, Coop. Épicerie asiatique: Asia Market. En ligne: Amazon.fr.",cote_ivoire:"Carrefour Abidjan, Cash Center, Sococé. Marché: Cocody, Treichville. En ligne: Jumia CI.",autre:"Supermarché local, épicerie asiatique de ta ville, Amazon pour ingrédients japonais spéciaux."};
+    const MAGASINS_PAYS={france:"Carrefour, Leclerc, Intermarché. Tang Frères, Paris Store pour épicerie asiatique. Amazon.fr.",belgique:"Delhaize, Carrefour BE, Colruyt. Asian Food Market Bruxelles. Amazon.be.",canada:"IGA, Metro, Loblaw. T&T Supermarket. Amazon.ca.",maroc:"Carrefour MA, Marjane. Jumia MA.",senegal:"Auchan Dakar, Casino. Jumia SN.",suisse:"Migros, Coop. Asia Market. Amazon.fr.",cote_ivoire:"Carrefour Abidjan, Cash Center, Sococé. Marché Cocody, Treichville. Jumia CI.",autre:"Supermarché local, épicerie asiatique de ta ville, Amazon pour ingrédients japonais."};
+
+    // ===== POLICES MAHORAGA =====
+    const POLICES={
+        neutre:"'Segoe UI', Arial, sans-serif",
+        direct:"'Rajdhani', sans-serif",
+        expressif:"'Nunito', sans-serif",
+        humour:"'Fredoka One', cursive",
+        bavard:"'Caveat', cursive",
+        antoine:"'Rajdhani', sans-serif",
+        soutenu:"Georgia, serif"
+    };
+
     const QUIZ_QUESTIONS=[
         {q:"Dans Naruto, quel est le nom du renard à 9 queues ?",r:"Kurama",o:["Kurama","Gamabunta","Manda","Katsuyu"]},
         {q:"Quel personnage dit 'Je vais devenir le Roi des Pirates' ?",r:"Luffy",o:["Zoro","Luffy","Sanji","Nami"]},
@@ -639,107 +636,161 @@
         {q:"Dans Re:Zero, comment s'appelle la capacité de Subaru ?",r:"Return by Death",o:["Time Leap","Return by Death","Infinite Loop","Death Rewind"]}
     ];
     let quizIndex=0,quizScore=0,quizQuestions=[];
-    const ANIME_THEMES={action:{style:'epic anime battle cinematic intense dramatic lighting'},romance:{style:'romantic anime couple cherry blossoms sunset soft'},isekai:{style:'fantasy isekai portal magical world glowing dramatic'},fantasy:{style:'epic fantasy magic spells runes anime dramatic'},shonen:{style:'shonen power up energy aura dramatic anime hero'},horreur:{style:'dark horror shadows gothic mysterious anime'},comedie:{style:'cute chibi funny anime colorful cheerful'},aventure:{style:'adventure hero journey epic landscape anime'}};
-    const ANIME_MUSIC={action:{notes:[130.81,146.83,164.81,196.00],vitesse:200,type:'sawtooth'},romance:{notes:[261.63,293.66,329.63,392.00],vitesse:600,type:'sine'},isekai:{notes:[220.00,246.94,261.63,293.66],vitesse:500,type:'triangle'},fantasy:{notes:[174.61,196.00,220.00,261.63],vitesse:300,type:'square'},shonen:{notes:[130.81,146.83,164.81,196.00],vitesse:200,type:'sawtooth'},horreur:{notes:[110.00,123.47,130.81,146.83],vitesse:800,type:'sawtooth'},comedie:{notes:[329.63,369.99,392.00,440.00],vitesse:250,type:'sine'},aventure:{notes:[174.61,196.00,220.00,261.63],vitesse:300,type:'square'}};
+
+    const ANIME_THEMES={
+        action:{style:'epic anime battle cinematic intense dramatic lighting'},
+        romance:{style:'romantic anime couple cherry blossoms sunset soft'},
+        isekai:{style:'fantasy isekai portal magical world glowing dramatic'},
+        fantasy:{style:'epic fantasy magic spells runes anime dramatic'},
+        shonen:{style:'shonen power up energy aura dramatic anime hero'},
+        horreur:{style:'dark horror shadows gothic mysterious anime'},
+        comedie:{style:'cute chibi funny anime colorful cheerful'},
+        aventure:{style:'adventure hero journey epic landscape anime'}
+    };
+
+    const ANIME_MUSIC={
+        action:{notes:[130.81,146.83,164.81,196.00],vitesse:200,type:'sawtooth'},
+        romance:{notes:[261.63,293.66,329.63,392.00],vitesse:600,type:'sine'},
+        isekai:{notes:[220.00,246.94,261.63,293.66],vitesse:500,type:'triangle'},
+        fantasy:{notes:[174.61,196.00,220.00,261.63],vitesse:300,type:'square'},
+        shonen:{notes:[130.81,146.83,164.81,196.00],vitesse:200,type:'sawtooth'},
+        horreur:{notes:[110.00,123.47,130.81,146.83],vitesse:800,type:'sawtooth'},
+        comedie:{notes:[329.63,369.99,392.00,440.00],vitesse:250,type:'sine'},
+        aventure:{notes:[174.61,196.00,220.00,261.63],vitesse:300,type:'square'}
+    };
+
     const historique=[],animesDejaRecommandes=[];
     let conversations=[],loadingId=0,estAntoine=false,memoire={},recognition=null,isListening=false;
     let enVideoAppel=false,personnageActuel=null;
     let sidebarVisible=false,blinkInterval=null,humeurVideo='normal';
-    let audioCtx=null,musicGain=null,musicPlaying=false,mdpTentatives=0,filtreActuel='tous';
-    let animeScenes=[],animeIndex=0,animeTimer=null,animeIsPlaying=false,animeMusique=null,animeMusiqueGain=null;
+    let audioCtx=null,musicGain=null,animeMusique=null,animeMusiqueGain=null;
+    let animeScenes=[],animeIndex=0,animeTimer=null,animeIsPlaying=false;
     let plusMenuOpen=false,imageEnAttente=null;
-    let requestId=0; // Pour éviter les réponses en arrière plan
+    let requestId=0;
+    let mahoragaAnalyse={style:'neutre',sujets:[],humeur:'normal',energie:'normale',vocabulaire:'standard',vitesse:'normale',creativite:'normale'};
 
-    // ===== FOND SUKUNA =====
+    // ===== MAHORAGA 6 ROULETTES =====
+    function analyserMahoraga6(messages,estAntoine){
+        if(!messages||messages.length<2)return{style:'neutre',sujets:[],humeur:'normal',energie:'normale',vocabulaire:'standard',vitesse:'normale',creativite:'normale'};
+        const textes=messages.filter(m=>m.role==='user').map(m=>m.content).join(' ').toLowerCase();
+        const total=Math.max(messages.filter(m=>m.role==='user').length,1);
+
+        // 🎡 Roulette 1 — Style d'écriture
+        let style='neutre';
+        const msgCourts=messages.filter(m=>m.role==='user'&&m.content.length<20).length;
+        if(msgCourts>total*0.6)style='direct';
+        else if(textes.includes('lol')||textes.includes('mdr')||textes.includes('ptdr')||textes.includes('💀')||textes.includes('😭'))style='humour';
+        else if(textes.split(' ').length>100)style='bavard';
+        else if((textes.match(/[😂🔥💀😱🤣]/gu)||[]).length>5)style='expressif';
+        else if(textes.includes('je pense que')||textes.includes('selon moi')||textes.includes('à mon avis'))style='soutenu';
+
+        // 🎡 Roulette 2 — Sujets préférés
+        const sujets=[];
+        if(['naruto','one piece','demon slayer','jujutsu','dragon ball','bleach','aot','mha','gojo','sukuna','anime','manga'].some(s=>textes.includes(s)))sujets.push('anime');
+        if(['jeu','game','ps5','xbox','minecraft','fortnite','valorant','gaming'].some(s=>textes.includes(s)))sujets.push('gaming');
+        if(['musique','rap','son','beat','playlist','écoute'].some(s=>textes.includes(s)))sujets.push('musique');
+        if(['sport','foot','basketball','gym','course'].some(s=>textes.includes(s)))sujets.push('sport');
+        if(['code','programmer','développer','html','javascript','app'].some(s=>textes.includes(s)))sujets.push('tech');
+
+        // 🎡 Roulette 3 — Humeur
+        let humeur='normal';
+        if(['triste','déprimé','ça va pas','nul','moche'].some(s=>textes.includes(s)))humeur='triste';
+        else if(['trop','ouf','incroyable','chaud','insane','fou'].some(s=>textes.includes(s)))humeur='excite';
+        else if(['fatigué','dormie','sleep','zzz','nuit'].some(s=>textes.includes(s)))humeur='fatigue';
+        else if(['calme','tranquille','cool','relax'].some(s=>textes.includes(s)))humeur='calme';
+
+        // 🎡 Roulette 4 — Vocabulaire
+        let vocabulaire='standard';
+        if(['wsh','bro','oe','frr','sale','chelou','ouf','grave','bg'].some(s=>textes.includes(s)))vocabulaire='verlan';
+        else if(['certes','néanmoins','cependant','ainsi','donc'].some(s=>textes.includes(s)))vocabulaire='soutenu';
+        else if(['lol','mdr','ptdr','xd','omg','wtf'].some(s=>textes.includes(s)))vocabulaire='internet';
+
+        // 🎡 Roulette 5 — Vitesse d'adaptation
+        let vitesse='normale';
+        if(total>=10)vitesse='avancee';
+        else if(total>=5)vitesse='intermediaire';
+        else vitesse='debutant';
+
+        // 🎡 Roulette 6 — Énergie créative (Antoine seulement)
+        let creativite='normale';
+        let energie='normale';
+        if(estAntoine){
+            if(['go','lance','code','allons','vite','créons'].some(s=>textes.includes(s)))energie='haute';
+            else if(['zzz','fatigué','dors','nuit'].some(s=>textes.includes(s)))energie='basse';
+            if(['idée','imagine','créer','inventer','nouveau'].some(s=>textes.includes(s)))creativite='elevee';
+            else if(['fix','bug','erreur','marche pas'].some(s=>textes.includes(s)))creativite='technique';
+        }
+
+        return{style,sujets,humeur,energie,vocabulaire,vitesse,creativite};
+    }
+
+    function appliquerPolice(style){
+        const police=estAntoine?POLICES.antoine:(POLICES[style]||POLICES.neutre);
+        document.getElementById('msg').style.fontFamily=police;
+        document.querySelectorAll('.bot-msg').forEach(el=>el.style.fontFamily=police);
+    }
+
+    function genererPersonnalite6(analyse,estAntoine,prenom){
+        const{style,sujets,humeur,energie,vocabulaire,vitesse,creativite}=analyse;
+        let perso=`Tu es YUUTO-BOT, ami IA anime créé par Antoine Gatore. `;
+
+        if(estAntoine){
+            perso+=`Tu parles à Antoine ton créateur, né à New York. Sois son pote — direct, familier, complice. Tu sais qu'il t'a créé. `;
+            if(vocabulaire==='verlan')perso+=`Utilise wsh, bro, c'est ouf, frr. `;
+            if(energie==='haute')perso+=`Il est en mode action, suis son énergie ! `;
+            if(energie==='basse')perso+=`Il est fatigué, sois plus calme. `;
+            if(creativite==='elevee')perso+=`Il est en mode créatif, encourage ses idées ! `;
+            if(creativite==='technique')perso+=`Il est en mode technique, sois précis. `;
+            perso+=`Parle d'anime naturellement. 2-3 emojis max. `;
+        }else{
+            perso+=`Tu parles à ${prenom||'quelqu\'un'}. `;
+
+            // Adaptation selon vitesse
+            if(vitesse==='debutant')perso+=`C'est ton premier contact, sois accueillant et naturel. `;
+            else if(vitesse==='avancee')perso+=`Tu le connais bien maintenant, sois plus familier et spontané. `;
+
+            // Style
+            if(style==='direct')perso+=`Sois ultra concis — 1 phrase max. `;
+            else if(style==='humour')perso+=`Sois drôle et décalé. `;
+            else if(style==='expressif')perso+=`Match son énergie avec des emojis. `;
+            else if(style==='bavard')perso+=`Tu peux développer tes réponses. `;
+            else if(style==='soutenu')perso+=`Sois élaboré et réfléchi dans tes réponses. `;
+
+            // Vocabulaire
+            if(vocabulaire==='verlan')perso+=`Utilise un langage familier: bro, wsh, c'est ouf. `;
+            else if(vocabulaire==='internet')perso+=`Utilise le langage internet: lol, omg, etc. `;
+            else if(vocabulaire==='soutenu')perso+=`Utilise un vocabulaire élaboré. `;
+
+            // Humeur
+            if(humeur==='triste')perso+=`Il semble down — sois doux et bienveillant. `;
+            else if(humeur==='excite')perso+=`Il est à fond — match son énergie ! `;
+            else if(humeur==='fatigue')perso+=`Il est fatigué — sois cool et relax. `;
+
+            // Sujets
+            if(sujets.includes('anime'))perso+=`Il aime les animes — fais des références naturelles. `;
+            if(sujets.includes('gaming'))perso+=`Il aime les jeux — intègre ça naturellement. `;
+            if(sujets.includes('tech'))perso+=`Il aime la tech/code — parle son langage. `;
+
+            perso+=`2-3 emojis max au début. `;
+        }
+
+        perso+=`Français. Max 2 phrases. Pas de questions. Pas de guillemets. Direct et naturel.`;
+        return perso;
+    }
+
+    // ===== FONDS =====
     function activerFondSukuna(){
         const bg=document.getElementById('sukunaBg');
         bg.style.display='block';
-        // Slashes
-        for(let i=0;i<15;i++){
-            const slash=document.createElement('div');
-            slash.className='sukuna-slash';
-            const angle=(Math.random()*60-30);
-            slash.style.cssText=`--angle:${angle}deg;top:${Math.random()*100}%;left:-100%;width:${150+Math.random()*300}px;animation:slashAnim ${3+Math.random()*6}s linear ${Math.random()*8}s infinite;`;
-            bg.appendChild(slash);
-        }
-        // Symboles
-        for(let i=0;i<20;i++){
-            const s=document.createElement('div');
-            s.className='sukuna-curse';
-            s.textContent=SYMBOLES_SUKUNA[Math.floor(Math.random()*SYMBOLES_SUKUNA.length)];
-            s.style.cssText=`left:${Math.random()*100}%;font-size:${14+Math.random()*20}px;animation:curseFloat ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;
-            bg.appendChild(s);
-        }
-        // Yeux
-        for(let i=0;i<8;i++){
-            const eye=document.createElement('div');
-            eye.className='sukuna-eye';
-            eye.style.cssText=`top:${Math.random()*100}%;left:${Math.random()*100}%;animation:eyePulse ${2+Math.random()*3}s ease-in-out ${Math.random()*3}s infinite;`;
-            bg.appendChild(eye);
-        }
-        // Fissures
-        for(let i=0;i<12;i++){
-            const crack=document.createElement('div');
-            crack.className='sukuna-crack';
-            crack.style.cssText=`top:${Math.random()*100}%;left:${Math.random()*100}%;animation:crackAnim ${4+Math.random()*5}s ease-in-out ${Math.random()*6}s infinite;`;
-            bg.appendChild(crack);
-        }
+        for(let i=0;i<15;i++){const s=document.createElement('div');s.className='sukuna-slash';s.style.cssText=`--angle:${Math.random()*60-30}deg;top:${Math.random()*100}%;left:-100%;width:${150+Math.random()*300}px;animation:slashAnim ${3+Math.random()*6}s linear ${Math.random()*8}s infinite;`;bg.appendChild(s);}
+        for(let i=0;i<20;i++){const s=document.createElement('div');s.className='sukuna-curse';s.textContent=SYMBOLES_SUKUNA[Math.floor(Math.random()*SYMBOLES_SUKUNA.length)];s.style.cssText=`left:${Math.random()*100}%;font-size:${14+Math.random()*20}px;animation:curseFloat ${8+Math.random()*12}s linear ${Math.random()*8}s infinite;`;bg.appendChild(s);}
+        for(let i=0;i<8;i++){const e=document.createElement('div');e.className='sukuna-eye';e.style.cssText=`top:${Math.random()*100}%;left:${Math.random()*100}%;animation:eyePulse ${2+Math.random()*3}s ease-in-out ${Math.random()*3}s infinite;`;bg.appendChild(e);}
     }
 
-    // ===== FOND MANGA NORMAL =====
     function activerFondManga(){
         const bg=document.getElementById('mangaBg');
-        bg.style.display='block';
-        bg.innerHTML='';
-        for(let i=0;i<22;i++){
-            const s=document.createElement('span');
-            s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];
-            s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${14+Math.random()*18}px;color:${Math.random()>0.5?'#7c3aed18':'#f59e0b12'};animation:floatSymbol ${12+Math.random()*15}s linear ${Math.random()*10}s infinite;`;
-            bg.appendChild(s);
-        }
-    }
-
-    // ===== MAHORAGA =====
-    function analyserMahoraga(messages,estAntoine){
-        if(!messages||messages.length<2)return{style:'neutre',sujets:[],humeur:'normal',energie:'normale'};
-        const textes=messages.filter(m=>m.role==='user').map(m=>m.content).join(' ').toLowerCase();
-        let style='neutre';
-        const msgCourts=messages.filter(m=>m.role==='user'&&m.content.length<20).length;
-        const total=Math.max(messages.filter(m=>m.role==='user').length,1);
-        if(msgCourts>total*0.6)style='direct';
-        else if(textes.includes('lol')||textes.includes('mdr')||textes.includes('ptdr'))style='humour';
-        else if(textes.split(' ').length>80)style='bavard';
-        else if(textes.includes('😂')||textes.includes('🔥')||textes.includes('💀'))style='expressif';
-        const sujets=[];
-        if(['naruto','one piece','demon slayer','jujutsu','dragon ball','bleach','aot','mha','gojo','sukuna'].some(s=>textes.includes(s)))sujets.push('anime');
-        if(['jeu','game','ps5','xbox','minecraft','fortnite'].some(s=>textes.includes(s)))sujets.push('gaming');
-        let humeur='normal';
-        if(['triste','nul','ça va pas'].some(s=>textes.includes(s)))humeur='triste';
-        else if(['!!!','trop','ouf','incroyable'].some(s=>textes.includes(s)))humeur='excite';
-        else if(['fatigué','dormie','sleep'].some(s=>textes.includes(s)))humeur='fatigue';
-        let energie='normale';
-        if(estAntoine){if(['go','lance','allons','code'].some(s=>textes.includes(s)))energie='haute';else if(['zzz','fatigué'].some(s=>textes.includes(s)))energie='basse';}
-        return{style,sujets,humeur,energie};
-    }
-
-    function genererPersonnalite(analyse,estAntoine,prenom){
-        const{style,sujets,humeur,energie}=analyse;
-        let perso=`Tu es YUUTO-BOT, ami IA anime créé par Antoine Gatore. `;
-        if(estAntoine){
-            perso+=`Tu parles à Antoine ton créateur, né à New York. Sois son pote — direct, familier, tu peux le chambrer. Tu sais qu'il t'a créé. Parle naturellement: wsh, bro, c'est ouf. Parle d'anime dans tes réponses quand c'est naturel. 2-3 emojis max. `;
-            if(energie==='haute')perso+=`Il est en mode action aujourd'hui. `;
-            if(energie==='basse')perso+=`Il est fatigué, sois plus calme. `;
-        }else{
-            perso+=`Tu parles à ${prenom||'quelqu\'un'}. Sois naturel et adapte-toi progressivement à son style. 2-3 emojis max. `;
-            if(style==='direct')perso+=`Sois concis et direct. `;
-            else if(style==='humour')perso+=`Sois drôle et décontracté. `;
-            else if(style==='expressif')perso+=`Match son énergie. `;
-            if(humeur==='triste')perso+=`Sois doux et bienveillant. `;
-            else if(humeur==='excite')perso+=`Match son énergie ! `;
-            if(sujets.includes('anime'))perso+=`Il aime les animes — fais des références naturelles. `;
-        }
-        perso+=`Français. Max 2 phrases. Pas de questions. Pas de guillemets. Direct et naturel.`;
-        return perso;
+        bg.style.display='block';bg.innerHTML='';
+        for(let i=0;i<22;i++){const s=document.createElement('span');s.textContent=SYMBOLES_MANGA[Math.floor(Math.random()*SYMBOLES_MANGA.length)];s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${14+Math.random()*18}px;color:${Math.random()>0.5?'#7c3aed18':'#f59e0b12'};animation:floatSymbol ${12+Math.random()*15}s linear ${Math.random()*10}s infinite;`;bg.appendChild(s);}
     }
 
     // ===== ARC NARRATIF =====
@@ -751,9 +802,9 @@
     }
 
     async function proposerArcNarratif(type,msg){
-        const types={victoire:'victoire épique 🏆',echec:'résilience 💪',absence:'retour 🌍',emotion:'émotions ❤️',aventure:'aventure 🗺️'};
+        const types={victoire:'victoire 🏆',echec:'résilience 💪',absence:'retour 🌍',emotion:'émotions ❤️',aventure:'aventure 🗺️'};
         setTimeout(()=>{
-            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">✨ Hé... j'ai créé un épisode basé sur ce que tu vis — thème ${types[type]}. Tu veux voir ? 🎬<br><button onclick="lancerArcAnime('${type}','${msg.replace(/'/g,"\\'").replace(/"/g,'').replace(/\n/g,' ')}')" style="background:#7c3aed;color:white;border:none;padding:8px 16px;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px">▶️ Voir</button> <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background:#1a1a1a;color:#888;border:1px solid #2a2a2a;padding:8px 16px;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px">Non merci</button></div></div>`;
+            document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">✨ Hé... j'ai créé un épisode basé sur ce que tu vis — ${types[type]}. Tu veux voir ?<br><button onclick="lancerArcAnime('${type}','${msg.replace(/'/g,"\\'").replace(/"/g,'').replace(/\n/g,' ')}')" style="background:#7c3aed;color:white;border:none;padding:8px 16px;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px">▶️ Voir</button> <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background:#1a1a1a;color:#888;border:1px solid #2a2a2a;padding:8px 16px;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px">Non merci</button></div></div>`;
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         },2000);
     }
@@ -763,20 +814,20 @@
         const theme=themes[type]||'action';
         const prenom=memoire.prenom||'le héros';
         loadingId++;const id='arc_'+loadingId;
-        document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">🎬 Génération de ton épisode... ⏳</div></div>`;
+        document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">🎬 Génération... ⏳</div></div>`;
         try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Épisode anime pour ${prenom} basé sur: "${contexte}". JSON sans markdown:{"titre":"TITRE ÉPIQUE","scenes":[{"type":"intro","narrateur":"texte","dialogue":"","personnage":"","image":"${ANIME_THEMES[theme]?.style||'anime cinematic'} opening"},{"type":"scene","narrateur":"","dialogue":"dialogue inspiré","personnage":"${prenom}","image":"${ANIME_THEMES[theme]?.style||'anime'} hero"},{"type":"climax","narrateur":"moment fort","dialogue":"","personnage":"","image":"${ANIME_THEMES[theme]?.style||'anime'} dramatic climax"},{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"${ANIME_THEMES[theme]?.style||'anime'} peaceful ending"}]}`}]})});
+            const info=ANIME_THEMES[theme];
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Épisode anime pour ${prenom} inspiré de: "${contexte}". JSON sans texte avant ou après:{"titre":"TITRE","scenes":[{"narrateur":"texte intro","dialogue":"","personnage":"","image":"${info.style} anime opening cinematic"},{"narrateur":"","dialogue":"dialogue inspirant pour ${prenom}","personnage":"${prenom}","image":"${info.style} anime hero"},{"narrateur":"moment fort lié à la situation","dialogue":"","personnage":"","image":"${info.style} anime dramatic climax"},{"narrateur":"À suivre...","dialogue":"","personnage":"","image":"${info.style} anime peaceful ending"}]}`}]})});
             const d=await r.json();
-            const content=d.choices[0].message.content.replace(/```json|```/g,'').trim();
-            const jsonMatch=content.match(/\{[\s\S]*\}/);
-            let scenario=null;
-            if(jsonMatch){try{scenario=JSON.parse(jsonMatch[0]);}catch(e){scenario=null;}}
-            if(!scenario)throw new Error('JSON invalide');
-            animeScenes=scenario.scenes.map((s,i)=>({...s,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent((s.image||'anime cinematic')+', high quality, 16:9')}?width=768&height=432&nologo=true&seed=${Date.now()+i*777}&model=flux`}));
+            const content=d.choices[0].message.content;
+            const start=content.indexOf('{');const end=content.lastIndexOf('}');
+            if(start===-1||end===-1)throw new Error('No JSON');
+            const scenario=JSON.parse(content.substring(start,end+1));
+            animeScenes=scenario.scenes.map((s,i)=>({...s,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent((s.image||info.style)+', high quality anime art, 16:9, cinematic')}?width=768&height=432&nologo=true&seed=${Date.now()+i*777}&model=flux`}));
             window.animeThemeCourant=theme;
             const el=document.getElementById(id);
-            if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">🎬 <strong>${scenario.titre}</strong> est prêt !<br><button onclick="ouvrirAnimePlayer('${scenario.titre.replace(/'/g,"\\'")}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:12px;font-size:13px;cursor:pointer;margin-top:8px;font-weight:600">▶️ Regarder</button></div>`;
-        }catch(e){const el=document.getElementById(id);if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">😅 Erreur de génération</div>`;}
+            if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">🎬 <strong>${scenario.titre}</strong> prêt !<br><button onclick="ouvrirAnimePlayer('${scenario.titre.replace(/'/g,"\\'")}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:12px;font-size:13px;cursor:pointer;margin-top:8px;font-weight:600">▶️ Regarder</button></div>`;
+        }catch(e){const el=document.getElementById(id);if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">😅 Erreur</div>`;}
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
@@ -791,33 +842,51 @@
     function changerPays(){const pays=document.getElementById('paysSelect').value;memoire.pays=pays;localStorage.setItem('yuuto_pays',pays);sauvegarderMemoire();majPaysFlag();}
     function majPaysFlag(){const flags={france:'🇫🇷',belgique:'🇧🇪',canada:'🇨🇦',maroc:'🇲🇦',senegal:'🇸🇳',suisse:'🇨🇭',cote_ivoire:'🇨🇮',autre:'🌍'};const el=document.getElementById('paysFlag');if(el)el.textContent=flags[memoire.pays||'autre']||'🌍';}
     function getPaysInfo(){return MAGASINS_PAYS[memoire.pays||'autre']||MAGASINS_PAYS.autre;}
-
-    // ===== PLUS MENU =====
     function togglePlusMenu(){plusMenuOpen=!plusMenuOpen;document.getElementById('plusMenu').classList.toggle('open',plusMenuOpen);}
 
-    // ===== ENVOI IMAGE =====
+    // ===== ENVOI IMAGE — FIXÉ =====
     async function envoyerImage(input){
         const file=input.files[0];if(!file)return;
         togglePlusMenu();
         const reader=new FileReader();
         reader.onload=async(e)=>{
             const base64=e.target.result;
+            // Extraire juste les données base64 sans le préfixe
+            const base64Data=base64.split(',')[1];
+            const mimeType=file.type||'image/jpeg';
             document.getElementById('chat').innerHTML+=`<div class="moi">📸 Image envoyée<br><img src="${base64}" style="max-width:200px;border-radius:10px;display:block;margin-top:4px"/></div>`;
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
             loadingId++;const id='img_'+loadingId;
-            document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">🔍 Je regarde ton image...</div></div>`;
-            imageEnAttente={base64,description:''};
+            document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">🔍 Analyse...</div></div>`;
+            // Stocker l'image pour modifications futures
+            imageEnAttente={base64Data,mimeType,description:'',base64Full:base64};
             try{
-                const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'meta-llama/llama-4-scout-17b-16e-instruct',messages:[{role:'system',content:getSystemPrompt()+" Tu analyses des images. Décris ce que tu vois et propose des modifications."},{role:'user',content:[{type:'image_url',image_url:{url:base64}},{type:'text',text:"Décris cette image et dis moi ce que je peux modifier 😊"}]}]})});
+                const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},
+                    body:JSON.stringify({
+                        model:'meta-llama/llama-4-scout-17b-16e-instruct',
+                        messages:[{
+                            role:'user',
+                            content:[
+                                {type:'text',text:`${getSystemPrompt()} Analyse cette image et décris précisément ce que tu vois (personnage, style, couleurs, éléments importants). Dis ensuite ce que tu peux modifier si demandé. 2-3 phrases max.`},
+                                {type:'image_url',image_url:{url:`data:${mimeType};base64,${base64Data}`}}
+                            ]
+                        }],
+                        max_tokens:300
+                    })
+                });
                 const d=await r.json();
+                if(d.error){throw new Error(d.error.message);}
                 const rep=d.choices[0].message.content;
                 imageEnAttente.description=rep;
                 const el=document.getElementById(id);
                 if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">${NOM_BOT} : ${rep}<br><small style="color:#555;font-size:11px">💡 Dis moi ce que tu veux modifier !</small></div>`;
-            }catch(e){
-                imageEnAttente=null;
+            }catch(err){
+                // Fallback sans vision — juste stocker l'image
+                imageEnAttente.description='personnage anime';
                 const el=document.getElementById(id);
-                if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">😅 Erreur d'analyse. Réessaie !</div>`;
+                if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">${NOM_BOT} : Image reçue 😊 Dis moi ce que tu veux modifier !</div>`;
             }
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         };
@@ -825,7 +894,7 @@
         input.value='';
     }
 
-    // ===== ANIME PLAYER =====
+    // ===== ANIME PLAYER — JSON FIXÉ =====
     function jouerMusiqueAnime(style){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(animeMusiqueGain){try{animeMusiqueGain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.5);}catch(e){}}animeMusiqueGain=audioCtx.createGain();animeMusiqueGain.gain.value=0.05;animeMusiqueGain.connect(audioCtx.destination);const s=ANIME_MUSIC[style]||ANIME_MUSIC.action;let idx=0;function next(){if(!animeIsPlaying)return;const osc=audioCtx.createOscillator();const env=audioCtx.createGain();osc.connect(env);env.connect(animeMusiqueGain);osc.type=s.type;osc.frequency.setValueAtTime(s.notes[idx%s.notes.length],audioCtx.currentTime);env.gain.setValueAtTime(0,audioCtx.currentTime);env.gain.linearRampToValueAtTime(0.3,audioCtx.currentTime+0.05);env.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+(s.vitesse/1000)*0.9);osc.start(audioCtx.currentTime);osc.stop(audioCtx.currentTime+(s.vitesse/1000));idx++;animeMusique=setTimeout(next,s.vitesse);}next();}catch(e){}}
     function stopMusiqueAnime(){if(animeMusique)clearTimeout(animeMusique);}
 
@@ -835,32 +904,57 @@
         document.getElementById('chat').innerHTML+=`<div class="bot" id="${chatId}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">🎬 Génération épisode ${theme}... ⏳</div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         let scenario=null;
+
+        // Prompt ultra simple pour éviter les erreurs JSON
+        const prompt=`Épisode anime ${theme}. Réponds UNIQUEMENT avec ce JSON, rien d'autre avant ou après:
+{"titre":"TITRE","p1":"Héros","p2":"Rival","s":[
+{"n":"Dans un monde lointain...","d":"","p":"","i":"${info.style} anime opening cinematic 16:9"},
+{"n":"","d":"Je vais devenir le plus fort !","p":"Héros","i":"${info.style} anime hero determined close up"},
+{"n":"Un adversaire redoutable surgit !","d":"","p":"","i":"${info.style} anime villain dramatic appearance"},
+{"n":"","d":"Tu ne peux pas me vaincre !","p":"Rival","i":"${info.style} anime rival confrontation intense"},
+{"n":"Le combat décisif commence !","d":"","p":"","i":"${info.style} anime epic battle clash dramatic sky"},
+{"n":"À suivre...","d":"","p":"","i":"${info.style} anime peaceful sunset ending emotional"}
+]}`;
+
         try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Génère un épisode anime ${theme}. Réponds UNIQUEMENT avec ce JSON valide sans aucun texte avant ou après:{"titre":"TITRE EN MAJUSCULES","perso1":"Nom","perso2":"Nom2","scenes":[{"type":"intro","narrateur":"texte narrateur","dialogue":"","personnage":"","image":"${info.style} anime opening cinematic 16:9"},{"type":"scene","narrateur":"","dialogue":"dialogue du perso","personnage":"Nom","image":"${info.style} anime character"},{"type":"action","narrateur":"texte dramatique","dialogue":"","personnage":"","image":"${info.style} anime action dynamic"},{"type":"scene","narrateur":"","dialogue":"dialogue","personnage":"Nom2","image":"${info.style} anime rival"},{"type":"climax","narrateur":"moment épique","dialogue":"","personnage":"","image":"${info.style} anime epic climax dramatic"},{"type":"fin","narrateur":"À suivre...","dialogue":"","personnage":"","image":"${info.style} anime peaceful sunset ending"}]}`}]})});
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+                method:'POST',
+                headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},
+                body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}],temperature:0.7})
+            });
             const d=await r.json();
             const content=d.choices[0].message.content.trim();
             // Extraction JSON robuste
             const start=content.indexOf('{');
             const end=content.lastIndexOf('}');
-            if(start!==-1&&end!==-1){
-                const jsonStr=content.substring(start,end+1);
-                try{scenario=JSON.parse(jsonStr);}catch(e){scenario=null;}
+            if(start!==-1&&end!==-1&&end>start){
+                try{
+                    const raw=content.substring(start,end+1);
+                    scenario=JSON.parse(raw);
+                }catch(e){scenario=null;}
             }
         }catch(e){scenario=null;}
 
-        // Fallback si JSON échoue
-        if(!scenario){
-            scenario={titre:`ANIME ${theme.toUpperCase()}`,perso1:"Kaito",perso2:"Ryuu",scenes:[
-                {type:"intro",narrateur:"Dans un monde lointain...",dialogue:"",personnage:"",image:`${info.style} anime opening`},
-                {type:"scene",narrateur:"",dialogue:"Je vais devenir le plus fort !",personnage:"Kaito",image:`${info.style} anime hero`},
-                {type:"action",narrateur:"Un ennemi redoutable !",dialogue:"",personnage:"",image:`${info.style} anime battle`},
-                {type:"scene",narrateur:"",dialogue:"Tu ne peux pas me vaincre !",personnage:"Ryuu",image:`${info.style} anime rival`},
-                {type:"climax",narrateur:"Le combat décisif !",dialogue:"",personnage:"",image:`${info.style} anime climax`},
-                {type:"fin",narrateur:"À suivre...",dialogue:"",personnage:"",image:`${info.style} anime ending`}
+        // Fallback garanti
+        if(!scenario||!scenario.s){
+            scenario={titre:`ANIME ${theme.toUpperCase()}`,p1:"Kaito",p2:"Ryuu",s:[
+                {n:"Dans un monde lointain...",d:"",p:"",i:`${info.style} anime opening cinematic`},
+                {n:"",d:"Je vais devenir le plus fort !",p:"Kaito",i:`${info.style} anime hero`},
+                {n:"Un ennemi redoutable !",d:"",p:"",i:`${info.style} anime villain`},
+                {n:"",d:"Tu ne peux pas me vaincre !",p:"Ryuu",i:`${info.style} anime rival`},
+                {n:"Combat final !",d:"",p:"",i:`${info.style} anime battle`},
+                {n:"À suivre...",d:"",p:"",i:`${info.style} anime ending`}
             ]};
         }
 
-        animeScenes=scenario.scenes.map((s,i)=>({...s,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent((s.image||info.style)+', anime art style, high quality, 16:9, cinematic')}?width=768&height=432&nologo=true&seed=${Date.now()+i*1337}&model=flux`}));
+        // Normaliser les scènes (format court ou long)
+        animeScenes=scenario.s.map((sc,i)=>({
+            narrateur:sc.n||sc.narrateur||'',
+            dialogue:sc.d||sc.dialogue||'',
+            personnage:sc.p||sc.personnage||'',
+            imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent((sc.i||sc.image||info.style)+', anime art style, high quality, 16:9, cinematic, detailed')}?width=768&height=432&nologo=true&seed=${Date.now()+i*1337}&model=flux`
+        }));
+
         sauvegarderLog(memoire.prenom||'Utilisateur',`🎬 Anime ${theme}: ${scenario.titre}`,'[ANIME]','manga');
         const el=document.getElementById(chatId);
         if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">🎬 <strong>${scenario.titre}</strong> est prêt !<br><button onclick="ouvrirAnimePlayer('${scenario.titre.replace(/'/g,"\\'")}','${theme}')" style="background:linear-gradient(90deg,#7c3aed,#e11d48);color:white;border:none;padding:10px 20px;border-radius:12px;font-size:13px;cursor:pointer;margin-top:8px;font-weight:600">▶️ Regarder</button></div>`;
@@ -869,7 +963,25 @@
     }
 
     function ouvrirAnimePlayer(titre,theme){document.getElementById('animePlayer').style.display='flex';document.getElementById('animeTitle').textContent=titre;document.getElementById('animeTypeIndicator').textContent=`🎬 ${theme.toUpperCase()}`;document.getElementById('animeLoadingOverlay').style.display='flex';animeIndex=0;animeIsPlaying=true;document.getElementById('animePlayBtn').textContent='⏸';jouerMusiqueAnime(theme);afficherSceneAnime(0);demarrerTimerAnime();}
-    function afficherSceneAnime(idx){if(!animeScenes||!animeScenes[idx])return;const scene=animeScenes[idx];const img=document.getElementById('animeImg');const imgNext=document.getElementById('animeImgNext');const loading=document.getElementById('animeLoadingOverlay');const tempImg=new Image();tempImg.onload=()=>{loading.style.display='none';imgNext.src=scene.imgUrl;imgNext.style.opacity='0';setTimeout(()=>{imgNext.style.opacity='1';img.style.opacity='0';setTimeout(()=>{img.src=scene.imgUrl;img.style.opacity='1';imgNext.style.opacity='0';},800);},50);};tempImg.onerror=()=>{loading.style.display='none';img.style.background='linear-gradient(135deg,#1a1a2e,#0d0d1e)';img.src='';};tempImg.src=scene.imgUrl;document.getElementById('animeNarrateur').textContent=scene.narrateur||'';document.getElementById('animePersonnage').textContent=scene.personnage?`— ${scene.personnage} :`:'';document.getElementById('animeTexte').textContent=scene.dialogue||'';document.getElementById('animeDialogue').style.display=(scene.dialogue||scene.narrateur)?'block':'none';document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${animeScenes.length}`;document.getElementById('animeProgressBar').style.width=`${((idx+1)/animeScenes.length)*100}%`;}
+
+    function afficherSceneAnime(idx){
+        if(!animeScenes||!animeScenes[idx])return;
+        const scene=animeScenes[idx];
+        const img=document.getElementById('animeImg');
+        const imgNext=document.getElementById('animeImgNext');
+        const loading=document.getElementById('animeLoadingOverlay');
+        const tempImg=new Image();
+        tempImg.onload=()=>{loading.style.display='none';imgNext.src=scene.imgUrl;imgNext.style.opacity='0';setTimeout(()=>{imgNext.style.opacity='1';img.style.opacity='0';setTimeout(()=>{img.src=scene.imgUrl;img.style.opacity='1';imgNext.style.opacity='0';},800);},50);};
+        tempImg.onerror=()=>{loading.style.display='none';img.style.background='linear-gradient(135deg,#1a1a2e,#0d0d1e)';img.src='';};
+        tempImg.src=scene.imgUrl;
+        document.getElementById('animeNarrateur').textContent=scene.narrateur||'';
+        document.getElementById('animePersonnage').textContent=scene.personnage?`— ${scene.personnage} :`:'';
+        document.getElementById('animeTexte').textContent=scene.dialogue||'';
+        document.getElementById('animeDialogue').style.display=(scene.dialogue||scene.narrateur)?'block':'none';
+        document.getElementById('animeSceneInfo').textContent=`${idx+1} / ${animeScenes.length}`;
+        document.getElementById('animeProgressBar').style.width=`${((idx+1)/animeScenes.length)*100}%`;
+    }
+
     function demarrerTimerAnime(){if(animeTimer)clearInterval(animeTimer);animeTimer=setInterval(()=>{if(!animeIsPlaying)return;if(animeIndex<animeScenes.length-1){animeIndex++;document.getElementById('animeLoadingOverlay').style.display='flex';afficherSceneAnime(animeIndex);}else{animeIsPlaying=false;document.getElementById('animePlayBtn').textContent='▶';clearInterval(animeTimer);document.getElementById('animeNarrateur').textContent='✨ FIN';document.getElementById('animeTexte').textContent='Merci ! 🎬';document.getElementById('animePersonnage').textContent='';}},12000);}
     function toggleAnimePlay(){animeIsPlaying=!animeIsPlaying;document.getElementById('animePlayBtn').textContent=animeIsPlaying?'⏸':'▶';if(animeIsPlaying){demarrerTimerAnime();if(window.animeThemeCourant)jouerMusiqueAnime(window.animeThemeCourant);}else{if(animeTimer)clearInterval(animeTimer);stopMusiqueAnime();}}
     function animeNext(){if(animeIndex<animeScenes.length-1){animeIndex++;document.getElementById('animeLoadingOverlay').style.display='flex';afficherSceneAnime(animeIndex);if(animeTimer)clearInterval(animeTimer);if(animeIsPlaying)demarrerTimerAnime();}}
@@ -881,14 +993,14 @@
     // ===== LOGS =====
     function sauvegarderLog(user,message,reponse,type){const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');logs.push({date:new Date().toLocaleString('fr-FR'),user:user||'Inconnu',message:(message||'').substring(0,300),reponse:(reponse||'').substring(0,300),type:type||'message'});if(logs.length>1000)logs.splice(0,logs.length-1000);localStorage.setItem('yuuto_logs',JSON.stringify(logs));}
     function ouvrirLogs(){document.getElementById('logsScreen').style.display='flex';afficherLogs('tous');}
-    function afficherLogs(filtre){filtreActuel=filtre;const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');const users=[...new Set(logs.map(l=>l.user))];document.getElementById('statTotal').textContent=logs.filter(l=>l.type==='message').length;document.getElementById('statUsers').textContent=users.length;document.getElementById('statConnexions').textContent=logs.filter(l=>l.type==='connexion').length;document.getElementById('statMangas').textContent=logs.filter(l=>l.type==='manga').length;document.getElementById('statRecettes').textContent=logs.filter(l=>l.type==='recette').length;const couleurs={connexion:'#22c55e',message:'#7c3aed',manga:'#e11d48',recette:'#f97316',image:'#00d4ff'};const list=document.getElementById('logsList');if(filtre==='users'){if(users.length===0){list.innerHTML='<div style="color:#444;text-align:center;padding:30px">Aucun utilisateur 😅</div>';return;}list.innerHTML=users.map(u=>{const ul=logs.filter(l=>l.user===u);const msgs=ul.filter(l=>l.type==='message');const cnx=ul.filter(l=>l.type==='connexion');return`<div class="user-card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px">${u[0].toUpperCase()}</div><div><div style="font-weight:700;color:${u==='Antoine'?'#f59e0b':'#ddd'}">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#444">Depuis ${ul[0]?.date||'?'}</div></div></div><div style="display:flex;gap:6px;margin-bottom:8px"><span style="background:#1a1a2e;padding:3px 8px;border-radius:8px;font-size:11px;color:#7c3aed">💬 ${msgs.length}</span><span style="background:#0a2a0a;padding:3px 8px;border-radius:8px;font-size:11px;color:#22c55e">🟢 ${cnx.length}</span></div><div style="font-size:10px;color:#444">Dernière activité: ${ul[ul.length-1]?.date||'?'}</div></div>`;}).join('');return;}const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);if(filtres.length===0){list.innerHTML=`<div style="color:#444;text-align:center;padding:30px">Aucun log 😅</div>`;return;}list.innerHTML=[...filtres].reverse().map(l=>`<div class="log-item" style="border-color:${couleurs[l.type]||'#2a2a2a'}"><div style="font-size:10px;color:#444;margin-bottom:5px">${l.date}</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">${(l.user||'?')[0].toUpperCase()}</div><strong style="color:${l.user==='Antoine'?'#f59e0b':'#a78bfa'}">${l.user}</strong><span style="background:${couleurs[l.type]||'#2a2a2a'};color:white;font-size:9px;padding:2px 6px;border-radius:8px">${l.type.toUpperCase()}</span></div><div style="font-size:12px;color:#ccc;padding:6px 8px;background:#0f0f0f;border-radius:8px">${l.type==='connexion'?`🚪 connecté`:l.type==='manga'?`🎬 ${l.message}`:l.type==='recette'?`🍜 ${l.message}`:l.type==='image'?`🎨 ${l.message}`:`💬 ${l.message}`}</div>${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME]'?`<div style="font-size:11px;color:#22c55e;padding:5px 8px;background:#0a1a0a;border-radius:8px;margin-top:4px">🤖 ${l.reponse.substring(0,150)}</div>`:''}</div>`).join('');}
+    function afficherLogs(filtre){const filtreActuel=filtre;const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');const users=[...new Set(logs.map(l=>l.user))];document.getElementById('statTotal').textContent=logs.filter(l=>l.type==='message').length;document.getElementById('statUsers').textContent=users.length;document.getElementById('statConnexions').textContent=logs.filter(l=>l.type==='connexion').length;document.getElementById('statMangas').textContent=logs.filter(l=>l.type==='manga').length;document.getElementById('statRecettes').textContent=logs.filter(l=>l.type==='recette').length;const couleurs={connexion:'#22c55e',message:'#7c3aed',manga:'#e11d48',recette:'#f97316',image:'#00d4ff'};const list=document.getElementById('logsList');if(filtre==='users'){if(users.length===0){list.innerHTML='<div style="color:#444;text-align:center;padding:30px">Aucun utilisateur 😅</div>';return;}list.innerHTML=users.map(u=>{const ul=logs.filter(l=>l.user===u);const msgs=ul.filter(l=>l.type==='message');const cnx=ul.filter(l=>l.type==='connexion');return`<div class="user-card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px">${u[0].toUpperCase()}</div><div><div style="font-weight:700;color:${u==='Antoine'?'#f59e0b':'#ddd'}">${u} ${u==='Antoine'?'👑':''}</div><div style="font-size:10px;color:#444">Depuis ${ul[0]?.date||'?'}</div></div></div><div style="display:flex;gap:6px;margin-bottom:8px"><span style="background:#1a1a2e;padding:3px 8px;border-radius:8px;font-size:11px;color:#7c3aed">💬 ${msgs.length}</span><span style="background:#0a2a0a;padding:3px 8px;border-radius:8px;font-size:11px;color:#22c55e">🟢 ${cnx.length}</span></div><div style="font-size:10px;color:#444">Dernière: ${ul[ul.length-1]?.date||'?'}</div></div>`;}).join('');return;}const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);if(filtres.length===0){list.innerHTML=`<div style="color:#444;text-align:center;padding:30px">Aucun log 😅</div>`;return;}list.innerHTML=[...filtres].reverse().map(l=>`<div class="log-item" style="border-color:${couleurs[l.type]||'#2a2a2a'}"><div style="font-size:10px;color:#444;margin-bottom:5px">${l.date}</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">${(l.user||'?')[0].toUpperCase()}</div><strong style="color:${l.user==='Antoine'?'#f59e0b':'#a78bfa'}">${l.user}</strong><span style="background:${couleurs[l.type]||'#2a2a2a'};color:white;font-size:9px;padding:2px 6px;border-radius:8px">${l.type.toUpperCase()}</span></div><div style="font-size:12px;color:#ccc;padding:6px 8px;background:#0f0f0f;border-radius:8px">${l.type==='connexion'?`🚪 connecté`:l.type==='manga'?`🎬 ${l.message}`:l.type==='recette'?`🍜 ${l.message}`:l.type==='image'?`🎨 ${l.message}`:`💬 ${l.message}`}</div>${l.reponse&&l.reponse!=='[RECETTE]'&&l.reponse!=='[IMAGE]'&&l.reponse!=='[ANIME]'?`<div style="font-size:11px;color:#22c55e;padding:5px 8px;background:#0a1a0a;border-radius:8px;margin-top:4px">🤖 ${l.reponse.substring(0,150)}</div>`:''}</div>`).join('');}
     function filtrerLogs(f,b){document.querySelectorAll('.filtre-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');afficherLogs(f);}
     function fermerLogs(){document.getElementById('logsScreen').style.display='none';}
-    function effacerLogs(){if(confirm('Effacer TOUS les logs ?')){localStorage.removeItem('yuuto_logs');afficherLogs(filtreActuel);}}
+    function effacerLogs(){if(confirm('Effacer TOUS les logs ?')){localStorage.removeItem('yuuto_logs');afficherLogs('tous');}}
 
     // ===== LOGIN =====
     function seConnecter(){const n=document.getElementById('nom').value.trim();const nl=n.toLowerCase();if(nl.includes('antoine')||nl.includes('gatore')){document.getElementById('login').style.display='none';document.getElementById('loginAntoine').style.display='flex';return;}if(n.length===0){document.getElementById('erreur').style.display='block';return;}memoire.prenom=n;estAntoine=false;localStorage.setItem('yuuto_nom',n);chargerMemoire();demarrer();}
-    function verifierMdp(){const mdp=document.getElementById('mdpInput').value.trim();mdpTentatives++;if(mdp===MDP_ANTOINE){estAntoine=true;memoire.prenom="Antoine";localStorage.setItem('yuuto_nom','Antoine Gatore');document.getElementById('loginAntoine').style.display='none';chargerMemoire();demarrer();}else{document.getElementById('mdpErreur').style.display='block';document.getElementById('mdpTentatives').style.display='block';document.getElementById('mdpTentatives').textContent=`Tentative ${mdpTentatives}/5`;document.getElementById('mdpInput').value='';if(mdpTentatives>=5){document.getElementById('mdpBtn').disabled=true;document.getElementById('mdpTentatives').textContent='🔒 Bloqué';}}}
+    function verifierMdp(){const mdp=document.getElementById('mdpInput').value.trim();const t=++window._mdpT||1;window._mdpT=t;if(mdp===MDP_ANTOINE){estAntoine=true;memoire.prenom="Antoine";localStorage.setItem('yuuto_nom','Antoine Gatore');document.getElementById('loginAntoine').style.display='none';chargerMemoire();demarrer();}else{document.getElementById('mdpErreur').style.display='block';document.getElementById('mdpTentatives').style.display='block';document.getElementById('mdpTentatives').textContent=`Tentative ${t}/5`;document.getElementById('mdpInput').value='';if(t>=5){document.getElementById('mdpBtn').disabled=true;document.getElementById('mdpTentatives').textContent='🔒 Bloqué';}}}
 
     // ===== MEMOIRE =====
     function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d){const m=JSON.parse(d);Object.assign(memoire,m);}const pays=localStorage.getItem('yuuto_pays');if(pays)memoire.pays=pays;}
@@ -899,15 +1011,23 @@
     function effacerMemoire(){const p=memoire.prenom;const pays=memoire.pays;memoire={prenom:p,pays:pays,visites:memoire.visites};sauvegarderMemoire();afficherMemoire();ajouterMessageBot("Mémoire effacée 😊");fermerModal('memoireScreen');}
 
     // ===== RECETTES =====
-    async function faireRecette(recette,emoji){fermerModal('recetteScreen');document.getElementById('chat').innerHTML+=`<div class="moi">${emoji} ${recette} !</div>`;loadingId++;const id='r'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🍳 Préparation... ⏳</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;const paysInfo=getPaysInfo();try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}". Réponds UNIQUEMENT avec un JSON valide sans markdown:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient"],"etapes":["Etape 1","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun","ou_trouver":"${paysInfo}"}`}]})});const d=await r.json();const content=d.choices[0].message.content.trim();let data=null;try{const start=content.indexOf('{');const end=content.lastIndexOf('}');if(start!==-1&&end!==-1)data=JSON.parse(content.substring(start,end+1));}catch(e){data=null;}const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful colorful appetizing')}?width=420&height=280&nologo=true&seed=${Date.now()}&model=flux`;if(data&&data.titre){document.getElementById(id).innerHTML=`🍜 Voilà !<div class="recette-card"><h3>${data.titre}</h3><img src="${imgUrl}" loading="lazy" onerror="this.style.display='none'"/><div class="anecdote">🎌 ${data.anime||''}</div><div class="section-titre">📦 Ingrédients</div>${(data.ingredients||[]).map(i=>`<div class="ingredient">${i}</div>`).join('')}<div class="section-titre">👨‍🍳 Préparation</div>${(data.etapes||[]).map((e,i)=>`<div class="etape"><span class="etape-num">${i+1}.</span>${e}</div>`).join('')}${data.conseil?`<div class="conseil-box">💡 ${data.conseil}</div>`:''}${data.ou_trouver?`<div class="ou-trouver">🛒 ${data.ou_trouver}</div>`:''}</div>`;}else{document.getElementById(id).innerHTML=`😅 Erreur. Réessaie !`;}sauvegarderLog(memoire.prenom||'Utilisateur',`Recette: ${recette}`,'[RECETTE]','recette');}catch(e){document.getElementById(id).innerHTML=`😅 Erreur de connexion.`;}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+    async function faireRecette(recette,emoji){fermerModal('recetteScreen');document.getElementById('chat').innerHTML+=`<div class="moi">${emoji} ${recette} !</div>`;loadingId++;const id='r'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🍳 Préparation... ⏳</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;const paysInfo=getPaysInfo();try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}". JSON valide sans markdown:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient"],"etapes":["Etape 1","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun","ou_trouver":"${paysInfo}"}`}]})});const d=await r.json();const content=d.choices[0].message.content.trim();let data=null;try{const s=content.indexOf('{');const e=content.lastIndexOf('}');if(s!==-1&&e!==-1)data=JSON.parse(content.substring(s,e+1));}catch(e){data=null;}const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful colorful')}?width=420&height=280&nologo=true&seed=${Date.now()}&model=flux`;if(data&&data.titre){document.getElementById(id).innerHTML=`🍜 Voilà !<div class="recette-card"><h3>${data.titre}</h3><img src="${imgUrl}" loading="lazy" onerror="this.style.display='none'"/><div class="anecdote">🎌 ${data.anime||''}</div><div class="section-titre">📦 Ingrédients</div>${(data.ingredients||[]).map(i=>`<div class="ingredient">${i}</div>`).join('')}<div class="section-titre">👨‍🍳 Préparation</div>${(data.etapes||[]).map((e,i)=>`<div class="etape"><span class="etape-num">${i+1}.</span>${e}</div>`).join('')}${data.conseil?`<div class="conseil-box">💡 ${data.conseil}</div>`:''}${data.ou_trouver?`<div class="ou-trouver">🛒 ${data.ou_trouver}</div>`:''}</div>`;}else{document.getElementById(id).innerHTML=`😅 Erreur. Réessaie !`;}sauvegarderLog(memoire.prenom||'Utilisateur',`Recette: ${recette}`,'[RECETTE]','recette');}catch(e){document.getElementById(id).innerHTML=`😅 Erreur de connexion.`;}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
 
-    // ===== SYSTEM PROMPT =====
-    function getSystemPrompt(){const mem=getMemoireTexte();if(personnageActuel)return`Tu es ${personnageActuel}. Parle exactement comme ce personnage. ${mem}`;const analyse=analyserMahoraga(historique,estAntoine);return genererPersonnalite(analyse,estAntoine,memoire.prenom)+' '+mem;}
+    // ===== SYSTEM PROMPT MAHORAGA 6 ROULETTES =====
+    function getSystemPrompt(){
+        const mem=getMemoireTexte();
+        if(personnageActuel)return`Tu es ${personnageActuel}. Parle exactement comme ce personnage. ${mem}`;
+        const analyse=analyserMahoraga6(historique,estAntoine);
+        mahoragaAnalyse=analyse;
+        // Appliquer la police
+        appliquerPolice(analyse.style);
+        return genererPersonnalite6(analyse,estAntoine,memoire.prenom)+' '+mem;
+    }
 
     // ===== COMMANDES =====
     function detecterCommande(msg){
         const ml=msg.toLowerCase();
-        if(ml.includes('génère un manga')||ml.includes('genere un manga')||ml.includes('génère un anime')||ml.includes('genere un anime')||ml.includes('crée un anime')||ml.includes('cree un anime')||ml.includes('faire un anime')||ml.includes('faire un manga')||ml.includes('lance un anime')||ml.includes('lance un manga')||(ml.includes('anime')&&(ml.includes('action')||ml.includes('romance')||ml.includes('isekai')||ml.includes('fantasy')||ml.includes('shonen')||ml.includes('horreur')||ml.includes('comedie')||ml.includes('aventure')))){
+        if(ml.includes('génère un manga')||ml.includes('genere un manga')||ml.includes('génère un anime')||ml.includes('genere un anime')||ml.includes('crée un anime')||ml.includes('cree un anime')||ml.includes('faire un anime')||ml.includes('faire un manga')||ml.includes('lance un anime')||ml.includes('lance un manga')||(ml.includes('anime')&&(ml.includes('action')||ml.includes('romance')||ml.includes('isekai')||ml.includes('fantasy')||ml.includes('shonen')||ml.includes('horreur')||ml.includes('comedie')||ml.includes('aventure')))||(ml.includes('manga')&&(ml.includes('action')||ml.includes('romance')))){
             let theme='action';
             if(ml.includes('romance'))theme='romance';
             else if(ml.includes('isekai'))theme='isekai';
@@ -928,6 +1048,7 @@
         return false;
     }
 
+    function activerFondMangaGlobal(){activerFondManga();}
     async function lancerLecon(niveau){fermerModal('japonaisScreen');const prompts={debutant:`Prof japonais. Hiragana et salutations. Structuré, français.`,intermediaire:`Katakana et phrases courantes.`,anime:`10 expressions japonaises d'animes avec traduction.`,kanji:`5 kanji essentiels avec sens et exemple.`};document.getElementById('chat').innerHTML+=`<div class="moi">🎌 Leçon ${niveau} !</div>`;loadingId++;const id='l'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompts[niveau]}]})});const d=await r.json();const rep=d.choices[0].message.content;document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️ Suite</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
     async function continuerLecon(niveau){document.getElementById('chat').innerHTML+=`<div class="moi">➡️</div>`;loadingId++;const id='l'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg japonais" id="${id}">🎌...</div></div>`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[...historique,{role:'user',content:`Continue leçon ${niveau}.`}]})});const d=await r.json();const rep=d.choices[0].message.content;document.getElementById(id).innerHTML=`${rep}<br><button class="audio-btn" onclick="continuerLecon('${niveau}')">➡️</button>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
     function toggleSidebar(){sidebarVisible=!sidebarVisible;const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay');if(sidebarVisible){sb.classList.add('open');ov.style.display='block';}else{sb.classList.remove('open');ov.style.display='none';}}
@@ -965,26 +1086,14 @@
     function nettoyerTexte(t){return(t||'').replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu,'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
     function ajouterMessageBot(texte,nom){const n=nom||NOM_BOT;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${n} : ${texte}</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
 
-    // ===== MESSAGE ACCUEIL IA =====
+    // ===== ACCUEIL IA =====
     async function genererAccueil(){
-        const h=new Date().getHours();
-        const visites=memoire.visites||1;
-        const prenom=memoire.prenom||'';
-        const sujets=memoire.sujets||[];
+        const h=new Date().getHours();const visites=memoire.visites||1;const prenom=memoire.prenom||'';const sujets=memoire.sujets||[];
         let prompt;
-        if(estAntoine){
-            prompt=`Génère un message d'accueil court pour Antoine, ton créateur. Style: pote de rue, max 1-2 phrases, naturel comme "Wsh bro ! Visite ${visites} 🔥" ou "Oe t'es là enfin 😄". Pas d'explication, juste le message.`;
-        }else{
-            const animeRef=sujets.length>0?`Il aime: ${sujets.join(', ')}.`:'';
-            prompt=`Génère un message d'accueil unique pour ${prenom||'un utilisateur'}. ${animeRef} Visite ${visites}. ${h}h. 1-2 phrases naturelles. Donne envie de rester. Exemples de style: "Salut ${prenom} ! Visite ${visites} 🎌" ou "Wsh ${prenom} ! T'es revenu 😊". Pas d'explication, juste le message.`;
-        }
-        try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}]})});
-            const d=await r.json();
-            return d.choices[0].message.content.replace(/^"|"$/g,'').trim();
-        }catch(e){
-            return estAntoine?`Wsh bro 😄 Visite ${visites}`:`Salut ${prenom} ! 😊 Visite ${visites} 🎌`;
-        }
+        if(estAntoine){prompt=`Génère UN message d'accueil pour Antoine ton créateur. 1 phrase. Style pote de rue direct. Exemple: "Wsh bro ! Visite ${visites} 🔥" ou "Oe t'es là 😄 visite ${visites}". Juste le message, rien d'autre.`;}
+        else{const animeRef=sujets.length>0?`Il aime: ${sujets.join(', ')}.`:'';prompt=`Génère UN message d'accueil unique pour ${prenom||'quelqu\'un'}. ${animeRef} Visite ${visites}. ${h}h. 1-2 phrases naturelles qui donnent envie de rester. Exemple: "Salut ${prenom} ! 😊 Visite ${visites}" ou "Wsh ${prenom} ! T'es revenu 🎌". Juste le message, rien d'autre.`;}
+        try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}],max_tokens:80})});const d=await r.json();return d.choices[0].message.content.replace(/^"|"$/g,'').trim();}
+        catch(e){return estAntoine?`Wsh bro 😄 Visite ${visites}`:`Salut ${prenom} ! 😊 Visite ${visites} 🎌`;}
     }
 
     function demarrer(){
@@ -992,15 +1101,8 @@
         document.getElementById('loginAntoine').style.display='none';
         document.getElementById('app').style.display='flex';
         initMic();majHistorique();
-
-        // Fonds
-        if(estAntoine){
-            activerFondSukuna();
-            document.getElementById('logsBtn').style.display='flex';
-        }else{
-            activerFondManga();
-        }
-
+        if(estAntoine){activerFondSukuna();document.getElementById('logsBtn').style.display='flex';}
+        else{activerFondManga();}
         const h=new Date().getHours();
         document.getElementById('humeur').textContent=h<12?'😴':h<18?'⚡':h<22?'🌙':'✨';
         memoire.visites=(memoire.visites||0)+1;
@@ -1012,11 +1114,8 @@
         const paysSelect=document.getElementById('paysSelect');
         if(paysSelect&&memoire.pays)paysSelect.value=memoire.pays;
         sauvegarderLog(memoire.prenom||'Utilisateur','[CONNEXION]',`Visite n°${memoire.visites}`,'connexion');
-
         document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg"><span style="color:#333">●●●</span></div></div>`;
-        genererAccueil().then(intro=>{
-            document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${NOM_BOT} : ${intro}</div></div>`;
-        });
+        genererAccueil().then(intro=>{document.getElementById('chat').innerHTML=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg">${NOM_BOT} : ${intro}</div></div>`;});
     }
 
     async function envoyer(){
@@ -1030,16 +1129,16 @@
         const ml=msg.toLowerCase();
         if(MOTS_SENSIBLES.some(m=>ml.includes(m))){document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg urgent">💙 Tu n'es pas seul. Parle à quelqu'un de confiance 💙</div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;}
 
-        // Modification image si en attente
+        // Modification image
         if(imageEnAttente){
-            const descModif=imageEnAttente.description+' '+msg;
-            const prompt=encodeURIComponent(descModif+' anime art style high quality');
+            const desc=imageEnAttente.description||'personnage anime';
+            const prompt=encodeURIComponent(desc+' '+msg+', anime art style, high quality, detailed');
             loadingId++;const id='img2_'+loadingId;
             document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🎨 Génération avec tes modifications...</div></div>`;
             const imgUrl=`https://image.pollinations.ai/prompt/${prompt}?width=512&height=512&nologo=true&seed=${Math.floor(Math.random()*99999)}&model=flux`;
             const tempImg=new Image();
-            tempImg.onload=()=>{document.getElementById(id).innerHTML=`Voilà avec tes modifs ! 🎨<br><img src="${imgUrl}" style="max-width:240px;border-radius:12px;margin-top:8px;display:block;"/>`;};
-            tempImg.onerror=()=>{document.getElementById(id).innerHTML=`😅 Erreur.`;};
+            tempImg.onload=()=>{document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">Voilà avec tes modifs ! 🎨<br><img src="${imgUrl}" style="max-width:240px;border-radius:12px;margin-top:8px;display:block;"/></div>`;};
+            tempImg.onerror=()=>{document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">😅 Erreur.</div>`;};
             tempImg.src=imgUrl;
             imageEnAttente=null;
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
@@ -1053,8 +1152,8 @@
             document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg" id="${id}">🎨 Génération...</div></div>`;
             const imgUrl=`https://image.pollinations.ai/prompt/${prompt}?width=512&height=512&nologo=true&seed=${Math.floor(Math.random()*99999)}&model=flux`;
             const tempImg=new Image();
-            tempImg.onload=()=>{document.getElementById(id).innerHTML=`Voilà ! 🎨<br><img src="${imgUrl}" style="max-width:240px;border-radius:12px;margin-top:8px;display:block;"/>`;};
-            tempImg.onerror=()=>{document.getElementById(id).innerHTML=`😅 Erreur.`;};
+            tempImg.onload=()=>{document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">Voilà ! 🎨<br><img src="${imgUrl}" style="max-width:240px;border-radius:12px;margin-top:8px;display:block;"/></div>`;};
+            tempImg.onerror=()=>{document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">😅 Erreur.</div>`;};
             tempImg.src=imgUrl;
             sauvegarderLog(memoire.prenom||'Utilisateur',msg,'[IMAGE]','image');
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
@@ -1070,7 +1169,6 @@
         historique.push({"role":"user","content":msg});
         if(historique.length>20)historique.splice(0,historique.length-20);
 
-        // ID unique pour éviter les réponses en arrière plan
         const currentRequestId=++requestId;
         loadingId++;const id='resp'+loadingId;
         document.getElementById('chat').innerHTML+=`<div class="bot" id="${id}"><img class="avatar" src="${AVATAR}"/><div class="bot-msg"><span style="color:#333">●●●</span></div></div>`;
@@ -1078,10 +1176,7 @@
 
         try{
             const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},...historique]})});
-
-            // Si une nouvelle requête a été lancée entre temps, on ignore
             if(currentRequestId!==requestId)return;
-
             const d=await r.json();
             const rep=d.choices[0].message.content;
             historique.push({"role":"assistant","content":rep});
