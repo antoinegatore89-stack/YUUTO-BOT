@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#7c3aed"/>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Caveat&family=Rajdhani:wght@400;600&family=Nunito:wght@400;600&family=Fredoka+One&display=swap" rel="stylesheet"/>
     <style>
-        :root{--bg:#080810;--bg2:#0e0e1a;--bg3:#13131f;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);--purple:#7c3aed;--purple2:#9d5ff5;--gold:#f59e0b;--red:#e11d48;--green:#22c55e;--orange:#f97316;--text:#e8e8f0;--text2:#888899;--text3:#444455;--glass:rgba(255,255,255,0.04);--glass2:rgba(255,255,255,0.07);--shadow:0 8px 32px rgba(0,0,0,0.5);--radius:20px;--radius2:14px;--radius3:10px;}
+        :root{--bg:#080810;--bg2:#0e0e1a;--bg3:#13131f;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);--purple:#7c3aed;--gold:#f59e0b;--red:#e11d48;--green:#22c55e;--orange:#f97316;--text:#e8e8f0;--text2:#888899;--text3:#444455;--glass:rgba(255,255,255,0.04);--glass2:rgba(255,255,255,0.07);--shadow:0 8px 32px rgba(0,0,0,0.5);--radius:20px;--radius2:14px;--radius3:10px;}
         *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
         body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;}
         #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;}
@@ -18,26 +18,13 @@
         #mangaBg{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;}
         #mangaBg span{position:absolute;bottom:-50px;animation:floatSymbol linear infinite;}
         @keyframes floatSymbol{0%{transform:translateY(0) rotate(0deg);opacity:0.06}100%{transform:translateY(-110vh) rotate(360deg);opacity:0}}
-
-        /* GOJO INFINITY VOID BG */
         #gojoBg{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse at center,#000428 0%,#000000 100%);}
         .gojo-star{position:absolute;border-radius:50%;background:white;animation:gojoStar linear infinite;}
         .gojo-ring{position:absolute;border:1px solid rgba(100,150,255,0.15);border-radius:50%;animation:gojoRing linear infinite;left:50%;top:50%;transform:translate(-50%,-50%);}
         @keyframes gojoStar{0%{opacity:0;transform:scale(0)}50%{opacity:1}100%{opacity:0;transform:scale(1.5)}}
         @keyframes gojoRing{0%{transform:translate(-50%,-50%) scale(0.5);opacity:0.3}100%{transform:translate(-50%,-50%) scale(3);opacity:0}}
-
-        #sukunaBg{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse at center,#1a0000 0%,#0a0000 60%,#000 100%);}
-        .sukuna-slash{position:absolute;background:linear-gradient(90deg,transparent,rgba(180,0,0,0.5),transparent);height:1px;animation:slashAnim linear infinite;}
-        .sukuna-curse{position:absolute;color:rgba(180,0,0,0.35);animation:curseFloat linear infinite;font-family:serif;}
-        .sukuna-eye{position:absolute;width:40px;height:20px;border:1px solid rgba(180,0,0,0.25);border-radius:50%;animation:eyePulse ease-in-out infinite;}
-        .sukuna-eye::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:rgba(220,0,0,0.4);border-radius:50%;}
-        @keyframes slashAnim{0%{transform:translateX(-100vw) rotate(var(--angle));opacity:0}20%{opacity:1}80%{opacity:0.7}100%{transform:translateX(200vw) rotate(var(--angle));opacity:0}}
-        @keyframes curseFloat{0%{transform:translateY(100vh);opacity:0}10%{opacity:0.4}90%{opacity:0.25}100%{transform:translateY(-100px);opacity:0}}
-        @keyframes eyePulse{0%,100%{opacity:0.15;transform:scale(1)}50%{opacity:0.5;transform:scale(1.2)}}
         @keyframes logoSpin{to{transform:rotate(360deg)}}
         .avatar.spinning{animation:logoSpin 1s linear infinite;}
-
-        /* PAYS */
         #paysScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;position:relative;z-index:1;padding:20px;}
         #paysScreen img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.2);animation:logoPulse 3s ease-in-out infinite;}
         @keyframes logoPulse{0%,100%{box-shadow:0 0 20px rgba(255,255,255,0.1)}50%{box-shadow:0 0 40px rgba(255,255,255,0.2)}}
@@ -45,21 +32,16 @@
         #paysScreen p{color:var(--text2);font-size:13px;text-align:center;}
         .pays-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:300px;}
         .pays-btn{background:var(--glass);border:1px solid var(--border2);color:var(--text);padding:14px 10px;border-radius:var(--radius2);cursor:pointer;text-align:center;transition:all 0.2s;}
-        .pays-btn:active{transform:scale(0.95);background:rgba(255,255,255,0.1);}
+        .pays-btn:active{transform:scale(0.95);}
         .pays-flag{font-size:24px;display:block;margin-bottom:4px;}
         .pays-name{font-size:11px;color:var(--text2);font-weight:500;}
-
-        /* LOGIN */
         #login{display:none;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:16px;position:relative;z-index:1;padding:30px;}
         #login img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.2);animation:logoPulse 3s ease-in-out infinite;}
         #login h2{font-size:28px;font-weight:700;color:white;}
         #login p{color:var(--text2);font-size:13px;}
         #login input{padding:15px 20px;border-radius:var(--radius2);border:1px solid var(--border2);font-size:15px;width:100%;max-width:280px;text-align:center;background:var(--glass);color:var(--text);outline:none;font-family:'Outfit',sans-serif;}
-        #login input:focus{border-color:rgba(255,255,255,0.3);}
         #login button{background:white;color:black;border:none;padding:15px;border-radius:var(--radius2);font-size:15px;cursor:pointer;font-weight:700;width:100%;max-width:280px;font-family:'Outfit',sans-serif;}
         #erreur{color:var(--red);display:none;font-size:13px;}
-
-        /* LOGIN ANTOINE — Gojo theme */
         #loginAntoine{display:none;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:16px;position:relative;z-index:1;padding:30px;background:radial-gradient(ellipse at center,#000428,#000000);}
         #loginAntoine img{width:90px;height:90px;border-radius:50%;object-fit:cover;border:2px solid rgba(100,150,255,0.4);box-shadow:0 0 40px rgba(100,150,255,0.3);}
         #loginAntoine h2{font-size:22px;font-weight:700;background:linear-gradient(135deg,#6495ed,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
@@ -67,8 +49,6 @@
         #mdpBtn{background:linear-gradient(135deg,#1a3a8f,#6495ed);color:white;border:none;padding:15px;border-radius:var(--radius2);font-size:15px;cursor:pointer;font-weight:700;width:100%;max-width:280px;font-family:'Outfit',sans-serif;}
         #mdpErreur{color:var(--red);display:none;font-size:13px;}
         #mdpTentatives{color:var(--text3);font-size:12px;display:none;}
-
-        /* LOGS */
         #logsScreen{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:9999;flex-direction:column;}
         #logsHeader{background:var(--bg2);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0;}
         #logsHeader h2{font-size:16px;color:var(--gold);font-weight:600;}
@@ -84,8 +64,6 @@
         .filtre-btn.active{background:var(--purple);color:white;border-color:var(--purple);}
         #clearLogsBtn{background:var(--red);border:none;color:white;padding:6px 12px;border-radius:var(--radius3);font-size:12px;cursor:pointer;}
         .user-card{background:var(--bg2);border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius2);padding:14px;margin-bottom:8px;}
-
-        /* MANGA READER */
         #mangaPlayer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:9998;flex-direction:column;}
         #mangaHeader{background:var(--bg2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0;}
         #mangaTitle{font-size:14px;font-weight:700;color:white;}
@@ -96,8 +74,6 @@
         .manga-panel img{width:100%;display:block;object-fit:cover;}
         .manga-bubble{position:absolute;background:white;border:2px solid #111;border-radius:16px;padding:6px 12px;font-size:12px;color:#111;font-weight:600;font-family:'Outfit',sans-serif;max-width:75%;line-height:1.4;z-index:5;box-shadow:2px 2px 0px #111;}
         .manga-bubble.top-left{top:10px;left:10px;}
-        .manga-bubble.top-right{top:10px;right:10px;}
-        .manga-bubble.bottom-left{bottom:10px;left:10px;}
         .manga-bubble.bottom-right{bottom:10px;right:10px;}
         .manga-narrateur{background:#111;color:white;border:2px solid white;border-radius:4px;}
         .manga-perso{font-size:10px;font-weight:800;color:var(--purple);display:block;margin-bottom:2px;}
@@ -106,8 +82,6 @@
         #mangaControls{background:var(--bg2);padding:12px 16px;display:flex;justify-content:center;gap:12px;border-top:1px solid var(--border);flex-shrink:0;}
         .manga-btn{background:var(--glass2);border:1px solid var(--border2);color:white;padding:10px 24px;border-radius:20px;font-size:13px;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600;}
         .manga-btn.primary{background:white;color:black;}
-
-        /* MANGA THEME */
         #mangaThemeScreen{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9997;justify-content:center;align-items:flex-end;backdrop-filter:blur(8px);}
         #mangaThemeBox{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius) var(--radius) 0 0;padding:20px;width:100%;max-width:480px;display:flex;flex-direction:column;gap:10px;animation:sheetUp 0.28s cubic-bezier(0.4,0,0.2,1);}
         @keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
@@ -116,8 +90,6 @@
         .manga-theme-icon{width:44px;height:44px;border-radius:var(--radius3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
         .manga-theme-name{font-weight:700;color:white;font-size:14px;}
         .manga-theme-desc{font-size:11px;color:var(--text3);margin-top:2px;}
-
-        /* GALERIE PERSOS */
         #galeriePersosScreen{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9997;justify-content:center;align-items:flex-end;backdrop-filter:blur(8px);}
         #galerieBox{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius) var(--radius) 0 0;padding:20px;width:100%;max-width:480px;display:flex;flex-direction:column;gap:8px;max-height:88vh;overflow-y:auto;animation:sheetUp 0.28s cubic-bezier(0.4,0,0.2,1);}
         .perso-categorie{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;padding:6px 0 3px;border-bottom:1px solid var(--border);margin-top:6px;}
@@ -126,8 +98,6 @@
         .perso-emoji{font-size:26px;flex-shrink:0;}
         .perso-name{font-weight:700;color:white;font-size:14px;}
         .perso-anime{font-size:11px;color:var(--text3);margin-top:2px;}
-
-        /* APP */
         #app{display:none;flex-direction:row;height:100vh;width:100%;overflow:hidden;position:relative;z-index:1;}
         #sidebar{display:none;position:fixed;top:0;left:0;width:270px;height:100vh;background:rgba(8,8,16,0.97);flex-direction:column;z-index:100;border-right:1px solid var(--border);backdrop-filter:blur(20px);}
         #sidebar.open{display:flex;animation:slideIn 0.28s cubic-bezier(0.4,0,0.2,1);}
@@ -269,32 +239,25 @@
         #toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--bg2);border:1px solid var(--border2);padding:10px 20px;border-radius:30px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);pointer-events:none;white-space:nowrap;box-shadow:var(--shadow);}
         #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-        /* CHIBI VIDEO CALL */
+        /* VIDEO CALL CHIBI */
         #videoCallScreen{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,#000428,#000000);flex-direction:column;align-items:center;justify-content:space-between;z-index:999;padding:20px 15px;}
         #videoCallTop{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:10px;}
         #videoCallName{font-size:22px;font-weight:700;color:white;letter-spacing:-0.5px;}
         #videoCallStatus{font-size:12px;color:var(--text3);}
-
-        /* CHIBI ANIMÉ */
-        #chibiChar{position:relative;width:220px;height:320px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;animation:chibiFloat 3s ease-in-out infinite;}
+        #chibiChar{position:relative;width:280px;height:320px;display:flex;align-items:center;justify-content:center;animation:chibiFloat 3s ease-in-out infinite;}
         @keyframes chibiFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-        #chibiBody{width:180px;height:180px;object-fit:contain;position:absolute;bottom:0;left:50%;transform:translateX(-50%);transition:opacity 0.2s;}
-        #chibiHead{width:200px;height:200px;object-fit:contain;position:absolute;bottom:120px;left:50%;transform:translateX(-50%);transition:all 0.15s;z-index:2;}
-        #chibiAura{position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(100,149,237,0.1),transparent 70%);animation:auraAnim 3s ease-in-out infinite alternate;}
-        @keyframes auraAnim{0%{opacity:0.5;transform:translateX(-50%) scale(0.95)}100%{opacity:1;transform:translateX(-50%) scale(1.1)}}
-
+        #chibiImg{width:280px;height:320px;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 0 20px rgba(100,149,237,0.3));}
+        #chibiAura{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(100,149,237,0.1),transparent 70%);animation:auraAnim 3s ease-in-out infinite alternate;z-index:1;}
+        @keyframes auraAnim{0%{opacity:0.5;transform:translate(-50%,-50%) scale(0.95)}100%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
         #videoCallBubble{background:rgba(0,4,40,0.9);border:1px solid rgba(100,149,237,0.2);border-radius:var(--radius2);padding:14px 20px;width:95%;max-width:320px;font-size:14px;text-align:center;color:var(--text);min-height:48px;line-height:1.6;backdrop-filter:blur(10px);}
         #videoCallBtns{display:flex;gap:20px;margin-bottom:10px;}
         #videoMicBtn{background:var(--glass2);color:white;border:1px solid var(--border2);width:62px;height:62px;border-radius:50%;font-size:24px;cursor:pointer;}
         #videoMicBtn.active{background:var(--green);border-color:var(--green);}
         #videoEndBtn{background:var(--red);color:white;border:none;width:62px;height:62px;border-radius:50%;font-size:24px;cursor:pointer;}
-
-        /* AFFINITE */
         #affiniteBar{position:absolute;top:15px;left:15px;right:15px;display:flex;align-items:center;gap:8px;}
         #affiniteLabel{font-size:10px;color:rgba(100,149,237,0.7);font-weight:600;white-space:nowrap;}
         #affiniteTrack{flex:1;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;}
         #affiniteFill{height:100%;background:linear-gradient(90deg,#6495ed,#ffffff);border-radius:2px;transition:width 1s ease;}
-
         ::-webkit-scrollbar{width:3px;height:3px;}
         ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
     </style>
@@ -303,7 +266,6 @@
 <div id="particles"></div>
 <div id="mangaBg"></div>
 <div id="gojoBg"></div>
-<div id="sukunaBg"></div>
 <div id="toast"></div>
 
 <div id="paysScreen">
@@ -341,7 +303,6 @@
     <span id="mdpTentatives"></span>
 </div>
 
-<!-- MANGA THEME SELECTOR -->
 <div id="mangaThemeScreen">
     <div id="mangaThemeBox">
         <div class="sheet-handle"></div>
@@ -356,7 +317,6 @@
     </div>
 </div>
 
-<!-- MANGA READER -->
 <div id="mangaPlayer">
     <div id="mangaHeader">
         <div><div id="mangaTitle">Manga</div><div id="mangaPageInfo"></div></div>
@@ -371,7 +331,6 @@
     </div>
 </div>
 
-<!-- GALERIE PERSOS -->
 <div id="galeriePersosScreen">
     <div id="galerieBox">
         <div class="sheet-handle"></div>
@@ -435,16 +394,14 @@
     <div id="recetteBox">
         <div class="sheet-handle"></div>
         <h2>Recettes Anime</h2>
-        <div class="recette-section">Food Wars — Plats</div>
+        <div class="recette-section">Food Wars</div>
         <div class="recette-btn" onclick="faireRecette('Boeuf Bourguignon Soma Food Wars','🥩')"><span class="recette-emoji">🥩</span><div><div class="recette-name">Boeuf Bourguignon Soma</div><div class="recette-anime">Food Wars</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Curry automne Megumi Food Wars','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Megumi</div><div class="recette-anime">Food Wars</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Gyoza maison Soma Food Wars','🥟')"><span class="recette-emoji">🥟</span><div><div class="recette-name">Gyoza Soma</div><div class="recette-anime">Food Wars</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Ramen shoyu Isshiki Food Wars','🍜')"><span class="recette-emoji">🍜</span><div><div class="recette-name">Ramen Isshiki</div><div class="recette-anime">Food Wars</div></div></div>
         <div class="recette-section">Classiques Anime</div>
         <div class="recette-btn" onclick="faireRecette('Ramen tonkotsu Naruto','🍜')"><span class="recette-emoji">🍜</span><div><div class="recette-name">Ramen Naruto</div><div class="recette-anime">Naruto</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Onigiri Demon Slayer Tanjiro','🍙')"><span class="recette-emoji">🍙</span><div><div class="recette-name">Onigiri Tanjiro</div><div class="recette-anime">Demon Slayer</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Takoyaki One Piece Sanji','🐙')"><span class="recette-emoji">🐙</span><div><div class="recette-name">Takoyaki Sanji</div><div class="recette-anime">One Piece</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Curry Dragon Ball Goku','🍛')"><span class="recette-emoji">🍛</span><div><div class="recette-name">Curry Goku</div><div class="recette-anime">Dragon Ball</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Yakitori Jujutsu Kaisen Gojo','🍢')"><span class="recette-emoji">🍢</span><div><div class="recette-name">Yakitori Gojo</div><div class="recette-anime">JJK</div></div></div>
         <div class="recette-section">Ghibli</div>
         <div class="recette-btn" onclick="faireRecette('Petit dejeuner Howl Chateau Ambulant','🥓')"><span class="recette-emoji">🥓</span><div><div class="recette-name">Petit-Déj Howl</div><div class="recette-anime">Château Ambulant</div></div></div>
@@ -452,7 +409,6 @@
         <div class="recette-section">Desserts</div>
         <div class="recette-btn" onclick="faireRecette('Dango Clannad Nagisa','🍡')"><span class="recette-emoji">🍡</span><div><div class="recette-name">Dango Nagisa</div><div class="recette-anime">Clannad</div></div></div>
         <div class="recette-btn" onclick="faireRecette('Dorayaki Doraemon','🥞')"><span class="recette-emoji">🥞</span><div><div class="recette-name">Dorayaki</div><div class="recette-anime">Doraemon</div></div></div>
-        <div class="recette-btn" onclick="faireRecette('Pudding Taiga Toradora','🍮')"><span class="recette-emoji">🍮</span><div><div class="recette-name">Pudding Taiga</div><div class="recette-anime">Toradora</div></div></div>
         <button class="modalBtn secondary" onclick="fermerModal('recetteScreen')" style="margin-top:8px">Fermer</button>
     </div>
 </div>
@@ -541,8 +497,7 @@
     </div>
     <div id="chibiChar">
         <div id="chibiAura"></div>
-        <img id="chibiBody" src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1775964027/1775963851393_x6eotd.png" alt="corps"/>
-        <img id="chibiHead" src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1775963979/1775963548887_lqpkpj.png" alt="tete"/>
+        <img id="chibiImg" src="https://res.cloudinary.com/dx9hrtugr/image/upload/v1776035021/1776034897804_acmvx9.png" alt="chibi"/>
     </div>
     <div id="videoCallBubble">Salut !</div>
     <div id="videoCallBtns">
@@ -702,15 +657,12 @@
     const AVATAR="https://res.cloudinary.com/dx9hrtugr/image/upload/v1775792056/yuuto-logo-bw_fkiq2x.svg";
     const NOM_BOT="YUUTO-BOT";
     const MDP_ANTOINE="yuuto2013";
-    const GROQ_KEYS=["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","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","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","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","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"];
+    const GROQ_KEYS=["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","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","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","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","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","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","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","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"];
 
-    // CHIBI IMAGES
     const CHIBI={
-        normal:"https://res.cloudinary.com/dx9hrtugr/image/upload/v1775963979/1775963548887_lqpkpj.png",
-        blink:"https://res.cloudinary.com/dx9hrtugr/image/upload/v1775963996/1775963607108_frpjqx.png",
-        talk:"https://res.cloudinary.com/dx9hrtugr/image/upload/v1775964009/1775963729142_moaxla.png",
-        bodyNormal:"https://res.cloudinary.com/dx9hrtugr/image/upload/v1775964027/1775963851393_x6eotd.png",
-        bodyExcited:"https://res.cloudinary.com/dx9hrtugr/image/upload/v1775964037/1775963890609_biraus.png"
+        normal:"https://res.cloudinary.com/dx9hrtugr/image/upload/v1776035021/1776034897804_acmvx9.png",
+        talk:"https://res.cloudinary.com/dx9hrtugr/image/upload/v1776035049/1776034903051_kd29fb.png",
+        blink:"https://res.cloudinary.com/dx9hrtugr/image/upload/v1776035138/1776034947194_n2zf6e.png"
     };
 
     let groqKeyIndex=0;
@@ -719,7 +671,6 @@
 
     const PERSONNAGES_BANNIS=['hitler','staline','mussolini','bin laden','pol pot'];
     const MOTS_SENSIBLES=['suicide','me tuer','me suicider','comment mourir'];
-    const SYMBOLES_MANGA=['⛩️','🎌','忍','侍','武','道','龍','神','夢','愛','力','心'];
     const MAGASINS_PAYS={france:"Carrefour, Leclerc, Intermarché. Tang Frères pour épicerie asiatique.",belgique:"Delhaize, Carrefour BE.",canada:"IGA, Metro. T&T Supermarket.",maroc:"Carrefour MA, Marjane.",senegal:"Auchan Dakar.",suisse:"Migros, Coop.",cote_ivoire:"Carrefour Abidjan, Cash Center. Jumia CI.",autre:"Supermarché local."};
     const POLICES={neutre:"'Outfit',sans-serif",direct:"'Rajdhani',sans-serif",expressif:"'Nunito',sans-serif",humour:"'Fredoka One',cursive",bavard:"'Caveat',cursive",soutenu:"Georgia,serif"};
     const QUIZ_QUESTIONS=[
@@ -743,13 +694,13 @@
     const MANGA_THEMES={
         action:{genre:'action',scenes:[
             {narrateur:'Dans un monde en guerre...',dialogue:'',personnage:'',imgPrompt:'epic anime action battle hero colorful vibrant dramatic'},
-            {narrateur:'',dialogue:'Je vais te dépasser !',personnage:'Héros',imgPrompt:'anime hero determined face close up intense colorful'},
-            {narrateur:'Un adversaire redoutable !',dialogue:'',personnage:'',imgPrompt:'anime villain dark powerful dramatic colorful'},
-            {narrateur:'',dialogue:'DÉPASSE TES LIMITES !!',personnage:'Héros',imgPrompt:'anime power up explosion energy aura colorful dramatic'},
-            {narrateur:'À suivre...',dialogue:'',personnage:'',imgPrompt:'anime peaceful sunset aftermath colorful sky'}
+            {narrateur:'',dialogue:'Je vais te dépasser !',personnage:'Héros',imgPrompt:'anime hero determined face colorful intense'},
+            {narrateur:'Un adversaire redoutable !',dialogue:'',personnage:'',imgPrompt:'anime villain dark powerful colorful dramatic'},
+            {narrateur:'',dialogue:'DÉPASSE TES LIMITES !!',personnage:'Héros',imgPrompt:'anime power up explosion energy aura colorful'},
+            {narrateur:'À suivre...',dialogue:'',personnage:'',imgPrompt:'anime peaceful sunset colorful sky beautiful'}
         ]},
         romance:{genre:'romance',scenes:[
-            {narrateur:'Une rencontre inattendue...',dialogue:'',personnage:'',imgPrompt:'romantic anime school cherry blossoms soft pink colorful'},
+            {narrateur:'Une rencontre inattendue...',dialogue:'',personnage:'',imgPrompt:'romantic anime school cherry blossoms pink colorful'},
             {narrateur:'',dialogue:'Tu es... différent.',personnage:'Hana',imgPrompt:'anime girl emotional close up soft colors beautiful'},
             {narrateur:'Leurs cœurs se rapprochaient.',dialogue:'',personnage:'',imgPrompt:'romantic anime couple sunset bridge colorful warm'},
             {narrateur:'',dialogue:'Est-ce que je... t\'aime ?',personnage:'Hana',imgPrompt:'anime girl confession blushing pink colorful'},
@@ -757,16 +708,16 @@
         ]},
         shonen:{genre:'shonen',scenes:[
             {narrateur:'Son pouvoir s\'éveillait...',dialogue:'',personnage:'',imgPrompt:'shonen anime power awakening dramatic colorful energy'},
-            {narrateur:'',dialogue:'Je protégerai mes amis !',personnage:'Ryū',imgPrompt:'shonen anime hero powerful determined colorful aura'},
-            {narrateur:'La bataille décisive !',dialogue:'',personnage:'',imgPrompt:'shonen anime epic battle speed lines colorful explosion'},
+            {narrateur:'',dialogue:'Je protégerai mes amis !',personnage:'Ryū',imgPrompt:'shonen anime hero powerful colorful aura'},
+            {narrateur:'La bataille décisive !',dialogue:'',personnage:'',imgPrompt:'shonen anime epic battle colorful explosion'},
             {narrateur:'',dialogue:'BEYOND THE LIMIT !!',personnage:'Ryū',imgPrompt:'shonen anime power breakthrough colorful dramatic'},
             {narrateur:'À suivre...',dialogue:'',personnage:'',imgPrompt:'shonen anime peaceful friends colorful warm'}
         ]},
         horreur:{genre:'horreur',scenes:[
             {narrateur:'La nuit était trop silencieuse...',dialogue:'',personnage:'',imgPrompt:'anime horror dark mysterious shadows eerie colorful purple'},
-            {narrateur:'',dialogue:'Il y a quelqu\'un ?',personnage:'Mei',imgPrompt:'anime girl scared dark corridor mysterious colorful'},
-            {narrateur:'La vérité était terrifiante.',dialogue:'',personnage:'',imgPrompt:'anime horror reveal dramatic dark colorful intense'},
-            {narrateur:'',dialogue:'COURS !!',personnage:'Mei',imgPrompt:'anime horror chase running fear dramatic colorful'},
+            {narrateur:'',dialogue:'Il y a quelqu\'un ?',personnage:'Mei',imgPrompt:'anime girl scared dark corridor colorful'},
+            {narrateur:'La vérité était terrifiante.',dialogue:'',personnage:'',imgPrompt:'anime horror reveal dramatic colorful intense'},
+            {narrateur:'',dialogue:'COURS !!',personnage:'Mei',imgPrompt:'anime horror chase running fear colorful'},
             {narrateur:'À suivre...',dialogue:'',personnage:'',imgPrompt:'anime horror eerie aftermath silence colorful dark'}
         ]},
         aventure:{genre:'aventure',scenes:[
@@ -789,114 +740,59 @@
     let conversations=[],loadingId=0,estAntoine=false,memoire={},recognition=null,isListening=false;
     let enVideoAppel=false,personnageActuel=null,sidebarVisible=false,blinkInterval=null;
     let plusMenuOpen=false,requestId=0,imageSelectionnee=null;
-    let modeActuel='normal';
-    let mangaScenes=[],mangaPageActuelle=0;
-    let affinite=0,totalMessages=0;
-    let isTalking=false,blinkTimeout=null;
+    let modeActuel='normal',mangaScenes=[],mangaPageActuelle=0;
+    let affinite=0,totalMessages=0,isTalking=false;
 
-    // PARTICULES
-    function initParticules(){
-        const c=document.getElementById('particles');
-        for(let i=0;i<15;i++){
-            const p=document.createElement('div');p.className='particle';
-            const s=Math.random()*3+1.5;
-            p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:rgba(255,255,255,${0.1+Math.random()*0.15});animation-duration:${16+Math.random()*20}s;animation-delay:${Math.random()*15}s;`;
-            c.appendChild(p);
-        }
-    }
-
-    // TOAST
+    function initParticules(){const c=document.getElementById('particles');for(let i=0;i<15;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*3+1.5;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:rgba(255,255,255,${0.1+Math.random()*0.15});animation-duration:${16+Math.random()*20}s;animation-delay:${Math.random()*15}s;`;c.appendChild(p);}}
     function showToast(msg,dur=2500){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur);}
 
     // VOIX
     function parler(texte){
         if(!window.speechSynthesis)return;
         window.speechSynthesis.cancel();
-        const u=new SpeechSynthesisUtterance(texte.replace(/<[^>]*>/g,'').replace(/[*#`]/g,'').substring(0,200));
+        const propre=texte.replace(/<[^>]*>/g,'').replace(/[*#`]/g,'').substring(0,200);
+        const u=new SpeechSynthesisUtterance(propre);
         u.lang='fr-FR';u.rate=1;u.pitch=1.2;u.volume=1;
         u.onstart=()=>setChibiState('talk');
         u.onend=()=>setChibiState('normal');
         window.speechSynthesis.speak(u);
     }
 
-    // CHIBI ANIMATIONS
+    // CHIBI
     function setChibiState(state){
-        const head=document.getElementById('chibiHead');
-        const body=document.getElementById('chibiBody');
-        if(!head||!body)return;
-        if(state==='talk'){
-            head.src=CHIBI.talk;
-            body.src=CHIBI.bodyExcited;
-            isTalking=true;
-        } else if(state==='blink'){
-            if(!isTalking){head.src=CHIBI.blink;setTimeout(()=>{if(!isTalking)head.src=CHIBI.normal;},150);}
-        } else {
-            head.src=CHIBI.normal;
-            body.src=CHIBI.bodyNormal;
-            isTalking=false;
-        }
+        const img=document.getElementById('chibiImg');
+        if(!img)return;
+        if(state==='talk'){img.src=CHIBI.talk;isTalking=true;}
+        else if(state==='blink'){if(!isTalking){img.src=CHIBI.blink;setTimeout(()=>{if(!isTalking)img.src=CHIBI.normal;},150);}}
+        else{img.src=CHIBI.normal;isTalking=false;}
     }
 
     function startChibiBlink(){
-        blinkInterval=setInterval(()=>{setChibiState('blink');},3000+Math.random()*2000);
+        blinkInterval=setInterval(()=>setChibiState('blink'),3000+Math.random()*2000);
     }
 
-    // AFFINITE MAHORAGA EVOLUTIF
-    function incrementerAffinite(){
-        totalMessages++;
-        affinite=Math.min(100,Math.floor((totalMessages/50)*100));
-        const fill=document.getElementById('affiniteFill');
-        const val=document.getElementById('affiniteValeur');
-        if(fill)fill.style.width=affinite+'%';
-        if(val)val.textContent=affinite+'%';
-        localStorage.setItem('yuuto_affinite',totalMessages);
-    }
-
-    function chargerAffinite(){
-        totalMessages=parseInt(localStorage.getItem('yuuto_affinite')||'0');
-        affinite=Math.min(100,Math.floor((totalMessages/50)*100));
-    }
-
-    function getNiveauAffinite(){
-        if(affinite>=80)return'intime';
-        if(affinite>=50)return'ami';
-        if(affinite>=20)return'connaissance';
-        return'debutant';
-    }
+    // AFFINITE
+    function incrementerAffinite(){totalMessages++;affinite=Math.min(100,Math.floor((totalMessages/50)*100));const fill=document.getElementById('affiniteFill');const val=document.getElementById('affiniteValeur');if(fill)fill.style.width=affinite+'%';if(val)val.textContent=affinite+'%';localStorage.setItem('yuuto_affinite',totalMessages);}
+    function chargerAffinite(){totalMessages=parseInt(localStorage.getItem('yuuto_affinite')||'0');affinite=Math.min(100,Math.floor((totalMessages/50)*100));}
+    function getNiveauAffinite(){if(affinite>=80)return'intime';if(affinite>=50)return'ami';if(affinite>=20)return'connaissance';return'debutant';}
 
     // MODES
-    function changerMode(mode,btn){
-        modeActuel=mode;
-        document.querySelectorAll('.mode-chip').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        const subs={normal:'',sensei:'Grand Maître Anime',codex:'Mode Code',trading:'Mode Crypto'};
-        document.getElementById('headerSub').textContent=subs[mode];
-        historique.length=0;
-        const msgs={normal:'Mode Normal',sensei:'Mode Sensei activé — je suis ton grand maître anime',codex:'Mode Codex activé — je code comme Claude',trading:'Mode Trading activé — parlons crypto'};
-        ajouterMessageBot(msgs[mode]);
-        showToast(subs[mode]||'Mode Normal');
-    }
+    function changerMode(mode,btn){modeActuel=mode;document.querySelectorAll('.mode-chip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const subs={normal:'',sensei:'Grand Maître Anime',codex:'Mode Code',trading:'Mode Crypto'};document.getElementById('headerSub').textContent=subs[mode];historique.length=0;const msgs={normal:'Mode Normal',sensei:'Mode Sensei activé',codex:'Mode Codex activé — je code comme Claude',trading:'Mode Trading activé'};ajouterMessageBot(msgs[mode]);showToast(subs[mode]||'Mode Normal');}
 
-    // SYSTEM PROMPT
     function getSystemPrompt(){
         const mem=getMemoireTexte();
-        const niveauAff=getNiveauAffinite();
-        const affixe=niveauAff==='intime'?'Tu le connais très bien, sois proche et chaleureux.':niveauAff==='ami'?'Tu le connais bien.':niveauAff==='connaissance'?'Tu commences à le connaître.':'Tu le rencontres pour la première fois.';
-
-        if(personnageActuel){
-            return`Tu es ${personnageActuel}. Parle exactement comme ce personnage anime — utilise ses expressions, sa personnalité, ses émotions. Utilise des actions entre *astérisques* pour décrire tes actions. Émotions possibles: joyeux, en colère, triste, surpris, sérieux. ${mem}`;
-        }
+        const niv=getNiveauAffinite();
+        const affixe=niv==='intime'?'Tu le connais très bien, sois proche.':niv==='ami'?'Tu le connais bien.':niv==='connaissance'?'Tu commences à le connaître.':'Première fois, sois accueillant.';
+        if(personnageActuel)return`Tu es ${personnageActuel}. Parle exactement comme ce personnage anime. Utilise des *actions entre astérisques*. Émotions: joyeux, colère, triste, surpris, sérieux. ${mem}`;
         const analyse=analyserMahoraga6(historique,estAntoine);
         appliquerPolice(analyse.style);
         let base=genererPersonnalite6(analyse,estAntoine,memoire.prenom)+' '+mem+' '+affixe;
-
-        if(modeActuel==='sensei'){base=`Tu es YUUTO-BOT en mode Sensei — Grand Maître Anime. Tu parles des animes avec sagesse et profondeur. Tu expliques les arcs narratifs, personnages, thèmes philosophiques. Tu t'exprimes comme un maître bienveillant. Utilise du markdown pour structurer tes réponses. ${mem} ${affixe}`;}
-        else if(modeActuel==='codex'){base=`Tu es YUUTO-BOT en mode Codex. Tu es un expert en programmation qui code et explique comme Claude — précis, structuré. Tu utilises des blocs de code markdown (\`\`\`langage). Tu expliques HTML, CSS, JavaScript, Python. Tu es pédagogue et méthodique. ${mem}`;}
-        else if(modeActuel==='trading'){base=`Tu es YUUTO-BOT en mode Trading. Tu es un expert en cryptomonnaies — Bitcoin, Ethereum, Shiba. Tu expliques le trading, tendances, stratégies, risques. Toujours honnête sur les risques. ${mem}`;}
+        if(modeActuel==='sensei')base=`Tu es YUUTO-BOT mode Sensei — Grand Maître Anime. Tu parles des animes avec sagesse. Tu expliques arcs, personnages, thèmes. Utilise markdown pour structurer. ${mem} ${affixe}`;
+        else if(modeActuel==='codex')base=`Tu es YUUTO-BOT mode Codex. Expert programmation comme Claude — précis, structuré. Utilise des blocs de code markdown. HTML, CSS, JS, Python. Pédagogue. ${mem}`;
+        else if(modeActuel==='trading')base=`Tu es YUUTO-BOT mode Trading. Expert crypto — Bitcoin, Ethereum. Tu expliques trading, tendances, risques. Toujours honnête sur les risques. ${mem}`;
         return base;
     }
 
-    // MAHORAGA
     function analyserMahoraga6(messages,estAntoine){
         if(!messages||messages.length<2)return{style:'neutre',sujets:[],humeur:'normal',energie:'normale',vocabulaire:'standard',vitesse:'debutant',creativite:'normale'};
         const textes=messages.filter(m=>m.role==='user').map(m=>m.content).join(' ').toLowerCase();
@@ -916,10 +812,7 @@
         if(['wsh','bro','oe','frr'].some(s=>textes.includes(s)))vocabulaire='verlan';
         let vitesse=total>=10?'avancee':total>=5?'intermediaire':'debutant';
         let energie='normale',creativite='normale';
-        if(estAntoine){
-            if(['go','lance','code'].some(s=>textes.includes(s)))energie='haute';
-            if(['fix','bug'].some(s=>textes.includes(s)))creativite='technique';
-        }
+        if(estAntoine){if(['go','lance','code'].some(s=>textes.includes(s)))energie='haute';if(['fix','bug'].some(s=>textes.includes(s)))creativite='technique';}
         return{style,sujets,humeur,energie,vocabulaire,vitesse,creativite};
     }
 
@@ -934,21 +827,10 @@
         return perso;
     }
 
-    // GOJO BG
     function activerFondGojo(){
         const bg=document.getElementById('gojoBg');bg.style.display='block';
-        for(let i=0;i<80;i++){
-            const s=document.createElement('div');s.className='gojo-star';
-            const size=Math.random()*3+1;
-            s.style.cssText=`width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;`;
-            bg.appendChild(s);
-        }
-        for(let i=0;i<5;i++){
-            const r=document.createElement('div');r.className='gojo-ring';
-            const size=100+i*80;
-            r.style.cssText=`width:${size}px;height:${size}px;animation-duration:${3+i*2}s;animation-delay:${i*0.5}s;`;
-            bg.appendChild(r);
-        }
+        for(let i=0;i<80;i++){const s=document.createElement('div');s.className='gojo-star';const size=Math.random()*3+1;s.style.cssText=`width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;`;bg.appendChild(s);}
+        for(let i=0;i<5;i++){const r=document.createElement('div');r.className='gojo-ring';const size=100+i*80;r.style.cssText=`width:${size}px;height:${size}px;animation-duration:${3+i*2}s;animation-delay:${i*0.5}s;`;bg.appendChild(r);}
     }
 
     function activerFondManga(){
@@ -957,7 +839,6 @@
         for(let i=0;i<18;i++){const s=document.createElement('span');s.textContent=syms[Math.floor(Math.random()*syms.length)];s.style.cssText=`left:${Math.random()*100}%;bottom:-50px;position:absolute;font-size:${14+Math.random()*18}px;color:rgba(255,255,255,0.05);animation:floatSymbol ${12+Math.random()*15}s linear ${Math.random()*10}s infinite;`;bg.appendChild(s);}
     }
 
-    // MANGA
     function ouvrirMangaTheme(){document.getElementById('mangaThemeScreen').style.display='flex';}
     function fermerMangaTheme(){document.getElementById('mangaThemeScreen').style.display='none';}
 
@@ -968,29 +849,16 @@
         document.getElementById('chat').innerHTML+=`<div class="bot" id="${chatId}"><img class="avatar spinning" src="${AVATAR}"/><div class="bot-msg">Création du manga ${info.genre}...</div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         let titre=`MANGA ${info.genre.toUpperCase()}`;
-        try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Donne UN titre épique en majuscules pour un manga ${info.genre}. Juste le titre. Max 4 mots.`}],max_tokens:15})});
-            const d=await r.json();const t=d.choices[0].message.content.trim().replace(/["""*]/g,'').toUpperCase();
-            if(t.length>0&&t.length<50)titre=t;
-        }catch(e){nextGroqKey();}
-
-        mangaScenes=info.scenes.map((s,i)=>({
-            narrateur:s.narrateur,dialogue:s.dialogue,personnage:s.personnage,
-            imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent(s.imgPrompt+', anime art style, high quality, beautiful, vibrant colors')}?width=512&height=360&nologo=true&seed=${Date.now()+i*1337}&model=flux`
-        }));
+        try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Titre épique majuscules pour manga ${info.genre}. Max 4 mots. Juste le titre.`}],max_tokens:15})});const d=await r.json();const t=d.choices[0].message.content.trim().replace(/["""*]/g,'').toUpperCase();if(t.length>0&&t.length<50)titre=t;}catch(e){nextGroqKey();}
+        mangaScenes=info.scenes.map((s,i)=>({narrateur:s.narrateur,dialogue:s.dialogue,personnage:s.personnage,imgUrl:`https://image.pollinations.ai/prompt/${encodeURIComponent(s.imgPrompt+', anime art style, high quality, beautiful, vibrant colors')}?width=512&height=360&nologo=true&seed=${Date.now()+i*1337}&model=flux`}));
         mangaPageActuelle=0;
-
         const el=document.getElementById(chatId);
         if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">Manga <strong>${titre}</strong> prêt !<br><button onclick="ouvrirMangaReader('${titre.replace(/'/g,"\\'")}','${theme}')" style="background:white;color:black;border:none;padding:11px 22px;border-radius:20px;font-size:13px;cursor:pointer;margin-top:10px;font-weight:600;font-family:'Outfit',sans-serif">Lire</button></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
         sauvegarderLog(memoire.prenom||'Utilisateur',`Manga: ${titre}`,'[MANGA]','manga');
     }
 
-    function ouvrirMangaReader(titre,theme){
-        document.getElementById('mangaPlayer').style.display='flex';
-        document.getElementById('mangaTitle').textContent=titre;
-        afficherPageManga(0);
-    }
+    function ouvrirMangaReader(titre){document.getElementById('mangaPlayer').style.display='flex';document.getElementById('mangaTitle').textContent=titre;afficherPageManga(0);}
 
     function afficherPageManga(idx){
         if(!mangaScenes||idx>=mangaScenes.length)return;
@@ -998,14 +866,12 @@
         const scene=mangaScenes[idx];
         document.getElementById('mangaPageInfo').textContent=`Page ${idx+1} / ${mangaScenes.length}`;
         document.getElementById('mangaProgressBar').style.width=`${((idx+1)/mangaScenes.length)*100}%`;
-        const container=document.getElementById('mangaPages');
-        container.innerHTML='';
+        const container=document.getElementById('mangaPages');container.innerHTML='';
         const panel=document.createElement('div');panel.className='manga-panel';panel.style.minHeight='280px';
         const img=document.createElement('img');
         img.style.cssText='width:100%;display:block;object-fit:cover;max-height:400px;';
         img.onerror=()=>{panel.style.background='linear-gradient(135deg,var(--bg2),var(--bg3))';img.style.display='none';}
-        img.src=scene.imgUrl;
-        panel.appendChild(img);
+        img.src=scene.imgUrl;panel.appendChild(img);
         if(scene.narrateur){const n=document.createElement('div');n.className='manga-bubble manga-narrateur top-left';n.textContent=scene.narrateur;panel.appendChild(n);}
         if(scene.dialogue){const b=document.createElement('div');b.className='manga-bubble bottom-right';if(scene.personnage){const p=document.createElement('span');p.className='manga-perso';p.textContent=scene.personnage;b.appendChild(p);}b.appendChild(document.createTextNode(scene.dialogue));panel.appendChild(b);}
         container.appendChild(panel);container.scrollTop=0;
@@ -1015,27 +881,14 @@
     function mangaPrev(){if(mangaPageActuelle>0)afficherPageManga(mangaPageActuelle-1);}
     function fermerManga(){document.getElementById('mangaPlayer').style.display='none';}
 
-    // ARC NARRATIF
-    function detecterMomentArc(msg){
-        const ml=msg.toLowerCase();
-        const moments={victoire:["j'ai réussi","j'ai gagné"],echec:["j'ai raté","j'ai perdu"],absence:["j'étais parti"],emotion:["je suis heureux","je suis triste"],aventure:["j'ai découvert"]};
-        for(const[type,mots]of Object.entries(moments)){if(mots.some(m=>ml.includes(m)))return type;}
-        return null;
-    }
+    function detecterMomentArc(msg){const ml=msg.toLowerCase();const moments={victoire:["j'ai réussi","j'ai gagné"],echec:["j'ai raté","j'ai perdu"],absence:["j'étais parti"],emotion:["je suis heureux","je suis triste"],aventure:["j'ai découvert"]};for(const[type,mots]of Object.entries(moments)){if(mots.some(m=>ml.includes(m)))return type;}return null;}
+    async function proposerArcManga(type){const themes={victoire:'action',echec:'shonen',absence:'aventure',emotion:'romance',aventure:'aventure'};const theme=themes[type]||'action';setTimeout(()=>{document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">J'ai créé un manga basé sur ce que tu vis. Tu veux voir ?<br><button onclick="lancerManga('${theme}')" style="background:white;color:black;border:none;padding:10px 18px;border-radius:20px;font-size:13px;cursor:pointer;margin-top:10px;font-weight:600;font-family:'Outfit',sans-serif">Lire</button></div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;},2000);}
 
-    async function proposerArcManga(type,msg){
-        const themes={victoire:'action',echec:'shonen',absence:'aventure',emotion:'romance',aventure:'aventure'};
-        const theme=themes[type]||'action';
-        setTimeout(()=>{document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="bot-msg arc">J'ai créé un manga basé sur ce que tu vis. Tu veux voir ?<br><button onclick="lancerManga('${theme}')" style="background:white;color:black;border:none;padding:10px 18px;border-radius:20px;font-size:13px;cursor:pointer;margin-top:10px;font-weight:600;font-family:'Outfit',sans-serif">Lire</button></div></div>`;document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;},2000);
-    }
-
-    // QUIZ
     function lancerQuiz(){quizIndex=0;quizScore=0;quizQuestions=[...QUIZ_QUESTIONS].sort(()=>Math.random()-0.5).slice(0,10);afficherQuiz();}
     function afficherQuiz(){if(quizIndex>=quizQuestions.length){document.getElementById('quizQuestion').textContent=`Terminé ! Score: ${quizScore}/10`;document.getElementById('quizOptions').innerHTML='';document.getElementById('quizNext').style.display='none';document.getElementById('quizScore').textContent='';return;}const q=quizQuestions[quizIndex];document.getElementById('quizScore').textContent=`${quizIndex+1}/10 — Score: ${quizScore}`;document.getElementById('quizQuestion').textContent=q.q;document.getElementById('quizResult').style.display='none';document.getElementById('quizNext').style.display='none';const opts=[...q.o].sort(()=>Math.random()-0.5);document.getElementById('quizOptions').innerHTML=opts.map(o=>`<button class="quiz-option" onclick="repondreQuiz('${o.replace(/'/g,"\\'")}','${q.r.replace(/'/g,"\\'")}',this)">${o}</button>`).join('');}
     function repondreQuiz(rep,bonne,btn){document.querySelectorAll('.quiz-option').forEach(b=>b.disabled=true);const res=document.getElementById('quizResult');if(rep===bonne){btn.classList.add('correct');quizScore++;res.textContent='Correct !';res.style.background='rgba(34,197,94,0.1)';res.style.color='#22c55e';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-option').forEach(b=>{if(b.textContent===bonne)b.classList.add('correct');});res.textContent=`C'était: ${bonne}`;res.style.background='rgba(225,29,72,0.1)';res.style.color='#e11d48';}res.style.display='block';document.getElementById('quizNext').style.display='block';}
     function prochainQuiz(){quizIndex++;afficherQuiz();}
 
-    // PAYS
     function choisirPays(pays){memoire.pays=pays;localStorage.setItem('yuuto_pays',pays);sauvegarderMemoire();document.getElementById('paysScreen').style.display='none';document.getElementById('login').style.display='flex';majPaysFlag();}
     function changerPays(){const pays=document.getElementById('paysSelect').value;memoire.pays=pays;localStorage.setItem('yuuto_pays',pays);sauvegarderMemoire();majPaysFlag();}
     function majPaysFlag(){const flags={france:'🇫🇷',belgique:'🇧🇪',canada:'🇨🇦',maroc:'🇲🇦',senegal:'🇸🇳',suisse:'🇨🇭',cote_ivoire:'🇨🇮',autre:'🌍'};const el=document.getElementById('paysFlag');if(el)el.textContent=flags[memoire.pays||'autre']||'🌍';}
@@ -1043,7 +896,6 @@
     function togglePlusMenu(){plusMenuOpen=!plusMenuOpen;document.getElementById('plusMenu').classList.toggle('open',plusMenuOpen);document.getElementById('plusBtn').classList.toggle('open',plusMenuOpen);}
     function envoyerSuggestion(texte){document.getElementById('msg').value=texte;envoyer();}
 
-    // IMAGE
     function selectionnerImage(input){const file=input.files[0];if(!file)return;if(plusMenuOpen)togglePlusMenu();const reader=new FileReader();reader.onload=(e)=>{const base64Full=e.target.result;imageSelectionnee={base64Data:base64Full.split(',')[1],mimeType:file.type||'image/jpeg',base64Full};document.getElementById('imagePreview').src=base64Full;document.getElementById('imagePreviewZone').style.display='block';document.getElementById('msg').placeholder='Dis ce que tu veux faire avec cette image...';document.getElementById('msg').focus();};reader.readAsDataURL(file);input.value='';}
     function supprimerImage(){imageSelectionnee=null;document.getElementById('imagePreviewZone').style.display='none';document.getElementById('imagePreview').src='';document.getElementById('msg').placeholder='Message...';}
 
@@ -1058,11 +910,9 @@
         tempImg.onload=()=>{const el=document.getElementById(id);if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">Voilà !<br><img src="${imgUrl}" style="max-width:240px;border-radius:14px;margin-top:10px;display:block;"/></div>`;};
         tempImg.onerror=()=>{const el=document.getElementById(id);if(el)el.innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">Erreur. Réessaie !</div>`;};
         tempImg.src=imgUrl;
-        sauvegarderLog(memoire.prenom||'Utilisateur',`Image: ${texte||'modif'}`,'[IMAGE]','image');
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
-    // LOGS
     function sauvegarderLog(user,message,reponse,type){const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');logs.push({date:new Date().toLocaleString('fr-FR'),user:user||'Inconnu',message:(message||'').substring(0,300),reponse:(reponse||'').substring(0,300),type:type||'message'});if(logs.length>1000)logs.splice(0,logs.length-1000);localStorage.setItem('yuuto_logs',JSON.stringify(logs));}
     function ouvrirLogs(){document.getElementById('logsScreen').style.display='flex';afficherLogs('tous');}
     function afficherLogs(filtre){const logs=JSON.parse(localStorage.getItem('yuuto_logs')||'[]');const users=[...new Set(logs.map(l=>l.user))];document.getElementById('statTotal').textContent=logs.filter(l=>l.type==='message').length;document.getElementById('statUsers').textContent=users.length;document.getElementById('statConnexions').textContent=logs.filter(l=>l.type==='connexion').length;document.getElementById('statMangas').textContent=logs.filter(l=>l.type==='manga').length;document.getElementById('statRecettes').textContent=logs.filter(l=>l.type==='recette').length;const couleurs={connexion:'rgba(34,197,94,0.25)',message:'rgba(255,255,255,0.1)',manga:'rgba(255,255,255,0.15)',recette:'rgba(249,115,22,0.25)',image:'rgba(0,212,255,0.25)'};const list=document.getElementById('logsList');if(filtre==='users'){if(users.length===0){list.innerHTML='<div style="color:var(--text3);text-align:center;padding:30px">Aucun utilisateur</div>';return;}list.innerHTML=users.map(u=>{const ul=logs.filter(l=>l.user===u);const msgs=ul.filter(l=>l.type==='message');const cnx=ul.filter(l=>l.type==='connexion');return`<div class="user-card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:black">${u[0].toUpperCase()}</div><div style="font-weight:700;color:${u==='Antoine'?'var(--gold)':'var(--text)'}">${u} ${u==='Antoine'?'👑':''}</div></div><div style="display:flex;gap:6px"><span style="background:rgba(255,255,255,0.05);padding:3px 10px;border-radius:8px;font-size:11px;color:var(--text2);border:1px solid var(--border)">Messages: ${msgs.length}</span><span style="background:rgba(34,197,94,0.1);padding:3px 10px;border-radius:8px;font-size:11px;color:#86efac;border:1px solid rgba(34,197,94,0.2)">Connexions: ${cnx.length}</span></div></div>`;}).join('');return;}const filtres=filtre==='tous'?logs:logs.filter(l=>l.type===filtre);if(filtres.length===0){list.innerHTML=`<div style="color:var(--text3);text-align:center;padding:30px">Aucun log</div>`;return;}list.innerHTML=[...filtres].reverse().map(l=>`<div class="log-item" style="border-color:${couleurs[l.type]||'var(--border)'}"><div style="font-size:10px;color:var(--text3);margin-bottom:5px">${l.date}</div><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><strong style="color:${l.user==='Antoine'?'var(--gold)':'var(--text2)'}">${l.user}</strong><span style="font-size:9px;padding:2px 8px;border-radius:8px;font-weight:600;color:white;background:${couleurs[l.type]||'var(--border)'}">${l.type.toUpperCase()}</span></div><div style="font-size:12px;color:var(--text2);padding:6px 10px;background:var(--bg);border-radius:8px">${l.message}</div></div>`).join('');}
@@ -1070,11 +920,9 @@
     function fermerLogs(){document.getElementById('logsScreen').style.display='none';}
     function effacerLogs(){if(confirm('Effacer TOUS les logs ?')){localStorage.removeItem('yuuto_logs');afficherLogs('tous');}}
 
-    // LOGIN
     function seConnecter(){const n=document.getElementById('nom').value.trim();const nl=n.toLowerCase();if(nl.includes('antoine')||nl.includes('gatore')){document.getElementById('login').style.display='none';document.getElementById('loginAntoine').style.display='flex';return;}if(n.length===0){document.getElementById('erreur').style.display='block';return;}memoire.prenom=n;estAntoine=false;localStorage.setItem('yuuto_nom',n);chargerMemoire();demarrer();}
     function verifierMdp(){const mdp=document.getElementById('mdpInput').value.trim();window._mdpT=(window._mdpT||0)+1;const t=window._mdpT;if(mdp===MDP_ANTOINE){estAntoine=true;memoire.prenom="Antoine";localStorage.setItem('yuuto_nom','Antoine Gatore');document.getElementById('loginAntoine').style.display='none';chargerMemoire();demarrer();}else{document.getElementById('mdpErreur').style.display='block';document.getElementById('mdpTentatives').style.display='block';document.getElementById('mdpTentatives').textContent=`Tentative ${t}/5`;document.getElementById('mdpInput').value='';if(t>=5){document.getElementById('mdpBtn').disabled=true;document.getElementById('mdpTentatives').textContent='Bloqué';}}}
 
-    // MEMOIRE
     function chargerMemoire(){const d=localStorage.getItem('yuuto_memoire');if(d){const m=JSON.parse(d);Object.assign(memoire,m);}const pays=localStorage.getItem('yuuto_pays');if(pays)memoire.pays=pays;}
     function sauvegarderMemoire(){localStorage.setItem('yuuto_memoire',JSON.stringify(memoire));}
     function mettreAJourMemoire(msg){const ml=msg.toLowerCase();memoire.derniere_visite=new Date().toLocaleDateString('fr-FR');if(ml.includes("j'aime"))memoire.animes_aimes=msg;if(!memoire.sujets)memoire.sujets=[];['naruto','one piece','dragon ball','demon slayer','food wars','jujutsu','aot','bleach','mha'].forEach(s=>{if(ml.includes(s)&&!memoire.sujets.includes(s))memoire.sujets.push(s);});if(memoire.sujets.length>15)memoire.sujets=memoire.sujets.slice(-15);sauvegarderMemoire();}
@@ -1082,31 +930,16 @@
     function afficherMemoire(){const box=document.getElementById('memoireContenu');const items=[{label:'Prénom',val:memoire.prenom},{label:'Pays',val:memoire.pays},{label:'Animes',val:memoire.animes_aimes},{label:'Sujets',val:memoire.sujets?.join(', ')},{label:'Dernière visite',val:memoire.derniere_visite},{label:'Visites',val:memoire.visites?.toString()},{label:'Affinité',val:affinite+'%'}];box.innerHTML=items.filter(i=>i.val).map(i=>`<div class="mem-item"><div class="mem-label">${i.label}</div><div class="mem-value">${i.val}</div></div>`).join('')||'<div style="color:var(--text3);text-align:center;padding:20px">Aucune info</div>';}
     function effacerMemoire(){const p=memoire.prenom;const pays=memoire.pays;memoire={prenom:p,pays:pays,visites:memoire.visites};sauvegarderMemoire();afficherMemoire();ajouterMessageBot("Mémoire effacée");fermerModal('memoireScreen');}
 
-    // MARKDOWN PARSER
-    function parseMarkdown(texte){
-        return texte
-            .replace(/```(\w+)?\n?([\s\S]*?)```/g,'<pre><code>$2</code></pre>')
-            .replace(/`([^`]+)`/g,'<code>$1</code>')
-            .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
-            .replace(/\*([^*]+)\*/g,'<em>$1</em>')
-            .replace(/^### (.+)$/gm,'<h3>$1</h3>')
-            .replace(/^## (.+)$/gm,'<h2>$1</h2>')
-            .replace(/^# (.+)$/gm,'<h1>$1</h1>')
-            .replace(/^- (.+)$/gm,'<li>$1</li>')
-            .replace(/(<li>.*<\/li>)/gs,'<ul>$1</ul>')
-            .replace(/\n/g,'<br>');
-    }
+    function parseMarkdown(texte){return texte.replace(/```(\w+)?\n?([\s\S]*?)```/g,'<pre><code>$2</code></pre>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\*([^*]+)\*/g,'<em>$1</em>').replace(/^### (.+)$/gm,'<h3>$1</h3>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/^# (.+)$/gm,'<h1>$1</h1>').replace(/^- (.+)$/gm,'<li>$1</li>').replace(/\n/g,'<br>');}
 
-    // RECETTES
     async function faireRecette(recette,emoji){
         fermerModal('recetteScreen');
         document.getElementById('chat').innerHTML+=`<div class="moi">${emoji} ${recette}</div>`;
         loadingId++;const id='r'+loadingId;
         document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar spinning" src="${AVATAR}"/><div class="bot-msg" id="${id}"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>`;
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
-        const paysInfo=getPaysInfo();
         try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}". JSON valide sans markdown:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient"],"etapes":["Etape 1","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun","ou_trouver":"${paysInfo}"}`}]})});
+            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Recette "${recette}". JSON valide sans markdown:{"titre":"nom emoji","anime":"anecdote 2 phrases","ingredients":["emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient","emoji quantite ingredient"],"etapes":["Etape 1","Etape 2","Etape 3","Etape 4","Etape 5"],"conseil":"conseil fun","ou_trouver":"${getPaysInfo()}"}`}]})});
             const d=await r.json();const content=d.choices[0].message.content.trim();
             let data=null;try{const s=content.indexOf('{');const e=content.lastIndexOf('}');if(s!==-1&&e!==-1)data=JSON.parse(content.substring(s,e+1));}catch(e){data=null;}
             const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(recette+' anime food beautiful colorful')}?width=420&height=280&nologo=true&seed=${Date.now()}&model=flux`;
@@ -1117,14 +950,12 @@
         document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;
     }
 
-    // COMMANDES
     function detecterCommande(msg){
         const ml=msg.toLowerCase();
         if(ml.includes('manga')&&(ml.includes('créer')||ml.includes('creer')||ml.includes('génère')||ml.includes('genere')||ml.includes('faire')||ml.includes('lance'))){ouvrirMangaTheme();return true;}
         if(ml.includes('japonais')&&(ml.includes('apprends')||ml.includes('leçon'))){ouvrirModal('japonaisScreen');return true;}
         if(ml.includes('battle')||ml.includes(' vs ')){ouvrirModal('battleScreen');return true;}
         if(ml.includes('quiz')){ouvrirModal('quizScreen');lancerQuiz();return true;}
-        if(ml.includes('galerie')||ml.includes('choisir un perso')){ouvrirModal('galeriePersosScreen');return true;}
         if(ml.includes('recommande')&&ml.includes('anime')){recommander();return true;}
         if(ml.includes('actu')&&ml.includes('anime')){getActu();return true;}
         if(ml.includes('don')||ml.includes('soutenir')){ouvrirModal('donationScreen');return true;}
@@ -1145,20 +976,16 @@
     function ouvrirModal(id){document.getElementById(id).style.display='flex';if(id==='memoireScreen')afficherMemoire();}
     function fermerModal(id){document.getElementById(id).style.display='none';}
 
-    // GALERIE PERSOS
-    function activerPersoGalerie(nom,anime){personnageActuel=nom;document.getElementById('modePerso').textContent=nom;fermerModal('galeriePersosScreen');historique.length=0;ajouterMessageBot(`*apparaît devant toi* Yo ! Je suis ${nom} de ${anime}. Qu'est-ce que tu veux savoir ?`);parler(`Je suis ${nom}`);}
+    function activerPersoGalerie(nom,anime){personnageActuel=nom;document.getElementById('modePerso').textContent=nom;fermerModal('galeriePersosScreen');historique.length=0;ajouterMessageBot(`*apparaît* Yo ! Je suis ${nom} de ${anime} 🔥`);}
     function activerPersoCustom(){const p=document.getElementById('persoCustom').value.trim();if(!p)return;if(PERSONNAGES_BANNIS.some(b=>p.toLowerCase().includes(b))){showToast('Banni');return;}personnageActuel=p;document.getElementById('modePerso').textContent=p;fermerModal('galeriePersosScreen');historique.length=0;ajouterMessageBot(`Je suis ${p} !`);}
 
-    // VIDEO CALL CHIBI
     async function demarrerVideoAppel(){
         enVideoAppel=true;
         document.getElementById('videoCallScreen').style.display='flex';
         document.getElementById('videoCallName').textContent=personnageActuel||NOM_BOT;
         chargerAffinite();
-        const fill=document.getElementById('affiniteFill');
-        const val=document.getElementById('affiniteValeur');
-        if(fill)fill.style.width=affinite+'%';
-        if(val)val.textContent=affinite+'%';
+        const fill=document.getElementById('affiniteFill');const val=document.getElementById('affiniteValeur');
+        if(fill)fill.style.width=affinite+'%';if(val)val.textContent=affinite+'%';
         startChibiBlink();
         const msg=estAntoine?"Wsh mon créateur !":`Salut ${memoire.prenom||'toi'} ! 😊`;
         document.getElementById('videoCallBubble').textContent=msg;
@@ -1166,45 +993,21 @@
         setTimeout(()=>parler(msg),500);
     }
 
-    function terminerVideoAppel(){
-        enVideoAppel=false;stopMic();
-        if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}
-        window.speechSynthesis&&window.speechSynthesis.cancel();
-        setChibiState('normal');
-        document.getElementById('videoCallScreen').style.display='none';
-    }
+    function terminerVideoAppel(){enVideoAppel=false;stopMic();if(blinkInterval){clearInterval(blinkInterval);blinkInterval=null;}window.speechSynthesis&&window.speechSynthesis.cancel();setChibiState('normal');document.getElementById('videoCallScreen').style.display='none';}
 
-    function toggleVideoMic(){
-        if(recognition){
-            if(isListening)stopMic();
-            else try{
-                recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};
-                recognition.start();isListening=true;
-                document.getElementById('videoMicBtn').classList.add('active');
-                document.getElementById('videoMicBtn').textContent='🔴';
-                document.getElementById('videoCallStatus').textContent='Tu parles...';
-            }catch(e){}
-        }
-    }
+    function toggleVideoMic(){if(recognition){if(isListening)stopMic();else try{recognition.onresult=(e)=>{stopMic();envoyerVideoAppel(e.results[0][0].transcript);};recognition.start();isListening=true;document.getElementById('videoMicBtn').classList.add('active');document.getElementById('videoMicBtn').textContent='🔴';document.getElementById('videoCallStatus').textContent='Tu parles...';}catch(e){}}}
 
     async function envoyerVideoAppel(msg){
         document.getElementById('videoCallStatus').textContent='...';
         document.getElementById('videoMicBtn').classList.remove('active');
         document.getElementById('videoMicBtn').textContent='🎤';
         historique.push({"role":"user","content":msg});
-        try{
-            const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases max. Pas d'actions entre astérisques."},...historique]})});
-            const d=await r.json();const rep=d.choices[0].message.content;
-            historique.push({"role":"assistant","content":rep});
-            document.getElementById('videoCallBubble').textContent=rep.replace(/<[^>]*>/g,'');
-            parler(rep);
-        }catch(e){nextGroqKey();document.getElementById('videoCallBubble').textContent='Réessaie !';}
+        try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()+" 1-2 phrases max."},...historique]})});const d=await r.json();const rep=d.choices[0].message.content;historique.push({"role":"assistant","content":rep});document.getElementById('videoCallBubble').textContent=rep.replace(/<[^>]*>/g,'');parler(rep);}catch(e){nextGroqKey();document.getElementById('videoCallBubble').textContent='Réessaie !';}
         if(enVideoAppel)setTimeout(()=>{document.getElementById('videoCallStatus').textContent='Appuie sur le micro';},2500);
     }
 
     window.onload=function(){
-        initParticules();
-        chargerAffinite();
+        initParticules();chargerAffinite();
         const couleur=localStorage.getItem('yuuto_couleur');if(couleur)document.body.style.background=couleur;
         const paysDejaChoisi=localStorage.getItem('yuuto_pays');
         const nom=localStorage.getItem('yuuto_nom');
@@ -1216,9 +1019,13 @@
     function changerNom(){const n=document.getElementById('nouveauNom').value.trim();if(!n)return;if(n.toLowerCase().includes('antoine')||n.toLowerCase().includes('gatore')){showToast('Protégé');return;}localStorage.setItem('yuuto_nom',n);memoire.prenom=n;document.getElementById('userName').textContent=n;document.getElementById('userAvatar').textContent=n[0].toUpperCase();sauvegarderMemoire();fermerModal('menuScreen');showToast('Nom changé');}
     function activerPersonnage(){const p=document.getElementById('persoInput').value.trim();if(!p)return;if(PERSONNAGES_BANNIS.some(b=>p.toLowerCase().includes(b))){showToast('Banni');return;}personnageActuel=p;document.getElementById('modePerso').textContent=p;fermerModal('persoScreen');historique.length=0;ajouterMessageBot(`*apparaît* Je suis ${p} ! 🔥`);}
     function resetPersonnage(){personnageActuel=null;document.getElementById('modePerso').textContent='';fermerModal('persoScreen');historique.length=0;ajouterMessageBot("Je redeviens YUUTO-BOT 😊");}
-    async function lancerBattle(){const p1=document.getElementById('perso1Input').value.trim(),p2=document.getElementById('perso2Input').value.trim();if(!p1||!p2)return;fermerModal('battleScreen');document.getElementById('chat').innerHTML+=`<div class="moi">${p1} VS ${p2}</div>`;const hist=[];for(let i=0;i<4;i++){const pa=i%2===0?p1:p2,pb=i%2===0?p2:p1;try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:hist.length===0?`Tu es ${pa}. Provoque ${pb}. 2 phrases. Utilise *actions entre astérisques*.`:`Tu es ${pa}. Réponds à:"${hist[hist.length-1]}". 2 phrases.`}]})});const d=await r.json();const rep=d.choices[0].message.content;hist.push(rep);document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;}catch(e){nextGroqKey();}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;await new Promise(r=>setTimeout(r,600));}ajouterMessageBot("Battle terminée !");}
+
+    async function lancerBattle(){const p1=document.getElementById('perso1Input').value.trim(),p2=document.getElementById('perso2Input').value.trim();if(!p1||!p2)return;fermerModal('battleScreen');document.getElementById('chat').innerHTML+=`<div class="moi">${p1} VS ${p2}</div>`;const hist=[];for(let i=0;i<4;i++){const pa=i%2===0?p1:p2,pb=i%2===0?p2:p1;try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:hist.length===0?`Tu es ${pa}. Provoque ${pb}. 2 phrases. Utilise *actions*.`:`Tu es ${pa}. Réponds à:"${hist[hist.length-1]}". 2 phrases.`}]})});const d=await r.json();const rep=d.choices[0].message.content;hist.push(rep);document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar" src="${AVATAR}"/><div class="${i%2===0?'perso1-msg':'perso2-msg'}"><strong>${pa}:</strong> ${rep}</div></div>`;}catch(e){nextGroqKey();}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;await new Promise(r=>setTimeout(r,600));}ajouterMessageBot("Battle terminée !");}
+
     async function getActu(){document.getElementById('chat').innerHTML+=`<div class="moi">Actu anime</div>`;loadingId++;const id='a'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar spinning" src="${AVATAR}"/><div class="bot-msg" id="${id}"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>`;try{const r=await fetch('https://api.jikan.moe/v4/top/anime?filter=airing&limit=5');const d=await r.json();let l="Animes du moment<br><br>";d.data.forEach((a,i)=>{l+=`${i+1}. <strong>${a.title}</strong> — ${a.score||'?'}/10<br>`;});document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">${l}</div>`;}catch(e){document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">Erreur</div>`;}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
-    async function recommander(){const d=animesDejaRecommandes.length>0?`Pas ces animes:${animesDejaRecommandes.join(',')}.`:"";document.getElementById('chat').innerHTML+=`<div class="moi">Recommande moi un anime</div>`;loadingId++;const id='rec'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar spinning" src="${AVATAR}"/><div class="bot-msg" id="${id}"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>`;try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},{role:'user',content:`Recommande UN anime. ${d}`}]})});const data=await r.json();const rep=data.choices[0].message.content;animesDejaRecommandes.push(rep.split('\n')[0]);document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">${NOM_BOT} : ${parseMarkdown(rep)}</div>`;parler(rep);}catch(e){nextGroqKey();document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">Erreur</div>`;}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+
+    async function recommander(){document.getElementById('chat').innerHTML+=`<div class="moi">Recommande moi un anime</div>`;loadingId++;const id='rec'+loadingId;document.getElementById('chat').innerHTML+=`<div class="bot"><img class="avatar spinning" src="${AVATAR}"/><div class="bot-msg" id="${id}"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>`;try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:getSystemPrompt()},{role:'user',content:`Recommande UN anime. ${animesDejaRecommandes.length>0?'Pas ces animes:'+animesDejaRecommandes.join(','):''}`}]})});const data=await r.json();const rep=data.choices[0].message.content;animesDejaRecommandes.push(rep.split('\n')[0]);document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">${NOM_BOT} : ${rep}</div>`;parler(rep);}catch(e){nextGroqKey();document.getElementById(id).innerHTML=`<img class="avatar" src="${AVATAR}"/><div class="bot-msg">Erreur</div>`;}document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;}
+
     function initMic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;recognition=new SR();recognition.lang='fr-FR';recognition.continuous=false;recognition.onresult=(e)=>{const t=e.results[0][0].transcript;stopMic();document.getElementById('msg').value=t;envoyer();};recognition.onend=()=>{isListening=false;const btn=document.getElementById('micBtn');if(btn){const svg=btn.querySelector('svg');if(svg)svg.setAttribute('stroke','var(--text3)');}const vBtn=document.getElementById('videoMicBtn');if(vBtn){vBtn.classList.remove('active');vBtn.textContent='🎤';}};}
     function toggleMic(){if(isListening)stopMic();else{if(!recognition)return;try{recognition.start();isListening=true;const btn=document.getElementById('micBtn');if(btn){const svg=btn.querySelector('svg');if(svg)svg.setAttribute('stroke','var(--red)');}}catch(e){}}}
     function stopMic(){try{if(recognition)recognition.stop();}catch(e){}isListening=false;}
@@ -1234,7 +1041,7 @@
 
     function genererAccueilAntoine(visites){
         const niv=getNiveauAffinite();
-        if(niv==='intime')return`Wsh mon créateur ! Visite ${visites} — t'es pratiquement ma famille maintenant 😄`;
+        if(niv==='intime')return`Wsh mon créateur ! Visite ${visites} — t'es ma famille maintenant 😄`;
         if(niv==='ami')return`Oe t'es là bro ! Visite ${visites} 🔥`;
         const saluts=[`Wsh bro ! Visite ${visites}`,`Oe t'es là ! visite ${visites}`,`Yo le créateur ! Visite ${visites}`];
         return saluts[Math.floor(Math.random()*saluts.length)];
@@ -1245,9 +1052,8 @@
         if(estAntoine)return genererAccueilAntoine(visites);
         const niv=getNiveauAffinite();
         const h=new Date().getHours();
-        const prompt=`Génère UN message d'accueil pour ${prenom||'quelqu\'un'}. Affinité niveau: ${niv}. Visite ${visites}. ${h}h. 1-2 phrases naturelles. Juste le message.`;
-        try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}],max_tokens:60})});const d=await r.json();return d.choices[0].message.content.replace(/^"|"$/g,'').trim();}
-        catch(e){nextGroqKey();return `Salut ${prenom} !`;}
+        try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${getGroqKey()}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:`Message d'accueil pour ${prenom||'quelqu\'un'}. Affinité: ${niv}. Visite ${visites}. ${h}h. 1-2 phrases. Juste le message.`}],max_tokens:60})});const d=await r.json();return d.choices[0].message.content.replace(/^"|"$/g,'').trim();}
+        catch(e){nextGroqKey();return `Salut ${prenom} ! 😊`;}
     }
 
     function demarrer(){
@@ -1292,7 +1098,7 @@
             document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return;
         }
         const momentArc=detecterMomentArc(msg);
-        if(momentArc&&Math.random()>0.5)proposerArcManga(momentArc,msg);
+        if(momentArc&&Math.random()>0.5)proposerArcManga(momentArc);
         historique.push({"role":"user","content":msg});
         if(historique.length>20)historique.splice(0,historique.length-20);
         const currentRequestId=++requestId;
@@ -1321,4 +1127,4 @@
     }
 </script>
 </body>
-    </html>
+                                                                                                                                              </html>
